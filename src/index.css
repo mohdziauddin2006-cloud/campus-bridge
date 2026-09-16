@@ -28,3 +28,6 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 .animate-fade-up { animation: fadeUp 0.4s ease-out both; }
+.neocard { background:#1e2126; border-radius:1.25rem; box-shadow:8px 8px 16px #15171b, -8px -8px 16px #272b31; border:1px solid rgba(255,255,255,0.03); }
+.neoinput { background:#1e2126; border-radius:0.75rem; box-shadow:inset 4px 4px 8px #15171b, inset -4px -4px 8px #272b31; border:none; color:#f1f5f9; outline:none; }
+.neobtn { background:linear-gradient(145deg,#10b981,#059669); color:#fff; border-radius:0.75rem; box-shadow:6px 6px 12px #15171b, -6px -6px 12px #272b31; transition:transform .1s; }
