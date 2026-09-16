@@ -26,20 +26,23 @@ const INDUSTRIES = {
 
 const courseCatalog = {
   'Full-Stack': [
-    { id: 'fs1', title: 'Modern React & TypeScript Patterns', embedUrl: 'https://www.youtube.com/embed/t2CEgPsws3U', tag: 'Frontend' },
-    { id: 'fs2', title: 'Node.js & API Design Masterclass', embedUrl: 'https://www.youtube.com/embed/KhuapsarqA4', tag: 'Backend' },
+    { id: 'fs1', title: 'Modern React & TypeScript Patterns', embedUrl: 'https://www.youtube.com/embed/t2CEgPsws3U', tag: 'Frontend', domain: 'Full-Stack', skills: ['React','JavaScript','CSS'] },
+    { id: 'fs2', title: 'Node.js & API Design Masterclass', embedUrl: 'https://www.youtube.com/embed/KhuapsarqA4', tag: 'Backend', domain: 'Full-Stack', skills: ['Node.js','API Design'] },
   ],
   'AI/ML': [
-    { id: 'ai1', title: 'Deep Learning with PyTorch', embedUrl: 'https://www.youtube.com/embed/k9RXKDirI44', tag: 'ML Core' },
-    { id: 'ai2', title: 'NLP & Transformer Architectures', embedUrl: 'https://www.youtube.com/embed/f03zGPOhwk0', tag: 'NLP' },
+    { id: 'ai1', title: 'Deep Learning with PyTorch', embedUrl: 'https://www.youtube.com/embed/k9RXKDirI44', tag: 'ML Core', domain: 'AI/ML', skills: ['PyTorch','Python'] },
+    { id: 'ai2', title: 'NLP & Transformer Architectures', embedUrl: 'https://www.youtube.com/embed/f03zGPOhwk0', tag: 'NLP', domain: 'AI/ML', skills: ['NLP','Python'] },
+    { id: 'ai3', title: 'Neural Networks from Scratch', embedUrl: 'https://www.youtube.com/embed/ilG7C8Otfbg', tag: 'Deep Learning', domain: 'AI/ML', skills: ['PyTorch','NumPy'] },
   ],
   'VLSI': [
-    { id: 'vl1', title: 'Verilog & SystemVerilog Fundamentals', embedUrl: 'https://www.youtube.com/embed/8B1M-cY9Oeg', tag: 'Digital Design' },
-    { id: 'vl2', title: 'UVM Verification Methodology', embedUrl: 'https://www.youtube.com/embed/MT2tW8zGZAk', tag: 'Verification' },
+    { id: 'vl1', title: 'Verilog & SystemVerilog Fundamentals', embedUrl: 'https://www.youtube.com/embed/8B1M-cY9Oeg', tag: 'Digital Design', domain: 'VLSI', skills: ['Verilog','SystemVerilog','Digital Design'] },
+    { id: 'vl2', title: 'UVM Verification Methodology', embedUrl: 'https://www.youtube.com/embed/MT2tW8zGZAk', tag: 'Verification', domain: 'VLSI', skills: ['UVM'] },
+    { id: 'vl3', title: 'Static Timing Analysis (STA)', embedUrl: 'https://www.youtube.com/embed/p9NuPj4lL3Q', tag: 'Timing', domain: 'VLSI', skills: ['STA'] },
   ],
   'DevOps': [
-    { id: 'do1', title: 'Docker & Kubernetes for Engineers', embedUrl: 'https://www.youtube.com/embed/3c-iBn73d8c', tag: 'Containers' },
-    { id: 'do2', title: 'CI/CD Pipelines & Infra as Code', embedUrl: 'https://www.youtube.com/embed/wxHH2mX6T9k', tag: 'Automation' },
+    { id: 'do1', title: 'Docker & Kubernetes for Engineers', embedUrl: 'https://www.youtube.com/embed/3c-iBn73d8c', tag: 'Containers', domain: 'DevOps', skills: ['Docker','Kubernetes'] },
+    { id: 'do2', title: 'CI/CD Pipelines & Infra as Code', embedUrl: 'https://www.youtube.com/embed/wxHH2mX6T9k', tag: 'Automation', domain: 'DevOps', skills: ['CI/CD','Terraform'] },
+    { id: 'do3', title: 'AWS Cloud Architecture Essentials', embedUrl: 'https://www.youtube.com/embed/jZoeqFcQ9Hw', tag: 'Cloud', domain: 'DevOps', skills: ['AWS','Linux'] },
   ],
 };
 
@@ -104,6 +107,17 @@ export default function App() {
   function MyApplicationsPage() {
     const apps = getApps();
     const timeline = ['Applied','Under Review','Interview','Decision'];
+    const missing = result ? result.missing : [];
+    const lowerMissing = missing.map(s => s.toLowerCase());
+    const allVideos = Object.values(courseCatalog).flat();
+    const filteredVideos = allVideos.filter(v => {
+      if (v.domain !== industry) return false;
+      if (!missing.length) return true;
+      return v.skills.some(sk => lowerMissing.some(m => sk.toLowerCase().includes(m) || m.includes(sk.toLowerCase())));
+    });
+    const displayVideos = filteredVideos.length ? filteredVideos : (courseCatalog[industry] || []);
+    const currentActive = activeVideo || displayVideos[0] || (courseCatalog[industry] ? courseCatalog[industry][0] : null);
+
     return (
       <div>
         <header className="mb-10"><h1 className="font-display text-5xl font-bold text-[#1A1A1A] mb-3">My Applications</h1><p className="text-[#1A1A1A]/60">Read-only view of your submitted profiles.</p></header>
@@ -138,7 +152,19 @@ export default function App() {
     const [industry, setIndustry] = useState('Full-Stack');
     const [typedSkills, setTypedSkills] = useState('');
     const [result, setResult] = useState(null);
-    const [activeVideo, setActiveVideo] = useState(courseCatalog['Full-Stack'][0]);
+    const [activeVideo, setActiveVideo] = useState(null);
+    useEffect(() => {
+      const missing = result ? result.missing : [];
+      const lowerMissing = missing.map(s => s.toLowerCase());
+      const allVideos = Object.values(courseCatalog).flat();
+      const filtered = allVideos.filter(v => {
+        if (v.domain !== industry) return false;
+        if (!missing.length) return true;
+        return v.skills.some(sk => lowerMissing.some(m => sk.toLowerCase().includes(m) || m.includes(sk.toLowerCase())));
+      });
+      const display = filtered.length ? filtered : (courseCatalog[industry] || []);
+      setActiveVideo(display[0] || (courseCatalog[industry] ? courseCatalog[industry][0] : null));
+    }, [industry, result]);
 
     const calculate = () => {
       const target = INDUSTRIES[industry].required;
@@ -198,16 +224,16 @@ export default function App() {
           </div>
           <div className="card-editorial mb-8" style={{ border: '2px solid #1A1A1A', boxShadow: '10px 10px 0 #d8d4c8, 4px 4px 0 #d8d4c8' }}>
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-display text-xl font-bold text-[#1A1A1A]">{activeVideo ? activeVideo.title : 'Select a Masterclass'}</h3>
-              <span className="text-xs font-bold uppercase text-[#800020] bg-[#800020]/10 px-2 py-0.5 rounded-full">{activeVideo ? activeVideo.tag : 'Waiting'}</span>
+              <h3 className="font-display text-xl font-bold text-[#1A1A1A]">{currentActive ? currentActive.title : 'Select a Masterclass'}</h3>
+              <span className="text-xs font-bold uppercase text-[#800020] bg-[#800020]/10 px-2 py-0.5 rounded-full">{currentActive ? currentActive.tag : 'Waiting'}</span>
             </div>
             <div className="video-wrap">
-              <iframe src={activeVideo ? activeVideo.embedUrl : 'https://www.youtube.com/embed/t2CEgPsws3U?rel=0'} title="Masterclass Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              <iframe src={currentActive ? currentActive.embedUrl : 'https://www.youtube.com/embed/t2CEgPsws3U?rel=0'} title="Masterclass Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            {(courseCatalog[industry] || []).map((vid, idx) => (
-              <button key={vid.id} onClick={() => setActiveVideo(vid)} className={`card-editorial text-left transition-all duration-300 hover:-translate-y-1 ${activeVideo?.id === vid.id ? 'ring-2 ring-[#800020] bg-[#FDFBF7]' : ''}`} style={{ borderColor: activeVideo?.id === vid.id ? '#800020' : '#EAE6DC' }}>
+            {displayVideos.map((vid, idx) => (
+              <button key={vid.id} onClick={() => setActiveVideo(vid)} className={`card-editorial text-left transition-all duration-300 hover:-translate-y-1 ${(currentActive?.id === vid.id || activeVideo?.id === vid.id) ? 'ring-2 ring-[#800020] bg-[#FDFBF7]' : ''}`} style={{ borderColor: (currentActive?.id === vid.id || activeVideo?.id === vid.id) ? '#800020' : '#EAE6DC' }}>
                 <div className="flex gap-5">
                   <div className="w-24 h-16 shrink-0 rounded-lg overflow-hidden shadow-md" style={{ background: '#800020' }}>
                     <div className="w-full h-full flex items-center justify-center text-white/90 font-display font-bold text-xs">▶</div>
