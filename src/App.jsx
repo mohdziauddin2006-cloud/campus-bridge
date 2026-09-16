@@ -107,16 +107,6 @@ export default function App() {
   function MyApplicationsPage() {
     const apps = getApps();
     const timeline = ['Applied','Under Review','Interview','Decision'];
-    const missing = result ? result.missing : [];
-    const lowerMissing = missing.map(s => s.toLowerCase());
-    const allVideos = Object.values(courseCatalog).flat();
-    const filteredVideos = allVideos.filter(v => {
-      if (v.domain !== industry) return false;
-      if (!missing.length) return true;
-      return v.skills.some(sk => lowerMissing.some(m => sk.toLowerCase().includes(m) || m.includes(sk.toLowerCase())));
-    });
-    const displayVideos = filteredVideos.length ? filteredVideos : (courseCatalog[industry] || []);
-    const currentActive = activeVideo || displayVideos[0] || (courseCatalog[industry] ? courseCatalog[industry][0] : null);
 
     return (
       <div>
@@ -153,6 +143,7 @@ export default function App() {
     const [typedSkills, setTypedSkills] = useState('');
     const [result, setResult] = useState(null);
     const [activeVideo, setActiveVideo] = useState(null);
+    const currentActive = activeVideo;
     useEffect(() => {
       const missing = result ? result.missing : [];
       const lowerMissing = missing.map(s => s.toLowerCase());
