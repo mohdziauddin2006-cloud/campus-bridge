@@ -19,103 +19,50 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Page transition animation */
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-.page-enter {
-  animation: fadeInUp 0.55s ease-out both;
+/* Mobile-first fluid typography */
+.hero-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 900; line-height: 0.92; letter-spacing: -0.04em; font-size: clamp(2.6rem, 7vw, 5.5rem); }
+.section-display { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; line-height: 1.05; letter-spacing: -0.03em; font-size: clamp(1.8rem, 4vw, 3.2rem); }
+.nav-label { font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+
+/* Card grid — mobile first, stacks to 1 column */
+.card-grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+
+/* Responsive nav — stack under 768px */
+@media (max-width: 768px) {
+  .nav-row { flex-direction: column; gap: 0.75rem; align-items: flex-start; padding: 0.75rem 1rem; height: auto; }
+  .nav-label { font-size: 10px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .hero-display { line-height: 1.05; }
 }
 
-/* Checkerboard hover */
-.checker-img {
-  filter: grayscale(100%) contrast(120%);
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: all 0.5s ease;
-}
-.checker-img:hover {
-  transform: scale(1.03);
-  filter: grayscale(100%) contrast(140%);
-}
+/* Timeline scroll horizontally on mobile */
+.timeline-scroll { display: flex; gap: 1.25rem; overflow-x: auto; padding-bottom: 0.5rem; scroll-snap-type: x mandatory; }
+.timeline-scroll > * { scroll-snap-align: start; flex: 0 0 85vw; min-width: 260px; }
 
-/* Typography scale */
-.hero-display {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 900;
-  line-height: 0.9;
-  letter-spacing: -0.04em;
-}
-.section-display {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-}
-.nav-label {
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-}
-.body-text {
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  font-size: 16px;
-  line-height: 1.75;
-  color: #2a2a2a;
-}
+/* Checkerboard hard-edge */
+.checker-square { border-radius: 0; overflow: hidden; }
 
-/* Pill button with glowing elevation */
-.btn-pill {
-  border-radius: 9999px;
-  background-color: #800020;
-  color: #FDFBF7;
-  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: none;
-  padding: 14px 32px;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  box-shadow: 0 2px 0 #5a0018;
-}
-.btn-pill:hover {
-  background-color: #600018;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(128, 0, 32, 0.35), 0 2px 0 #5a0018;
-}
+/* Video player exact 16/9 */
+.video-wrap { position: relative; width: 100%; aspect-ratio: 16 / 9; background: #1A1A1A; border-radius: 0.75rem; overflow: hidden; }
+.video-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
 
-/* Checkerboard layout */
-.checker-square {
-  border-radius: 0;
-  overflow: hidden;
-}
+/* Modal overlay */
+.modal-back { position: fixed; inset: 0; z-index: 70; display: flex; align-items: center; justify-content: center; background: rgba(26,26,26,0.55); backdrop-filter: blur(8px); transition: opacity .2s ease; }
+.modal-back.hidden { opacity: 0; pointer-events: none; }
+.modal-panel { background: #FDFBF7; border-radius: 1.5rem; padding: 1.5rem; max-width: 28rem; width: 92%; box-shadow: 0 25px 50px rgba(0,0,0,0.25); }
 
-/* Toast slide-in */
-@keyframes toastSlideIn {
-  from { opacity: 0; transform: translateX(30px) translateY(10px); }
-  to   { opacity: 1; transform: translateX(0) translateY(0); }
-}
-@keyframes toastFadeOut {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-.animate-toast-in {
-  animation: toastSlideIn 0.35s ease-out both;
-}
+/* Extruded double-shadow for cards */
+.card-editorial { background: #FDFBF7; border: 1px solid #EAE6DC; border-radius: 1rem; padding: 1.5rem; box-shadow: 8px 8px 0 #d8d4c8, 2px 2px 0 #d8d4c8; transition: all .3s ease; }
+.card-editorial:hover { transform: translate(-3px,-3px); box-shadow: 12px 12px 0 #d8d4c8, 4px 4px 0 #d8d4c8; }
 
-/* Timeline line */
-.timeline-step {
-  position: relative;
-  padding-left: 2.5rem;
-  border-left: 2px solid rgba(26, 26, 26, 0.1);
-}
-.timeline-step:hover {
-  border-left-color: #800020;
-}
+/* Inset double-shadow for inputs/active */
+.input-editorial { background: #fff; border: 1.5px solid #EAE6DC; border-radius: 10px; padding: 0.65rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #1A1A1A; outline: none; transition: border-color .2s; }
+.input-editorial:focus { border-color: #800020; box-shadow: inset 2px 2px 6px rgba(128,0,32,0.08); }
+
+/* Button pill with elevation */
+.btn-editorial { background: #800020; color: #FDFBF7; padding: 0.65rem 1.4rem; border-radius: 9999px; font-family: 'Inter', sans-serif; font-weight: 600; letter-spacing: 0.03em; font-size: 0.8rem; transition: all .25s ease; box-shadow: 6px 6px 0 #3a0a1a, 2px 2px 0 #3a0a1a; border: none; cursor: pointer; }
+.btn-editorial:hover { transform: translate(-2px,-2px); box-shadow: 10px 10px 0 #3a0a1a, 4px 4px 0 #3a0a1a; background: #6a001b; }
+
+/* Toast */
+@keyframes toastSlideIn { from { opacity: 0; transform: translateX(30px) translateY(10px); } to { opacity: 1; transform: translateX(0) translateY(0); } }
+.animate-toast-in { animation: toastSlideIn .35s ease-out both; }
