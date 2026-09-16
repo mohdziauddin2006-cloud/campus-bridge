@@ -20,7 +20,8 @@
       "PowerShell(& 'C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe' branch -M main)",
       "PowerShell(& 'C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe' remote add origin https://github.com/<YOUR-USERNAME>/campus-bridge.git)",
       "PowerShell(& 'C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe' push -u origin main)",
-      "PowerShell(& 'C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe' remote set-url origin https://github.com/mohdziauddin2006-cloud/campus-bridge.git)"
+      "PowerShell(& 'C:\\\\Program Files\\\\Git\\\\bin\\\\git.exe' remote set-url origin https://github.com/mohdziauddin2006-cloud/campus-bridge.git)",
+      "PowerShell(Get-Process *)"
     ]
   }
 }
