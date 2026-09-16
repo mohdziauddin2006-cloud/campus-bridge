@@ -27,7 +27,8 @@
       "Bash(npm --version)",
       "Bash(npm run *)",
       "Bash(git add *)",
-      "Bash(git commit -m 'Fix search bug, update job titles, secure TPO routes *)"
+      "Bash(git commit -m 'Fix search bug, update job titles, secure TPO routes *)",
+      "Bash(sed *)"
     ]
   }
 }
