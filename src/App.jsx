@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import {
   Search, Filter, GraduationCap, Sparkles, CheckCircle2, Clock, MapPin,
   DollarSign, Send, X, Menu, ChevronRight, Zap, BookOpen, TrendingUp,
-  Shield, BrainCircuit, Wrench, Server, Code2, Hash, Trophy, ArrowRight, Building2, Briefcase
+  Shield, BrainCircuit, Wrench, Server, Code2, Hash, Trophy, ArrowRight, Briefcase
 } from 'lucide-react';
 
 /* ═════════════════════ NEOMORPHIC TOKENS ═════════════════════ */
@@ -21,12 +21,12 @@ const LS_INTS = 'si_internships';
 const LS_APPS = 'si_applications';
 
 const REAL_INTS = [
-  { id: 201, title: 'ASIC Design Intern', company: 'SiliconCore Labs', domain: 'VLSI', location: 'Bangalore', stipend: '₹ 22,000/mo', duration: '6 months', skills: ['Verilog','SystemVerilog','Synthesis','Physical Design'], desc: 'Work on custom silicon architectures using Verilog and SystemVerilog for ASIC tapeout.' },
-  { id: 202, title: 'RTL Verification Engineer', company: 'NeuroForge AI', domain: 'VLSI', location: 'Hyderabad', stipend: '₹ 25,000/mo', duration: '6 months', skills: ['SystemVerilog','UVM','SVA','Formal Methods'], desc: 'Validate RTL designs with UVM testbenches and formal property checking.' },
-  { id: 203, title: 'Full-Stack Developer', company: 'Orbit Labs', domain: 'Software', location: 'Mumbai', stipend: '₹ 28,000/mo', duration: '4 months', skills: ['React','Node.js','PostgreSQL','TypeScript','Tailwind'], desc: 'Build responsive product interfaces and REST APIs with modern stacks.' },
-  { id: 204, title: 'Embedded Systems Intern', company: 'Vertex Systems', domain: 'Embedded', location: 'Pune', stipend: '₹ 18,000/mo', duration: '12 months', skills: ['ARM Cortex-M','FreeRTOS','C','Embedded C'], desc: 'Develop firmware for ARM Cortex-M based IoT and industrial controllers.' },
-  { id: 205, title: 'AI/ML Research Intern', company: 'Meridian AI', domain: 'AI/ML', location: 'Delhi NCR', stipend: '₹ 30,000/mo', duration: '6 months', skills: ['Python','PyTorch','Transformer','NLP'], desc: 'Train large language models and evaluate on downstream benchmarks.' },
-  { id: 206, title: 'Cloud DevOps Intern', company: 'ShieldNet', domain: 'DevOps', location: 'Remote', stipend: '₹ 20,000/mo', duration: '6 months', skills: ['AWS','Docker','Terraform','CI/CD'], desc: 'Build and maintain CI/CD pipelines, container clusters, and IaC templates.' },
+  { id: 201, title: 'VLSI Verification Engineer', company: 'SiliconCore Labs', domain: 'VLSI', location: 'Bangalore', stipend: '₹ 22,000/mo', duration: '6 months', skills: ['Verilog','SystemVerilog','Synthesis','Physical Design'], desc: 'Work on custom silicon architectures using Verilog and SystemVerilog for ASIC tapeout.' },
+  { id: 202, title: 'Physical Design Intern', company: 'NeuroForge AI', domain: 'VLSI', location: 'Hyderabad', stipend: '₹ 25,000/mo', duration: '6 months', skills: ['SystemVerilog','UVM','SVA','Formal Methods'], desc: 'Validate RTL designs with UVM testbenches and formal property checking.' },
+  { id: 203, title: 'Junior React Developer', company: 'Orbit Labs', domain: 'Software', location: 'Mumbai', stipend: '₹ 28,000/mo', duration: '4 months', skills: ['React','Node.js','PostgreSQL','TypeScript','Tailwind'], desc: 'Build responsive product interfaces and REST APIs with modern stacks.' },
+  { id: 204, title: 'Embedded Firmware Engineer', company: 'Vertex Systems', domain: 'Embedded', location: 'Pune', stipend: '₹ 18,000/mo', duration: '12 months', skills: ['ARM Cortex-M','FreeRTOS','C','Embedded C'], desc: 'Develop firmware for ARM Cortex-M based IoT and industrial controllers.' },
+  { id: 205, title: 'Junior NLP Engineer', company: 'Meridian AI', domain: 'AI/ML', location: 'Delhi NCR', stipend: '₹ 30,000/mo', duration: '6 months', skills: ['Python','PyTorch','Transformer','NLP'], desc: 'Train large language models and evaluate on downstream benchmarks.' },
+  { id: 206, title: 'DevOps Automation Intern', company: 'ShieldNet', domain: 'DevOps', location: 'Remote', stipend: '₹ 20,000/mo', duration: '6 months', skills: ['AWS','Docker','Terraform','CI/CD'], desc: 'Build and maintain CI/CD pipelines, container clusters, and IaC templates.' },
 ];
 
 function loadInt() {
@@ -59,7 +59,7 @@ export default function App() {
   const [applyOpen, setApplyOpen] = useState(false);
   const [applyInt, setApplyInt] = useState(null);
   const [applyForm, setApplyForm] = useState({ name:'', college:'', email:'', portfolio:'' });
-  const [matchRole, setMatchRole] = useState('Full-Stack');
+  const [matchRole, setMatchRole] = useState('Junior React Developer');
   const [resumeText, setResumeText] = useState('');
   const [parsing, setParsing] = useState(false);
   const [parsedSkills, setParsedSkills] = useState([]);
@@ -105,16 +105,17 @@ export default function App() {
     setTimeout(() => {
       const text = resumeText.toLowerCase();
       const keywords = ['python', 'react', 'node.js', 'verilog', 'systemverilog', 'arm cortex', 'aws', 'docker', 'sql', 'pytorch', 'c', 'typescript', 'terraform', 'freeRTOS'];
-      const found = keywords.filter(k => text.includes(k));
+      const found = keywords.filter(k => text.includes(k)).map(k => k.toLowerCase());
       setParsedSkills(found); setParsing(false); pushToast('Skills Extracted');
     }, 1000);
   }
 
   /* Skill matcher */
-  const currentRole = ints.find(i => i.domain === matchRole) || ints[0];
-  const userSkillsArr = parsedSkills.length ? parsedSkills : resumeText.toLowerCase().split(/[,+\s]+/).filter(Boolean);
+  const currentRole = ints.find(i => i.title === matchRole) || ints[0];
+  const userSkillsArr = parsedSkills.length ? parsedSkills.map(p => p.toLowerCase().trim()) : resumeText.toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
   const reqSkills = currentRole.skills || [];
-  const matched = reqSkills.filter(s => userSkillsArr.some(u => s.toLowerCase().includes(u) || u.includes(s.toLowerCase())));
+  const userSet = new Set(userSkillsArr.map(u => u.toLowerCase()));
+  const matched = reqSkills.filter(s => userSet.has(s.toLowerCase()));
   const missing = reqSkills.filter(s => !matched.includes(s));
   const score = Math.round((matched.length / Math.max(reqSkills.length, 1)) * 100);
 
@@ -122,8 +123,6 @@ export default function App() {
     { key: 'Explore', label: 'Explore Internships', icon: Search },
     { key: 'Match', label: 'Skill Matcher', icon: Sparkles },
     { key: 'Applications', label: 'My Apps', icon: Send },
-    { key: 'Post', label: 'Employer Portal', icon: Building2 },
-    { key: 'TPO', label: 'TPO Command', icon: Shield },
   ];
 
   const stats = {
@@ -231,7 +230,7 @@ export default function App() {
                   <div>
                     <label className="text-xs font-bold text-[#94a3b8] block mb-2">Target Role</label>
                     <select value={matchRole} onChange={e => setMatchRole(e.target.value)} style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0' }} className="w-full p-3 rounded-2xl text-sm outline-none border-none appearance-none cursor-pointer">
-                      {['Full-Stack','VLSI','AI/ML','Embedded','DevOps'].map(r => <option key={r}>{r}</option>)}
+                      {['Junior React Developer','VLSI Verification Engineer','Physical Design Intern','Embedded Firmware Engineer','Junior NLP Engineer','DevOps Automation Intern'].map(r => <option key={r}>{r}</option>)}
                     </select>
                   </div>
                   <div>
@@ -322,69 +321,6 @@ export default function App() {
                     ))}
                   </div>
                 )}
-              </div>
-            </section>
-          )}
-
-          {/* ─── View 4: Employer Portal ─── */}
-          {nav === 'Post' && (
-            <section className="space-y-6 animate-fade-up">
-              <h2 className="text-xl font-extrabold">Employer Portal — Post Opening</h2>
-              <div className="rounded-[1.5rem] p-6" style={{ background: BG2, boxShadow: CARD, border: '1px solid #24282e' }}>
-                <form onSubmit={e => { e.preventDefault(); submitPost(); }} className="grid md:grid-cols-2 gap-3">
-                  {[
-                    { k: 'title', l: 'Role Title', ph: 'e.g., ASIC Design Intern', r: true },
-                    { k: 'company', l: 'Company Name', ph: 'e.g., SiliconCore Labs', r: true },
-                    { k: 'domain', l: 'Domain', ph: 'VLSI / Software / AI', r: false },
-                    { k: 'location', l: 'Location', ph: 'Bangalore / Remote', r: false },
-                    { k: 'stipend', l: 'Stipend', ph: '₹ 22,000/mo', r: true },
-                    { k: 'duration', l: 'Duration', ph: '6 months', r: false },
-                  ].map(f => (
-                    <div key={f.k}>
-                      <label className="text-xs font-bold text-[#94a3b8] block mb-1">{f.l}</label>
-                      <input required={f.r} value={postForm[f.k]} onChange={e => setPostForm({ ...postForm, [f.k]: e.target.value })} placeholder={f.ph} style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0', border: 'none' }} className="w-full p-3 rounded-2xl text-sm outline-none placeholder:text-[#64748b]" />
-                    </div>
-                  ))}
-                  <div className="md:col-span-2">
-                    <label className="text-xs font-bold text-[#94a3b8] block mb-1">Required Skills</label>
-                    <input value={postForm.skills} onChange={e => setPostForm({ ...postForm, skills: e.target.value })} placeholder="Verilog, SystemVerilog, UVM..." style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0', border: 'none' }} className="w-full p-3 rounded-2xl text-sm outline-none placeholder:text-[#64748b] mb-3" />
-                    <button type="submit" className="w-full py-3 rounded-2xl font-extrabold text-sm transition" style={{ background: BG2, boxShadow: BTN, color: '#e2e8f0' }} onMouseDown={e => e.currentTarget.style.boxShadow = BTN_ACTIVE} onMouseUp={e => e.currentTarget.style.boxShadow = BTN}>Publish Opening</button>
-                  </div>
-                </form>
-              </div>
-            </section>
-          )}
-
-          {/* ─── View 5: TPO Command Center ─── */}
-          {nav === 'TPO' && (
-            <section className="space-y-6 animate-fade-up">
-              <h2 className="text-xl font-extrabold">TPO Command Center</h2>
-              <div className="grid md:grid-cols-3 gap-5">
-                <div className="rounded-[1.5rem] p-6" style={{ background: BG2, boxShadow: CARD }}>
-                  <h3 className="text-xs font-bold text-[#94a3b8] mb-2">Average Batch Readiness</h3>
-                  <div className="text-5xl font-extrabold tracking-tight" style={{ color: '#10b981' }}>68%</div>
-                  <div className="mt-3 h-2.5 rounded-full overflow-hidden" style={{ background: DARK2, boxShadow: INSET }}>
-                    <div className="h-full rounded-full" style={{ width: '68%', background: 'linear-gradient(90deg, #10b981, #34d399)' }} />
-                  </div>
-                </div>
-                <div className="rounded-[1.5rem] p-6" style={{ background: BG2, boxShadow: CARD }}>
-                  <h3 className="text-xs font-bold text-[#94a3b8] mb-2">Applications Active</h3>
-                  <div className="text-5xl font-extrabold tracking-tight" style={{ color: '#10b981' }}>{apps.length}</div>
-                  <div className="text-xs text-[#94a3b8] mt-2">Live submissions this cycle</div>
-                </div>
-                <div className="rounded-[1.5rem] p-6" style={{ background: BG2, boxShadow: CARD }}>
-                  <h3 className="text-xs font-bold text-[#94a3b8] mb-2">Top Missing Skills</h3>
-                  <div className="space-y-2">
-                    {['SystemVerilog','Cloud Architectures','UVM'].map(s => (
-                      <div key={s} className="flex items-center gap-3">
-                        <div className="w-full h-2 rounded-full overflow-hidden" style={{ background: DARK2, boxShadow: INSET }}>
-                          <div className="h-full rounded-full" style={{ width: `${Math.floor(Math.random()*30+55)}%`, background: '#ef4444' }} />
-                        </div>
-                        <span className="text-xs font-bold whitespace-nowrap">{s}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
               </div>
             </section>
           )}
