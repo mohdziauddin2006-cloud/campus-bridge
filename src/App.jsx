@@ -26,23 +26,23 @@ const INDUSTRIES = {
 
 const courseCatalog = {
   'Full-Stack': [
-    { id: 'fs1', title: 'Modern React & TypeScript Patterns', embedUrl: 'https://www.youtube.com/embed/t2CEgPsws3U', tag: 'Frontend', domain: 'Full-Stack', skills: ['React','JavaScript','CSS'] },
-    { id: 'fs2', title: 'Node.js & API Design Masterclass', embedUrl: 'https://www.youtube.com/embed/KhuapsarqA4', tag: 'Backend', domain: 'Full-Stack', skills: ['Node.js','API Design'] },
+    { id: 'fs1', title: 'Modern React & TypeScript Patterns', embedUrl: 'https://www.youtube.com/embed/zjs13CRwIsk', tag: 'Frontend', domain: 'Full-Stack', skills: ['React','JavaScript','CSS'], fallbackUrl: 'https://react.dev/learn', fallbackText: 'Read Official React Docs' },
+    { id: 'fs2', title: 'Node.js & API Design Masterclass', embedUrl: 'https://www.youtube.com/embed/Oe421EPjePz', tag: 'Backend', domain: 'Full-Stack', skills: ['Node.js','API Design'], fallbackUrl: 'https://nodejs.org/en/docs/', fallbackText: 'Read Official Node.js Docs' },
   ],
   'AI/ML': [
-    { id: 'ai1', title: 'Deep Learning with PyTorch', embedUrl: 'https://www.youtube.com/embed/k9RXKDirI44', tag: 'ML Core', domain: 'AI/ML', skills: ['PyTorch','Python'] },
-    { id: 'ai2', title: 'NLP & Transformer Architectures', embedUrl: 'https://www.youtube.com/embed/f03zGPOhwk0', tag: 'NLP', domain: 'AI/ML', skills: ['NLP','Python'] },
-    { id: 'ai3', title: 'Neural Networks from Scratch', embedUrl: 'https://www.youtube.com/embed/ilG7C8Otfbg', tag: 'Deep Learning', domain: 'AI/ML', skills: ['PyTorch','NumPy'] },
+    { id: 'ai1', title: 'Deep Learning with PyTorch', embedUrl: 'https://www.youtube.com/embed/3t9lZh11ZfA', tag: 'ML Core', domain: 'AI/ML', skills: ['PyTorch','Python'], fallbackUrl: 'https://pytorch.org/tutorials/', fallbackText: 'Read PyTorch Tutorials' },
+    { id: 'ai2', title: 'NLP & Transformer Architectures', embedUrl: 'https://www.youtube.com/embed/fqpta0OQjS0', tag: 'NLP', domain: 'AI/ML', skills: ['NLP','Python'], fallbackUrl: 'https://huggingface.co/docs', fallbackText: 'Read Hugging Face Docs' },
+    { id: 'ai3', title: 'Neural Networks from Scratch', embedUrl: 'https://www.youtube.com/embed/w8yWXqWQYmU', tag: 'Deep Learning', domain: 'AI/ML', skills: ['PyTorch','NumPy'], fallbackUrl: 'https://www.w3schools.com/ai/', fallbackText: 'Read W3Schools AI Guide' },
   ],
   'VLSI': [
-    { id: 'vl1', title: 'Verilog & SystemVerilog Fundamentals', embedUrl: 'https://www.youtube.com/embed/8B1M-cY9Oeg', tag: 'Digital Design', domain: 'VLSI', skills: ['Verilog','SystemVerilog','Digital Design'] },
-    { id: 'vl2', title: 'UVM Verification Methodology', embedUrl: 'https://www.youtube.com/embed/MT2tW8zGZAk', tag: 'Verification', domain: 'VLSI', skills: ['UVM'] },
-    { id: 'vl3', title: 'Static Timing Analysis (STA)', embedUrl: 'https://www.youtube.com/embed/p9NuPj4lL3Q', tag: 'Timing', domain: 'VLSI', skills: ['STA'] },
+    { id: 'vl1', title: 'Verilog & SystemVerilog Fundamentals', embedUrl: 'https://www.youtube.com/embed/3zO1f3OqwRI', tag: 'Digital Design', domain: 'VLSI', skills: ['Verilog','SystemVerilog','Digital Design'], fallbackUrl: 'https://www.chipverify.com/verilog/', fallbackText: 'Read ChipVerify Verilog Guide' },
+    { id: 'vl2', title: 'UVM Verification Methodology', embedUrl: 'https://www.youtube.com/embed/0Y7lP8D8LzU', tag: 'Verification', domain: 'VLSI', skills: ['UVM'], fallbackUrl: 'https://verificationacademy.com/', fallbackText: 'Read Verification Academy' },
+    { id: 'vl3', title: 'Static Timing Analysis (STA)', embedUrl: 'https://www.youtube.com/embed/d5f8e6j3nRg', tag: 'Timing', domain: 'VLSI', skills: ['STA'], fallbackUrl: 'https://www.synopsys.com/glossary/sta.html', fallbackText: 'Read Synopsys STA Overview' },
   ],
   'DevOps': [
-    { id: 'do1', title: 'Docker & Kubernetes for Engineers', embedUrl: 'https://www.youtube.com/embed/3c-iBn73d8c', tag: 'Containers', domain: 'DevOps', skills: ['Docker','Kubernetes'] },
-    { id: 'do2', title: 'CI/CD Pipelines & Infra as Code', embedUrl: 'https://www.youtube.com/embed/wxHH2mX6T9k', tag: 'Automation', domain: 'DevOps', skills: ['CI/CD','Terraform'] },
-    { id: 'do3', title: 'AWS Cloud Architecture Essentials', embedUrl: 'https://www.youtube.com/embed/jZoeqFcQ9Hw', tag: 'Cloud', domain: 'DevOps', skills: ['AWS','Linux'] },
+    { id: 'do1', title: 'Docker & Kubernetes for Engineers', embedUrl: 'https://www.youtube.com/embed/fqpta0OQjS0', tag: 'Containers', domain: 'DevOps', skills: ['Docker','Kubernetes'], fallbackUrl: 'https://docs.docker.com/get-started/', fallbackText: 'Read Official Docker Docs' },
+    { id: 'do2', title: 'CI/CD Pipelines & Infra as Code', embedUrl: 'https://www.youtube.com/embed/-C5XfBjFc5g', tag: 'Automation', domain: 'DevOps', skills: ['CI/CD','Terraform'], fallbackUrl: 'https://learn.hashicorp.com/terraform', fallbackText: 'Read HashiCorp Learn' },
+    { id: 'do3', title: 'AWS Cloud Architecture Essentials', embedUrl: 'https://www.youtube.com/embed/Ndrr9P6x5vU', tag: 'Cloud', domain: 'DevOps', skills: ['AWS','Linux'], fallbackUrl: 'https://aws.amazon.com/getting-started/', fallbackText: 'Read AWS Getting Started' },
   ],
 };
 
@@ -231,8 +231,15 @@ export default function App() {
               <span className="text-xs font-bold uppercase text-[#800020] bg-[#800020]/10 px-2 py-0.5 rounded-full">{currentActive ? currentActive.tag : 'Waiting'}</span>
             </div>
             <div className="video-wrap">
-              <iframe src={currentActive ? currentActive.embedUrl : 'https://www.youtube.com/embed/t2CEgPsws3U?rel=0'} title="Masterclass Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              <iframe src={currentActive && currentActive.embedUrl ? currentActive.embedUrl : 'https://www.youtube.com/embed/zjs13CRwIsk?rel=0'} title="Masterclass Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
+            {currentActive && currentActive.fallbackUrl && (
+              <div className="mt-4 p-4 rounded-xl bg-[#FDFBF7] border border-[#EAE6DC] shadow-[4px_4px_0_#d8d4c8,1px_1px_0_#d8d4c8]">
+                <a href={currentActive.fallbackUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold text-white bg-[#800020] hover:bg-[#600018] transition-colors shadow-[3px_3px_0_#4a0010,1px_1px_0_#4a0010]" style={{fontFamily:"'Inter',sans-serif"}}>
+                  Prefer reading? {currentActive.fallbackText}
+                </a>
+              </div>
+            )}
           </div>
           <div className="grid md:grid-cols-2 gap-6">
             {displayVideos.map((vid, idx) => (
