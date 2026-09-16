@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from 'react';
 import {
   Search, Filter, GraduationCap, Sparkles, CheckCircle2, Clock, MapPin,
   DollarSign, Send, X, Menu, ChevronRight, Zap, BookOpen, TrendingUp,
-  Shield, BrainCircuit, Wrench, Server, Code2, Hash, Trophy, ArrowRight
+  Shield, BrainCircuit, Wrench, Server, Code2, Hash, Trophy, ArrowRight, Building2
 } from 'lucide-react';
 
 /* ═════════════════════ NEOMORPHIC TOKENS ═════════════════════ */
