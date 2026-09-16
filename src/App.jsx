@@ -1,349 +1,222 @@
-import { useState, useEffect, useMemo } from 'react';
-import {
-  Search, Filter, GraduationCap, Sparkles, CheckCircle2, Clock, MapPin,
-  DollarSign, Send, X, Menu, ChevronRight, Zap, BookOpen, TrendingUp,
-  Shield, BrainCircuit, Wrench, Server, Code2, Hash, Trophy, ArrowRight, Briefcase
-} from 'lucide-react';
+import { useState } from 'react';
+import { CheckCircle, Clock, Award, ChevronRight, GraduationCap, Briefcase } from 'lucide-react';
 
-/* ═════════════════════ NEOMORPHIC TOKENS ═════════════════════ */
-const BG2 = '#1b1e23';
-const DARK2 = '#121418';
-const LIGHT2 = '#24282e';
-const CARD = '9px 9px 18px #121418, -9px -9px 18px #24282e';
-const INSET = 'inset 4px 4px 8px #121418, inset -4px -4px 8px #24282e';
-const BTN = '6px 6px 12px #121418, -6px -6px 12px #24282e';
-const BTN_ACTIVE = 'inset 3px 3px 6px #121418, inset -3px -3px 6px #24282e';
-const ACCENT = '#10b981';
-const ROSE = '#ef4444';
+const CHECK = 'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop';
+const TIMELINE = 'https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=800&auto=format&fit=crop';
 
-/* ═════════════════════ STORAGE ═════════════════════ */
-const LS_INTS = 'si_internships';
-const LS_APPS = 'si_applications';
+export default function App() {
+  const [page, setPage] = useState('portal');
 
-const REAL_INTS = [
-  { id: 201, title: 'VLSI Verification Engineer', company: 'SiliconCore Labs', domain: 'VLSI', location: 'Bangalore', stipend: '₹ 22,000/mo', duration: '6 months', skills: ['Verilog','SystemVerilog','Synthesis','Physical Design'], desc: 'Work on custom silicon architectures using Verilog and SystemVerilog for ASIC tapeout.' },
-  { id: 202, title: 'Physical Design Intern', company: 'NeuroForge AI', domain: 'VLSI', location: 'Hyderabad', stipend: '₹ 25,000/mo', duration: '6 months', skills: ['SystemVerilog','UVM','SVA','Formal Methods'], desc: 'Validate RTL designs with UVM testbenches and formal property checking.' },
-  { id: 203, title: 'Junior React Developer', company: 'Orbit Labs', domain: 'Software', location: 'Mumbai', stipend: '₹ 28,000/mo', duration: '4 months', skills: ['React','Node.js','PostgreSQL','TypeScript','Tailwind'], desc: 'Build responsive product interfaces and REST APIs with modern stacks.' },
-  { id: 204, title: 'Embedded Firmware Engineer', company: 'Vertex Systems', domain: 'Embedded', location: 'Pune', stipend: '₹ 18,000/mo', duration: '12 months', skills: ['ARM Cortex-M','FreeRTOS','C','Embedded C'], desc: 'Develop firmware for ARM Cortex-M based IoT and industrial controllers.' },
-  { id: 205, title: 'Junior NLP Engineer', company: 'Meridian AI', domain: 'AI/ML', location: 'Delhi NCR', stipend: '₹ 30,000/mo', duration: '6 months', skills: ['Python','PyTorch','Transformer','NLP'], desc: 'Train large language models and evaluate on downstream benchmarks.' },
-  { id: 206, title: 'DevOps Automation Intern', company: 'ShieldNet', domain: 'DevOps', location: 'Remote', stipend: '₹ 20,000/mo', duration: '6 months', skills: ['AWS','Docker','Terraform','CI/CD'], desc: 'Build and maintain CI/CD pipelines, container clusters, and IaC templates.' },
-];
-
-function loadInt() {
-  try { const r = localStorage.getItem(LS_INTS); if (r) return JSON.parse(r); } catch {}
-  localStorage.setItem(LS_INTS, JSON.stringify(REAL_INTS));
-  return REAL_INTS;
-}
-function saveInt(a) { try { localStorage.setItem(LS_INTS, JSON.stringify(a)); } catch {} }
-function loadApp() { try { return JSON.parse(localStorage.getItem(LS_APPS) || '[]'); } catch { return []; } }
-function saveApp(a) { try { localStorage.setItem(LS_APPS, JSON.stringify(a)); } catch {} }
-
-/* ═════════════════════ TOAST ═════════════════════ */
-function Toast({ msg, onClose }) {
-  useEffect(() => { const t = setTimeout(onClose, 2800); return () => clearTimeout(t); }, [onClose]);
   return (
-    <div className="fixed top-6 right-6 z-[70] px-5 py-3 rounded-2xl text-sm font-bold shadow-2xl flex items-center gap-2 animate-fade-up" style={{ background: BG2, boxShadow: CARD, border: '1px solid #24282e', color: '#e2e8f0' }}>
-      <CheckCircle2 size={18} style={{ color: ACCENT }} /> {msg}
+    <div className="min-h-screen bg-[#FDFBF7] text-[#1A1A1A] font-[Inter] selection:bg-[#800020]/10">
+      {/* Navigation */}
+      <nav className="sticky top-0 z-50 bg-[#FDFBF7]/95 backdrop-blur-sm border-b border-[#EAE6DC]">
+        <div className="max-w-7xl mx-auto px-6 md:px-10 h-16 flex items-center justify-between">
+          <button onClick={() => setPage('portal')} className="font-[Playfair_Display] text-xl font-bold text-[#1A1A1A] tracking-tight hover:text-[#800020] transition-colors">
+            Campus Bridge
+          </button>
+          <div className="flex gap-8">
+            <button onClick={() => setPage('portal')} className="nav-label text-[#1A1A1A] hover:text-[#800020] transition-colors">Student Portal</button>
+            <button onClick={() => setPage('applications')} className="nav-label text-[#1A1A1A] hover:text-[#800020] transition-colors">My Applications</button>
+            <button onClick={() => setPage('tpo')} className="nav-label text-[#1A1A1A] hover:text-[#800020] transition-colors">TPO Admin</button>
+          </div>
+        </div>
+      </nav>
+
+      <main className="max-w-7xl mx-auto px-6 md:px-10">
+        {page === 'portal' && <StudentPortal />}
+        {page === 'applications' && <MyApplications />}
+        {page === 'tpo' && <TPOAdmin />}
+      </main>
     </div>
   );
 }
 
-/* ═════════════════════ MAIN ═════════════════════ */
-export default function App() {
-  const [nav, setNav] = useState('Explore');
-  const [toasts, setToasts] = useState([]);
-  const [ints, setInts] = useState(() => loadInt());
-  const [apps, setApps] = useState(() => loadApp());
-  const [search, setSearch] = useState('');
-  const [tag, setTag] = useState('All');
-  const [applyOpen, setApplyOpen] = useState(false);
-  const [applyInt, setApplyInt] = useState(null);
-  const [applyForm, setApplyForm] = useState({ name:'', college:'', email:'', portfolio:'' });
-  const [matchRole, setMatchRole] = useState('Junior React Developer');
-  const [resumeText, setResumeText] = useState('');
-  const [parsing, setParsing] = useState(false);
-  const [parsedSkills, setParsedSkills] = useState([]);
-  const [mobileNav, setMobileNav] = useState(false);
-  const [postForm, setPostForm] = useState({ title:'', company:'', domain:'', location:'', stipend:'', duration:'', skills:'' });
-
-  useEffect(() => saveInt(ints), [ints]);
-  useEffect(() => saveApp(apps), [apps]);
-
-  const pushToast = (msg) => setToasts(t => [...t, { id: Date.now(), msg }]);
-  const clearToast = (id) => setToasts(t => t.filter(x => x.id !== id));
-
-  /* Filter */
-  const filtered = useMemo(() => ints.filter(i => {
-    const q = search.toLowerCase();
-    const okS = !q || i.title.toLowerCase().includes(q) || i.company.toLowerCase().includes(q) || i.domain.toLowerCase().includes(q);
-    const okT = tag === 'All' || (tag === 'VLSI' && i.domain === 'VLSI') || (tag === 'Software' && i.domain === 'Software') || (tag === 'AI/ML' && i.domain === 'AI/ML') || (tag === 'Embedded' && i.domain === 'Embedded') || (tag === 'DevOps' && i.domain === 'DevOps');
-    return okS && okT;
-  }), [ints, search, tag]);
-
-  /* Apply */
-  function openApply(i) { setApplyInt(i); setApplyForm({ name:'', college:'', email:'', portfolio:'' }); setApplyOpen(true); }
-  function submitApply() {
-    if (!applyForm.name.trim() || !applyForm.email.trim()) return;
-    setApps(prev => [{ id: Date.now(), intId: applyInt.id, title: applyInt.title, company: applyInt.company, name: applyForm.name.trim(), college: applyForm.college.trim(), email: applyForm.email.trim(), portfolio: applyForm.portfolio.trim(), status: 'Under Review', date: new Date().toISOString() }, ...prev]);
-    setApplyOpen(false); setApplyForm({ name:'', college:'', email:'', portfolio:'' });
-    pushToast('Application Submitted Successfully');
-  }
-
-  /* Withdraw */
-  function withdraw(id) { setApps(prev => prev.filter(a => a.id !== id)); pushToast('Application Withdrawn'); }
-
-  /* Post */
-  function submitPost() {
-    if (!postForm.title.trim() || !postForm.company.trim() || !postForm.stipend.trim()) return;
-    const newItem = { id: Date.now(), title: postForm.title.trim(), company: postForm.company.trim(), domain: postForm.domain || 'Software', location: postForm.location || 'Remote', stipend: postForm.stipend.trim(), duration: postForm.duration || '3 months', skills: postForm.skills.split(',').map(s=>s.trim()).filter(Boolean), desc: 'New opening posted.', created: new Date().toISOString() };
-    setInts(prev => [newItem, ...prev]); setPostForm({ title:'', company:'', domain:'', location:'', stipend:'', duration:'', skills:'' }); setNav('Explore'); pushToast('New Internship Published');
-  }
-
-  /* Smart parse */
-  function smartParse() {
-    setParsing(true);
-    setTimeout(() => {
-      const text = resumeText.toLowerCase();
-      const keywords = ['python', 'react', 'node.js', 'verilog', 'systemverilog', 'arm cortex', 'aws', 'docker', 'sql', 'pytorch', 'c', 'typescript', 'terraform', 'freeRTOS'];
-      const found = keywords.filter(k => text.includes(k)).map(k => k.toLowerCase());
-      setParsedSkills(found); setParsing(false); pushToast('Skills Extracted');
-    }, 1000);
-  }
-
-  /* Skill matcher */
-  const currentRole = ints.find(i => i.title === matchRole) || ints[0];
-  const userSkillsArr = parsedSkills.length ? parsedSkills.map(p => p.toLowerCase().trim()) : resumeText.toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
-  const reqSkills = currentRole.skills || [];
-  const userSet = new Set(userSkillsArr.map(u => u.toLowerCase()));
-  const matched = reqSkills.filter(s => userSet.has(s.toLowerCase()));
-  const missing = reqSkills.filter(s => !matched.includes(s));
-  const score = Math.round((matched.length / Math.max(reqSkills.length, 1)) * 100);
-
-  const navLabels = [
-    { key: 'Explore', label: 'Explore Internships', icon: Search },
-    { key: 'Match', label: 'Skill Matcher', icon: Sparkles },
-    { key: 'Applications', label: 'My Apps', icon: Send },
-  ];
-
-  const stats = {
-    open: ints.length,
-    apps: apps.length,
-    match: score,
-    avgReady: 68,
-  };
-
+/* ═══════════════════════════════════════════
+   1) STUDENT PORTAL
+   ═══════════════════════════════════════════ */
+function StudentPortal() {
   return (
-    <div className="min-h-screen" style={{ background: BG2, color: '#e2e8f0', fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif" }}>
-      {toasts.map(t => <Toast key={t.id} msg={t.msg} onClose={() => clearToast(t.id)} />)}
-
-      {/* Header */}
-      <header className="sticky top-0 z-40 px-6 lg:px-10 h-20 flex items-center justify-between gap-4" style={{ background: 'rgba(27,30,35,0.85)', backdropFilter: 'blur(16px)', borderBottom: '1px solid #24282e' }}>
-        <button onClick={() => setNav('Explore')} className="flex items-center gap-3 group">
-          <div className="h-10 w-10 rounded-2xl flex items-center justify-center transition group-hover:-translate-y-0.5" style={{ background: BG2, boxShadow: BTN, border: '1px solid #24282e' }}>
-            <GraduationCap size={20} style={{ color: '#10b981' }} />
+    <>
+      {/* HERO */}
+      <section className="pt-24 pb-16 md:pt-36 md:pb-28">
+        <div className="max-w-5xl">
+          <h1 className="hero-display text-[clamp(80px,12vw,120px)] font-black text-[#1A1A1A] leading-[0.88] mb-8 tracking-[-0.04em]">
+            The New<br />Standard in<br />Placement.
+          </h1>
+          <p className="body-text max-w-xl text-lg md:text-xl text-[#3a3a3a] leading-relaxed mb-10">
+            A curated bridge between academia and industry. Explore internships, match skills, and apply with precision.
+          </p>
+          <div className="flex gap-4">
+            <button className="btn-pill">Explore Internships</button>
+            <button className="btn-pill bg-[#1A1A1A] hover:bg-[#333]">Skill Matcher</button>
           </div>
-          <div className="leading-none">
-            <div className="text-sm font-extrabold tracking-tight">Campus Bridge</div>
-            <div className="text-[10px] text-[#94a3b8] font-medium mt-0.5">SIH26044 · Academia-Industry</div>
+        </div>
+      </section>
+
+      {/* CHECKERBOARD: Explore Internships */}
+      <section className="py-16 md:py-24">
+        <div className="flex items-baseline gap-4 mb-12">
+          <h2 className="section-display text-[clamp(48px,5vw,72px)] font-black text-[#1A1A1A] tracking-[-0.03em]">Explore Internships</h2>
+          <span className="nav-label text-[#800020]">CURATED OPENINGS</span>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-0 border border-[#1A1A1A]/10">
+          {/* Image block */}
+          <div className="checker-square relative h-[520px] md:h-[600px] bg-[#1A1A1A]">
+            <img src={CHECK} alt="Team meeting" className="checker-img" />
           </div>
-        </button>
-        <button onClick={() => setMobileNav(!mobileNav)} className="lg:hidden p-2 rounded-xl" style={{ background: BG2, boxShadow: BTN }} aria-label="Menu"><Menu size={20} style={{ color: '#94a3b8' }} /></button>
-      </header>
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 py-10 flex gap-6 lg:gap-10">
-        {/* Sidebar */}
-        <aside className={`lg:w-64 shrink-0 lg:sticky lg:top-28 lg:self-start ${mobileNav ? 'block absolute top-20 left-6 right-6 z-30 rounded-3xl p-4' : 'hidden lg:block'}`} style={{ background: BG2, boxShadow: CARD, border: '1px solid #24282e', borderRadius: '1.5rem' }}>
-          <nav className="space-y-1">
-            {navLabels.map(n => (
-              <button key={n.key} onClick={() => { setNav(n.key); setMobileNav(false); }} className="w-full text-left px-4 py-3 rounded-xl text-sm font-bold transition flex items-center gap-3" style={nav === n.key ? { background: DARK2, boxShadow: INSET, color: '#10b981' } : { color: '#94a3b8' }}>
-                <n.icon size={16} /> {n.label}
-              </button>
-            ))}
-          </nav>
-        </aside>
-
-        {/* Main */}
-        <main className="flex-1 min-w-0 space-y-8">
-
-          {/* Stats */}
-          <div className="grid sm:grid-cols-3 gap-4">
-            {[
-              { title: 'Active Openings', val: stats.open, sub: 'Live listings', icon: Briefcase, color: '#10b981' },
-              { title: 'Applications Active', val: stats.apps, sub: 'Submitted', icon: Send, color: '#f59e0b' },
-              { title: 'Batch Readiness', val: '68%', sub: 'Average index', icon: TrendingUp, color: '#10b981' },
-            ].map(s => (
-              <div key={s.title} className="rounded-[1.5rem] p-6 relative overflow-hidden" style={{ background: BG2, boxShadow: CARD }}>
-                <div className="flex items-start justify-between mb-4">
-                  <h3 className="text-xs font-bold text-[#94a3b8] uppercase tracking-wider">{s.title}</h3>
-                  <div className="h-10 w-10 rounded-xl flex items-center justify-center" style={{ background: DARK2, boxShadow: INSET }}>
-                    <s.icon size={18} style={{ color: s.color }} />
-                  </div>
-                </div>
-                <div className="text-4xl font-extrabold tracking-tight" style={{ color: s.color }}>{s.val}</div>
-                <div className="text-xs text-[#94a3b8] mt-1">{s.sub}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* ─── View 1: Explore ─── */}
-          {nav === 'Explore' && (
-            <section className="space-y-6 animate-fade-up">
-              <div className="flex flex-col sm:flex-row gap-3 items-center">
-                <div className="relative flex-1 w-full">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2" size={18} style={{ color: '#64748b' }} />
-                  <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search roles, companies, domains..." style={{ background: BG2, boxShadow: INSET, border: 'none', color: '#e2e8f0' }} className="w-full pl-11 pr-4 py-3.5 rounded-2xl text-sm outline-none placeholder:text-[#64748b]" />
-                </div>
-                <div className="flex gap-2 flex-wrap justify-center">
-                  {['All','VLSI','Software','AI/ML','Embedded','DevOps'].map(t => (
-                    <button key={t} onClick={() => setTag(t)} className="px-4 py-2 rounded-xl text-xs font-bold transition" style={tag === t ? { background: DARK2, boxShadow: INSET, color: '#10b981' } : { background: BG2, boxShadow: BTN, color: '#94a3b8' }} onMouseDown={e => { if(tag!==t){e.currentTarget.style.boxShadow=BTN_ACTIVE;}}} onMouseUp={e => { if(tag!==t){e.currentTarget.style.boxShadow=BTN;}}}>{t}</button>
-                  ))}
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filtered.map(i => (
-                  <article key={i.id} className="rounded-[1.5rem] p-6 relative overflow-hidden transition hover:-translate-y-1 duration-300" style={{ background: BG2, boxShadow: CARD, border: '1px solid #24282e' }}>
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md" style={{ background: DARK2, color: '#10b981', boxShadow: INSET }}>{i.domain}</div>
-                      <div className="text-xs font-mono font-bold" style={{ color: '#10b981' }}>{i.stipend}</div>
-                    </div>
-                    <h3 className="text-xl font-extrabold leading-tight mb-1" style={{ color: '#e2e8f0' }}>{i.title}</h3>
-                    <div className="text-sm font-semibold mb-3" style={{ color: '#94a3b8' }}>{i.company} · {i.location}</div>
-                    <p className="text-sm leading-relaxed mb-4" style={{ color: '#cbd5e1' }}>{i.desc}</p>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {i.skills.map(s => <span key={s} className="text-[11px] font-medium px-2 py-0.5 rounded-md" style={{ background: DARK2, color: '#94a3b8', boxShadow: INSET }}>{s}</span>)}
-                    </div>
-                    <button onClick={() => openApply(i)} className="w-full py-3 rounded-2xl font-extrabold text-sm transition" style={{ background: BG2, boxShadow: BTN, color: '#e2e8f0' }} onMouseDown={e => e.currentTarget.style.boxShadow = BTN_ACTIVE} onMouseUp={e => e.currentTarget.style.boxShadow = BTN}>Quick Apply</button>
-                  </article>
+          {/* Text block */}
+          <div className="checker-square bg-[#FDFBF7] p-10 md:p-14 flex flex-col justify-between border-t md:border-t-0 md:border-l border-[#1A1A1A]/10">
+            <div>
+              <h3 className="font-[Playfair_Display] text-3xl md:text-4xl font-bold text-[#1A1A1A] mb-4">Tech, Design, Research</h3>
+              <p className="body-text text-base mb-6">Browse verified openings from top-tier companies across VLSI, Software, AI/ML, Embedded, and DevOps.</p>
+              <ul className="space-y-3 text-[#3a3a3a] font-medium">
+                {['VLSI Verification Engineer — SiliconCore', 'Junior NLP Engineer — Meridian AI', 'DevOps Automation — ShieldNet'].map(i => (
+                  <li key={i} className="flex items-center gap-3"><CheckCircle size={16} className="text-[#800020] shrink-0" /> <span className="font-[Inter] text-sm">{i}</span></li>
                 ))}
-                {filtered.length === 0 && <div className="col-span-full text-center py-10 text-[#94a3b8]">No results. Adjust filters.</div>}
-              </div>
-            </section>
-          )}
+              </ul>
+            </div>
+            <button className="btn-pill mt-8 w-max">Browse All Openings</button>
+          </div>
+        </div>
+      </section>
 
-          {/* ─── View 2: Skill Matcher ─── */}
-          {nav === 'Match' && (
-            <section className="space-y-6 animate-fade-up">
-              <div className="rounded-[1.5rem] p-6" style={{ background: BG2, boxShadow: CARD, border: '1px solid #24282e' }}>
-                <h2 className="text-xl font-extrabold mb-4">Smart Skill Matcher</h2>
-                <div className="grid md:grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <label className="text-xs font-bold text-[#94a3b8] block mb-2">Target Role</label>
-                    <select value={matchRole} onChange={e => setMatchRole(e.target.value)} style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0' }} className="w-full p-3 rounded-2xl text-sm outline-none border-none appearance-none cursor-pointer">
-                      {['Junior React Developer','VLSI Verification Engineer','Physical Design Intern','Embedded Firmware Engineer','Junior NLP Engineer','DevOps Automation Intern'].map(r => <option key={r}>{r}</option>)}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="text-xs font-bold text-[#94a3b8] block mb-2">Paste Resume / Syllabus</label>
-                    <textarea rows={3} value={resumeText} onChange={e => setResumeText(e.target.value)} placeholder="Paste your skills, courses, projects..." style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0', border: 'none', resize: 'vertical' }} className="w-full p-3 rounded-2xl text-sm outline-none placeholder:text-[#64748b]" />
-                  </div>
-                </div>
-                <button onClick={smartParse} disabled={parsing} className="px-5 py-2.5 rounded-xl font-bold text-sm transition mb-6" style={{ background: BG2, boxShadow: BTN, color: '#e2e8f0' }} onMouseDown={e => e.currentTarget.style.boxShadow = BTN_ACTIVE} onMouseUp={e => e.currentTarget.style.boxShadow = BTN}>{parsing ? 'Parsing...' : 'Smart Parse Skills'}</button>
+      {/* CHECKERBOARD REVERSE: Skill Matcher */}
+      <section className="py-16 md:py-24">
+        <div className="flex items-baseline gap-4 mb-12">
+          <h2 className="section-display text-[clamp(48px,5vw,72px)] font-black text-[#1A1A1A] tracking-[-0.03em]">Skill Matcher</h2>
+          <span className="nav-label text-[#800020]">COMPETENCY ANALYSIS</span>
+        </div>
 
-                {/* Circular progress */}
-                <div className="flex items-center gap-8 mb-6">
-                  <div className="relative w-36 h-36 shrink-0">
-                    <svg viewBox="0 0 100 100" className="w-full h-full -rotate-90">
-                      <circle cx="50" cy="50" r="42" fill="none" stroke="#24282e" strokeWidth="8" />
-                      <circle cx="50" cy="50" r="42" fill="none" stroke="#10b981" strokeWidth="8" strokeLinecap="round" strokeDasharray={`${(score/100)*264} 264`} />
-                    </svg>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <span className="text-3xl font-extrabold" style={{ color: '#10b981' }}>{score}%</span>
-                    </div>
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-extrabold mb-1">{currentRole.title}</h3>
-                    <div className="text-xs text-[#94a3b8] mb-3">{currentRole.company} · Required: {currentRole.skills.join(', ')}</div>
-                    <div className="flex flex-wrap gap-2">
-                      {currentRole.skills.map(s => (
-                        <span key={s} className={`text-xs font-bold px-2 py-0.5 rounded-md ${matched.includes(s) ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-400 border border-rose-500/20'}`}>{s}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Two lists */}
-                <div className="grid md:grid-cols-2 gap-4 mb-6">
-                  <div className="rounded-2xl p-4" style={{ background: DARK2, boxShadow: INSET }}>
-                    <div className="text-xs font-bold text-emerald-400 mb-2">Matched Competencies</div>
-                    {matched.map(s => <div key={s} className="text-sm font-medium flex items-center gap-2"><CheckCircle2 size={14} style={{ color: '#10b981' }} /> {s}</div>)}
-                    {!matched.length && <div className="text-xs text-[#94a3b8]">None yet</div>}
-                  </div>
-                  <div className="rounded-2xl p-4" style={{ background: DARK2, boxShadow: INSET }}>
-                    <div className="text-xs font-bold text-rose-400 mb-2">Missing Prerequisites</div>
-                    {missing.map(s => <div key={s} className="text-sm font-medium flex items-center gap-2"><X size={14} style={{ color: '#ef4444' }} /> {s}</div>)}
-                    {!missing.length && <div className="text-xs text-emerald-400 font-bold">Fully matched!</div>}
-                  </div>
-                </div>
-
-                {/* 14-Day Bridge Plan */}
-                {missing.length > 0 && (
-                  <div className="rounded-2xl p-5" style={{ background: DARK2, boxShadow: INSET }}>
-                    <h3 className="font-extrabold mb-3 flex items-center gap-2"><BookOpen size={18} style={{ color: '#10b981' }} /> 14-Day Bridge Plan</h3>
-                    <div className="space-y-3">
-                      {missing.map((s, idx) => (
-                        <div key={s} className="flex gap-3">
-                          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-extrabold shrink-0" style={{ background: '#10b981', color: '#1b1e23' }}>{idx + 1}</div>
-                          <div>
-                            <div className="font-bold text-sm">Master {s}</div>
-                            <div className="text-xs text-[#94a3b8]">Day {idx * 2 + 1}–{idx * 2 + 3}: Prerequisite tutorials, practice projects, and peer reviews.</div>
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </section>
-          )}
-
-          {/* ─── View 3: Applications ─── */}
-          {nav === 'Applications' && (
-            <section className="space-y-6 animate-fade-up">
-              <h2 className="text-xl font-extrabold">My Applications</h2>
-              <div className="rounded-[1.5rem] p-6" style={{ background: BG2, boxShadow: CARD, border: '1px solid #24282e' }}>
-                {apps.length === 0 ? (
-                  <p className="text-[#94a3b8]">No applications yet. Visit <button onClick={() => setNav('Explore')} className="text-[#10b981] underline font-bold">Explore</button>.</p>
-                ) : (
-                  <div className="space-y-3">
-                    {apps.map(a => (
-                      <div key={a.id} className="flex flex-col sm:flex-row sm:items-center gap-3 p-4 rounded-2xl" style={{ background: DARK2, boxShadow: INSET }}>
-                        <div className="flex-1 min-w-0">
-                          <div className="font-extrabold text-[#e2e8f0] text-sm">{a.title}</div>
-                          <div className="text-xs text-[#94a3b8]">{a.company} · {a.name}</div>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <span className={`text-xs font-bold px-2.5 py-1 rounded-full border ${a.status === 'Shortlisted' ? 'bg-amber-500/10 text-amber-400 border-amber-500/20' : 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'}`}>{a.status}</span>
-                          <span className="text-xs text-[#94a3b8]">{new Date(a.date).toLocaleDateString()}</span>
-                        </div>
-                        <button onClick={() => withdraw(a.id)} className="px-3 py-1.5 rounded-xl text-xs font-bold transition" style={{ background: BG2, boxShadow: BTN, color: '#ef4444' }} onMouseDown={e => e.currentTarget.style.boxShadow = BTN_ACTIVE} onMouseUp={e => e.currentTarget.style.boxShadow = BTN}>Withdraw</button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </section>
-          )}
-
-          {/* Apply Modal */}
-          {applyOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: 'rgba(27,30,35,0.7)' }} onClick={() => setApplyOpen(false)}>
-              <div className="w-full max-w-md rounded-[1.5rem] p-6 relative" style={{ background: BG2, boxShadow: CARD, border: '1px solid #24282e' }} onClick={e => e.stopPropagation()}>
-                <button onClick={() => setApplyOpen(false)} className="absolute top-3 right-3 p-2 rounded-xl transition" style={{ background: DARK2, boxShadow: BTN }} aria-label="Close"><X size={16} /></button>
-                <h3 className="text-xl font-extrabold mb-1">Apply — {applyInt?.title}</h3>
-                <p className="text-xs text-[#94a3b8] mb-5">{applyInt?.company} · {applyInt?.location}</p>
-                <form onSubmit={e => { e.preventDefault(); submitApply(); }} className="space-y-3">
-                  <input required placeholder="Full Name" value={applyForm.name} onChange={e => setApplyForm({ ...applyForm, name: e.target.value })} style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0', border: 'none' }} className="w-full p-3 rounded-2xl text-sm outline-none placeholder:text-[#64748b]" />
-                  <input required placeholder="College / University" value={applyForm.college} onChange={e => setApplyForm({ ...applyForm, college: e.target.value })} style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0', border: 'none' }} className="w-full p-3 rounded-2xl text-sm outline-none placeholder:text-[#64748b]" />
-                  <input required placeholder="Email" type="email" value={applyForm.email} onChange={e => setApplyForm({ ...applyForm, email: e.target.value })} style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0', border: 'none' }} className="w-full p-3 rounded-2xl text-sm outline-none placeholder:text-[#64748b]" />
-                  <input placeholder="Portfolio / GitHub" value={applyForm.portfolio} onChange={e => setApplyForm({ ...applyForm, portfolio: e.target.value })} style={{ background: BG2, boxShadow: INSET, color: '#e2e8f0', border: 'none' }} className="w-full p-3 rounded-2xl text-sm outline-none placeholder:text-[#64748b]" />
-                  <button type="submit" className="w-full py-3 rounded-2xl font-extrabold text-sm transition" style={{ background: BG2, boxShadow: BTN, color: '#10b981' }} onMouseDown={e => e.currentTarget.style.boxShadow = BTN_ACTIVE} onMouseUp={e => e.currentTarget.style.boxShadow = BTN}>Submit Application</button>
-                </form>
+        <div className="grid md:grid-cols-2 gap-0 border border-[#1A1A1A]/10">
+          {/* Text block first */}
+          <div className="checker-square bg-[#800020] text-[#FDFBF7] p-10 md:p-14 flex flex-col justify-between order-2 md:order-1">
+            <div>
+              <h3 className="font-[Playfair_Display] text-3xl md:text-4xl font-bold mb-4">Where Do You Stand?</h3>
+              <p className="text-[#FDFBF7]/90 text-base leading-relaxed mb-6">Upload your resume or describe your skills. Our matcher maps competencies against live internship requirements.</p>
+              <div className="flex gap-2 flex-wrap">
+                {['React','Verilog','Python','AWS','C'].map(tag => (
+                  <span key={tag} className="px-3 py-1 text-xs font-bold uppercase tracking-widest border border-[#FDFBF7]/30">{tag}</span>
+                ))}
               </div>
             </div>
-          )}
-        </main>
-      </div>
-    </div>
+            <button className="btn-pill mt-8 w-max bg-[#FDFBF7] text-[#800020] hover:bg-[#EAE6DC]">Start Matching</button>
+          </div>
+          {/* Image block second */}
+          <div className="checker-square relative h-[520px] md:h-[600px] bg-[#1A1A1A] order-1 md:order-2">
+            <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?q=80&w=800&auto=format&fit=crop" alt="Workspace" className="checker-img" />
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   2) MY APPLICATIONS
+   ═══════════════════════════════════════════ */
+function MyApplications() {
+  return (
+    <>
+      <header className="pt-24 pb-8">
+        <h1 className="hero-display text-[clamp(60px,8vw,95px)] font-black text-[#1A1A1A] leading-[0.92] tracking-[-0.04em] mb-4">My Applications</h1>
+        <p className="nav-label text-[#800020]">TRACK YOUR PROGRESS</p>
+      </header>
+
+      {/* Timeline */}
+      <section className="py-12 md:py-20">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-start">
+          {/* Timeline graphic */}
+          <div className="relative h-[600px] md:h-[720px] bg-[#1A1A1A] overflow-hidden">
+            <img src={TIMELINE} alt="Office" className="checker-img opacity-60" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-[#1A1A1A]/20" />
+            <div className="absolute top-8 left-8 right-8">
+              <h3 className="font-[Playfair_Display] text-3xl md:text-5xl text-[#FDFBF7] leading-tight mb-2">Timeline</h3>
+              <p className="body-text text-[#FDFBF7]/80 text-sm">Applied → Interviewing → Offered</p>
+            </div>
+          </div>
+
+          {/* Timeline steps */}
+          <div className="flex flex-col gap-10">
+            {[
+              { title: 'Applied', desc: 'Your application is submitted and under initial review by the hiring team.', icon: Clock, color: '#800020' },
+              { title: 'Interviewing', desc: 'You have been shortlisted. Prepare for technical and behavioral rounds.', icon: Briefcase, color: '#A03040' },
+              { title: 'Offered', desc: 'Congratulations. Review terms and confirm acceptance to secure your position.', icon: Award, color: '#10b981' },
+            ].map((step, i) => (
+              <div key={step.title} className="group relative pl-10 border-l-2 border-[#1A1A1A]/10 hover:border-[#800020] transition-colors">
+                <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-[#FDFBF7] border-2 border-[#1A1A1A] group-hover:border-[#800020] transition-colors" />
+                <h4 className="font-[Playfair_Display] text-2xl md:text-3xl font-bold mb-2">{step.title}</h4>
+                <p className="body-text text-sm md:text-base mb-4">{step.desc}</p>
+                <span className="nav-label text-xs text-[#800020]">STEP {i + 1}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  );
+}
+
+/* ═══════════════════════════════════════════
+   3) TPO ADMIN DASHBOARD
+   ═══════════════════════════════════════════ */
+function TPOAdmin() {
+  return (
+    <>
+      <header className="pt-24 pb-8">
+        <h1 className="hero-display text-[clamp(60px,8vw,95px)] font-black text-[#1A1A1A] leading-[0.92] tracking-[-0.04em] mb-4">TPO Dashboard</h1>
+        <p className="nav-label text-[#800020]">PLACEMENT OFFICER VIEW</p>
+      </header>
+
+      {/* Metrics */}
+      <section className="py-12 md:py-16">
+        <div className="grid md:grid-cols-3 gap-0 border-t border-b border-[#1A1A1A]/10">
+          {[
+            { label: 'Total Placements', val: '312', sub: '+24 this month' },
+            { label: 'Active Internships', val: '48', sub: '6 new postings' },
+            { label: 'Avg. Stipend', val: '₹26,400', sub: 'Across all domains' },
+          ].map(m => (
+            <div key={m.label} className="p-8 md:p-10 border-r border-[#1A1A1A]/10 last:border-r-0">
+              <h4 className="nav-label text-[#1A1A1A] mb-3">{m.label}</h4>
+              <div className="font-[Playfair_Display] text-4xl md:text-6xl font-black text-[#800020] mb-2">{m.val}</div>
+              <p className="body-text text-sm">{m.sub}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Approval table */}
+      <section className="py-12 md:py-16">
+        <h2 className="section-display text-[clamp(36px,4vw,60px)] font-black text-[#1A1A1A] mb-8">Applicant Approvals</h2>
+        <div className="overflow-x-auto border border-[#1A1A1A]/10">
+          <table className="w-full text-left border-collapse">
+            <thead>
+              <tr className="bg-[#1A1A1A] text-[#FDFBF7]">
+                <th className="nav-label px-6 py-4 font-semibold">Name</th>
+                <th className="nav-label px-6 py-4 font-semibold">Role</th>
+                <th className="nav-label px-6 py-4 font-semibold">Status</th>
+                <th className="nav-label px-6 py-4 font-semibold">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {[
+                { name: 'Arjun Mehta', role: 'VLSI Verification Engineer', status: 'Under Review' },
+                { name: 'Priya Nair', role: 'Junior React Developer', status: 'Interviewing' },
+                { name: 'Daniel Roy', role: 'DevOps Automation Intern', status: 'Offered' },
+                { name: 'Shreya Iyer', role: 'Junior NLP Engineer', status: 'Applied' },
+              ].map(r => (
+                <tr key={r.name} className="border-b border-[#1A1A1A]/10 hover:bg-[#FDFBF7]/50 transition-colors">
+                  <td className="px-6 py-4 font-medium">{r.name}</td>
+                  <td className="px-6 py-4 text-[#555] text-sm">{r.role}</td>
+                  <td className="px-6 py-4 text-sm font-semibold text-[#800020]">{r.status}</td>
+                  <td className="px-6 py-4"><button className="btn-pill text-xs px-4 py-2">Review</button></td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </>
   );
 }
