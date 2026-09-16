@@ -157,6 +157,18 @@ export default function App() {
       setActiveVideo(display[0] || (courseCatalog[industry] ? courseCatalog[industry][0] : null));
     }, [industry, result]);
 
+    const displayVideos = result ? (() => {
+      const missing = result.missing || [];
+      const lowerMissing = missing.map(s => s.toLowerCase());
+      const allVideos = Object.values(courseCatalog).flat();
+      const filtered = allVideos.filter(v => {
+        if (v.domain !== industry) return false;
+        if (!missing.length) return true;
+        return v.skills.some(sk => lowerMissing.some(m => sk.toLowerCase().includes(m) || m.includes(sk.toLowerCase())));
+      });
+      return filtered.length ? filtered : (courseCatalog[industry] || []);
+    })() : (courseCatalog[industry] || []);
+
     const calculate = () => {
       const target = INDUSTRIES[industry].required;
       const current = typedSkills.split(/[;,]+/).map(s => s.trim()).filter(Boolean);
