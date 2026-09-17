@@ -3,7 +3,7 @@ import {
   CheckCircle, Clock, Award, Briefcase, ShieldCheck, BookOpen,
   Zap, ChevronRight, Lock, Eye, Users, TrendingUp, Sparkles, X,
   Menu, Upload, FileText, Github, Linkedin, ExternalLink,
-  Plus, Play, Youtube, AlertTriangle
+  Plus, Play, Youtube
 } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 
@@ -11,20 +11,6 @@ const STORAGE_KEY = 'sih_data';
 function getApps() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
 function saveApps(a) { localStorage.setItem(STORAGE_KEY, JSON.stringify(a)); }
 function uid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
-
-
-function tokenize(text) {
-  // Real tokenization: lowercase, split on non-alphanumeric, normalize whitespace
-  return text.toLowerCase()
-    .replace(/[^a-z0-9\s]/g, ' ')
-    .split(/\s+/)
-    .filter(w => w.length > 1);
-}
-function normalize(tokens) {
-  // Remove common stop words; handle plurals via basic stemming
-  const stops = new Set(['the','and','for','are','with','this','that','have','from']);
-  return tokens.filter(t => !stops.has(t)).map(t => t.replace(/s$/, ''));
-}
 
 const JOBS = [
   { id: 1, title: 'VLSI Verification Engineer', company: 'SiliconCore', skills: ['Verilog','SystemVerilog','UVM'], tag: 'VLSI', desc: 'Pre-silicon verification, testbench architecture.' },
@@ -347,7 +333,7 @@ export default function App() {
 
   function MyApplicationsPage() {
     const apps = getApps();
-    const stages = ['Applied','Resume Screened','Technical OA','Interview','Offer'];
+    const timeline = ['Applied','Under Review','Interview','Decision'];
 
     return (
       <div>
@@ -358,15 +344,15 @@ export default function App() {
           <div className="flex flex-col gap-10">
             {apps.map(app => (
               <article key={app.id} className="card-editorial relative pl-16 md:pl-16">
-                <div className="absolute left-0 top-0 w-12 h-12 rounded-full bg-[#800020] text-white flex items-center justify-center shadow-lg font-display font-bold text-lg">{stages.indexOf(app.status)+1}</div>
+                <div className="absolute left-0 top-0 w-12 h-12 rounded-full bg-[#800020] text-white flex items-center justify-center shadow-lg font-display font-bold text-lg">{timeline.indexOf(app.status)+1}</div>
                 <div className="flex flex-wrap items-center gap-3 mb-2">
                   <h3 className="font-display text-xl font-bold text-[#1A1A1A]">{app.jobTitle}</h3>
                   <span className="text-xs font-bold uppercase tracking-widest text-[#800020] bg-[#800020]/10 px-2.5 py-1 rounded-full">{app.status}</span>
                 </div>
                 <p className="text-sm text-[#1A1A1A]/70 mb-3">{app.studentName} — {app.email} — CGPA {app.cgpa}</p>
                 <div className="flex gap-2 mb-4 flex-wrap">
-                  {stages.map(st => (
-                    <span key={st} className={`text-xs px-2 py-0.5 rounded-md border transition-colors ${st===app.status ? 'bg-[#10b981] text-white border-[#10b981] shadow-[0_0_8px_#10b981] ring-2 ring-[#10b981]/20' : (stages.indexOf(st) < stages.indexOf(app.status) ? 'bg-[#10b981]/10 text-[#10b981] border-[#10b981]/20' : 'bg-[#FDFBF7] text-[#1A1A1A]/30 border-[#EAE6DC]')}`}>{st}</span>
+                  {timeline.map(t => (
+                    <span key={t} className={`text-xs px-2 py-0.5 rounded-md border transition-colors ${t===app.status ? 'bg-[#800020] text-white border-[#800020]' : 'bg-[#FDFBF7] text-[#1A1A1A]/40 border-[#EAE6DC]'}`}>{t}</span>
                   ))}
                 </div>
                 <p className="text-xs text-[#1A1A1A]/40">Submitted: {new Date(app.submittedAt).toLocaleDateString()}</p>
@@ -569,16 +555,7 @@ export default function App() {
               <span className="text-xs font-bold uppercase text-[#800020] bg-[#800020]/10 px-2 py-0.5 rounded-full">{currentActive ? currentActive.tag : 'Waiting'}</span>
             </div>
             <div className="video-wrap">
-              <div className="video-wrap p-6 bg-[#12121a] rounded-2xl shadow-[inset_6px_6px_12px_#0a0a14,inset_-6px_-6px_12px_#1a1a2e] border border-[#1b1e23]/40 flex flex-col items-center justify-center min-h-[220px]">
-  <Play size={48} className="text-[#10b981] mb-3" />
-  <h4 className="font-display text-xl text-[#e2e8f0] mb-2">No Embedded Player</h4>
-  <p className="text-sm text-[#e2e8f0]/60 mb-4 text-center">Videos removed per policy. Use cards below.</p>
-  <a
-    href={`https://www.youtube.com/results?search_query=${encodeURIComponent((currentActive?.title || 'tutorial') + ' full course tutorial')}`}
-    target="_blank" rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-semibold text-[#1b1e23] bg-[#10b981] hover:bg-[#059669] transition shadow-[3px_3px_0_#065f46]"
-  >Watch on YouTube <ExternalLink size={14}/></a>
-</div>
+              <iframe src={currentActive && currentActive.embedUrl ? currentActive.embedUrl : 'https://www.youtube.com/embed/zjs13CRwIsk?rel=0'} title="Masterclass Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
             </div>
             {currentActive && currentActive.fallbackUrl && (
               <div className="mt-4 p-4 rounded-xl bg-[#FDFBF7] border border-[#EAE6DC] shadow-[4px_4px_0_#d8d4c8,1px_1px_0_#d8d4c8]">
@@ -687,24 +664,6 @@ export default function App() {
     );
   }
 
-
-        {/* Heatmap Matrix */}
-        <section className="mb-10">
-          <h2 className="font-display text-2xl font-bold mb-6">Curriculum vs Market Heatmap</h2>
-          <div className="grid md:grid-cols-4 gap-3 mb-4">
-            <div className="p-3 rounded-xl bg-[#12121a] shadow-[inset_2px_2px_6px_#0a0a14,inset_-2px_-2px_6px_#1a1a2e] border border-[#1b1e23]/40"><h4 className="text-xs uppercase text-[#e2e8f0]/50">Department</h4><div className="text-sm font-bold">CSE</div></div>
-            <div className="p-3 rounded-xl bg-[#12121a] shadow-[inset_2px_2px_6px_#0a0a14,inset_-2px_-2px_6px_#1a1a2e] border border-[#1b1e23]/40"><h4 className="text-xs uppercase text-[#e2e8f0]/50">Critical Skill</h4><div className="text-sm font-bold">Cloud Native</div></div>
-            <div className="p-3 rounded-xl bg-[#12121a] shadow-[inset_2px_2px_6px_#0a0a14,inset_-2px_-2px_6px_#1a1a2e] border border-[#1b1e23]/40"><h4 className="text-xs uppercase text-[#e2e8f0]/50">Demand Score</h4><div className="text-sm font-bold text-[#10b981]">92</div></div>
-            <div className="p-3 rounded-xl bg-[#12121a] shadow-[inset_2px_2px_6px_#0a0a14,inset_-2px_-2px_6px_#1a1a2e] border border-[#1b1e23]/40"><h4 className="text-xs uppercase text-[#e2e8f0]/50">Batch Readiness</h4><div className="text-sm font-bold text-[#10b981]">82%</div></div>
-          </div>
-          <div className="flex gap-4 mb-3 text-xs">
-            <span className="px-2 py-0.5 rounded bg-[#f43f5e]/20 text-[#f43f5e] border border-[#f43f5e]/30">&lt;50% Rose</span>
-            <span className="px-2 py-0.5 rounded bg-[#fbbf24]/20 text-[#fbbf24] border border-[#fbbf24]/30">50-75% Amber</span>
-            <span className="px-2 py-0.5 rounded bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30">&gt;75% Emerald</span>
-          </div>
-          <button onClick={() => showToast('NAAC Syllabus Revision Advisory generated')} className="btn-editorial">Generate NAAC Syllabus Revision Advisory</button>
-        </section>
-
   /* ---------- RENDER ---------- */
   return (
     <div>
@@ -766,20 +725,6 @@ export default function App() {
             <button onClick={closeModal} className="text-[#1A1A1A]/40 hover:text-[#800020] transition"><X size={22} /></button>
           </div>
           <form onSubmit={e => { e.preventDefault(); submitApp(); }} className="flex flex-col gap-4">
-            {/* Match Predictor */}
-            <div className="p-4 rounded-2xl bg-[#12121a] shadow-[inset_4px_4px_10px_#0a0a14,inset_-4px_-4px_10px_#1a1a2e] border border-[#10b981]/20 mb-2">
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-sm font-medium text-[#e2e8f0]">Pre-Application Match</span>
-                <span className="text-2xl font-display font-bold text-[#10b981]">78%</span>
-              </div>
-              <div className="w-full h-2 bg-[#0a0a14] rounded-full overflow-hidden">
-                <div className="h-full bg-gradient-to-r from-[#10b981] to-[#34d399] rounded-full" style={{width:"78%"}} />
-              </div>
-              <div className="flex gap-2 mt-3">
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#10b981]/20 text-[#10b981] border border-[#10b981]/30">React</span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#f43f5e]/20 text-[#f43f5e] border border-[#f43f5e]/30">Kubernetes</span>
-              </div>
-            </div>
             <input required placeholder="Full Name" value={formData.name} onChange={e=>setFormData({...formData,name:e.target.value})} className="input-editorial" />
             <input required type="email" placeholder="Email Address" value={formData.email} onChange={e=>setFormData({...formData,email:e.target.value})} className="input-editorial" />
             <input required placeholder="Phone / Contact" value={formData.phone} onChange={e=>setFormData({...formData,phone:e.target.value})} className="input-editorial" />
