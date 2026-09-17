@@ -31,7 +31,11 @@
       "Bash(sed *)",
       "Bash(git config *)",
       "Bash(git commit -m 'Add AI resume scanner and profile sync *)",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(npm install *)",
+      "Bash(get-content '.env')",
+      "Bash(select-object -first 1)",
+      "Bash(git commit -m 'Update UI and gitignore for Gemini integration *)"
     ]
   }
 }

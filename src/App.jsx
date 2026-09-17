@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import {
   CheckCircle, Clock, Award, Briefcase, ShieldCheck, BookOpen,
   Zap, ChevronRight, Lock, Eye, Users, TrendingUp, Sparkles, X,
-  Menu, Upload, FileText, Github, Linkedin
+  Menu, Upload, FileText, Github, Linkedin, ExternalLink
 } from 'lucide-react';
+import { GoogleGenAI } from '@google/genai';
 
 const STORAGE_KEY = 'sih_data';
 function getApps() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch { return []; } }
@@ -22,6 +23,188 @@ const INDUSTRIES = {
   'AI/ML': { required: ['Python','PyTorch','NLP','Pandas','NumPy','Scikit-learn','Data Visualization'], label: 'AI / Machine Learning' },
   'VLSI': { required: ['Verilog','SystemVerilog','UVM','Digital Design','Synthesis','STA'], label: 'VLSI / Semiconductor' },
   'DevOps': { required: ['AWS','Docker','CI/CD','Kubernetes','Terraform','Linux','Monitoring'], label: 'DevOps & Cloud' },
+};
+
+// Enhanced Learning Resources Component
+const EnhancedLearningResources = ({ missingSkills, industry }) => {
+  const [learningResources, setLearningResources] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchLearningResources = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        // Mock data for demonstration (graceful fallback)
+        const mockResources = generateMockResources(missingSkills);
+
+        // Try to use Gemini API if key is available
+        let geminiResources = null;
+        if (import.meta.env.VITE_GEMINI_API_KEY) {
+          try {
+            const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
+            const prompt = `For the following missing skills in the ${industry} industry, provide official documentation URLs and YouTube search URLs:
+
+            Missing Skills: ${missingSkills.join(', ')}
+
+            For each skill, provide:
+            1. The exact official documentation URL
+            2. A targeted YouTube search URL (format: https://www.youtube.com/results?search_query=learn+[skill]+crash+course)
+
+            Return as JSON array with this structure:
+            [{
+              "skill": "Skill Name",
+              "docsUrl": "https://official-docs-url.com",
+              "youtubeUrl": "https://www.youtube.com/results?search_query=learn+skill+crash+course"
+            }]
+
+            Focus on practical, beginner-friendly resources. Include official government/academic resources when available.`;
+
+            const response = await ai.models.generateContent({
+              model: 'gemini-2.0-flash',
+              contents: prompt,
+            });
+
+            const textResponse = response.text;
+            if (textResponse) {
+              const jsonMatch = textResponse.match(/\[.*\]/s);
+              if (jsonMatch) {
+                geminiResources = JSON.parse(jsonMatch[0]);
+              }
+            }
+          } catch (geminiError) {
+            console.log('Gemini API failed, using mock data:', geminiError);
+            geminiResources = null;
+          }
+        }
+
+        setLearningResources(geminiResources || mockResources);
+      } catch (err) {
+        console.error('Failed to fetch learning resources:', err);
+        setError('Failed to load resources');
+        setLearningResources(generateMockResources(missingSkills));
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLearningResources();
+  }, [missingSkills, industry]);
+
+  const generateMockResources = (skills) => {
+    return skills.map(skill => {
+      const skillSlug = skill.toLowerCase().replace(/\s+/g, '+');
+      const mockDocsUrls = {
+        'Advanced System Design': 'https://assets.amazon.com/2f60e548-df70-4ce3-bcad-6c8972e313bc/documents/61bcfa8e-c506-4fe8-bc41-c9245332e233/Designing_Highly_Available_Applications_on_AWS.pdf',
+        'Kubernetes': 'https://kubernetes.io/docs/home/',
+        'Microservices Architecture': 'https://microservices.io/patterns/index.html',
+        'React': 'https://react.dev/learn',
+        'Node.js': 'https://nodejs.org/en/docs/',
+        'Python': 'https://docs.python.org/3/',
+        'AWS': 'https://docs.aws.amazon.com/',
+        'Docker': 'https://docs.docker.com/get-started/',
+        'Git': 'https://git-scm.com/doc',
+        'TypeScript': 'https://www.typescriptlang.org/docs/',
+        'GraphQL': 'https://graphql.org/learn/',
+        'Digital Design': 'https://www.allaboutcircuits.com/tutorials/',
+        'SystemVerilog': 'https://static.dev.snowblower.com/pdf/sv_getting_started_guide_2021_en.pdf',
+        'UVM': 'https://dvresources.e-research.info/wiki/UVM',
+        'Synthesis': 'https://www.synopsys.com/designware/synthesis.html',
+        'STA': 'https://www.synopsys.com/glossary/sta.html',
+        'CI/CD': 'https://docs.gitlab.com/ee/ci/cd_prerequisites/',
+        'Terraform': 'https://developer.hashicorp.com/terraform/docs',
+        'Linux': 'https://linux.die.net/man/',
+        'Monitoring': 'https://prometheus.io/docs/introduction/overview/',
+        'PyTorch': 'https://pytorch.org/tutorials/',
+        'NLP': 'https://huggingface.co/docs/transformers/',
+        'Pandas': 'https://pandas.pydata.org/docs/',
+        'NumPy': 'https://numpy.org/doc/stable/',
+        'Scikit-learn': 'https://scikit-learn.org/stable/documentation.html',
+        'Data Visualization': 'https://matplotlib.org/stable/users/index.html',
+      };
+
+      const docsUrl = mockDocsUrls[skill] || `https://www.google.com/search?q=${encodeURIComponent(skill + ' official documentation')}`;
+
+      return {
+        skill,
+        docsUrl,
+        youtubeUrl: `https://www.youtube.com/results?search_query=learn+${skillSlug}+crash+course`
+      };
+    });
+  };
+
+  if (loading) {
+    return (
+      <div className="mt-4 p-4 bg-[#FDFBF7] rounded-xl border border-[#EAE6DC] shadow-[4px_4px_0_#d8d4c8,1px_1px_0_#d8d4c8]">
+        <div className="flex items-center gap-2 text-sm text-[#1A1A1A]/60">
+          <div className="w-4 h-4 border-2 border-[#10b981] border-t-transparent rounded-full animate-spin"></div>
+          Loading learning resources...
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mt-4 p-4 bg-[#800020]/5 rounded-xl border border-[#800020]/20">
+        <p className="text-sm text-[#800020]">{error}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-4 space-y-3">
+      <div className="text-sm font-medium text-[#10b981] mb-2">
+        🎓 Recommended Learning Resources:
+      </div>
+      {learningResources.map((resource, idx) => (
+        <div
+          key={idx}
+          className="card-editorial p-4 hover:-translate-y-1 transition-all duration-300 border-l-4 border-[#10b981] bg-gradient-to-r from-[#10b981]/5 to-transparent"
+        >
+          <div className="flex items-start justify-between mb-3">
+            <h6 className="font-medium text-sm text-[#1A1A1A] flex items-center gap-2">
+              <BookOpen size={14} className="text-[#10b981]" />
+              {resource.skill}
+            </h6>
+            <span className="text-xs text-[#1A1A1A]/40">Industry: {industry}</span>
+          </div>
+          <div className="grid md:grid-cols-2 gap-3 mt-3">
+            <a
+              href={resource.docsUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 p-3 rounded-lg bg-[#FDFBF7] border border-[#EAE6DC] hover:border-[#10b981] hover:bg-[#10b981]/5 transition-all duration-300"
+            >
+              <BookOpen size={16} className="text-[#10b981]" />
+              <span className="text-sm text-[#1A1A1A] group-hover:text-[#10b981] truncate">
+                Official Docs
+              </span>
+              <ExternalLink size={12} className="text-[#1A1A1A]/40 group-hover:text-[#10b981]" />
+            </a>
+            <a
+              href={resource.youtubeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 p-3 rounded-lg bg-[#FDFBF7] border border-[#EAE6DC] hover:border-[#800020] hover:bg-[#800020]/5 transition-all duration-300"
+            >
+              <div className="relative">
+                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current text-[#800020]" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M23.498 6.186a3.516 3.516 0 0 0-2.49-2.49C19.695 3.422 12 3.432 12 3.432s-7.695-.01-9.006.254a3.516 3.516 0 0 0-2.49 2.49C.842 8.476.833 12.5.833 12.5s.01 4.024.254 9.006a3.516 3.516 0 0 0 2.49 2.49C4.305 20.578 12 20.568 12 20.568s7.695.01 9.006-.254a3.516 3.516 0 0 0 2.49-2.49C23.488 16.524 23.498 12.5 23.498 12.5s-.01-4.024-.254-9.006zM9.345 15.262V8.738L15.4 12 9.345 15.262z"/>
+                </svg>
+              </div>
+              <span className="text-sm text-[#1A1A1A] group-hover:text-[#800020] truncate">
+                YouTube Tutorial
+              </span>
+              <ExternalLink size={12} className="text-[#1A1A1A]/40 group-hover:text-[#800020]" />
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 };
 
 const courseCatalog = {
@@ -304,6 +487,12 @@ export default function App() {
                   <li className="text-sm text-[#800020] flex items-center gap-2"><X size={14} className="text-[#800020]" /> Kubernetes</li>
                   <li className="text-sm text-[#800020] flex items-center gap-2"><X size={14} className="text-[#800020]" /> Microservices Architecture</li>
                 </ul>
+                {result?.missing?.length > 0 && (
+                  <EnhancedLearningResources
+                    missingSkills={result.missing}
+                    industry={result.industryLabel}
+                  />
+                )}
               </div>
             </div>
           </div>
