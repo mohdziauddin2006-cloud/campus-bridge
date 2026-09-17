@@ -12,6 +12,20 @@ function getApps() { try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) 
 function saveApps(a) { localStorage.setItem(STORAGE_KEY, JSON.stringify(a)); }
 function uid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
 
+
+function tokenize(text) {
+  // Real tokenization: lowercase, split on non-alphanumeric, normalize whitespace
+  return text.toLowerCase()
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .split(/\s+/)
+    .filter(w => w.length > 1);
+}
+function normalize(tokens) {
+  // Remove common stop words; handle plurals via basic stemming
+  const stops = new Set(['the','and','for','are','with','this','that','have','from']);
+  return tokens.filter(t => !stops.has(t)).map(t => t.replace(/s$/, ''));
+}
+
 const JOBS = [
   { id: 1, title: 'VLSI Verification Engineer', company: 'SiliconCore', skills: ['Verilog','SystemVerilog','UVM'], tag: 'VLSI', desc: 'Pre-silicon verification, testbench architecture.' },
   { id: 2, title: 'Junior NLP Engineer', company: 'Meridian AI', skills: ['Python','PyTorch','NLP'], tag: 'AI/ML', desc: 'Transformer fine-tuning, sentiment pipelines.' },
