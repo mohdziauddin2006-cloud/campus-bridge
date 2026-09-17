@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Upload, Sparkles, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { supabase } from '../lib/supabase';
 
 export default function Scanner() {
   const [file, setFile] = useState(null);
@@ -54,6 +55,15 @@ export default function Scanner() {
             <div><h4 className="font-bold mb-3">Missing Keywords</h4><div className="flex flex-wrap gap-2">{['Kubernetes','GraphQL','Terraform','Microservices'].map(k=> <span key={k} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">{k}</span>)} </div></div>
           </div>
           <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace "Responsible for backend" with <strong>"Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%"</strong>.</p></div>
+          <button onClick={async () => {
+            await supabase.from('applications').insert({
+              name: file ? file.name.replace(/\.(pdf|txt|jpg)/,'') : 'Candidate',
+              role: jd.split('—')[1]?.trim() || 'General',
+              score: 78,
+              status: 'Pending',
+              created_at: new Date().toISOString()
+            });
+          }} className="mt-6 w-full py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition">Submit Application to TPO</button>
         </div>
       )}
     </main>

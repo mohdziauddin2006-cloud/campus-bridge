@@ -5,6 +5,7 @@ import Scanner from './pages/Scanner';
 import Academy from './pages/Academy';
 import TpoLogin from './pages/TpoLogin';
 import TpoDashboard from './pages/TpoDashboard';
+import Readiness from './pages/Readiness';
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/academy" element={<Academy />} />
         <Route path="/tpo-login" element={<TpoLogin />} />
         <Route path="/tpo-dashboard" element={<TpoDashboard />} />
+        <Route path="/readiness" element={<Readiness />} />
       </Routes>
     </BrowserRouter>
   );

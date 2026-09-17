@@ -11,6 +11,7 @@ export default function Navbar() {
         <Link to="/" className="hover:text-blue-600 transition">Student Hub</Link>
         <Link to="/scanner" className="hover:text-blue-600 transition">ATS Scanner</Link>
         <Link to="/academy" className="hover:text-blue-600 transition">Video Academy</Link>
+        <Link to="/readiness" className="hover:text-blue-600 transition">Industry Readiness</Link>
         <Link to="/tpo-dashboard" className="hover:text-blue-600 transition">TPO Portal</Link>
       </div>
       <Link to="/tpo-login" className="text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-5 py-2.5 rounded-full transition shadow-md shadow-blue-600/20">TPO Officer Sign In</Link>
