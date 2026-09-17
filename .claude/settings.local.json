@@ -28,7 +28,10 @@
       "Bash(npm run *)",
       "Bash(git add *)",
       "Bash(git commit -m 'Fix search bug, update job titles, secure TPO routes *)",
-      "Bash(sed *)"
+      "Bash(sed *)",
+      "Bash(git config *)",
+      "Bash(git commit -m 'Add AI resume scanner and profile sync *)",
+      "Bash(git push *)"
     ]
   }
 }
