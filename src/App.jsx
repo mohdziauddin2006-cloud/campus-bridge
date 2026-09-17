@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {
   CheckCircle, Clock, Award, Briefcase, ShieldCheck, BookOpen,
   Zap, ChevronRight, Lock, Eye, Users, TrendingUp, Sparkles, X,
-  Menu
+  Menu, Upload, FileText, Github, Linkedin
 } from 'lucide-react';
 
 const STORAGE_KEY = 'sih_data';
@@ -217,6 +217,97 @@ export default function App() {
             </div>
           </section>
         )}
+
+        {/* AI Profile & Resume Analyzer */}
+        <section className="card-editorial mb-10">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-1 h-8 bg-[#10b981] rounded-full" />
+            <h2 className="font-display text-3xl font-bold text-[#1A1A1A]">AI Profile & Resume Analyzer</h2>
+            <span className="text-xs font-bold uppercase tracking-widest text-[#10b981] bg-[#10b981]/10 px-3 py-1 rounded-full">AI-Powered</span>
+          </div>
+
+          {/* Resume Scanner Section */}
+          <div className="mb-10">
+            <h3 className="font-display text-2xl font-bold mb-4">Resume Scanner</h3>
+            <div className="relative border-2 border-dashed border-[#800020]/30 rounded-xl p-8 bg-gradient-to-br from-[#FDFBF7] to-[#FDFBF7]/80 hover:from-[#FDFBF7]/90 hover:to-[#FDFBF7]/70 transition-all duration-300">
+              <input type="file" id="resume-upload" className="hidden" accept=".pdf,.docx" onChange={e => {
+                if (e.target.files && e.target.files[0]) {
+                  // Simulate file upload
+                  showToast('Processing resume...');
+                  setTimeout(() => {
+                    setToast(null);
+                    showToast('Resume scan complete!');
+                  }, 2500);
+                }
+              }} />
+              <label htmlFor="resume-upload" className="cursor-pointer block text-center">
+                <div className="flex flex-col items-center gap-4">
+                  <Upload size={48} className="text-[#800020]" />
+                  <div>
+                    <p className="font-medium text-[#1A1A1A] mb-1">Drop your resume here or click to browse</p>
+                    <p className="text-sm text-[#1A1A1A]/60">Supports PDF and DOCX files</p>
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          {/* GitHub & LinkedIn Integration */}
+          <div className="mb-6">
+            <h3 className="font-display text-2xl font-bold mb-4">Professional Profiles</h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium text-[#1A1A1A]/80 mb-2">GitHub Profile</label>
+                <div className="relative">
+                  <Github size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#1A1A1A]/40" />
+                  <input type="url" placeholder="https://github.com/yourusername" className="input-editorial pl-10 w-full" />
+                  <button onClick={() => showToast('GitHub profile synced successfully!')} className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 bg-[#10b981] text-white text-xs rounded-full hover:bg-[#10b981]/90 transition-colors">Sync</button>
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-[#1A1A1A]/80 mb-2">LinkedIn Profile</label>
+                <div className="relative">
+                  <Linkedin size={20} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#1A1A1A]/40" />
+                  <input type="url" placeholder="https://linkedin.com/in/yourusername" className="input-editorial pl-10 w-full" />
+                  <button onClick={() => showToast('LinkedIn profile synced successfully!')} className="absolute right-2 top-1/2 transform -translate-y-1/2 px-3 py-1 bg-[#10b981] text-white text-xs rounded-full hover:bg-[#10b981]/90 transition-colors">Sync</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* AI Scanning Results Demo */}
+          <div className="mt-8 p-6 bg-[#10b981]/5 rounded-xl border border-[#10b981]/20">
+            <h4 className="font-display text-xl font-bold mb-4 text-[#10b981]">AI Scanning Results</h4>
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm text-[#1A1A1A]/70">Job Readiness Score</span>
+              <div className="relative w-16 h-16">
+                <div className="absolute inset-0 rounded-full border-4 border-[#10b981]/20"></div>
+                <div className="absolute inset-0 rounded-full border-4 border-[#10b981] border-t-transparent transform rotate-[-90deg]" style={{background: 'conic-gradient(from 90deg, #10b981 var(--progress, 88%), transparent 0)'}}></div>
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <span className="text-lg font-bold text-[#10b981]">88%</span>
+                </div>
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <h5 className="font-semibold text-sm text-[#10b981] mb-2">Extracted Skills</h5>
+                <ul className="space-y-1">
+                  <li className="text-sm text-[#1A1A1A]/80 flex items-center gap-2"><CheckCircle size={14} className="text-[#10b981]" /> React, Node.js, Python, SQL</li>
+                  <li className="text-sm text-[#1A1A1A]/80 flex items-center gap-2"><CheckCircle size={14} className="text-[#10b981]" /> Docker, AWS, Git</li>
+                  <li className="text-sm text-[#1A1A1A]/80 flex items-center gap-2"><CheckCircle size={14} className="text-[#10b981]" /> TypeScript, GraphQL</li>
+                </ul>
+              </div>
+              <div>
+                <h5 className="font-semibold text-sm text-[#800020] mb-2">Identified Gaps</h5>
+                <ul className="space-y-1">
+                  <li className="text-sm text-[#800020] flex items-center gap-2"><X size={14} className="text-[#800020]" /> Advanced System Design</li>
+                  <li className="text-sm text-[#800020] flex items-center gap-2"><X size={14} className="text-[#800020]" /> Kubernetes</li>
+                  <li className="text-sm text-[#800020] flex items-center gap-2"><X size={14} className="text-[#800020]" /> Microservices Architecture</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
 
         {/* Video Platform */}
         <section className="mt-10">

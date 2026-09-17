@@ -7,6 +7,9 @@
   --color-cream: #FDFBF7;
   --color-burgundy: #800020;
   --color-charcoal: #1A1A1A;
+  --color-emerald: #10b981;
+  --color-background: #1b1e23;
+  --color-text-primary: #e2e8f0;
 }
 
 html { scroll-behavior: smooth; }
