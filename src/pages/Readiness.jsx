@@ -1,0 +1,60 @@
+import { useEffect, useState } from 'react';
+import { TrendingUp, BarChart3, Target, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+const pillars = [
+  { label: 'Programming', score: 82 },
+  { label: 'VLSI / Embedded', score: 76 },
+  { label: 'System Architecture', score: 68 },
+  { label: 'Soft Skills', score: 71 },
+];
+
+export default function Readiness() {
+  const overall = Math.round(pillars.reduce((a,b)=>a+b.score,0)/pillars.length);
+
+  return (
+    <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Industry Readiness Portal</h1>
+      <p className="text-slate-500 mb-8">Live diagnostic of student skill readiness vs industry benchmarks.</p>
+
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 mb-10">
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-extrabold text-slate-900">Overall Readiness Gauge</h2>
+          <span className="text-4xl font-extrabold text-blue-700">{overall}%</span>
+        </div>
+        <div className="w-full h-6 bg-slate-100 rounded-full overflow-hidden">
+          <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400" style={{ width: `${overall}%` }} />
+        </div>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
+        {pillars.map(p => (
+          <div key={p.label} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+            <h3 className="font-extrabold text-slate-900 mb-3">{p.label}</h3>
+            <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-2">
+              <div className="h-full rounded-full bg-gradient-to-r from-blue-500 to-blue-400" style={{ width: `${p.score}%` }} />
+            </div>
+            <span className="text-xs font-bold text-slate-500">{p.score}% proficiency</span>
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-gradient-to-br from-blue-950 to-slate-900 rounded-3xl p-8 text-white shadow-2xl mb-10">
+        <h2 className="text-xl font-extrabold mb-4">Targeted Bridge Curriculum</h2>
+        <p className="text-blue-200 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
+        <div className="grid md:grid-cols-2 gap-4">
+          <Link to="/academy" className="block bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-5 transition">
+            <h4 className="font-extrabold mb-1">Programming Strengthening</h4>
+            <p className="text-sm text-blue-200 mb-2">Systems programming, performance optimization</p>
+            <span className="inline-flex items-center text-xs font-bold bg-blue-500/20 px-2 py-0.5 rounded-full text-blue-100">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
+          </Link>
+          <Link to="/academy" className="block bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-5 transition">
+            <h4 className="font-extrabold mb-1">VLSI & Embedded Systems</h4>
+            <p className="text-sm text-blue-200 mb-2">Verilog, FPGA design, microcontroller architecture</p>
+            <span className="inline-flex items-center text-xs font-bold bg-blue-500/20 px-2 py-0.5 rounded-full text-blue-100">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
+          </Link>
+        </div>
+      </div>
+    </main>
+  );
+}
