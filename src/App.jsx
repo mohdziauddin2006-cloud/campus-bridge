@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import {
   CheckCircle, Clock, Award, Briefcase, ShieldCheck, BookOpen,
   Zap, ChevronRight, Lock, Eye, Users, TrendingUp, Sparkles, X,
-  Menu, Upload, FileText, Github, Linkedin, ExternalLink
+  Menu, Upload, FileText, Github, Linkedin, ExternalLink,
+  Plus, Play, Youtube
 } from 'lucide-react';
 import { GoogleGenAI } from '@google/genai';
 
@@ -16,6 +17,12 @@ const JOBS = [
   { id: 2, title: 'Junior NLP Engineer', company: 'Meridian AI', skills: ['Python','PyTorch','NLP'], tag: 'AI/ML', desc: 'Transformer fine-tuning, sentiment pipelines.' },
   { id: 3, title: 'DevOps Automation Intern', company: 'ShieldNet', skills: ['AWS','Docker','CI/CD'], tag: 'DevOps', desc: 'Infrastructure-as-code, pipeline optimization.' },
   { id: 4, title: 'Full-Stack React Intern', company: 'Nebula UI', skills: ['React','Node.js','PostgreSQL'], tag: 'Full-Stack', desc: 'Component libraries, API integration.' },
+];
+
+const DEFAULT_JOB_LISTINGS = [
+  { id: 101, title: 'Software Engineer Intern', company: 'Orbit Labs', skills: ['React','Node.js','PostgreSQL'], tag: 'Full-Stack', desc: 'Build production-grade web applications.', ctc: '₹ 12-16 LPA', dept: 'CSE', published: true },
+  { id: 102, title: 'AI Research Intern', company: 'Meridian AI', skills: ['Python','PyTorch','NLP'], tag: 'AI/ML', desc: 'Research on large language models.', ctc: '₹ 14-18 LPA', dept: 'CSE', published: true },
+  { id: 103, title: 'Cloud DevOps Intern', company: 'Vertex Systems', skills: ['AWS','Docker','CI/CD'], tag: 'DevOps', desc: 'Infrastructure automation and monitoring.', ctc: '₹ 10-14 LPA', dept: 'IT', published: true },
 ];
 
 const INDUSTRIES = {
@@ -130,7 +137,7 @@ const EnhancedLearningResources = ({ missingSkills, industry }) => {
       return {
         skill,
         docsUrl,
-        youtubeUrl: `https://www.youtube.com/results?search_query=learn+${skillSlug}+crash+course`
+        youtubeUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(skill + ' full course tutorial')}`
       };
     });
   };
@@ -190,15 +197,16 @@ const EnhancedLearningResources = ({ missingSkills, industry }) => {
               rel="noopener noreferrer"
               className="group flex items-center gap-2 p-3 rounded-lg bg-[#FDFBF7] border border-[#EAE6DC] hover:border-[#800020] hover:bg-[#800020]/5 transition-all duration-300"
             >
-              <div className="relative">
-                <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current text-[#800020]" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M23.498 6.186a3.516 3.516 0 0 0-2.49-2.49C19.695 3.422 12 3.432 12 3.432s-7.695-.01-9.006.254a3.516 3.516 0 0 0-2.49 2.49C.842 8.476.833 12.5.833 12.5s.01 4.024.254 9.006a3.516 3.516 0 0 0 2.49 2.49C4.305 20.578 12 20.568 12 20.568s7.695.01 9.006-.254a3.516 3.516 0 0 0 2.49-2.49C23.488 16.524 23.498 12.5 23.498 12.5s-.01-4.024-.254-9.006zM9.345 15.262V8.738L15.4 12 9.345 15.262z"/>
-                </svg>
+              <div className="relative w-10 h-10 rounded-lg overflow-hidden bg-[#1A1A1A] flex items-center justify-center shadow-md shrink-0">
+                <Play size={16} className="text-[#10b981] fill-[#10b981]" />
               </div>
-              <span className="text-sm text-[#1A1A1A] group-hover:text-[#800020] truncate">
-                YouTube Tutorial
-              </span>
-              <ExternalLink size={12} className="text-[#1A1A1A]/40 group-hover:text-[#800020]" />
+              <div className="min-w-0 flex-1">
+                <span className="text-sm font-medium text-[#1A1A1A] group-hover:text-[#800020] block truncate">
+                  Watch Tutorial on YouTube ↗
+                </span>
+                <span className="text-[10px] text-[#1A1A1A]/50">Search results for {resource.skill}</span>
+              </div>
+              <Youtube size={16} className="text-[#800020] shrink-0" />
             </a>
           </div>
         </div>
@@ -234,6 +242,32 @@ export default function App() {
   const [toast, setToast] = useState(null);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  const [jobListings, setJobListings] = useState(DEFAULT_JOB_LISTINGS);
+  const [postJobOpen, setPostJobOpen] = useState(false);
+  const [postForm, setPostForm] = useState({ company: '', role: '', skills: '', ctc: '', dept: 'CSE' });
+
+  const openPostJob = () => { setPostForm({ company: '', role: '', skills: '', ctc: '', dept: 'CSE' }); setPostJobOpen(true); };
+  const closePostJob = () => setPostJobOpen(false);
+
+  const submitPostJob = () => {
+    if (!postForm.company || !postForm.role) { showToast('Fill company and role'); return; }
+    const skillsArr = postForm.skills.split(/[;,]+/).map(s => s.trim()).filter(Boolean);
+    const newJob = {
+      id: Math.max(...jobListings.map(j => j.id), 0) + 1,
+      title: postForm.role,
+      company: postForm.company,
+      skills: skillsArr,
+      tag: skillsArr[0] || 'General',
+      desc: `New opportunity at ${postForm.company}.`,
+      ctc: postForm.ctc || '₹ 10-14 LPA',
+      dept: postForm.dept,
+      published: true,
+    };
+    setJobListings([...jobListings, newJob]);
+    closePostJob();
+    showToast('Job listing published to Recruiter Matching');
+  };
+
   const showToast = (msg) => { setToast(msg); setTimeout(() => setToast(null), 3000); };
   useEffect(() => { saveApps(getApps()); }, []);
 
@@ -267,7 +301,7 @@ export default function App() {
           <p className="text-[#1A1A1A]/70 text-lg max-w-2xl leading-relaxed">Browse verified roles across VLSI, AI/ML, DevOps and Full-Stack. Apply formally — no instant submissions.</p>
         </header>
         <section className="card-grid">
-          {JOBS.map(j => (
+          {jobListings.map(j => (
             <article key={j.id} className="card-editorial flex flex-col">
               <div className="flex items-start justify-between mb-3">
                 <span className="text-xs font-bold uppercase tracking-widest text-[#800020] bg-[#800020]/10 px-2.5 py-1 rounded-full">{j.tag}</span>
@@ -279,7 +313,7 @@ export default function App() {
               <div className="flex flex-wrap gap-2 mb-6">
                 {j.skills.map(s => <span key={s} className="text-xs border border-[#EAE6DC] px-2 py-0.5 rounded-md text-[#1A1A1A]/70">{s}</span>)}
               </div>
-              <button onClick={() => onApply(j)} className="btn-editorial w-full text-center">Apply Now</button>
+              <button onClick={() => onApply({ title: j.title, company: j.company, skills: j.skills })} className="btn-editorial w-full text-center">Apply Now</button>
             </article>
           ))}
         </section>
@@ -578,15 +612,19 @@ export default function App() {
 
     return (
       <div>
-        <header className="mb-10 border-b border-[#EAE6DC] pb-6">
-          <h1 className="font-display text-4xl font-bold text-[#1A1A1A] mb-1">Annamacharya Institute Of Technology And Sciences - TPO Placement Portal</h1>
-          <p className="text-sm text-[#1A1A1A]/50">Authorized administrator view · localStorage sync active</p>
+        <header className="mb-10 border-b border-[#EAE6DC] pb-6 flex items-start justify-between">
+          <div>
+            <h1 className="font-display text-4xl font-bold text-[#1A1A1A] mb-1">Annamacharya Institute Of Technology And Sciences - TPO Placement Portal</h1>
+            <p className="text-sm text-[#1A1A1A]/50">Authorized administrator view · localStorage sync active · Active Internships: {jobListings.filter(j => j.published).length}</p>
+          </div>
+          <button onClick={openPostJob} className="btn-editorial flex items-center gap-2 shrink-0"><Plus size={14} /> Post New Job / Internship</button>
         </header>
 
-        <section className="grid md:grid-cols-3 gap-6 mb-10">
+        <section className="grid md:grid-cols-4 gap-6 mb-10">
           <div className="card-editorial"><h3 className="font-display text-xl font-bold mb-1">{apps.length}</h3><p className="text-xs uppercase tracking-widest text-[#1A1A1A]/40">Total Applications</p></div>
           <div className="card-editorial"><h3 className="font-display text-xl font-bold mb-1">{apps.filter(a=>a.status==='Applied').length}</h3><p className="text-xs uppercase tracking-widest text-[#1A1A1A]/40">Awaiting Review</p></div>
           <div className="card-editorial"><h3 className="font-display text-xl font-bold mb-1">{new Set(apps.map(a=>a.jobTitle)).size}</h3><p className="text-xs uppercase tracking-widest text-[#1A1A1A]/40">Active Roles</p></div>
+          <div className="card-editorial"><h3 className="font-display text-xl font-bold mb-1 text-[#10b981]">{jobListings.filter(j => j.published).length}</h3><p className="text-xs uppercase tracking-widest text-[#1A1A1A]/40">Active Internships</p></div>
         </section>
 
         <section>
@@ -641,6 +679,30 @@ export default function App() {
         {page==='readiness' && <ReadinessPage />}
         {page==='tpo' && <TPOPage />}
       </main>
+
+      {/* Post Job Modal */}
+      <div className={`modal-back ${postJobOpen ? '' : 'hidden'}`} onClick={closePostJob}>
+        <div className="modal-panel" onClick={e => e.stopPropagation()}>
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="font-display text-2xl font-bold text-[#1A1A1A]">Post New Job / Internship</h2>
+            <button onClick={closePostJob} className="text-[#1A1A1A]/40 hover:text-[#800020] transition"><X size={22} /></button>
+          </div>
+          <form onSubmit={e => { e.preventDefault(); submitPostJob(); }} className="flex flex-col gap-4">
+            <input required placeholder="Company Name" value={postForm.company} onChange={e=>setPostForm({...postForm,company:e.target.value})} className="input-editorial" />
+            <input required placeholder="Role Title" value={postForm.role} onChange={e=>setPostForm({...postForm,role:e.target.value})} className="input-editorial" />
+            <input placeholder="Required Skills (comma separated)" value={postForm.skills} onChange={e=>setPostForm({...postForm,skills:e.target.value})} className="input-editorial" />
+            <input placeholder="Expected CTC / Stipend (e.g. ₹ 12-16 LPA)" value={postForm.ctc} onChange={e=>setPostForm({...postForm,ctc:e.target.value})} className="input-editorial" />
+            <select value={postForm.dept} onChange={e=>setPostForm({...postForm,dept:e.target.value})} className="input-editorial bg-white">
+              <option value="CSE">CSE</option>
+              <option value="ECE">ECE</option>
+              <option value="Mech">Mech</option>
+              <option value="Civil">Civil</option>
+              <option value="IT">IT</option>
+            </select>
+            <button type="submit" className="btn-editorial w-full mt-2">Publish Listing</button>
+          </form>
+        </div>
+      </div>
 
       {/* Modal */}
       <div className={`modal-back ${applyJob ? '' : 'hidden'}`} onClick={closeModal}>
