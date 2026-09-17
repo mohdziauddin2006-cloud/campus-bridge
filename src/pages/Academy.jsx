@@ -5,7 +5,7 @@ const videos = [
   { id: 'm8Icp_Cid5o', title: 'Advanced System Design', desc: 'Architecture & scaling patterns' },
   { id: 'bMknfKXIFA8', title: 'React & TypeScript Modern Architecture', desc: 'Component patterns, hooks, performance' },
   { id: 'k1RI5locZE4', title: 'Cloud / DevOps (AWS / Docker)', desc: 'Containers, Kubernetes, infra automation' },
-  { id: 'RBSGKlAoi34', title: 'Core DSA & Technical Coding', desc: 'Algorithmic engineering for interviews' },
+  { id: '8hly31xKli0', title: 'Core DSA & Technical Coding', desc: 'Algorithmic engineering for interviews' },
 ];
 
 export default function Academy() {

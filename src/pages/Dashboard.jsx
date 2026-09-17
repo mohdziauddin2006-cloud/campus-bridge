@@ -15,6 +15,10 @@ const skills = [
   { name: 'React / Frontend', level: 78, status: 'Growing' },
   { name: 'Cloud / AWS', level: 65, status: 'Developing' },
   { name: 'Embedded / IoT', level: 41, status: 'Gap' },
+  { name: 'VLSI Design (Verilog / Vivado)', level: 88, status: 'Strong' },
+  { name: 'Microcontrollers (8086 / 8051)', level: 82, status: 'Strong' },
+  { name: 'Local AI Model Deployment', level: 75, status: 'Growing' },
+  { name: 'System on Chip (SoC) Architecture', level: 60, status: 'Developing' },
 ];
 
 export default function Dashboard() {
@@ -50,7 +54,7 @@ export default function Dashboard() {
           <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
             <h2 className="font-extrabold text-xl mb-1">Department Skill Gap Intelligence</h2>
             <p className="text-sm text-slate-500 mb-6">Readiness score by department — Batch 2026 · AITS Skilling Hub</p>
-            <div className="h-72"><ResponsiveContainer width="100%" height="100%"><BarChart data={gapData}><XAxis dataKey="dept" tick={{fontSize:12}} /><YAxis domain={[0,100]} tick={{fontSize:12}} /><Tooltip />{gapData.map((e,i)=> <Cell key={e.dept} fill={i===0?'#2563eb':i===1?'#38bdf8':i===2?'#f59e0b':i===3?'#f43f5e':'#10b981'} />)}<Bar dataKey="score" radius={[6,6,0,0]} /></BarChart></ResponsiveContainer></div>
+            <div className="h-72"><ResponsiveContainer width="100%" height="100%"><BarChart data={gapData}><XAxis dataKey="dept" tick={{fontSize:12}} /><YAxis domain={[0,100]} tick={{fontSize:12}} /><Tooltip />{gapData.map((e,i)=> <Cell key={e.dept} fill={i===0?'#2563eb':i===1?'#38bdf8':i===2?'#f59e0b':i===3?'#f43f5e':'#10b981'} />)}<Bar dataKey="score" fill="#2563eb" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></div>
           </div>
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
             <h2 className="font-extrabold text-xl mb-4">Skill Diagnostic</h2>
@@ -69,7 +73,7 @@ export default function Dashboard() {
         <div className="bg-gradient-to-br from-blue-950 to-slate-900 rounded-3xl p-8 md:p-10 text-white shadow-2xl shadow-blue-950/20 mb-16">
           <div className="flex items-end justify-between mb-6"><div><h2 className="text-2xl font-extrabold mb-1">Matched Learning Paths</h2><p className="text-blue-200 text-sm">Curated academy modules linked to your skill gap profile</p></div><Link to="/academy" className="inline-flex items-center gap-1 text-sm font-extrabold bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-full transition">Browse Academy <ArrowRight size={16}/></Link></div>
           <div className="grid md:grid-cols-4 gap-4">
-            {[{t:'System Design',d:'Advanced architecture & scaling patterns',id:'m8Icp_Cid5o'},{t:'React & TS',d:'Modern component patterns',id:'bMknfKXIFA8'},{t:'Cloud / AWS',d:'Docker, Kubernetes, infra',id:'k1RI5locZE4'},{t:'Core DSA',d:'Algorithmic engineering',id:'RBSGKlAoi34'}].map(p => <Link key={p.t} to="/academy" className="bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-5 transition backdrop-blur"><h3 className="font-extrabold mb-1">{p.t}</h3><p className="text-sm text-blue-100">{p.d}</p><span className="inline-block mt-3 text-xs font-bold bg-blue-500/20 px-2 py-0.5 rounded-full">Embedded</span></Link>)}
+            {[{t:'System Design',d:'Advanced architecture & scaling patterns',id:'m8Icp_Cid5o'},{t:'React & TS',d:'Modern component patterns',id:'bMknfKXIFA8'},{t:'Cloud / AWS',d:'Docker, Kubernetes, infra',id:'k1RI5locZE4'},{t:'Core DSA',d:'Algorithmic engineering',id:'8hly31xKli0'}].map(p => <Link key={p.t} to="/academy" className="bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-5 transition backdrop-blur"><h3 className="font-extrabold mb-1 text-slate-100">{p.t}</h3><p className="text-sm text-slate-300">{p.d}</p><span className="inline-block mt-3 text-xs font-bold bg-blue-500/20 px-2 py-0.5 rounded-full text-slate-200">Embedded</span></Link>)}
           </div>
         </div>
       </div>
