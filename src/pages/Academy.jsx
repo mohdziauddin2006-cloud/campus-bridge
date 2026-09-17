@@ -1,1 +1,51 @@
-export default function Academy() { return <main className='p-10'><h2>Academy</h2></main>; }
+import { useState } from 'react';
+import { Play, CheckCircle, Clock, ArrowRight } from 'lucide-react';
+
+const videos = [
+  { id: 'm8Icp_Cid5o', title: 'Advanced System Design', desc: 'Architecture & scaling patterns' },
+  { id: 'bMknfKXIFA8', title: 'React & TypeScript Modern Architecture', desc: 'Component patterns, hooks, performance' },
+  { id: 'k1RI5locZE4', title: 'Cloud / DevOps (AWS / Docker)', desc: 'Containers, Kubernetes, infra automation' },
+  { id: 'RBSGKlAoi34', title: 'Core DSA & Technical Coding', desc: 'Algorithmic engineering for interviews' },
+];
+
+export default function Academy() {
+  const [activeId, setActiveId] = useState('m8Icp_Cid5o');
+  const [completed, setCompleted] = useState(new Set());
+  const activeVideo = videos.find(v => v.id === activeId);
+
+  return (
+    <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Video Academy</h1>
+      <p className="text-slate-500 mb-8">In-app embedded curriculum — zero redirects, verified educational sources.</p>
+      <div className="grid lg:grid-cols-3 gap-8">
+        {/* Playlist */}
+        <div className="space-y-3">
+          <h3 className="text-xs font-extrabold uppercase tracking-widest text-slate-400 mb-3">Curated Learning Paths</h3>
+          {videos.map(v => (
+            <button key={v.id} onClick={() => setActiveId(v.id)} className={`w-full text-left rounded-2xl border p-4 transition shadow-sm ${activeId === v.id ? 'bg-blue-50 border-blue-200 shadow-md' : 'bg-white border-slate-200 hover:shadow-md hover:border-blue-200'}`}>
+              <h4 className="font-extrabold text-slate-900">{v.title}</h4>
+              <p className="text-xs text-slate-500">{v.desc}</p>
+            </button>
+          ))}
+        </div>
+        {/* Player + notes */}
+        <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+          <div className="aspect-video bg-black relative">
+            <iframe src={`https://www.youtube-nocookie.com/embed/${activeId}`} title={activeVideo?.title || 'Video'} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+          </div>
+          <div className="p-8">
+            <h3 className="text-2xl font-extrabold mb-2">{activeVideo?.title}</h3>
+            <div className="flex items-center gap-4 text-sm text-slate-500 mb-6"><span className="inline-flex items-center gap-1"><Clock size={14} /> ~25 min</span><span className="inline-flex items-center gap-1"><CheckCircle size={14} /> Zero redirect</span></div>
+            <h4 className="font-bold mb-2">Key Takeaways</h4>
+            <ul className="space-y-2 text-sm text-slate-700 mb-6">
+              {['Understand core concepts through guided instruction.', 'Apply patterns in real-world engineering problems.', 'Complete the module checklist to progress.'].map((t, i) => (
+                <li key={i} className="flex items-start gap-2"><ArrowRight size={14} className="mt-1 text-blue-600 shrink-0" /><span>{t}</span></li>
+              ))}
+            </ul>
+            <button onClick={() => setCompleted(new Set([...completed, activeId]))} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">{completed.has(activeId) ? 'Completed' : 'Mark Module Complete'}</button>
+          </div>
+        </div>
+      </div>
+    </main>
+  );
+}
