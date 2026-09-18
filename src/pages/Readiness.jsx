@@ -70,8 +70,8 @@ export default function Readiness() {
 
   return (
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Industry Readiness Portal</h1>
-      <p className="text-slate-500 mb-8">Live diagnostic of student skill readiness vs industry benchmarks.</p>
+      <h1 className="text-3xl font-extrabold text-slate-950 font-bold mb-2">Industry Readiness Portal</h1>
+      <p className="text-slate-800 text-sm font-medium mb-8">Live diagnostic of student skill readiness vs industry benchmarks.</p>
 
       {/* Interactive Gauge + Quiz Button */}
       <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 rounded-3xl p-8 md:p-10 text-white shadow-2xl mb-10 relative overflow-hidden">
@@ -98,7 +98,7 @@ export default function Readiness() {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
         {pillars.map(p => (
           <div key={p.label} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-            <h3 className="font-extrabold text-slate-950 mb-3">{p.label}</h3>
+            <h3 className="font-extrabold text-slate-950 font-bold mb-3">{p.label}</h3>
             <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-2">
               <div className="h-full rounded-full bg-blue-600" style={{ width: `${p.score}%` }} />
             </div>

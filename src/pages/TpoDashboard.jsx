@@ -8,6 +8,8 @@ export default function TpoDashboard() {
   const [announcementText, setAnnouncementText] = useState('');
   const [liveAnnouncement, setLiveAnnouncement] = useState('');
   const [loading, setLoading] = useState(true);
+  const [loadingLocal, setLoadingLocal] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
   const [inspectorApp, setInspectorApp] = useState(null);
 
   useEffect(() => {
@@ -21,14 +23,69 @@ export default function TpoDashboard() {
       setLoading(false);
     });
 
+    const syncLocalStorage = () => {
+      // Read applications saved to localStorage (e.g. by TpoModal.jsx)
+      let localApps = [];
+      try {
+        const raw = localStorage.getItem('pending_applications');
+        if (raw) {
+          const arr = JSON.parse(raw);
+          if (Array.isArray(arr)) {
+            localApps = arr.map((a, i) => ({
+              ...a,
+              // ensure stable ids for dedupe
+              id: a.id || `local-${a.studentId || a.email || i}-${i}`,
+              mode: 'local',
+            }));
+          }
+        }
+      } catch (e) {
+        // ignore malformed storage
+      }
+
+      setPendingApps(prev => {
+        const merged = [...prev];
+        localApps.forEach(a => {
+          const exists = merged.find(m => m.id === a.id || m.email === a.email);
+          if (!exists) merged.push(a);
+        });
+        return merged;
+      });
+    };
+
+    // call once on mount
+    syncLocalStorage();
+
+    // reactive: if another tab writes pending_applications, re-sync
+    const onStorage = (e) => {
+      if (!e.key || e.key === 'pending_applications') syncLocalStorage();
+    };
+    window.addEventListener('storage', onStorage);
+
     const unsubAnn = onSnapshot(doc(db, 'globals', 'announcement'), (snap) => {
       if (snap.exists() && snap.data().message) setLiveAnnouncement(snap.data().message);
       else setLiveAnnouncement('');
     });
 
-    return () => { unsubApps(); unsubAnn(); };
+    // Reactive localStorage merge + storage listener (deduped)
+    const mergeFromLocal = () => {
+      const s = localStorage.getItem('pending_applications');
+      if (s) try {
+        const arr = JSON.parse(s);
+        setPendingApps(prev => {
+          const merged = [...prev];
+          arr.forEach(a => { if (!merged.find(p => p.id === a.id || p.email === a.email)) merged.push(a); });
+          return merged;
+        });
+      } catch(e){}
+    };
+    mergeFromLocal();
+    window.addEventListener('storage', mergeFromLocal);
+
+    return () => { unsubApps(); unsubAnn(); window.removeEventListener('storage', onStorage); };
   }, []);
 
+  const loadQueue = () => { const s = localStorage.getItem("pending_applications"); if (s) { try { const arr = JSON.parse(s); setPendingApps(prev => { const merged = [...prev]; arr.forEach(a => { if (!merged.find(p => p.id === a.id)) merged.push(a); }); return merged; }); } catch(e){} } };
   const handleReject = async (id) => {
     try { await deleteDoc(doc(db, 'applications', id)); } catch (e) { console.error('Delete error', e); }
   };
