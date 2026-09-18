@@ -69,3 +69,9 @@ body {
 /* Toast */
 @keyframes toastSlideIn { from { opacity: 0; transform: translateX(30px) translateY(10px); } to { opacity: 1; transform: translateX(0) translateY(0); } }
 .animate-toast-in { animation: toastSlideIn .35s ease-out both; }
+
+@media print {
+  nav, .navbar, header, .fixed, [class*="fixed"], button { display: none !important; }
+  body { background: white !important; color: black !important; }
+  .print\:hidden { display: none !important; }
+}

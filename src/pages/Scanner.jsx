@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle, Zap, TrendingUp, BadgeCheck, X, Check } from 'lucide-react';
+import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 import MatchPredictor from '../components/MatchPredictor';
 import AIRecommendationPanel from '../components/AIRecommendationPanel';
 import { db } from '../lib/firebase';
@@ -12,6 +13,7 @@ export default function Scanner() {
   const [done, setDone] = useState(false);
   const [jd, setJd] = useState('');
   const [matchScore, setMatchScore] = useState(null);
+  const [readinessScore, setReadinessScore] = useState(() => { try { return Number(localStorage.getItem('readiness_score')) || 0; } catch { return 0; } });
 
   // Modal state
   const [showModal, setShowModal] = useState(false);
@@ -56,6 +58,7 @@ export default function Scanner() {
         university: formCollege.trim(),
         cgpa: formCgpa.trim(),
         skills: 'VLSI, SystemVerilog, Python, SQLite',
+        readinessScore: readinessScore || 0,
         score: '78%',
         matchedKeywords: ['React', 'TypeScript', 'Node.js', 'AWS', 'Git'],
         missingSkills: ['Kubernetes', 'GraphQL', 'Terraform', 'Microservices'],
@@ -117,9 +120,26 @@ export default function Scanner() {
             <div><h4 className="font-bold mb-3">Missing Keywords</h4><div className="flex flex-wrap gap-2">{['Kubernetes', 'GraphQL', 'Terraform', 'Microservices'].map(k => <span key={k} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">{k}</span>)}</div></div>
           </div>
           <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace &quot;Responsible for backend&quot; with <strong>&quot;Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%&quot;</strong>.</p></div>
+          {/* Radar / Bar chart of matched vs missing keywords */}
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6 print:hidden">
+            <h4 className="font-extrabold text-slate-900 mb-4">Matched vs Missing Keywords (Radar)</h4>
+            <div className="h-64">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={[{ subject: 'Matched', A: 78, fullMark: 100 }, { subject: 'Missing', A: 34, fullMark: 100 }]}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="subject" />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} />
+                  <Radar name="Score" dataKey="A" stroke="#10b981" fill="#10b981" fillOpacity={0.35} />
+                  <Tooltip />
+                </RadarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
           <AIRecommendationPanel studentSkills={["React","TypeScript","Node","AWS"]} studentBranch="B.Tech ECE" studentDegree="B.Tech" />
           <MatchPredictor skills={["React","TypeScript","Node","AWS"]} jobSkills={["React","System Design","Cloud Native","Embedded C"]} onApply={(s)=>{console.log("Applied with score",s);}} />
-          <button onClick={openModal} className="mt-6 w-full py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition">Submit Application to TPO</button>
+          <button onClick={() => window.print()} className="mt-4 w-full py-3 rounded-full bg-emerald-600 text-white font-extrabold hover:bg-emerald-700 transition shadow-lg shadow-emerald-600/20">Download Report (PDF)</button>
+          <button onClick={openModal} className="mt-2 w-full py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition">Submit Application to TPO</button>
         </div>
       )}
 
