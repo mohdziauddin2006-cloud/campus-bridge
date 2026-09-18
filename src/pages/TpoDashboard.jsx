@@ -8,6 +8,7 @@ export default function TpoDashboard() {
   const [announcementText, setAnnouncementText] = useState('');
   const [liveAnnouncement, setLiveAnnouncement] = useState('');
   const [loading, setLoading] = useState(true);
+  const [inspectorApp, setInspectorApp] = useState(null);
 
   useEffect(() => {
     const auth = localStorage.getItem('tpo_auth');
@@ -97,6 +98,7 @@ export default function TpoDashboard() {
                     <td className="px-3 py-3 font-medium text-slate-700">{app.role || '—'} / <span className="text-xs text-slate-400">{app.company || '—'}</span></td>
                     <td className="px-3 py-3"><span className={`text-xs font-extrabold px-2.5 py-0.5 rounded-full ${app.status === 'Dispatched to Recruiter' ? 'bg-emerald-50 text-emerald-700 border border-emerald-200' : 'bg-amber-50 text-amber-700 border border-amber-200'}`}>{app.status || 'Submitted'}</span></td>
                     <td className="px-3 py-3 flex gap-2">
+                      <button onClick={() => setInspectorApp(app)} className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1"><Sparkles size={12}/> View Details</button>
                       <button onClick={() => handleReject(app.id)} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1"><XCircle size={12}/> Reject</button>
                       <button onClick={() => handleVerifyAndDispatch(app.id)} className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1"><Send size={12}/> Verify</button>
                     </td>
@@ -119,6 +121,27 @@ export default function TpoDashboard() {
         </div>
         <p className="text-xs text-slate-400 mt-3 font-medium">Writes to Firestore <code>globals/announcement</code>; visible instantly on Student Hub.</p>
       </div>
-    </main>
+    
+      {inspectorApp && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md px-4" onClick={() => setInspectorApp(null)}>
+          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-md w-full p-8 relative" onClick={e => e.stopPropagation()}>
+            <button onClick={() => setInspectorApp(null)} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition">×</button>
+            <h2 className="text-xl font-extrabold text-slate-900 mb-4">Student Profile — {inspectorApp.fullName || inspectorApp.name || '—'}</h2>
+            <div className="space-y-2 text-sm">
+              <div><span className="font-bold text-slate-500">Email:</span> <span className="font-medium text-slate-800">{inspectorApp.email || '—'}</span></div>
+              <div><span className="font-bold text-slate-500">Qualification:</span> <span className="font-medium text-slate-800">{inspectorApp.qualification || inspectorApp.branch || '—'}</span></div>
+              <div><span className="font-bold text-slate-500">Hall Ticket / Roll:</span> <span className="font-medium text-slate-800">{inspectorApp.hallTicket || inspectorApp.rollNo || '—'}</span></div>
+              <div><span className="font-bold text-slate-500">Core Skills:</span> <span className="font-medium text-slate-800">{(inspectorApp.skills || inspectorApp.coreSkills || '—').toString()}</span></div>
+              <div><span className="font-bold text-slate-500">College:</span> <span className="font-medium text-slate-800">{inspectorApp.college || inspectorApp.university || '—'}</span></div>
+              <div><span className="font-bold text-slate-500">ATS Score:</span> <span className="font-bold text-blue-600">{inspectorApp.score || '—'}</span></div>
+            </div>
+            <div className="flex gap-3 mt-6">
+              <button onClick={() => { handleReject(inspectorApp.id); setInspectorApp(null); }} className="flex-1 py-2.5 rounded-full bg-rose-50 text-rose-600 font-extrabold border border-rose-200 hover:bg-rose-100 transition">Reject</button>
+              <button onClick={() => { handleVerifyAndDispatch(inspectorApp.id); setInspectorApp(null); }} className="flex-1 py-2.5 rounded-full bg-emerald-50 text-emerald-700 font-extrabold border border-emerald-200 hover:bg-emerald-100 transition">Verify</button>
+            </div>
+          </div>
+        </div>
+      )}
+</main>
   );
 }

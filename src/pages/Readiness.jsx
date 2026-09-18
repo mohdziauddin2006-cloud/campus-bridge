@@ -113,13 +113,13 @@ export default function Readiness() {
         <p className="text-slate-300 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
         <div className="grid md:grid-cols-2 gap-4">
           <Link to="/academy" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 shadow-sm p-5 transition backdrop-blur-sm">
-            <h4 className="font-extrabold mb-1 text-slate-900">Programming Strengthening</h4>
-            <p className="text-sm text-slate-700 mb-2">Systems programming, performance optimization</p>
+            <h4 className="font-extrabold mb-1 text-white">Programming Strengthening</h4>
+            <p className="text-sm text-slate-300 mb-2">Systems programming, performance optimization</p>
             <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-blue-200">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
           </Link>
           <Link to="/academy" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 shadow-sm p-5 transition backdrop-blur-sm">
-            <h4 className="font-extrabold mb-1 text-slate-900">VLSI &amp; Embedded Systems</h4>
-            <p className="text-sm text-slate-700 mb-2">Verilog, FPGA design, microcontroller architecture</p>
+            <h4 className="font-extrabold mb-1 text-white">VLSI &amp; Embedded Systems</h4>
+            <p className="text-sm text-slate-300 mb-2">Verilog, FPGA design, microcontroller architecture</p>
             <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-blue-200">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
           </Link>
         </div>

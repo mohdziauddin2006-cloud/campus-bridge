@@ -1,71 +1,21 @@
 import { useState, useEffect } from 'react';
 import { Play, CheckCircle, Clock, ArrowRight } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 
 export default function Academy() {
-  const [videos, setVideos] = useState([]);
-  const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [activeId, setActiveId] = useState('');
-  const [completed, setCompleted] = useState(new Set());
+  const videos = [
+    { youtube_id: 'rfscVS0vtbw', title: 'Python Full Course', description: 'Complete Python from zero to advanced.', category: 'Programming' },
+    { youtube_id: '8hly31xKli0', title: 'Data Structures & Algorithms', description: 'Core DSA patterns and optimization.', category: 'Programming' },
+    { youtube_id: 'A74TOX803D0', title: 'Java Full Course', description: 'OOP, collections, multithreading.', category: 'Programming' },
+    { youtube_id: '7xngnjfIlK4', title: 'Docker & Kubernetes', description: 'Container orchestration and DevOps.', category: 'Cloud / DevOps' },
+    { youtube_id: 'G3e-cpL7ofc', title: 'HTML & CSS Full Course', description: 'Responsive design and layout.', category: 'Web Dev' },
+    { youtube_id: 'lNuXY4_34aU', title: 'Computer Architecture / Digital Logic', description: 'VLSI, digital design fundamentals.', category: 'VLSI / Hardware' },
+    { youtube_id: '1qw5ITr3k9E', title: 'Technical Interview Preparation', description: 'Behavioral and coding interview strategies.', category: 'Soft Skills' },
+    { youtube_id: 'kqtD5dpn9C8', title: 'Business Fundamentals', description: 'Marketing, finance, and strategic management.', category: 'Marketing / Finance' },
+  ];
+  const categories = ['All', 'Programming', 'Cloud / DevOps', 'Web Dev', 'VLSI / Hardware', 'Soft Skills', 'Marketing / Finance'];
   const [filterCat, setFilterCat] = useState('All');
-
-  useEffect(() => {
-    async function fetchData() {
-      setLoading(true);
-      try {
-        const { data: vidData } = await supabase.from('video_academy').select('*').order('youtube_id');
-        const { data: catData } = await supabase.from('video_academy').select('category').not('category', 'is', null);
-        if (vidData && vidData.length > 0) { setVideos(vidData); }
-        if (catData && catData.length > 0) { const cats = ['All', ...new Set(catData.map(c => c.category))]; setCategories(cats); }
-        if (vidData && vidData.length > 0) setActiveId(vidData[0].youtube_id);
-      } catch (e) { console.error('supabase fetch', e); }
-      // Expanded seed overlay (new categories + working public IDs)
-      const expanded = [
-        { youtube_id: 'jBzwzrDvZ18', title: 'Financial Statement Analysis', description: 'Balance sheet, cash flow, ratios', category: 'Finance & Accounting' },
-        { youtube_id: 'JwHK0TShM3w', title: 'Accounting Principles for Startups', description: 'GAAP / IFRS basics for founders', category: 'Finance & Accounting' },
-        { youtube_id: 'x4O8S4XkHxw', title: 'SEO Strategy 2026', description: 'Keyword mapping, backlinks, technical SEO', category: 'Marketing & SEO' },
-        { youtube_id: 'bixR-KIJKYM', title: 'Content Marketing & Funnel Design', description: 'Conversion-focused content systems', category: 'Marketing & SEO' },
-        { youtube_id: 'tXbKzZAwgUo', title: 'CAD Design Basics (SolidWorks)', description: 'Parametric modeling for engineering', category: 'Mechanical & CAD' },
-        { youtube_id: 'cO7AaxbM0Mc', title: 'Mechanical Drawing & GD&T', description: 'Tolerancing and assembly design', category: 'Mechanical & CAD' },
-        { youtube_id: '8yV0ZzRQ6G8', title: 'Hospital Administration Overview', description: 'Operations, compliance, patient flow', category: 'Healthcare Admin' },
-        { youtube_id: 'L3w1Z6iZqWk', title: 'Healthcare Data & HIPAA Basics', description: 'Privacy, interoperability, standards', category: 'Healthcare Admin' },
-        { youtube_id: 'U-xYHFrPjO0', title: 'Interview Mastery', description: 'Behavioral questions & STAR method', category: 'Core Soft Skills' },
-        { youtube_id: 'Dg01onyMrAk', title: 'Professional Communication', description: 'Emails, presentations, cross-functional dialogue', category: 'Core Soft Skills' },
-      ];
-      setVideos(prev => { const existing = new Map((prev || []).map(v => [v.youtube_id, v])); expanded.forEach(e => existing.set(e.youtube_id, e)); return Array.from(existing.values()); });
-      setCategories(prev => { const merged = new Set([... (prev || []), ...expanded.map(e => e.category)]); return ['All', ...merged]; });
-      setActiveId(prev => prev || (expanded[0]?.youtube_id || ''));
-      setLoading(false);
-    }
-    fetchData();
-  }, []);
-
-  if (loading) return (
-    <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
-      <div className="flex items-center justify-center h-96"><div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" /></div>
-    
-      {/* Govt & Open Resources */}
-      <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 text-white shadow-2xl mb-10">
-        <h2 className="text-xl font-extrabold mb-2">Govt &amp; Open Resources</h2>
-        <p className="text-slate-300 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
-        <div className="grid sm:grid-cols-3 gap-4">
-          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
-            <h4 className="font-extrabold mb-1 text-slate-900">NPTEL: VLSI Design</h4>
-            <p className="text-xs text-slate-700">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
-          </a>
-          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
-            <h4 className="font-extrabold mb-1">SWAYAM: Embedded C</h4>
-            <p className="text-xs text-slate-700">Government-certified embedded systems & microcontroller course.</p>
-          </a>
-          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
-            <h4 className="font-extrabold mb-1">AICTE Technical Books</h4>
-            <p className="text-xs text-slate-700">Recommended open-source PDF downloads for engineering core.</p>
-          </a>
-        </div>
-      </div>
-</main>
-  );
+  const [activeId, setActiveId] = useState(videos[0].youtube_id);
+  const [completed, setCompleted] = useState(new Set());
 
   const filtered = filterCat === 'All' ? videos : videos.filter(v => v.category === filterCat);
   const activeVideo = videos.find(v => v.youtube_id === activeId) || videos[0];
@@ -73,7 +23,7 @@ export default function Academy() {
   return (
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Video Academy</h1>
-      <p className="text-slate-500 mb-6">In-app embedded curriculum — multi-language, verified sources.</p>
+      <p className="text-slate-500 mb-6">Verified, embeddable public courses — no restricted IDs.</p>
 
       <div className="flex flex-wrap gap-2 mb-8">
         {categories.map(c => (
@@ -98,7 +48,10 @@ export default function Academy() {
           </div>
           <div className="p-8">
             <h3 className="text-2xl font-extrabold text-slate-900 mb-2">{activeVideo?.title}</h3>
-            <div className="flex items-center gap-4 text-sm text-slate-500 mb-6"><span className="inline-flex items-center gap-1"><Clock size={14} /> ~25 min</span><span className="inline-flex items-center gap-1"><CheckCircle size={14} /> Zero redirect</span></div>
+            <div className="flex items-center gap-4 text-sm text-slate-500 mb-6">
+              <span className="inline-flex items-center gap-1"><Clock size={14} /> ~25 min</span>
+              <span className="inline-flex items-center gap-1"><CheckCircle size={14} /> Verifiable public source</span>
+            </div>
             <h4 className="font-bold mb-2 text-slate-900">Key Takeaways</h4>
             <ul className="space-y-2 text-sm text-slate-600 mb-6">
               {['Understand core concepts through guided instruction.', 'Apply patterns in real-world engineering problems.', 'Complete the module checklist to progress.'].map((t, i) => (
@@ -106,29 +59,30 @@ export default function Academy() {
               ))}
             </ul>
             <button onClick={() => setCompleted(new Set([...completed, activeVideo?.youtube_id]))} className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition shadow-lg shadow-blue-600/20">{completed.has(activeVideo?.youtube_id) ? 'Completed' : 'Mark Module Complete'}</button>
+            <a href={`https://www.youtube.com/watch?v=${activeVideo?.youtube_id}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 text-xs font-semibold text-blue-600 hover:text-blue-800 mt-3">Watch Directly on YouTube (Fallback) ↗</a>
           </div>
         </div>
       </div>
-    
-      {/* Govt & Open Resources */}
-      <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 text-white shadow-2xl mb-10">
-        <h2 className="text-xl font-extrabold mb-2">Govt &amp; Open Resources</h2>
-        <p className="text-slate-300 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
+
+      {/* Govt & Open Resources - dark cards with white text */}
+      <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 text-white shadow-2xl mb-10 mt-10">
+        <h2 className="text-xl font-extrabold mb-2 text-white">Govt &amp; Open Resources</h2>
+        <p className="text-slate-200 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
         <div className="grid sm:grid-cols-3 gap-4">
-          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
-            <h4 className="font-extrabold mb-1 text-slate-900">NPTEL: VLSI Design</h4>
-            <p className="text-xs text-slate-700">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
+          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-slate-800 hover:bg-slate-900 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
+            <h4 className="font-extrabold mb-1 text-white">NPTEL: VLSI Design</h4>
+            <p className="text-xs text-slate-200">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
           </a>
-          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
-            <h4 className="font-extrabold mb-1">SWAYAM: Embedded C</h4>
-            <p className="text-xs text-slate-700">Government-certified embedded systems & microcontroller course.</p>
+          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-slate-800 hover:bg-slate-900 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
+            <h4 className="font-extrabold mb-1 text-white">SWAYAM: Embedded C</h4>
+            <p className="text-xs text-slate-200">Government-certified embedded systems & microcontroller course.</p>
           </a>
-          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
-            <h4 className="font-extrabold mb-1">AICTE Technical Books</h4>
-            <p className="text-xs text-slate-700">Recommended open-source PDF downloads for engineering core.</p>
+          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-slate-800 hover:bg-slate-900 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
+            <h4 className="font-extrabold mb-1 text-white">AICTE Technical Books</h4>
+            <p className="text-xs text-slate-200">Recommended open-source PDF downloads for engineering core.</p>
           </a>
         </div>
       </div>
-</main>
+    </main>
   );
 }

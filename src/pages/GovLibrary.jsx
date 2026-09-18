@@ -23,6 +23,22 @@ export default function GovLibrary() {
           </a>
         ))}
       </div>
+
+      <h2 className="text-xl font-extrabold mb-4 mt-12 text-white">Open Source PDF Library</h2>
+      <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-4 mb-10">
+        {[
+          { title: 'VLSI Design & SystemVerilog Architecture.pdf', desc: 'Advanced digital design, SystemVerilog, and physical design fundamentals.' },
+          { title: 'Intel 8086 & 8051 Microcontrollers Guide.pdf', desc: 'Microprocessor architecture, assembly programming, and embedded systems.' },
+          { title: 'Python Data Engineering & Systems.pdf', desc: 'Python for data pipelines, automation, and cloud-native architectures.' },
+          { title: 'AICTE Model Engineering Curriculum.pdf', desc: 'National engineering core curriculum and accreditation framework.' },
+        ].map(p => (
+          <div key={p.title} className="bg-[#26282f] hover:bg-[#2d3038] rounded-2xl border border-slate-700 p-5 transition shadow-lg shadow-black/20 hover:-translate-y-1">
+            <h4 className="font-extrabold text-white mb-2">{p.title}</h4>
+            <p className="text-xs text-slate-300 mb-3">{p.desc}</p>
+            <a href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf" download="Engineering_Resource.pdf" target="_blank" className="px-3 py-1.5 bg-blue-600 text-white rounded-lg text-xs font-medium hover:bg-blue-700 inline-block">Download PDF</a>
+          </div>
+        ))}
+      </div>
     </main>
   );
 }
