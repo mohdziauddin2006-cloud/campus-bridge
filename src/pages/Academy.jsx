@@ -24,8 +24,8 @@ export default function Academy() {
       const expanded = [
         { youtube_id: 'jBzwzrDvZ18', title: 'Financial Statement Analysis', description: 'Balance sheet, cash flow, ratios', category: 'Finance & Accounting' },
         { youtube_id: 'JwHK0TShM3w', title: 'Accounting Principles for Startups', description: 'GAAP / IFRS basics for founders', category: 'Finance & Accounting' },
-        { youtube_id: 'D2hTXYs2yZs', title: 'SEO Strategy 2026', description: 'Keyword mapping, backlinks, technical SEO', category: 'Marketing & SEO' },
-        { youtube_id: 'OkyNq9XHLMU', title: 'Content Marketing & Funnel Design', description: 'Conversion-focused content systems', category: 'Marketing & SEO' },
+        { youtube_id: 'x4O8S4XkHxw', title: 'SEO Strategy 2026', description: 'Keyword mapping, backlinks, technical SEO', category: 'Marketing & SEO' },
+        { youtube_id: 'bixR-KIJKYM', title: 'Content Marketing & Funnel Design', description: 'Conversion-focused content systems', category: 'Marketing & SEO' },
         { youtube_id: 'tXbKzZAwgUo', title: 'CAD Design Basics (SolidWorks)', description: 'Parametric modeling for engineering', category: 'Mechanical & CAD' },
         { youtube_id: 'cO7AaxbM0Mc', title: 'Mechanical Drawing & GD&T', description: 'Tolerancing and assembly design', category: 'Mechanical & CAD' },
         { youtube_id: '8yV0ZzRQ6G8', title: 'Hospital Administration Overview', description: 'Operations, compliance, patient flow', category: 'Healthcare Admin' },
@@ -50,17 +50,17 @@ export default function Academy() {
         <h2 className="text-xl font-extrabold mb-2">Govt &amp; Open Resources</h2>
         <p className="text-slate-300 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
         <div className="grid sm:grid-cols-3 gap-4">
-          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
-            <h4 className="font-extrabold mb-1">NPTEL: VLSI Design</h4>
-            <p className="text-xs text-slate-300">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
+          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
+            <h4 className="font-extrabold mb-1 text-slate-900">NPTEL: VLSI Design</h4>
+            <p className="text-xs text-slate-700">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
           </a>
-          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
             <h4 className="font-extrabold mb-1">SWAYAM: Embedded C</h4>
-            <p className="text-xs text-slate-300">Government-certified embedded systems & microcontroller course.</p>
+            <p className="text-xs text-slate-700">Government-certified embedded systems & microcontroller course.</p>
           </a>
-          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
             <h4 className="font-extrabold mb-1">AICTE Technical Books</h4>
-            <p className="text-xs text-slate-300">Recommended open-source PDF downloads for engineering core.</p>
+            <p className="text-xs text-slate-700">Recommended open-source PDF downloads for engineering core.</p>
           </a>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function Academy() {
         </div>
         <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
           <div className="aspect-video bg-black relative">
-            <iframe src={`https://www.youtube-nocookie.com/embed/${activeVideo?.youtube_id}`} title={activeVideo?.title || 'Video'} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+            <iframe src={`https://www.youtube.com/embed/${activeVideo?.youtube_id}`} title={activeVideo?.title || 'Video'} className="w-full h-full" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
           </div>
           <div className="p-8">
             <h3 className="text-2xl font-extrabold text-slate-900 mb-2">{activeVideo?.title}</h3>
@@ -115,17 +115,17 @@ export default function Academy() {
         <h2 className="text-xl font-extrabold mb-2">Govt &amp; Open Resources</h2>
         <p className="text-slate-300 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
         <div className="grid sm:grid-cols-3 gap-4">
-          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
-            <h4 className="font-extrabold mb-1">NPTEL: VLSI Design</h4>
-            <p className="text-xs text-slate-300">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
+          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
+            <h4 className="font-extrabold mb-1 text-slate-900">NPTEL: VLSI Design</h4>
+            <p className="text-xs text-slate-700">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
           </a>
-          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
             <h4 className="font-extrabold mb-1">SWAYAM: Embedded C</h4>
-            <p className="text-xs text-slate-300">Government-certified embedded systems & microcontroller course.</p>
+            <p className="text-xs text-slate-700">Government-certified embedded systems & microcontroller course.</p>
           </a>
-          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-slate-900 hover:bg-slate-800 rounded-2xl border border-slate-700 p-5 transition shadow-lg">
             <h4 className="font-extrabold mb-1">AICTE Technical Books</h4>
-            <p className="text-xs text-slate-300">Recommended open-source PDF downloads for engineering core.</p>
+            <p className="text-xs text-slate-700">Recommended open-source PDF downloads for engineering core.</p>
           </a>
         </div>
       </div>

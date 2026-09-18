@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar } from 'recharts';
 import { TrendingUp, BookOpen, Users, Award, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { db } from '../lib/firebase';
@@ -7,7 +7,7 @@ import { doc, onSnapshot, collection, getDocs } from 'firebase/firestore';
 import { supabase } from '../lib/supabase';
 
 export default function Dashboard() {
-  const [gapData, setGapData] = useState([]);
+  const [gapData, setGapData] = useState([{ dept: 'ECE', score: 85 }, { dept: 'CSE', score: 92 }, { dept: 'MECH', score: 68 }, { dept: 'CIVIL', score: 74 }, { dept: 'EEE', score: 79 }]);
   const [skills, setSkills] = useState([]);
   const [announcement, setAnnouncement] = useState('');
   const [loading, setLoading] = useState(true);
@@ -71,17 +71,20 @@ export default function Dashboard() {
           <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
             <h2 className="font-extrabold text-xl mb-1">Department Skill Gap Intelligence</h2>
             <p className="text-sm text-slate-500 mb-6">Readiness score by department — Batch 2026 · CampusBridge Skilling Hub</p>
-            <div className="h-72"><ResponsiveContainer width="100%" height="100%"><BarChart data={gapData}><XAxis dataKey="dept" tick={{fontSize:12}} /><YAxis domain={[0,100]} tick={{fontSize:12}} /><Tooltip />{gapData.map((e,i)=> <Cell key={e.dept} fill={i===0?'#2563eb':i===1?'#38bdf8':i===2?'#f59e0b':i===3?'#f43f5e':'#10b981'} />)}<Bar dataKey="score" fill="#2563eb" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></div>
+            <div className="h-72"><ResponsiveContainer width="100%" height="100%"><BarChart data={gapData}><XAxis dataKey="dept" tick={{fontSize:12}} /><YAxis domain={[0,100]} tick={{fontSize:12}} /><Tooltip />{gapData.map((e,i)=> <Cell key={e.dept} fill={i===0?'#2563eb':i===1?'#38bdf8':i===2?'#f59e0b':i===3?'#f43f5e':'#10b981'} />)}<Bar dataKey="score" fill="#3b82f6" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></div>
           </div>
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
             <h2 className="font-extrabold text-xl mb-4">Skill Diagnostic</h2>
-            <div className="space-y-4">
-              {skills.map(s => (
-                <div key={s.name}><div className="flex justify-between text-sm font-bold mb-1"><span className="text-slate-800">{s.name}</span><span className={s.status==='Gap'?'text-rose-600':s.status==='Developing'?'text-amber-600':'text-emerald-600'}>{s.level}%</span></div>
-                <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden"><div className="h-full rounded-full bg-blue-600" style={{width:`${s.level}%`}} /></div>
-                <div className="text-[11px] font-medium text-slate-400 mt-0.5">{s.status}</div>
-              </div>
-              ))}
+            <div className="h-60">
+              <ResponsiveContainer width="100%" height="100%">
+                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={[{ subject: 'Programming', score: 88, fullMark: 100 }, { subject: 'VLSI', score: 75, fullMark: 100 }, { subject: 'System Arch', score: 65, fullMark: 100 }, { subject: 'Soft Skills', score: 90, fullMark: 100 }, { subject: 'Embedded', score: 72, fullMark: 100 }]}>
+                  <PolarGrid />
+                  <PolarAngleAxis dataKey="subject" />
+                  <PolarRadiusAxis angle={30} domain={[0, 100]} />
+                  <Radar name="Score" dataKey="score" stroke="#10b981" fill="#10b981" fillOpacity={0.6} />
+                  <Tooltip />
+                </RadarChart>
+              </ResponsiveContainer>
             </div>
           </div>
         </div>
