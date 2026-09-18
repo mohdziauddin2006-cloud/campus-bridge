@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Download, Filter, BarChart3, CheckCircle2, XCircle, UserCheck } from 'lucide-react';
+import { Download, Filter, BarChart3, CheckCircle2, XCircle, UserCheck, ShieldCheck } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 export default function TpoDashboard() {
@@ -68,7 +68,7 @@ export default function TpoDashboard() {
 
 
   const downloadReport = () => {
-    const text = `AITS NAAC Criterion 1 & 2 Report — Batch 2026\n\nDepartment Readiness:\n` + gaps.map(g=>`${g.dept}: ${g.score}% · ${g.missing}`).join('\n') + `\n\nInstitutional Skill Gaps — localStorage key: institutionalSkillGaps`;
+    const text = `CampusBridge NAAC Criterion 1 & 2 Report — Batch 2026\n\nDepartment Readiness:\n` + gaps.map(g=>`${g.dept}: ${g.score}% · ${g.missing}`).join('\n') + `\n\nInstitutional Skill Gaps — localStorage key: institutionalSkillGaps`;
     const blob = new Blob([text], {type:'text/plain'});
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a'); a.href = url; a.download = 'naac_sih26044_criterion_report.txt'; a.click(); URL.revokeObjectURL(url);
@@ -78,7 +78,7 @@ export default function TpoDashboard() {
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <button onClick={() => window.history.back()} className="text-sm text-blue-600 font-bold mb-4">← Back to Portal</button>
       <h1 className="text-3xl font-extrabold text-slate-900 mb-2">TPO Admin Analytics</h1>
-      <p className="text-slate-500 mb-6">Institutional Skill Gap Heatmap · Batch 2026 · AITS SIH26044</p>
+      <p className="text-slate-500 mb-6">Institutional Skill Gap Heatmap · Batch 2026 · CampusBridge National Gateway</p>
 
       <div className="flex items-center gap-3 mb-6">
         <select value={filterDept} onChange={e=>setFilterDept(e.target.value)} className="px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm font-semibold"><option>All</option><option>CSE</option><option>ECE</option><option>MECH</option><option>CIVIL</option></select>
@@ -163,6 +163,9 @@ export default function TpoDashboard() {
           {['Full-Stack React', 'DevOps / AWS', 'AI / NLP', 'VLSI Design'].map(tag => <span key={tag} className="px-3 py-1 rounded-full bg-white/10 border border-white/10 text-sm font-semibold">{tag}</span>)}
         </div>
       </div>
-    </main>
-  );
+    
+      {/* Two-Tier Pipeline */}
+      <div className="bg-gradient-to-r from-blue-950 to-indigo-900 rounded-3xl p-8 text-white shadow-2xl mb-10"><div className="flex items-center gap-3 mb-6"><ShieldCheck size={28} className="text-amber-300" /><h3 className="text-xl font-extrabold">Student Endorsement &amp; Dispatch Queue</h3></div><table className="w-full text-sm"><thead><tr><th className="text-left px-3 py-2 font-medium text-blue-200">Student</th><th className="text-left px-3 py-2 font-medium text-blue-200">College / Target</th><th className="text-left px-3 py-2 font-medium text-blue-200">Role / Company</th><th className="text-left px-3 py-2 font-medium text-blue-200">Status</th><th className="text-left px-3 py-2 font-medium text-blue-200">Actions</th></tr></thead><tbody><tr className="border-b border-blue-800"><td className="px-3 py-3 font-bold">Aarav Mehta</td><td className="px-3 py-3 text-blue-200">IIT Delhi / Bengaluru</td><td className="px-3 py-3">Frontend Engineer / CampusBridge Tech</td><td className="px-3 py-3"><span className="text-xs font-bold px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300">SUBMITTED_TO_TPO</span></td><td className="px-3 py-3 flex gap-2"><button className="px-2 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30">Reject / Revise</button><button className="px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30">Endorse &amp; Transmit</button></td></tr><tr className="border-b border-blue-800"><td className="px-3 py-3 font-bold">Divya Krishnan</td><td className="px-3 py-3 text-blue-200">NIT Trichy / Hyderabad</td><td className="px-3 py-3">Full-Stack / Global Recruiters</td><td className="px-3 py-3"><span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300">TPO_ENDORSED</span></td><td className="px-3 py-3"><button className="px-2 py-1 rounded-full bg-blue-500/20 text-blue-300 text-xs font-bold border border-blue-500/30">Transmit to Recruiter Portal</button></td></tr></tbody></table></div>
+</main>
+)
 }

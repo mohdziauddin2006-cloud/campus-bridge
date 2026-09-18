@@ -33,7 +33,7 @@ export default function Dashboard() {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-slate-950 text-white px-8 lg:px-14 pt-14 pb-10">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-3">Academia-Industry Collaboration</h1>
-          <p className="text-blue-200 text-lg md:text-xl font-medium">AITS Placement Intelligence · Skill Readiness &amp; Institutional Gap Analytics · SIH26044</p>
+          <p className="text-blue-200 text-lg md:text-xl font-medium">CampusBridge Placement Intelligence · Skill Readiness &amp; Institutional Gap Analytics · National Gateway</p>
         </div>
       </section>
 
@@ -58,7 +58,7 @@ export default function Dashboard() {
         <div className="grid lg:grid-cols-3 gap-8 mb-14">
           <div className="lg:col-span-2 bg-white rounded-3xl border border-slate-200 shadow-sm p-8">
             <h2 className="font-extrabold text-xl mb-1">Department Skill Gap Intelligence</h2>
-            <p className="text-sm text-slate-500 mb-6">Readiness score by department — Batch 2026 · AITS Skilling Hub</p>
+            <p className="text-sm text-slate-500 mb-6">Readiness score by department — Batch 2026 · CampusBridge Skilling Hub</p>
             <div className="h-72"><ResponsiveContainer width="100%" height="100%"><BarChart data={gapData}><XAxis dataKey="dept" tick={{fontSize:12}} /><YAxis domain={[0,100]} tick={{fontSize:12}} /><Tooltip />{gapData.map((e,i)=> <Cell key={e.dept} fill={i===0?'#2563eb':i===1?'#38bdf8':i===2?'#f59e0b':i===3?'#f43f5e':'#10b981'} />)}<Bar dataKey="score" fill="#2563eb" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></div>
           </div>
           <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8">

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
+import OpportunitiesPage from './pages/Opportunities';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
 import Scanner from './pages/Scanner';
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/scanner" element={<ProtectedRoute role="Student"><Scanner /></ProtectedRoute>} />
         <Route path="/academy" element={<ProtectedRoute role="Student"><Academy /></ProtectedRoute>} />
         <Route path="/tpo-login" element={<TpoLogin />} />
+        <Route path="/opportunities" element={<OpportunitiesPage />} />
         <Route path="/tpo-dashboard" element={<ProtectedRoute role="TPO"><TpoDashboard /></ProtectedRoute>} />
         
         <Route path="/applications" element={<ProtectedRoute role="Student"><Applications /></ProtectedRoute>} />
