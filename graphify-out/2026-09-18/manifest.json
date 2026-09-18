@@ -18,9 +18,9 @@
     "semantic_hash": ""
   },
   "src/App.jsx": {
-    "mtime": 1789665045.0203815,
-    "seen": 1789702158.4267945,
-    "ast_hash": "82dac0744d91659897bedff44d3b4383",
+    "mtime": 1789709523.56253,
+    "seen": 1789711750.424923,
+    "ast_hash": "698e5d9fb76576eaf52a6cfb72b079b6",
     "semantic_hash": ""
   },
   "src/components/Navbar.jsx": {
@@ -42,9 +42,9 @@
     "semantic_hash": ""
   },
   "src/main.jsx": {
-    "mtime": 1789553252.660057,
-    "seen": 1789702158.4267979,
-    "ast_hash": "253d4db42a0b217629b29497cec5becb",
+    "mtime": 1789702379.2660706,
+    "seen": 1789711750.4252954,
+    "ast_hash": "618722c1931df656f0a989928b019303",
     "semantic_hash": ""
   },
   "src/pages/Academy.jsx": {
@@ -66,21 +66,21 @@
     "semantic_hash": ""
   },
   "src/pages/Scanner.jsx": {
-    "mtime": 1789701431.3032212,
-    "seen": 1789702158.4268012,
-    "ast_hash": "c9f2ac08438b4a83db22336c7bcd12e9",
+    "mtime": 1789709551.7972674,
+    "seen": 1789711750.4255779,
+    "ast_hash": "e95426733186876a1ba3f400fa4008a1",
     "semantic_hash": ""
   },
   "src/pages/TpoDashboard.jsx": {
-    "mtime": 1789665085.389428,
-    "seen": 1789702158.426802,
-    "ast_hash": "23c283e2f9f812727ec9c1af4be3e514",
+    "mtime": 1789709727.952538,
+    "seen": 1789711750.4255798,
+    "ast_hash": "49158f1643e8305733451aac9e80c46c",
     "semantic_hash": ""
   },
   "src/pages/TpoLogin.jsx": {
-    "mtime": 1789663449.83555,
-    "seen": 1789702158.4268026,
-    "ast_hash": "f13f3068ec8382aabca494bb7027d7bc",
+    "mtime": 1789711625.1890204,
+    "seen": 1789711750.4255812,
+    "ast_hash": "f93ed7aebf6e243f9705e3dcc785b546",
     "semantic_hash": ""
   },
   "vite.config.js": {
@@ -111,6 +111,36 @@
     "mtime": 1789662904.4364805,
     "seen": 1789702158.426806,
     "ast_hash": "c62bedacb7397819a686a9c79f692936",
+    "semantic_hash": ""
+  },
+  "src/components/MatchPredictor.jsx": {
+    "mtime": 1789709537.3256805,
+    "seen": 1789711750.424926,
+    "ast_hash": "3ab264c2f4b4f519cb816143919214ab",
+    "semantic_hash": ""
+  },
+  "src/components/ProtectedRoute.jsx": {
+    "mtime": 1789702800.7923765,
+    "seen": 1789711750.4250648,
+    "ast_hash": "4ce0c77fcdc53f187c7bf6a0db62a2c4",
+    "semantic_hash": ""
+  },
+  "src/pages/Applications.jsx": {
+    "mtime": 1789709497.0014446,
+    "seen": 1789711750.4253836,
+    "ast_hash": "63ac51e3db42275e9f6643d00cb1ce69",
+    "semantic_hash": ""
+  },
+  "src/pages/Auth.jsx": {
+    "mtime": 1789711683.4531875,
+    "seen": 1789711750.4253864,
+    "ast_hash": "cc9947b3a2d5a47d9985a508916302e7",
+    "semantic_hash": ""
+  },
+  "src/pages/MatchPredictor.jsx": {
+    "mtime": 1789709529.3715034,
+    "seen": 1789711750.4254854,
+    "ast_hash": "3ab264c2f4b4f519cb816143919214ab",
     "semantic_hash": ""
   }
 }

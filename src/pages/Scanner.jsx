@@ -35,7 +35,7 @@ export default function Scanner() {
         {file && <div className="mt-4 text-sm text-slate-800 font-medium">{file.name}</div>}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
+      <div className="flex flex-col md:flex-row gap-6 mb-6">
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <label className="font-bold text-sm text-slate-700 mb-2 block">Target Role / Job Description</label>
           <textarea rows={4} value={jd} onChange={e => setJd(e.target.value)} className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20" />

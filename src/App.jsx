@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import ProtectedRoute from './components/ProtectedRoute';
 import OpportunitiesPage from './pages/Opportunities';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
@@ -14,19 +13,20 @@ import Applications from './pages/Applications';
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path="/auth" element={<Auth onAuth={() => window.location.reload()} initialMode="tpo" />} />
-        <Route path="/" element={<ProtectedRoute role="Student"><Dashboard /></ProtectedRoute>} />
-        <Route path="/scanner" element={<ProtectedRoute role="Student"><Scanner /></ProtectedRoute>} />
-        <Route path="/academy" element={<ProtectedRoute role="Student"><Academy /></ProtectedRoute>} />
+      <div className="min-h-screen w-full overflow-x-hidden bg-slate-50">
+        <Navbar />
+        <Routes>
+        <Route path="/auth" element={<Auth />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/scanner" element={<Scanner />} />
+        <Route path="/academy" element={<Academy />} />
         <Route path="/tpo-login" element={<TpoLogin />} />
         <Route path="/opportunities" element={<OpportunitiesPage />} />
-        <Route path="/tpo-dashboard" element={<ProtectedRoute role="TPO"><TpoDashboard /></ProtectedRoute>} />
-        
-        <Route path="/applications" element={<ProtectedRoute role="Student"><Applications /></ProtectedRoute>} />
-        <Route path="/readiness" element={<ProtectedRoute role="Student"><Readiness /></ProtectedRoute>} />
+        <Route path="/tpo-dashboard" element={<TpoDashboard />} />
+        <Route path="/applications" element={<Applications />} />
+        <Route path="/readiness" element={<Readiness />} />
       </Routes>
+      </div>
     </BrowserRouter>
   );
 }

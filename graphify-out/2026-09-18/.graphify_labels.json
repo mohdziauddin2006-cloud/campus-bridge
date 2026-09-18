@@ -5,6 +5,6 @@
   "3": "dependencies",
   "4": "CLAUDE.md",
   "5": "scripts",
-  "6": "AuthProvider",
-  "7": "Readiness"
+  "6": "AuthContext.jsx",
+  "7": "TpoDashboard"
 }
