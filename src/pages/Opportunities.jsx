@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ShieldCheck, Globe, Clock, CheckCircle2, Send, Filter, Search, Building, MapPin, Briefcase } from 'lucide-react';
 import { db } from '../lib/firebase';
-import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
-import { mockOpportunities } from '../data/mockOpportunities';
+import { collection, addDoc, getDocs, serverTimestamp } from 'firebase/firestore';
 
 export default function OpportunitiesPage() {
+  const [opportunities, setOpportunities] = useState([]);
   const [search, setSearch] = useState('');
   const [modeFilter, setModeFilter] = useState('All');
   const [cityFilter, setCityFilter] = useState('All Cities');
@@ -14,7 +14,18 @@ export default function OpportunitiesPage() {
   const [form, setForm] = useState({ fullName: '', email: '', university: '', branch: '', cgpa: '', github: '', linkedin: '', resume: '' });
   const [toast, setToast] = useState('');
 
-  const filtered = mockOpportunities.filter(o => {
+  useEffect(() => {
+    async function load() {
+      try {
+        const snap = await getDocs(collection(db, 'opportunities'));
+        const data = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+        setOpportunities(data);
+      } catch (e) { console.error('Opportunities Firestore', e); }
+    }
+    load();
+  }, []);
+
+  const filtered = opportunities.filter(o => {
     const s = o.role.toLowerCase().includes(search.toLowerCase()) || o.company.toLowerCase().includes(search.toLowerCase());
     const m = modeFilter === 'All' || o.workMode === modeFilter;
     const c = cityFilter === 'All Cities' || o.location === cityFilter;

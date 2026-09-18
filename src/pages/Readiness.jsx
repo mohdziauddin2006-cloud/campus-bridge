@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { TrendingUp, BarChart3, Target, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { db } from '../lib/firebase';
+import { collection, getDocs } from 'firebase/firestore';
 
 export default function Readiness() {
   const [pillars, setPillars] = useState([]);
@@ -10,8 +11,11 @@ export default function Readiness() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const { data, error } = await supabase.from('readiness_pillars').select('*').order('label');
-      if (data) setPillars(data);
+      try {
+        const snap = await getDocs(collection(db, 'readiness_pillars'));
+        const data = snap.docs.map(d => d.data());
+        if (data.length) setPillars(data);
+      } catch (e) { console.error('Readiness Firestore', e); }
       setLoading(false);
     }
     fetchData();
@@ -54,9 +58,9 @@ export default function Readiness() {
         ))}
       </div>
 
-      <div className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-3xl p-8 text-slate-900 shadow-2xl mb-10">
-        <h2 className="text-xl font-extrabold mb-4 text-slate-900">Targeted Bridge Curriculum</h2>
-        <p className="text-slate-600 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
+      <div className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-3xl p-8 text-white shadow-2xl mb-10">
+        <h2 className="text-xl font-extrabold mb-4 text-white">Targeted Bridge Curriculum</h2>
+        <p className="text-slate-300 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
         <div className="grid md:grid-cols-2 gap-4">
           <Link to="/academy" className="block bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:shadow-md transition">
             <h4 className="font-extrabold mb-1 text-slate-900">Programming Strengthening</h4>

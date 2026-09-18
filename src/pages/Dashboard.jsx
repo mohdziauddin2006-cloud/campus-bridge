@@ -3,7 +3,8 @@ import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 
 import { TrendingUp, BookOpen, Users, Award, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { db } from '../lib/firebase';
-import { doc, onSnapshot, serverTimestamp } from 'firebase/firestore';
+import { doc, onSnapshot, collection, getDocs } from 'firebase/firestore';
+import { supabase } from '../lib/supabase';
 
 export default function Dashboard() {
   const [gapData, setGapData] = useState([]);
@@ -14,10 +15,16 @@ export default function Dashboard() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const { data: depts } = await supabase.from('departments').select('*').order('dept_code');
-      const { data: skl } = await supabase.from('skills').select('*').order('name');
-      if (depts) setGapData(depts.map(d => ({ dept: d.dept_code, score: d.score, gap: d.gap_level })));
-      if (skl) setSkills(skl);
+      try {
+        const deptSnap = await getDocs(collection(db, 'departments'));
+        const sklSnap = await getDocs(collection(db, 'skills'));
+        const depts = deptSnap.docs.map(d => d.data());
+        const skl = sklSnap.docs.map(d => d.data());
+        if (depts.length) setGapData(depts.map(d => ({ dept: d.dept_code || d.id, score: d.score || 0, gap: d.gap_level || '—' })));
+        if (skl.length) setSkills(skl);
+      } catch (e) {
+        console.error('Dashboard Firestore fetch', e);
+      }
       setLoading(false);
     }
     fetchData();

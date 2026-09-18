@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle, Zap } from 'lucide-react';
+import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle, Zap, TrendingUp, BadgeCheck, X, Check } from 'lucide-react';
 import MatchPredictor from '../components/MatchPredictor';
+import AIRecommendationPanel from '../components/AIRecommendationPanel';
 import { db } from '../lib/firebase';
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { supabase } from '../lib/supabase';
@@ -12,16 +13,68 @@ export default function Scanner() {
   const [jd, setJd] = useState('');
   const [matchScore, setMatchScore] = useState(null);
 
+  // Modal state
+  const [showModal, setShowModal] = useState(false);
+  const [formName, setFormName] = useState('');
+  const [formBranch, setFormBranch] = useState('');
+  const [formCollege, setFormCollege] = useState('');
+  const [formCgpa, setFormCgpa] = useState('');
+  const [formError, setFormError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+
   useEffect(() => {
     async function fetchKeywords() {
       const { data } = await supabase.from('skills').select('name, status');
-      // live DB wiring only; results rendered from DB queries in future iterations.
     }
     fetchKeywords();
   }, []);
 
   const handleDrop = (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) setFile(f); };
   const startScan = () => { setScanning(true); setTimeout(() => { setScanning(false); setDone(true); }, 2200); };
+
+  const openModal = () => {
+    setFormError('');
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    if (submitting) return;
+    setShowModal(false);
+  };
+
+  const handleSubmit = async () => {
+    setFormError('');
+    if (!formName.trim() || !formBranch.trim() || !formCollege.trim() || !formCgpa.trim()) {
+      setFormError('Please fill all fields before submitting.');
+      return;
+    }
+    setSubmitting(true);
+    try {
+      await addDoc(collection(db, 'applications'), {
+        fullName: formName.trim(),
+        branch: formBranch.trim(),
+        university: formCollege.trim(),
+        cgpa: formCgpa.trim(),
+        skills: 'VLSI, SystemVerilog, Python, SQLite',
+        score: '78%',
+        matchedKeywords: ['React', 'TypeScript', 'Node.js', 'AWS', 'Git'],
+        missingSkills: ['Kubernetes', 'GraphQL', 'Terraform', 'Microservices'],
+        status: 'Pending',
+        timestamp: serverTimestamp()
+      });
+      setSubmitting(false);
+      setShowModal(false);
+      // Reset form
+      setFormName('');
+      setFormBranch('');
+      setFormCollege('');
+      setFormCgpa('');
+    } catch (e) {
+      console.error('Firestore submit error', e);
+      setSubmitting(false);
+      setFormError('Failed to submit. Please try again.');
+    }
+  };
 
   return (
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
@@ -64,22 +117,51 @@ export default function Scanner() {
             <div><h4 className="font-bold mb-3">Missing Keywords</h4><div className="flex flex-wrap gap-2">{['Kubernetes', 'GraphQL', 'Terraform', 'Microservices'].map(k => <span key={k} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">{k}</span>)}</div></div>
           </div>
           <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace &quot;Responsible for backend&quot; with <strong>&quot;Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%&quot;</strong>.</p></div>
+          <AIRecommendationPanel studentSkills={["React","TypeScript","Node","AWS"]} studentBranch="B.Tech ECE" studentDegree="B.Tech" />
           <MatchPredictor skills={["React","TypeScript","Node","AWS"]} jobSkills={["React","System Design","Cloud Native","Embedded C"]} onApply={(s)=>{console.log("Applied with score",s);}} />
-          <button onClick={async () => {
-            try {
-              await addDoc(collection(db, 'applications'), {
-                name: 'Mohd Zia Uddin',
-                branch: 'B.Tech ECE',
-                skills: 'VLSI, SystemVerilog, Python, SQLite',
-                project: 'JanSev AI Classification',
-                score: '82%',
-                status: 'Pending',
-                timestamp: serverTimestamp()
-              });
-            } catch (e) {
-              console.error('Firestore submit error', e);
-            }
-          }} className="mt-6 w-full py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition">Submit Application to TPO</button>
+          <button onClick={openModal} className="mt-6 w-full py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition">Submit Application to TPO</button>
+        </div>
+      )}
+
+      {/* Student Details Modal */}
+      {showModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-md px-4" onClick={closeModal}>
+          <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-md w-full p-8 relative" onClick={e => e.stopPropagation()}>
+            <button onClick={closeModal} disabled={submitting} className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition disabled:opacity-30"><X size={20} /></button>
+            <h2 className="text-2xl font-extrabold text-slate-900 mb-1">Student Details</h2>
+            <p className="text-sm text-slate-500 mb-6">Complete your profile before submitting to the TPO.</p>
+
+            <form onSubmit={e => { e.preventDefault(); handleSubmit(); }} className="space-y-4">
+              <div>
+                <label htmlFor="fullName" className="block text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-1">Full Name</label>
+                <input id="fullName" type="text" value={formName} onChange={e => setFormName(e.target.value)} placeholder="Mohd Zia Uddin" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition" />
+              </div>
+              <div>
+                <label htmlFor="branch" className="block text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-1">Degree / Branch</label>
+                <input id="branch" type="text" value={formBranch} onChange={e => setFormBranch(e.target.value)} placeholder="B.Tech ECE, MBA Finance, B.Sc Nursing..." className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition" />
+              </div>
+              <div>
+                <label htmlFor="college" className="block text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-1">College / University</label>
+                <input id="college" type="text" value={formCollege} onChange={e => setFormCollege(e.target.value)} placeholder="National Institute of Technology" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition" />
+              </div>
+              <div>
+                <label htmlFor="cgpa" className="block text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-1">CGPA</label>
+                <input id="cgpa" type="text" value={formCgpa} onChange={e => setFormCgpa(e.target.value)} placeholder="8.2" className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition" />
+              </div>
+
+              {formError && (
+                <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl text-sm text-rose-700 font-bold flex items-center gap-2"><AlertCircle size={16} /> {formError}</div>
+              )}
+
+              <button type="submit" disabled={submitting || !formName.trim() || !formBranch.trim() || !formCollege.trim() || !formCgpa.trim()} className="w-full py-3.5 rounded-full bg-blue-600 text-white font-extrabold shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition flex items-center justify-center gap-2 disabled:opacity-40 disabled:cursor-not-allowed">
+                {submitting ? (
+                  <><span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" /> Submitting...</>
+                ) : (
+                  <><Check size={18} /> Confirm & Submit to TPO</>
+                )}
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </main>
