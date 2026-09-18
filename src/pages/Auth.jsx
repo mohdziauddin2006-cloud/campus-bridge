@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { ShieldCheck, GraduationCap, Building2, UserPlus, CheckCircle, AlertTriangle, Send, Briefcase } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
-export default function Auth({ onAuth }) {
-  const [mode, setMode] = useState('student');
+export default function Auth({ onAuth, initialMode = 'student' }) {
+  const [mode, setMode] = useState(initialMode);
   const [tab, setTab] = useState('signin');
-  const [id, setId] = useState('');
-  const [pass, setPass] = useState('');
+  const [id, setId] = useState('tpoaits');
+  const [pass, setPass] = useState('tpo123');
   const [email, setEmail] = useState('');
   const [hallTicket, setHallTicket] = useState('');
   const [createPass, setCreatePass] = useState('');

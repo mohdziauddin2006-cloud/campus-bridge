@@ -15,7 +15,7 @@ export default function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/auth" element={<Auth onAuth={() => window.location.reload()} />} />
+        <Route path="/auth" element={<Auth onAuth={() => window.location.reload()} initialMode="tpo" />} />
         <Route path="/" element={<ProtectedRoute role="Student"><Dashboard /></ProtectedRoute>} />
         <Route path="/scanner" element={<ProtectedRoute role="Student"><Scanner /></ProtectedRoute>} />
         <Route path="/academy" element={<ProtectedRoute role="Student"><Academy /></ProtectedRoute>} />
