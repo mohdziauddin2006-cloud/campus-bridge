@@ -13,14 +13,29 @@ export default function Academy() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const { data: vidData } = await supabase.from('video_academy').select('*').order('youtube_id');
-      const { data: catData } = await supabase.from('video_academy').select('category').not('category', 'is', null);
-      if (vidData) setVideos(vidData);
-      if (catData) {
-        const cats = ['All', ...new Set(catData.map(c => c.category))];
-        setCategories(cats);
-      }
-      setActiveId(vidData?.[0]?.youtube_id || '');
+      try {
+        const { data: vidData } = await supabase.from('video_academy').select('*').order('youtube_id');
+        const { data: catData } = await supabase.from('video_academy').select('category').not('category', 'is', null);
+        if (vidData && vidData.length > 0) { setVideos(vidData); }
+        if (catData && catData.length > 0) { const cats = ['All', ...new Set(catData.map(c => c.category))]; setCategories(cats); }
+        if (vidData && vidData.length > 0) setActiveId(vidData[0].youtube_id);
+      } catch (e) { console.error('supabase fetch', e); }
+      // Expanded seed overlay (new categories + working public IDs)
+      const expanded = [
+        { youtube_id: 'hZnNUW1I9pA', title: 'Financial Statement Analysis', description: 'Balance sheet, cash flow, ratios', category: 'Finance & Accounting' },
+        { youtube_id: 'JwHK0TShM3w', title: 'Accounting Principles for Startups', description: 'GAAP / IFRS basics for founders', category: 'Finance & Accounting' },
+        { youtube_id: 'Fvsl-A59RKU', title: 'SEO Strategy 2026', description: 'Keyword mapping, backlinks, technical SEO', category: 'Marketing & SEO' },
+        { youtube_id: 'OkyNq9XHLMU', title: 'Content Marketing & Funnel Design', description: 'Conversion-focused content systems', category: 'Marketing & SEO' },
+        { youtube_id: 'tXbKzZAwgUo', title: 'CAD Design Basics (SolidWorks)', description: 'Parametric modeling for engineering', category: 'Mechanical & CAD' },
+        { youtube_id: 'cO7AaxbM0Mc', title: 'Mechanical Drawing & GD&T', description: 'Tolerancing and assembly design', category: 'Mechanical & CAD' },
+        { youtube_id: '8yV0ZzRQ6G8', title: 'Hospital Administration Overview', description: 'Operations, compliance, patient flow', category: 'Healthcare Admin' },
+        { youtube_id: 'L3w1Z6iZqWk', title: 'Healthcare Data & HIPAA Basics', description: 'Privacy, interoperability, standards', category: 'Healthcare Admin' },
+        { youtube_id: 'U-xYHFrPjO0', title: 'Interview Mastery', description: 'Behavioral questions & STAR method', category: 'Core Soft Skills' },
+        { youtube_id: 'Dg01onyMrAk', title: 'Professional Communication', description: 'Emails, presentations, cross-functional dialogue', category: 'Core Soft Skills' },
+      ];
+      setVideos(prev => { const existing = new Map((prev || []).map(v => [v.youtube_id, v])); expanded.forEach(e => existing.set(e.youtube_id, e)); return Array.from(existing.values()); });
+      setCategories(prev => { const merged = new Set([... (prev || []), ...expanded.map(e => e.category)]); return ['All', ...merged]; });
+      setActiveId(prev => prev || (expanded[0]?.youtube_id || ''));
       setLoading(false);
     }
     fetchData();
