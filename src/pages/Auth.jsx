@@ -41,15 +41,10 @@ export default function Auth({ onAuth }) {
       if (!emailLogin || !passwordLogin) { setError('Fill both fields'); setLoading(false); return; }
 
       if (!isStudent) {
-        // Foolproof TPO authentication — admin@aits.ac.in always grants access
-        if (id.trim() === 'admin@aits.ac.in') {
-          await onAuth?.({ mode, email: 'admin@aits.ac.in' });
-          setLoading(false); return;
-        }
-        // Also accept legacy / test credentials
-        const pTrim = (pass || '').trim();
-        if (id.trim() === 'admin@aits.ac.in' && (pTrim.toLowerCase() === 'tpo@aits2026' || pTrim === 'tpo123' || pTrim === 'Tpo@AITS2026' || pTrim.toLowerCase() === 'tpo123')) {
-          await onAuth?.({ mode, email: 'admin@aits.ac.in' });
+        // Hackathon-safe TPO auth: username tpoaits grants access with any password
+        // Demo-proof: tpoaits always succeeds; tpo123 is the shown password
+        if (id.trim().toLowerCase() === 'tpoaits') {
+          await onAuth?.({ mode, email: 'tpoaits' });
           setLoading(false); return;
         }
         setError('Incorrect TPO credentials'); setLoading(false); return;
@@ -116,7 +111,7 @@ export default function Auth({ onAuth }) {
           <form onSubmit={handleSubmit} className="space-y-3 mb-4">
             <div>
               <label className="text-xs font-bold text-slate-500 mb-1 block">{isStudent ? 'Hall Ticket Number' : 'Institutional Email'}</label>
-              <input type="text" value={id} onChange={e=>setId(e.target.value)} placeholder={isStudent ? 'e.g. 21BRS1234' : 'tpo@college.ac.in'} className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition" />
+              <input type="text" value={id} onChange={e=>setId(e.target.value)} placeholder={isStudent ? 'e.g. 21BRS1234' : 'tpoaits'} className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-400 transition" />
             </div>
             <div>
               <label className="text-xs font-bold text-slate-500 mb-1 block">Password</label>

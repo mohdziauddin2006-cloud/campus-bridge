@@ -4,6 +4,18 @@
   "graph": {},
   "nodes": [
     {
+      "id": "src_app_app",
+      "label": "App()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "app()",
+      "source_file": "src/App.jsx",
+      "source_location": "L10"
+    },
+    {
       "id": "src_components_navbar_navbar",
       "label": "Navbar()",
       "_callable": true,
@@ -40,18 +52,6 @@
       "source_location": "L14"
     },
     {
-      "id": "src_pages_applications_applications",
-      "label": "Applications()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "applications()",
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L12"
-    },
-    {
       "id": "src_pages_dashboard_dashboard",
       "label": "Dashboard()",
       "_callable": true,
@@ -76,30 +76,6 @@
       "source_location": "L13"
     },
     {
-      "id": "src_pages_readiness_readiness",
-      "label": "Readiness()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "readiness()",
-      "source_file": "src/pages/Readiness.jsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_pages_readiness_readiness_fetchdata",
-      "label": "fetchData()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "fetchdata()",
-      "source_file": "src/pages/Readiness.jsx",
-      "source_location": "L11"
-    },
-    {
       "id": "src_pages_scanner_scanner",
       "label": "Scanner()",
       "_callable": true,
@@ -109,7 +85,7 @@
       "file_type": "code",
       "norm_label": "scanner()",
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L6"
+      "source_location": "L5"
     },
     {
       "id": "src_pages_scanner_scanner_fetchkeywords",
@@ -121,7 +97,43 @@
       "file_type": "code",
       "norm_label": "fetchkeywords()",
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L14"
+      "source_location": "L13"
+    },
+    {
+      "id": "src_pages_tpodashboard_tpodashboard",
+      "label": "TpoDashboard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "tpodashboard()",
+      "source_file": "src/pages/TpoDashboard.jsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "src_pages_tpodashboard_tpodashboard_fetchannouncements",
+      "label": "fetchAnnouncements()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "fetchannouncements()",
+      "source_file": "src/pages/TpoDashboard.jsx",
+      "source_location": "L25"
+    },
+    {
+      "id": "src_pages_tpodashboard_tpodashboard_fetchapps",
+      "label": "fetchApps()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "fetchapps()",
+      "source_file": "src/pages/TpoDashboard.jsx",
+      "source_location": "L21"
     },
     {
       "id": "src_pages_tpologin_tpologin",
@@ -136,64 +148,16 @@
       "source_location": "L4"
     },
     {
-      "id": "src_components_matchpredictor_matchpredictor",
-      "label": "MatchPredictor()",
+      "id": "src_context_authcontext_useauth",
+      "label": "useAuth()",
       "_callable": true,
       "_origin": "ast",
       "community": 2,
       "community_name": "react",
       "file_type": "code",
-      "norm_label": "matchpredictor()",
-      "source_file": "src/components/MatchPredictor.jsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_pages_auth_auth",
-      "label": "Auth()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "auth()",
-      "source_file": "src/pages/Auth.jsx",
-      "source_location": "L5"
-    },
-    {
-      "id": "src_pages_matchpredictor_matchpredictor",
-      "label": "MatchPredictor()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "matchpredictor()",
-      "source_file": "src/pages/MatchPredictor.jsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_app_app",
-      "label": "App()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "app()",
-      "source_file": "src/App.jsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_components_protectedroute_protectedroute",
-      "label": "ProtectedRoute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "protectedroute()",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L4"
+      "norm_label": "useauth()",
+      "source_file": "src/context/AuthContext.jsx",
+      "source_location": "L37"
     },
     {
       "id": "src_context_authcontext_authprovider",
@@ -201,7 +165,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "AuthProvider",
       "file_type": "code",
       "norm_label": "authprovider()",
       "source_file": "src/context/AuthContext.jsx",
@@ -213,7 +177,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "AuthProvider",
       "file_type": "code",
       "norm_label": "refreshprofile()",
       "source_file": "src/context/AuthContext.jsx",
@@ -225,59 +189,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "AuthProvider",
       "file_type": "code",
       "norm_label": "signout()",
       "source_file": "src/context/AuthContext.jsx",
       "source_location": "L34"
     },
     {
-      "id": "src_context_authcontext_useauth",
-      "label": "useAuth()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "useauth()",
-      "source_file": "src/context/AuthContext.jsx",
-      "source_location": "L37"
-    },
-    {
-      "id": "src_pages_tpodashboard_tpodashboard",
-      "label": "TpoDashboard()",
+      "id": "src_pages_readiness_readiness",
+      "label": "Readiness()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "TpoDashboard",
+      "community_name": "Readiness",
       "file_type": "code",
-      "norm_label": "tpodashboard()",
-      "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L5"
+      "norm_label": "readiness()",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L6"
     },
     {
-      "id": "src_pages_tpodashboard_tpodashboard_fetchannouncements",
-      "label": "fetchAnnouncements()",
+      "id": "src_pages_readiness_readiness_fetchdata",
+      "label": "fetchData()",
       "_callable": true,
       "_origin": "ast",
       "community": 7,
-      "community_name": "TpoDashboard",
+      "community_name": "Readiness",
       "file_type": "code",
-      "norm_label": "fetchannouncements()",
-      "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L52"
-    },
-    {
-      "id": "src_pages_tpodashboard_tpodashboard_fetchapps",
-      "label": "fetchApps()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 7,
-      "community_name": "TpoDashboard",
-      "file_type": "code",
-      "norm_label": "fetchapps()",
-      "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L48"
+      "norm_label": "fetchdata()",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L11"
     },
     {
       "id": "package",
@@ -489,36 +429,25 @@
       "source_location": "L1"
     },
     {
-      "id": "src_pages_applications",
-      "label": "Applications.jsx",
+      "id": "src_main",
+      "label": "main.jsx",
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "applications.jsx",
-      "source_file": "src/pages/Applications.jsx",
+      "norm_label": "main.jsx",
+      "source_file": "src/main.jsx",
       "source_location": "L1"
     },
     {
-      "id": "src_pages_applications_stages",
-      "label": "STAGES",
+      "id": "src_pages_tpologin",
+      "label": "TpoLogin.jsx",
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "stages",
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_pages_readiness",
-      "label": "Readiness.jsx",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "readiness.jsx",
-      "source_file": "src/pages/Readiness.jsx",
+      "norm_label": "tpologin.jsx",
+      "source_file": "src/pages/TpoLogin.jsx",
       "source_location": "L1"
     },
     {
@@ -533,15 +462,26 @@
       "source_location": "L19"
     },
     {
-      "id": "src_components_matchpredictor",
-      "label": "components/MatchPredictor.jsx",
+      "id": "src_context_authcontext",
+      "label": "AuthContext.jsx",
       "_origin": "ast",
       "community": 2,
       "community_name": "react",
       "file_type": "code",
-      "norm_label": "components/matchpredictor.jsx",
-      "source_file": "src/components/MatchPredictor.jsx",
+      "norm_label": "authcontext.jsx",
+      "source_file": "src/context/AuthContext.jsx",
       "source_location": "L1"
+    },
+    {
+      "id": "src_context_authcontext_authcontext",
+      "label": "AuthContext",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "authcontext",
+      "source_file": "src/context/AuthContext.jsx",
+      "source_location": "L4"
     },
     {
       "id": "src_lib_supabase",
@@ -577,17 +517,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_pages_auth",
-      "label": "Auth.jsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "auth.jsx",
-      "source_file": "src/pages/Auth.jsx",
-      "source_location": "L1"
-    },
-    {
       "id": "src_pages_dashboard",
       "label": "Dashboard.jsx",
       "_origin": "ast",
@@ -599,14 +528,14 @@
       "source_location": "L1"
     },
     {
-      "id": "src_pages_matchpredictor",
-      "label": "pages/MatchPredictor.jsx",
+      "id": "src_pages_readiness",
+      "label": "Readiness.jsx",
       "_origin": "ast",
       "community": 2,
       "community_name": "react",
       "file_type": "code",
-      "norm_label": "pages/matchpredictor.jsx",
-      "source_file": "src/pages/MatchPredictor.jsx",
+      "norm_label": "readiness.jsx",
+      "source_file": "src/pages/Readiness.jsx",
       "source_location": "L1"
     },
     {
@@ -629,17 +558,6 @@
       "file_type": "code",
       "norm_label": "tpodashboard.jsx",
       "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_pages_tpologin",
-      "label": "TpoLogin.jsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "tpologin.jsx",
-      "source_file": "src/pages/TpoLogin.jsx",
       "source_location": "L1"
     },
     {
@@ -866,65 +784,9 @@
       "norm_label": "preview",
       "source_file": "package.json",
       "source_location": "L10"
-    },
-    {
-      "id": "src_components_protectedroute",
-      "label": "ProtectedRoute.jsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "protectedroute.jsx",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_context_authcontext",
-      "label": "AuthContext.jsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "authcontext.jsx",
-      "source_file": "src/context/AuthContext.jsx",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_context_authcontext_authcontext",
-      "label": "AuthContext",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "authcontext",
-      "source_file": "src/context/AuthContext.jsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_main",
-      "label": "main.jsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "main.jsx",
-      "source_file": "src/main.jsx",
-      "source_location": "L1"
     }
   ],
   "links": [
-    {
-      "source": "src_components_protectedroute_protectedroute",
-      "target": "src_context_authcontext_useauth",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L5",
-      "weight": 1.0
-    },
     {
       "source": "src_context_authcontext_authprovider_signout",
       "target": "src_context_authcontext_authprovider_signout",
@@ -994,7 +856,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L14",
+      "source_location": "L13",
       "weight": 1.0
     },
     {
@@ -1006,7 +868,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L48",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -1018,7 +880,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L52",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -1143,30 +1005,6 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_readiness_readiness",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/App.jsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app",
-      "target": "src_pages_applications_applications",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/App.jsx",
-      "source_location": "L11",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app",
       "target": "src_components_navbar_navbar",
       "relation": "imports",
       "_origin": "ast",
@@ -1179,7 +1017,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_components_protectedroute_protectedroute",
+      "target": "src_pages_dashboard_dashboard",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1191,7 +1029,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_auth_auth",
+      "target": "src_pages_scanner_scanner",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1203,7 +1041,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_dashboard_dashboard",
+      "target": "src_pages_academy_academy",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1215,7 +1053,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_scanner_scanner",
+      "target": "src_pages_tpologin_tpologin",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1227,7 +1065,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_academy_academy",
+      "target": "src_pages_tpodashboard_tpodashboard",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1239,7 +1077,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_tpologin_tpologin",
+      "target": "src_pages_readiness_readiness",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1247,30 +1085,6 @@
       "context": "import",
       "source_file": "src/App.jsx",
       "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app",
-      "target": "src_pages_tpodashboard_tpodashboard",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/App.jsx",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_protectedroute",
-      "target": "src_context_authcontext_useauth",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L1",
       "weight": 1.0
     },
     {
@@ -1298,18 +1112,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_main",
-      "target": "src_context_authcontext_authprovider",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/main.jsx",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
       "source": "src_pages_academy",
       "target": "src_lib_supabase_supabase",
       "relation": "imports",
@@ -1318,18 +1120,6 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/pages/Academy.jsx",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_auth",
-      "target": "src_lib_supabase_supabase",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Auth.jsx",
       "source_location": "L3",
       "weight": 1.0
     },
@@ -1359,18 +1149,6 @@
     },
     {
       "source": "src_pages_scanner",
-      "target": "src_components_matchpredictor_matchpredictor",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_scanner",
       "target": "src_lib_supabase_supabase",
       "relation": "imports",
       "_origin": "ast",
@@ -1378,7 +1156,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L4",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -1407,30 +1185,6 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_readiness",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/App.jsx",
-      "source_location": "L10",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app",
-      "target": "src_pages_applications",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/App.jsx",
-      "source_location": "L11",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app",
       "target": "src_components_navbar",
       "relation": "imports_from",
       "_origin": "ast",
@@ -1443,7 +1197,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_components_protectedroute",
+      "target": "src_pages_dashboard",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1455,7 +1209,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_auth",
+      "target": "src_pages_scanner",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1467,7 +1221,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_dashboard",
+      "target": "src_pages_academy",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1479,7 +1233,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_scanner",
+      "target": "src_pages_tpologin",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1491,7 +1245,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_academy",
+      "target": "src_pages_tpodashboard",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1503,7 +1257,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_tpologin",
+      "target": "src_pages_readiness",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1511,42 +1265,6 @@
       "context": "import",
       "source_file": "src/App.jsx",
       "source_location": "L8",
-      "weight": 1.0
-    },
-    {
-      "source": "src_app",
-      "target": "src_pages_tpodashboard",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/App.jsx",
-      "source_location": "L9",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_matchpredictor",
-      "target": "ref_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/components/MatchPredictor.jsx",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_matchpredictor",
-      "target": "ref_lucide_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/components/MatchPredictor.jsx",
-      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -1559,30 +1277,6 @@
       "context": "import",
       "source_file": "src/components/Navbar.jsx",
       "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_protectedroute",
-      "target": "src_context_authcontext",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_protectedroute",
-      "target": "ref_react_router_dom",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -1646,18 +1340,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_main",
-      "target": "src_context_authcontext",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/main.jsx",
-      "source_location": "L6",
-      "weight": 1.0
-    },
-    {
       "source": "src_pages_academy",
       "target": "ref_react",
       "relation": "imports_from",
@@ -1690,66 +1372,6 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/pages/Academy.jsx",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_applications",
-      "target": "ref_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_applications",
-      "target": "ref_lucide_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_auth",
-      "target": "ref_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Auth.jsx",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_auth",
-      "target": "ref_lucide_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Auth.jsx",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_auth",
-      "target": "src_lib_supabase",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Auth.jsx",
       "source_location": "L3",
       "weight": 1.0
     },
@@ -1814,30 +1436,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_pages_matchpredictor",
-      "target": "ref_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/MatchPredictor.jsx",
-      "source_location": "L1",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_matchpredictor",
-      "target": "ref_lucide_react",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/MatchPredictor.jsx",
-      "source_location": "L2",
-      "weight": 1.0
-    },
-    {
       "source": "src_pages_readiness",
       "target": "ref_react",
       "relation": "imports_from",
@@ -1911,18 +1509,6 @@
     },
     {
       "source": "src_pages_scanner",
-      "target": "src_components_matchpredictor",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_scanner",
       "target": "src_lib_supabase",
       "relation": "imports_from",
       "_origin": "ast",
@@ -1930,7 +1516,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L4",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -2312,18 +1898,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/App.jsx",
-      "source_location": "L13",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_matchpredictor",
-      "target": "src_components_matchpredictor_matchpredictor",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/MatchPredictor.jsx",
-      "source_location": "L4",
+      "source_location": "L10",
       "weight": 1.0
     },
     {
@@ -2335,17 +1910,6 @@
       "confidence_score": 1.0,
       "source_file": "src/components/Navbar.jsx",
       "source_location": "L3",
-      "weight": 1.0
-    },
-    {
-      "source": "src_components_protectedroute",
-      "target": "src_components_protectedroute_protectedroute",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -2404,39 +1968,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_pages_applications",
-      "target": "src_pages_applications_applications",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_applications",
-      "target": "src_pages_applications_stages",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L4",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_auth",
-      "target": "src_pages_auth_auth",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/pages/Auth.jsx",
-      "source_location": "L5",
-      "weight": 1.0
-    },
-    {
       "source": "src_pages_dashboard",
       "target": "src_pages_dashboard_dashboard",
       "relation": "contains",
@@ -2445,17 +1976,6 @@
       "confidence_score": 1.0,
       "source_file": "src/pages/Dashboard.jsx",
       "source_location": "L7",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_matchpredictor",
-      "target": "src_pages_matchpredictor_matchpredictor",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/pages/MatchPredictor.jsx",
-      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -2477,7 +1997,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L6",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -2516,5 +2036,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "97f99965c868ea52b58483efb7e8ad8f9afa1710"
+  "built_at_commit": "51defd8664e3be18822ea31a7a6ac5a0cc0615f5"
 }
