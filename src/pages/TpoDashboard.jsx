@@ -1,22 +1,49 @@
 import { useState, useEffect } from 'react';
-import { Download, Filter, BarChart3 } from 'lucide-react';
+import { Download, Filter, BarChart3, CheckCircle2, XCircle, UserCheck } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 export default function TpoDashboard() {
   const [filterDept, setFilterDept] = useState('All');
   const [applications, setApplications] = useState([]);
+  const [pendingStudents, setPendingStudents] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
   const [announcementText, setAnnouncementText] = useState('');
 
   useEffect(() => {
     fetchApps();
     fetchAnnouncements();
+    loadPending();
     const sub = supabase
       .channel('applications-changes')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'applications' }, () => fetchApps())
       .subscribe();
     return () => { supabase.removeChannel(sub); };
   }, []);
+
+  const loadPending = () => {
+    const pending = JSON.parse(localStorage.getItem('pendingStudents') || '[]');
+    setPendingStudents(pending);
+  };
+
+  const approveStudent = (email) => {
+    const approved = JSON.parse(localStorage.getItem('approvedStudents') || '[]');
+    const pending = JSON.parse(localStorage.getItem('pendingStudents') || '[]');
+    const student = pending.find(s => s.email === email);
+    if (student && !approved.find(s => s.email === email)) {
+      approved.push(student);
+      localStorage.setItem('approvedStudents', JSON.stringify(approved));
+      const remaining = pending.filter(s => s.email !== email);
+      localStorage.setItem('pendingStudents', JSON.stringify(remaining));
+      setPendingStudents(remaining);
+    }
+  };
+
+  const rejectStudent = (email) => {
+    const pending = JSON.parse(localStorage.getItem('pendingStudents') || '[]');
+    const remaining = pending.filter(s => s.email !== email);
+    localStorage.setItem('pendingStudents', JSON.stringify(remaining));
+    setPendingStudents(remaining);
+  };
 
   async function fetchApps() {
     const { data } = await supabase.from('applications').select('*').order('created_at', { ascending: false });
@@ -81,6 +108,32 @@ export default function TpoDashboard() {
         {applications.length === 0 && <div className="p-8 text-center text-slate-400 text-sm">No applications found.</div>}
       </div>
 
+      {/* Pending Student Approvals */}
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 mb-10">
+        <div className="flex items-center gap-3 mb-4">
+          <UserCheck size={24} className="text-blue-600" />
+          <h3 className="font-extrabold text-xl text-slate-900">Pending Student Approvals</h3>
+        </div>
+        {pendingStudents.length === 0 ? (
+          <div className="text-slate-400 text-sm">No pending sign-up requests.</div>
+        ) : (
+          <div className="space-y-3">
+            {pendingStudents.map(s => (
+              <div key={s.email} className="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-100">
+                <div>
+                  <div className="font-bold text-slate-900 text-sm">{s.email}</div>
+                  <div className="text-xs text-slate-500">Hall Ticket: <span className="font-mono text-blue-600">{s.hallTicket}</span></div>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={() => approveStudent(s.email)} className="px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1"><CheckCircle2 size={12}/> Approve</button>
+                  <button onClick={() => rejectStudent(s.email)} className="px-3 py-1.5 rounded-full bg-rose-50 text-rose-700 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1"><XCircle size={12}/> Reject</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
       {/* Announcement */}
       <div className="mb-10">
         <h3 className="font-extrabold text-lg mb-3">TPO Announcement Broadcast</h3>
@@ -90,7 +143,20 @@ export default function TpoDashboard() {
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-blue-950 to-slate-900 rounded-3xl p-8 text-white shadow-2xl mb-10">
+      
+      {/* Skill Gap Heatmap */}
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 mb-10">
+        <div className="flex items-center gap-3 mb-4"><h3 className="font-extrabold text-xl text-slate-900">Institutional Skill Gap Heatmap — Batch 2026</h3></div>
+        <table className="w-full text-sm border-collapse"><thead className="bg-slate-900 text-white"><tr><th className="px-3 py-2 text-left font-medium">Dept / Skill</th><th>Cloud Native</th><th>System Design</th><th>Embedded C</th><th>BIM</th></tr></thead>
+        <tbody>
+          <tr className="border-b border-slate-100"><td className="font-bold px-3 py-2 text-slate-800">CSE</td><td className="bg-emerald-50 text-emerald-700 font-extrabold px-3 py-2">82%</td><td className="bg-emerald-50 text-emerald-700 font-extrabold px-3 py-2">88%</td><td className="bg-rose-50 text-rose-700 font-extrabold px-3 py-2">45%</td><td className="bg-rose-50 text-rose-700 font-extrabold px-3 py-2">30%</td></tr>
+          <tr className="border-b border-slate-100"><td className="font-bold px-3 py-2 text-slate-800">ECE</td><td className="bg-amber-50 text-amber-700 font-extrabold px-3 py-2">68%</td><td className="bg-amber-50 text-amber-700 font-extrabold px-3 py-2">72%</td><td className="bg-emerald-50 text-emerald-700 font-extrabold px-3 py-2">78%</td><td className="bg-rose-50 text-rose-700 font-extrabold px-3 py-2">42%</td></tr>
+          <tr className="border-b border-slate-100"><td className="font-bold px-3 py-2 text-slate-800">MECH</td><td className="bg-amber-50 text-amber-700 font-extrabold px-3 py-2">55%</td><td className="bg-amber-50 text-amber-700 font-extrabold px-3 py-2">60%</td><td className="bg-rose-50 text-rose-700 font-extrabold px-3 py-2">35%</td><td className="bg-emerald-50 text-emerald-700 font-extrabold px-3 py-2">65%</td></tr>
+          <tr><td className="font-bold px-3 py-2 text-slate-800">CIVIL</td><td className="bg-rose-50 text-rose-700 font-extrabold px-3 py-2">42%</td><td className="bg-amber-50 text-amber-700 font-extrabold px-3 py-2">50%</td><td className="bg-rose-50 text-rose-700 font-extrabold px-3 py-2">28%</td><td className="bg-amber-50 text-amber-700 font-extrabold px-3 py-2">72%</td></tr>
+        </tbody></table>
+        <button onClick={() => { const advisory = `NAAC Syllabus Advisory — ${new Date().toISOString()}: CSE (82%), ECE (68%), MECH (55%), CIVIL (42%). Recommend adding Cloud Native, System Design, Embedded C, BIM modules.`; const blob = new Blob([advisory], {type:'text/plain'}); const u = URL.createObjectURL(blob); const a = document.createElement('a'); a.href=u; a.download='naac_syllabus_advisory.txt'; a.click(); URL.revokeObjectURL(u); }} className="mt-4 px-4 py-2 rounded-full bg-blue-600 text-white text-sm font-extrabold shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition">Generate NAAC Syllabus Revision Advisory</button>
+      </div>
+<div className="bg-gradient-to-r from-blue-950 to-slate-900 rounded-3xl p-8 text-white shadow-2xl mb-10">
         <h3 className="text-xl font-extrabold mb-2">Reverse Talent Matchmaking</h3>
         <p className="text-blue-200 text-sm mb-4">Mock recruiter queries against student competency database.</p>
         <div className="flex flex-wrap gap-2">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle } from 'lucide-react';
+import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle, Zap } from 'lucide-react';
+import MatchPredictor from '../components/MatchPredictor';
 import { supabase } from '../lib/supabase';
 
 export default function Scanner() {
@@ -61,6 +62,7 @@ export default function Scanner() {
             <div><h4 className="font-bold mb-3">Missing Keywords</h4><div className="flex flex-wrap gap-2">{['Kubernetes', 'GraphQL', 'Terraform', 'Microservices'].map(k => <span key={k} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">{k}</span>)}</div></div>
           </div>
           <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace &quot;Responsible for backend&quot; with <strong>&quot;Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%&quot;</strong>.</p></div>
+          <MatchPredictor skills={["React","TypeScript","Node","AWS"]} jobSkills={["React","System Design","Cloud Native","Embedded C"]} onApply={(s)=>{console.log("Applied with score",s);}} />
           <button onClick={async () => {
             await supabase.from('applications').insert({
               name: file ? file.name.replace(/\.(pdf|txt|jpg)/, '') : 'Candidate',
