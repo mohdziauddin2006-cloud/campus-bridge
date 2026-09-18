@@ -24,7 +24,7 @@ export default function Academy() {
       const expanded = [
         { youtube_id: 'hZnNUW1I9pA', title: 'Financial Statement Analysis', description: 'Balance sheet, cash flow, ratios', category: 'Finance & Accounting' },
         { youtube_id: 'JwHK0TShM3w', title: 'Accounting Principles for Startups', description: 'GAAP / IFRS basics for founders', category: 'Finance & Accounting' },
-        { youtube_id: 'Fvsl-A59RKU', title: 'SEO Strategy 2026', description: 'Keyword mapping, backlinks, technical SEO', category: 'Marketing & SEO' },
+        { youtube_id: 'D2hTXYs2yZs', title: 'SEO Strategy 2026', description: 'Keyword mapping, backlinks, technical SEO', category: 'Marketing & SEO' },
         { youtube_id: 'OkyNq9XHLMU', title: 'Content Marketing & Funnel Design', description: 'Conversion-focused content systems', category: 'Marketing & SEO' },
         { youtube_id: 'tXbKzZAwgUo', title: 'CAD Design Basics (SolidWorks)', description: 'Parametric modeling for engineering', category: 'Mechanical & CAD' },
         { youtube_id: 'cO7AaxbM0Mc', title: 'Mechanical Drawing & GD&T', description: 'Tolerancing and assembly design', category: 'Mechanical & CAD' },

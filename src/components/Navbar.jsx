@@ -26,7 +26,6 @@ export default function Navbar() {
         <Link to="/tpo-dashboard" className="hover:text-blue-600 transition whitespace-nowrap">TPO Portal</Link>
       </div>
 
-      <Link to="/tpo-login" className="hidden md:inline-block text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 px-4 xl:px-5 py-2.5 rounded-full transition shadow-md shadow-blue-600/20 whitespace-nowrap shrink-0">TPO Officer Sign In</Link>
 
       {/* Mobile drawer */}
       {open && (
@@ -36,7 +35,6 @@ export default function Navbar() {
           <Link to="/academy" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Video Academy</Link>
           <Link to="/readiness" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Industry Readiness</Link>
           <Link to="/tpo-dashboard" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">TPO Portal</Link>
-          <Link to="/tpo-login" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium bg-blue-600 text-white font-bold px-5 py-2.5 rounded-full text-center mt-2">TPO Officer Sign In</Link>
         </div>
       )}
     </nav>
