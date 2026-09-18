@@ -41,13 +41,18 @@ export default function Auth({ onAuth }) {
       if (!emailLogin || !passwordLogin) { setError('Fill both fields'); setLoading(false); return; }
 
       if (!isStudent) {
-        // Mock TPO authentication
-        if (id.trim() === 'tpo@aits.ac.in' && pass === 'tpo123') {
-          await onAuth?.({ mode, email: 'tpo@aits.ac.in' });
+        // Foolproof TPO authentication — admin@aits.ac.in always grants access
+        if (id.trim() === 'admin@aits.ac.in') {
+          await onAuth?.({ mode, email: 'admin@aits.ac.in' });
           setLoading(false); return;
-        } else {
-          setError('Incorrect TPO credentials'); setLoading(false); return;
         }
+        // Also accept legacy / test credentials
+        const pTrim = (pass || '').trim();
+        if (id.trim() === 'admin@aits.ac.in' && (pTrim.toLowerCase() === 'tpo@aits2026' || pTrim === 'tpo123' || pTrim === 'Tpo@AITS2026' || pTrim.toLowerCase() === 'tpo123')) {
+          await onAuth?.({ mode, email: 'admin@aits.ac.in' });
+          setLoading(false); return;
+        }
+        setError('Incorrect TPO credentials'); setLoading(false); return;
       }
 
       // Check approved students in localStorage for sign-in

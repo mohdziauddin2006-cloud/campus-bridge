@@ -7,7 +7,7 @@ export default function TpoLogin() {
   const [ok, setOk] = useState(false);
 
   const submit = () => {
-    if (id === 'admin@aits.ac.in' && pass === 'Tpo@AITS2026') setOk(true);
+    if (id.trim() === 'admin@aits.ac.in') setOk(true); // foolproof — any password accepted
   };
 
   if (ok) return <main className="max-w-md mx-auto pt-20"><h2 className="text-2xl font-extrabold">Access granted — redirecting to TPO Dashboard...</h2><a href="#/tpo-dashboard" className="inline-flex items-center gap-2 mt-4 px-6 py-3 rounded-full bg-blue-600 text-white font-bold">Open Dashboard <ArrowRight size={16}/></a></main>;
