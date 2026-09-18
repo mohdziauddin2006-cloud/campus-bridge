@@ -60,7 +60,7 @@ export default function Scanner() {
         skills: 'VLSI, SystemVerilog, Python, SQLite',
         readinessScore: readinessScore || 0,
         score: '78%',
-        matchedKeywords: ['React', 'TypeScript', 'Node.js', 'AWS', 'Git'],
+        matchedKeywords: ['React', 'TypeScript', 'Node.js', 'AWS', 'Git', 'AutoCAD', 'Tally', 'Carpentry', 'Machine Learning', 'SystemVerilog', 'MATLAB'],
         missingSkills: ['Kubernetes', 'GraphQL', 'Terraform', 'Microservices'],
         status: 'Pending',
         timestamp: serverTimestamp()

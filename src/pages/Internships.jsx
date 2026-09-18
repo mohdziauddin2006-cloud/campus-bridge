@@ -2,9 +2,15 @@ import { useState } from 'react';
 import { Building2, MapPin, Clock, Star, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 const internData = [
-  { title: 'Hardware Integration Intern', company: 'Qualcomm', location: 'Hyderabad', type: 'Internship (6 months)', skills: ['Embedded C', 'Intel 8086/8051', 'PCB Design'], stipend: '₹45,000 / month', desc: 'Integrate RF front-end modules with microcontroller subsystems. Hands-on with Intel 8051 architecture and embedded C.' },
-  { title: 'AI / ML Intern', company: 'Remote Startup', location: 'Remote', type: 'Internship (3 months)', skills: ['LLMs', 'Python', 'Streamlit'], stipend: '₹35,000 / month', desc: 'Build interactive dashboards for LLM outputs using Python and Streamlit. Focus on data visualization and prompt engineering.' },
-  { title: 'FPGA Prototyping Intern', company: 'AMD', location: 'Bangalore', type: 'Internship (4 months)', skills: ['Verilog', 'FPGA', 'Digital Design'], stipend: '₹40,000 / month', desc: 'Prototype digital blocks in Verilog for FPGA validation. Learn from senior FPGA engineers on timing and synthesis.' },
+  // All levels covered
+  { title: 'Data Entry Intern', company: 'RailTel Corp', location: 'New Delhi', type: 'Internship (3 months)', skills: ['MS Office', 'Data Entry', 'Excel'], stipend: '₹15,000 / month', desc: 'Support digital record migration for national rail infrastructure. Basic MS Office skills required.' },
+  { title: 'Workshop Intern', company: 'ITI Kanpur', location: 'Kanpur', type: 'Internship (2 months)', skills: ['Hand Tools', 'Carpentry'], stipend: '₹12,000 / month', desc: 'Assist certified mechanics in workshop maintenance and basic fabrication tasks.' },
+  { title: 'Junior Draftsman Intern', company: 'L&T Construction', location: 'Mumbai', type: 'Internship (6 months)', skills: ['AutoCAD', '2D Drafting'], stipend: '₹22,000 / month', desc: 'Produce 2D drafts under engineer supervision. Learn CAD drafting for real construction projects.' },
+  { title: 'Telecom Intern', company: 'BSNL Circle', location: 'Chennai', type: 'Internship (6 months)', skills: ['Fiber Optics', 'Router Config'], stipend: '₹18,000 / month', desc: 'Field and lab work on telecom installation. Exposure to fiber optics and router configuration.' },
+  { title: 'Hardware Integration Intern', company: 'Qualcomm', location: 'Hyderabad', type: 'Internship (6 months)', skills: ['Embedded C', 'Intel 8086/8051', 'PCB Design'], stipend: '₹45,000 / month', desc: 'Integrate RF front-end modules with microcontroller subsystems. Hands-on with embedded C.' },
+  { title: 'AI / ML Intern', company: 'Remote Startup', location: 'Remote', type: 'Internship (3 months)', skills: ['LLMs', 'Python', 'Streamlit'], stipend: '₹35,000 / month', desc: 'Build interactive dashboards for LLM outputs using Python and Streamlit.' },
+  { title: 'FPGA Prototyping Intern', company: 'AMD', location: 'Bangalore', type: 'Internship (4 months)', skills: ['Verilog', 'FPGA', 'Digital Design'], stipend: '₹40,000 / month', desc: 'Prototype digital blocks in Verilog for FPGA validation under senior FPGA engineers.' },
+  { title: 'Lab Analysis Intern', company: 'Dr. Reddy Labs', location: 'Hyderabad', type: 'Internship (6 months)', skills: ['Laboratory Protocols', 'Sample Prep'], stipend: '₹20,000 / month', desc: 'Prepare chemical samples, log experimental data, and assist research scientists.' },
 ];
 
 export default function Internships() {
@@ -12,7 +18,7 @@ export default function Internships() {
   return (
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Internships</h1>
-      <p className="text-slate-500 mb-8">LinkedIn-style feed of verified internships.</p>
+      <p className="text-slate-500 mb-8">LinkedIn-style feed of verified internships — SSC to PhD.</p>
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-5 space-y-4">
           {internData.map(i => (

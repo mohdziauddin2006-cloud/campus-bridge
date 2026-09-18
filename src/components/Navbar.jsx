@@ -40,7 +40,8 @@ export default function Navbar() {
         <Link to="/internships" className="hover:text-blue-600 transition whitespace-nowrap">Internships</Link>
         <Link to="/jobs" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Jobs</Link>
           <Link to="/internships" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Internships</Link>
-          <Link to="/tpo-dashboard" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">TPO Portal</Link>
+          <Link to="/gov-library" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Gov Library</Link>
+        <Link to="/tpo-dashboard" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">TPO Portal</Link>
         </div>
       )}
     </nav>

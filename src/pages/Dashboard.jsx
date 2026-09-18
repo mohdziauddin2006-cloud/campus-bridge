@@ -48,8 +48,8 @@ export default function Dashboard() {
         </div>
       </section>
 
-      {announcement && <div className="max-w-6xl mx-auto px-6 lg:px-10 mt-12 relative z-40"><div className="bg-blue-600 text-white rounded-2xl px-6 py-3 font-bold shadow-lg shadow-blue-900/20">Institutional Announcement: {announcement}</div></div>}
-      <div className="max-w-6xl mx-auto px-6 lg:px-10 -mt-6">
+      {announcement && <div className="max-w-6xl mx-auto px-6 lg:px-10 relative w-full mb-8"><div className="bg-blue-600 text-white rounded-2xl px-6 py-3 font-bold shadow-lg shadow-blue-900/20">Institutional Announcement: {announcement}</div></div>}
+      <div className="max-w-6xl mx-auto px-6 lg:px-10">
         {/* Metric cards */}
         <div className="grid md:grid-cols-4 gap-5 mb-14">
           {[

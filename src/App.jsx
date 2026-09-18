@@ -10,6 +10,7 @@ import Academy from './pages/Academy';
 import TpoLogin from './pages/TpoLogin';
 import TpoDashboard from './pages/TpoDashboard';
 import Readiness from './pages/Readiness';
+import GovLibrary from './pages/GovLibrary';
 import Applications from './pages/Applications';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -30,6 +31,7 @@ export default function App() {
         <Route path="/tpo-dashboard" element={<ProtectedRoute><TpoDashboard /></ProtectedRoute>} />
         <Route path="/applications" element={<Applications />} />
         <Route path="/readiness" element={<Readiness />} />
+        <Route path="/gov-library" element={<GovLibrary />} />
       </Routes>
       </div>
     </BrowserRouter>

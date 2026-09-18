@@ -1,10 +1,27 @@
 import { useState } from 'react';
-import { Building2, MapPin, Briefcase, DollarSign, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Building2, MapPin, Briefcase, ArrowRight } from 'lucide-react';
 
 const jobsData = [
+  // SSC / 10th Pass
+  { title: 'Data Entry Operator', company: 'RailTel Corp', location: 'New Delhi', type: 'Contract', skills: ['MS Office', 'Data Entry', 'Basic Excel'], salary: '2.5 - 4.5 LPA', desc: 'Accurate data entry for digital records, form validation, and basic spreadsheet maintenance across national rail infrastructure databases.' },
+  { title: 'Workshop Assistant', company: 'ITI Kanpur', location: 'Kanpur', type: 'Full-time', skills: ['Hand Tools', 'Carpentry', 'Safety Compliance'], salary: '2.0 - 3.5 LPA', desc: 'Assist in mechanical workshop setup, maintain tooling inventory, and support basic fabrication tasks under certified technicians.' },
+  // Diploma / ITI
+  { title: 'Junior Mechanic', company: 'Bharat Heavy Electricals', location: 'Haridwar', type: 'Full-time', skills: ['AutoCAD', 'Welding', 'Mechanical Fitting'], salary: '3.5 - 6 LPA', desc: 'Assist senior mechanics in assembly, repair, and quality inspection of mechanical systems on industrial equipment.' },
+  { title: 'Junior Draftsman', company: 'L&T Construction', location: 'Mumbai', type: 'Full-time', skills: ['AutoCAD', '2D Drafting', 'Dimensioning'], salary: '4 - 7 LPA', desc: 'Prepare 2D technical drawings for civil and structural projects. Convert engineer notes into production-ready drafts.' },
+  { title: 'Telecom Technician', company: 'BSNL Circle', location: 'Chennai', type: 'Full-time', skills: ['Fiber Optics', 'Router Config', 'Troubleshooting'], salary: '4 - 7 LPA', desc: 'Install, maintain, and troubleshoot telecom infrastructure including copper lines, fiber optics, and router configurations.' },
+  // B.Sc / B.Com
+  { title: 'Financial Analyst', company: 'Kotak Securities', location: 'Mumbai', type: 'Full-time', skills: ['Tally', 'Excel', 'Financial Modeling'], salary: '5 - 9 LPA', desc: 'Analyze balance sheets, prepare investor reports, model revenue projections, and assist senior analysts with portfolio tracking.' },
+  { title: 'Lab Technician', company: 'Dr. Reddy Labs', location: 'Hyderabad', type: 'Full-time', skills: ['Laboratory Protocols', 'Sample Prep', 'Data Logging'], salary: '3.5 - 6 LPA', desc: 'Prepare chemical and biological samples, log experimental data, maintain calibration records, and assist research scientists.' },
+  // B.Tech (All Branches)
   { title: 'Python Backend Developer', company: 'TCS', location: 'Hyderabad', type: 'Full-time', skills: ['Python', 'SQLite', 'REST APIs'], salary: '8-14 LPA', desc: 'Build scalable backend APIs for enterprise clients. Work with Python, SQLite, and cloud-native architectures.' },
   { title: 'Physical Design Engineer', company: 'Intel', location: 'Bangalore', type: 'Full-time', skills: ['VLSI', 'SystemVerilog', 'Physical Design'], salary: '18-35 LPA', desc: 'Lead physical design and timing closure for advanced silicon nodes. Deep digital logic and EDA tooling.' },
-  { title: 'Embedded Firmware Engineer', company: 'Texas Instruments', location: 'Bangalore', type: 'Full-time', skills: ['C', 'RTOS', 'Microcontrollers'], salary: '14-28 LPA', desc: 'Develop embedded firmware for sensor interfaces, motor control, and IoT modules.' },
+  { title: 'VLSI Engineer', company: 'Qualcomm', location: 'Hyderabad', type: 'Full-time', skills: ['Verilog', 'SystemVerilog', 'FPGA'], salary: '15-30 LPA', desc: 'Design and verify digital circuits for mobile chipsets. Work with SystemVerilog, synthesis, and timing analysis.' },
+  { title: 'Civil Site Engineer', company: 'Shapoorji Pallonji', location: 'Pune', type: 'Full-time', skills: ['AutoCAD', 'Surveying', 'Concrete Technology'], salary: '6-11 LPA', desc: 'Supervise construction site activities, manage material logistics, ensure structural compliance, and coordinate with survey teams.' },
+  { title: 'Mechanical CAD Designer', company: 'Mahindra & Mahindra', location: 'Ahmedabad', type: 'Full-time', skills: ['AutoCAD', 'SolidWorks', 'Sheet Metal'], salary: '7-12 LPA', desc: 'Produce 3D CAD models and assembly drawings for mechanical components and vehicle subsystems using SolidWorks.' },
+  // M.Tech / PhD
+  { title: 'AI Research Scientist', company: 'IIT Research Lab', location: 'Bangalore', type: 'Full-time', skills: ['Machine Learning', 'NumPy', 'MATLAB', 'Python'], salary: '25-45 LPA', desc: 'Lead research in deep learning architectures, publish peer-reviewed papers, and build production-grade AI systems.' },
+  { title: 'Quantum Computing Engineer', company: 'Tata Research Institute', location: 'Pune', type: 'Full-time', skills: ['Quantum Mechanics', 'Qiskit', 'Python', 'Linear Algebra'], salary: '20-40 LPA', desc: 'Develop algorithms for quantum error correction and optimize circuit depth for NISQ devices using Qiskit.' },
+  { title: 'Senior Materials Scientist', company: 'ISRO Satellite Center', location: 'Bangalore', type: 'Full-time', skills: ['Materials Science', 'MATLAB', 'Thermal Analysis', 'Nanotech'], salary: '18-35 LPA', desc: 'Characterize aerospace-grade composites, run thermal and stress simulations, and advise on material selection for satellite structures.' },
 ];
 
 export default function Jobs() {
@@ -12,7 +29,7 @@ export default function Jobs() {
   return (
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Job Opportunities</h1>
-      <p className="text-slate-500 mb-8">LinkedIn-style feed of verified industry openings.</p>
+      <p className="text-slate-500 mb-8">LinkedIn-style feed of verified industry openings — SSC to PhD.</p>
       <div className="grid lg:grid-cols-12 gap-8">
         <div className="lg:col-span-5 space-y-4">
           {jobsData.map(j => (
