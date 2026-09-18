@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { TrendingUp, BookOpen, Users, Award, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { db } from '../lib/firebase';
+import { doc, onSnapshot, serverTimestamp } from 'firebase/firestore';
 
 export default function Dashboard() {
   const [gapData, setGapData] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [announcement, setAnnouncement] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -19,6 +21,8 @@ export default function Dashboard() {
       setLoading(false);
     }
     fetchData();
+    const unsub = onSnapshot(doc(db, 'globals', 'announcement'), (snap) => { if (snap.exists()) { setAnnouncement(snap.data().message); } else { setAnnouncement(''); } });
+    return () => unsub();
   }, []);
 
   if (loading) return (
@@ -37,6 +41,7 @@ export default function Dashboard() {
         </div>
       </section>
 
+      {announcement && <div className="max-w-6xl mx-auto px-6 lg:px-10 -mt-6"><div className="bg-blue-600 text-white rounded-2xl px-6 py-3 font-bold shadow-lg">Institutional Announcement: {announcement}</div></div>}
       <div className="max-w-6xl mx-auto px-6 lg:px-10 -mt-6">
         {/* Metric cards */}
         <div className="grid md:grid-cols-4 gap-5 mb-14">

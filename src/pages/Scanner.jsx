@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle, Zap } from 'lucide-react';
 import MatchPredictor from '../components/MatchPredictor';
+import { db } from '../lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { supabase } from '../lib/supabase';
 
 export default function Scanner() {
@@ -64,13 +66,19 @@ export default function Scanner() {
           <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace &quot;Responsible for backend&quot; with <strong>&quot;Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%&quot;</strong>.</p></div>
           <MatchPredictor skills={["React","TypeScript","Node","AWS"]} jobSkills={["React","System Design","Cloud Native","Embedded C"]} onApply={(s)=>{console.log("Applied with score",s);}} />
           <button onClick={async () => {
-            await supabase.from('applications').insert({
-              name: file ? file.name.replace(/\.(pdf|txt|jpg)/, '') : 'Candidate',
-              role: jd.split('—')[1]?.trim() || 'General',
-              score: 78,
-              status: 'Pending',
-              created_at: new Date().toISOString()
-            });
+            try {
+              await addDoc(collection(db, 'applications'), {
+                name: 'Mohd Zia Uddin',
+                branch: 'B.Tech ECE',
+                skills: 'VLSI, SystemVerilog, Python, SQLite',
+                project: 'JanSev AI Classification',
+                score: '82%',
+                status: 'Pending',
+                timestamp: serverTimestamp()
+              });
+            } catch (e) {
+              console.error('Firestore submit error', e);
+            }
           }} className="mt-6 w-full py-3 rounded-full bg-blue-600 text-white font-extrabold hover:bg-blue-700 transition">Submit Application to TPO</button>
         </div>
       )}

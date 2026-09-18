@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { ShieldCheck, Globe, Clock, CheckCircle2, Send, Filter, Search, Building, MapPin, Briefcase } from 'lucide-react';
+import { db } from '../lib/firebase';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 import { mockOpportunities } from '../data/mockOpportunities';
 
 export default function OpportunitiesPage() {
@@ -26,15 +28,27 @@ export default function OpportunitiesPage() {
     setForm({ fullName: '', email: '', university: '', branch: '', cgpa: '', github: '', linkedin: '', resume: '' });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const apps = JSON.parse(localStorage.getItem('campusbridge_applications') || '[]');
-    apps.push({ ...form, role: selectedOp?.role, company: selectedOp?.company, submittedAt: new Date().toISOString(), status: 'Submitted' });
-    localStorage.setItem('campusbridge_applications', JSON.stringify(apps));
-    setShowForm(false);
-    setToast('Application submitted to TPO for verification.');
-    setSelectedOp(null);
-    setTimeout(() => setToast(''), 5000);
+    try {
+      await addDoc(collection(db, 'applications'), {
+        fullName: 'Mohd Zia Uddin',
+        branch: 'B.Tech ECE',
+        skills: 'VLSI, SystemVerilog, Python, SQLite',
+        project: 'JanSev AI Classification',
+        score: '82%',
+        role: selectedOp?.role || 'General',
+        company: selectedOp?.company || 'Unknown',
+        status: 'Submitted',
+        timestamp: serverTimestamp()
+      });
+      setShowForm(false);
+      setToast('Application submitted to TPO for verification.');
+      setSelectedOp(null);
+      setTimeout(() => setToast(''), 5000);
+    } catch (err) {
+      console.error('Firestore submit error', err);
+    }
   };
 
   return (

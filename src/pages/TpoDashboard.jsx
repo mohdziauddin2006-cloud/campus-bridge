@@ -1,60 +1,52 @@
 import { useState, useEffect } from 'react';
 import { ShieldCheck, Send, XCircle } from 'lucide-react';
-import { supabase } from '../lib/supabase';
+import { db } from '../lib/firebase';
+import { doc, setDoc, addDoc, collection, onSnapshot, serverTimestamp, deleteDoc, updateDoc } from 'firebase/firestore';
 
 export default function TpoDashboard() {
   const [filterDept, setFilterDept] = useState('All');
   const [pendingApps, setPendingApps] = useState([]);
-  const [announcements, setAnnouncements] = useState([]);
   const [announcementText, setAnnouncementText] = useState('');
 
   useEffect(() => {
-  const auth = localStorage.getItem("tpo_auth");
-    loadPending();
-    fetchAnnouncements();
+    const auth = localStorage.getItem('tpo_auth');
+    if (auth !== 'true') return;
+
+    const unsub = onSnapshot(collection(db, 'applications'), (snap) => {
+      const apps = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      setPendingApps(apps);
+    });
+
+    return () => unsub();
   }, []);
 
-  const loadPending = () => {
-    const apps = JSON.parse(localStorage.getItem('campusbridge_applications') || '[]');
-    setPendingApps(apps);
-  };
-
-  const handleReject = (index) => {
-    const updated = pendingApps.filter((_, i) => i !== index);
-    localStorage.setItem('campusbridge_applications', JSON.stringify(updated));
-    setPendingApps(updated);
-  };
-
-  const handleVerifyAndDispatch = (index) => {
-    const updated = pendingApps.map((app, i) => {
-      if (i === index) {
-        return { ...app, status: 'Dispatched to Recruiter' };
-      }
-      return app;
-    });
-    localStorage.setItem('campusbridge_applications', JSON.stringify(updated));
-    setPendingApps(updated);
-    const app = pendingApps[index];
-    const companyUrl = app?.company ? `https://careers.${app.company.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '')}.com/` : '#';
-    alert(`Dispatched: ${app?.fullName || 'Candidate'} to ${app?.company || 'Recruiter'}. Career URL: ${companyUrl}`);
-  };
-
-  async function fetchAnnouncements() {
+  const handleReject = async (id) => {
     try {
-      const { data } = await supabase.from('announcements').select('*').order('created_at', { ascending: false });
-      if (data) setAnnouncements(data);
-    } catch {
-      setAnnouncements([]);
+      await deleteDoc(doc(db, 'applications', id));
+    } catch (e) {
+      console.error('Delete error', e);
     }
-  }
+  };
+
+  const handleVerifyAndDispatch = async (id) => {
+    const app = pendingApps.find(a => a.id === id);
+    if (!app) return;
+    try {
+      await updateDoc(doc(db, 'applications', id), { status: 'Dispatched to Recruiter' });
+      const companyUrl = app.company ? `https://careers.${app.company.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '')}.com/` : '#';
+      alert(`Dispatched: ${app.fullName || 'Candidate'} to ${app.company || 'Recruiter'}. Career URL: ${companyUrl}`);
+    } catch (e) {
+      console.error('Update error', e);
+    }
+  };
 
   const broadcast = async () => {
     if (!announcementText.trim()) return;
     try {
-      await supabase.from('announcements').insert({ message: announcementText });
+      await setDoc(doc(db, 'globals', 'announcement'), { message: announcementText, timestamp: serverTimestamp() });
       setAnnouncementText('');
-      fetchAnnouncements();
-    } catch {
+    } catch (e) {
+      console.error('Broadcast error', e);
       setAnnouncementText('');
     }
   };
@@ -71,7 +63,6 @@ export default function TpoDashboard() {
         </select>
       </div>
 
-      {/* Pending Applications Queue */}
       <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-slate-900 shadow-sm mb-10">
         <div className="flex items-center gap-3 mb-6">
           <ShieldCheck size={28} className="text-amber-600" />
@@ -92,8 +83,8 @@ export default function TpoDashboard() {
               </tr>
             </thead>
             <tbody>
-              {pendingApps.map((app, idx) => (
-                <tr key={idx} className="border-b border-slate-300 hover:bg-white/5">
+              {pendingApps.map((app) => (
+                <tr key={app.id} className="border-b border-slate-300 hover:bg-white/5">
                   <td className="px-3 py-3 font-bold">{app.fullName || 'Unknown'}</td>
                   <td className="px-3 py-3 text-slate-600">
                     {app.university || '—'} · {app.branch || '—'} · CGPA {app.cgpa || '—'}
@@ -105,8 +96,8 @@ export default function TpoDashboard() {
                     </span>
                   </td>
                   <td className="px-3 py-3 flex gap-2">
-                    <button onClick={() => handleReject(idx)} className="px-2 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold border border-rose-500/30 hover:bg-rose-500/30 flex items-center gap-1"><XCircle size={10}/> Reject</button>
-                    <button onClick={() => handleVerifyAndDispatch(idx)} className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold border border-emerald-500/30 hover:bg-emerald-500/30 flex items-center gap-1"><Send size={10}/> Verify &amp; Send</button>
+                    <button onClick={() => handleReject(app.id)} className="px-2 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold border border-rose-500/30 hover:bg-rose-500/30 flex items-center gap-1"><XCircle size={10}/> Reject</button>
+                    <button onClick={() => handleVerifyAndDispatch(app.id)} className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold border border-emerald-500/30 hover:bg-emerald-500/30 flex items-center gap-1"><Send size={10}/> Verify & Send</button>
                   </td>
                 </tr>
               ))}
@@ -116,7 +107,6 @@ export default function TpoDashboard() {
         )}
       </div>
 
-      {/* Announcement */}
       <div className="mb-10">
         <h3 className="font-extrabold text-lg mb-3">TPO Announcement Broadcast</h3>
         <div className="flex gap-3">
