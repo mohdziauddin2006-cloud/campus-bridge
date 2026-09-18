@@ -68,3 +68,40 @@ INSERT INTO skills (name, level, status) VALUES
 ('Local AI Model Deployment', 75, 'Growing'),
 ('System on Chip (SoC) Architecture', 60, 'Developing')
 ON CONFLICT DO NOTHING;
+-- Auth-related tables (idempotent, safe for publishable-key only insert/update)
+CREATE TABLE IF NOT EXISTS profiles (
+  id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  full_name TEXT,
+  role TEXT CHECK (role IN ('Student','TPO')),
+  branch TEXT,
+  skills TEXT[] DEFAULT '{}',
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_profiles_role ON profiles(role);
+
+CREATE TABLE IF NOT EXISTS opportunities (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  company TEXT NOT NULL,
+  type TEXT CHECK (type IN ('job','internship')),
+  location TEXT,
+  stipend_salary TEXT,
+  deadline TIMESTAMP,
+  required_skills TEXT[] DEFAULT '{}',
+  created_at TIMESTAMP DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_opportunities_type ON opportunities(type);
+CREATE INDEX IF NOT EXISTS idx_opportunities_deadline ON opportunities(deadline);
+
+CREATE TABLE IF NOT EXISTS tpo_queries (
+  id SERIAL PRIMARY KEY,
+  student_name TEXT,
+  subject TEXT,
+  question TEXT,
+  reply TEXT DEFAULT '',
+  status TEXT DEFAULT 'Pending' CHECK (status IN ('Pending','Resolved')),
+  created_at TIMESTAMP DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_tpo_queries_status ON tpo_queries(status);

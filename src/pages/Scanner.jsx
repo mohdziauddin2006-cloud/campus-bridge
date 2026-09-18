@@ -6,7 +6,8 @@ export default function Scanner() {
   const [file, setFile] = useState(null);
   const [scanning, setScanning] = useState(false);
   const [done, setDone] = useState(false);
-  const [jd, setJd] = useState('Senior Full-Stack Engineer — React, TypeScript, AWS, System Design');
+  const [jd, setJd] = useState('');
+  const [matchScore, setMatchScore] = useState(null);
 
   useEffect(() => {
     async function fetchKeywords() {

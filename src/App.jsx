@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
+import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
 import Scanner from './pages/Scanner';
 import Academy from './pages/Academy';
@@ -12,12 +14,13 @@ export default function App() {
     <BrowserRouter>
       <Navbar />
       <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/scanner" element={<Scanner />} />
-        <Route path="/academy" element={<Academy />} />
+        <Route path="/auth" element={<Auth onAuth={() => window.location.reload()} />} />
+        <Route path="/" element={<ProtectedRoute role="Student"><Dashboard /></ProtectedRoute>} />
+        <Route path="/scanner" element={<ProtectedRoute role="Student"><Scanner /></ProtectedRoute>} />
+        <Route path="/academy" element={<ProtectedRoute role="Student"><Academy /></ProtectedRoute>} />
         <Route path="/tpo-login" element={<TpoLogin />} />
-        <Route path="/tpo-dashboard" element={<TpoDashboard />} />
-        <Route path="/readiness" element={<Readiness />} />
+        <Route path="/tpo-dashboard" element={<ProtectedRoute role="TPO"><TpoDashboard /></ProtectedRoute>} />
+        <Route path="/readiness" element={<ProtectedRoute role="Student"><Readiness /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   );

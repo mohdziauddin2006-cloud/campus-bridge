@@ -39,12 +39,6 @@ export default function TpoDashboard() {
     fetchAnnouncements();
   };
 
-  const gaps = [
-    { dept: 'CSE', score: 82, missing: 'Kubernetes, GraphQL', readiness: 'High' },
-    { dept: 'ECE', score: 68, missing: 'Microservices, AWS Arch', readiness: 'Medium' },
-    { dept: 'MECH', score: 54, missing: 'Python, Data Analysis', readiness: 'Low' },
-    { dept: 'CIVIL', score: 47, missing: 'Cloud Fundamentals', readiness: 'Critical' },
-  ];
 
   const downloadReport = () => {
     const text = `AITS NAAC Criterion 1 & 2 Report — Batch 2026\n\nDepartment Readiness:\n` + gaps.map(g=>`${g.dept}: ${g.score}% · ${g.missing}`).join('\n') + `\n\nInstitutional Skill Gaps — localStorage key: institutionalSkillGaps`;

@@ -1,0 +1,116 @@
+{
+  ".claude/settings.json": {
+    "mtime": 1789559154.8738108,
+    "seen": 1789702158.4267876,
+    "ast_hash": "3ac995fbf93552a991ecab9b63f776aa",
+    "semantic_hash": ""
+  },
+  ".claude/settings.local.json": {
+    "mtime": 1789624573.0852926,
+    "seen": 1789702158.4267917,
+    "ast_hash": "66bf3e4b73610e6517544821c58ee43d",
+    "semantic_hash": ""
+  },
+  "package.json": {
+    "mtime": 1789664978.7678604,
+    "seen": 1789702158.4267936,
+    "ast_hash": "0c3d5f0821bc39ccf801b2d72538042d",
+    "semantic_hash": ""
+  },
+  "src/App.jsx": {
+    "mtime": 1789665045.0203815,
+    "seen": 1789702158.4267945,
+    "ast_hash": "82dac0744d91659897bedff44d3b4383",
+    "semantic_hash": ""
+  },
+  "src/components/Navbar.jsx": {
+    "mtime": 1789665049.0177672,
+    "seen": 1789702158.4267955,
+    "ast_hash": "6343192605c186669b7d0b46fb158ad3",
+    "semantic_hash": ""
+  },
+  "src/context/AuthContext.jsx": {
+    "mtime": 1789702123.4879546,
+    "seen": 1789702158.4267962,
+    "ast_hash": "60414cac47a605cd48c389e28b7741ad",
+    "semantic_hash": ""
+  },
+  "src/lib/supabase.js": {
+    "mtime": 1789664989.9541295,
+    "seen": 1789702158.4267972,
+    "ast_hash": "5ee9809a2dd5ddfca367a1a7727bc242",
+    "semantic_hash": ""
+  },
+  "src/main.jsx": {
+    "mtime": 1789553252.660057,
+    "seen": 1789702158.4267979,
+    "ast_hash": "253d4db42a0b217629b29497cec5becb",
+    "semantic_hash": ""
+  },
+  "src/pages/Academy.jsx": {
+    "mtime": 1789698971.4085941,
+    "seen": 1789702158.4267986,
+    "ast_hash": "d9fb49f6b14a20409ba9810bd3c9548b",
+    "semantic_hash": ""
+  },
+  "src/pages/Dashboard.jsx": {
+    "mtime": 1789699217.352179,
+    "seen": 1789702158.4267995,
+    "ast_hash": "71b4e2d646e23af2ac3ffe8a17514768",
+    "semantic_hash": ""
+  },
+  "src/pages/Readiness.jsx": {
+    "mtime": 1789699184.016183,
+    "seen": 1789702158.4268,
+    "ast_hash": "d9d8470c0d2ec0434c13848766eb81ca",
+    "semantic_hash": ""
+  },
+  "src/pages/Scanner.jsx": {
+    "mtime": 1789701431.3032212,
+    "seen": 1789702158.4268012,
+    "ast_hash": "c9f2ac08438b4a83db22336c7bcd12e9",
+    "semantic_hash": ""
+  },
+  "src/pages/TpoDashboard.jsx": {
+    "mtime": 1789665085.389428,
+    "seen": 1789702158.426802,
+    "ast_hash": "23c283e2f9f812727ec9c1af4be3e514",
+    "semantic_hash": ""
+  },
+  "src/pages/TpoLogin.jsx": {
+    "mtime": 1789663449.83555,
+    "seen": 1789702158.4268026,
+    "ast_hash": "f13f3068ec8382aabca494bb7027d7bc",
+    "semantic_hash": ""
+  },
+  "vite.config.js": {
+    "mtime": 1789553604.482706,
+    "seen": 1789702158.4268034,
+    "ast_hash": "b77fff5f21462f249670cd4c3e0942e0",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1789559154.869248,
+    "seen": 1789702158.4268043,
+    "ast_hash": "74d4e0bb32c68259086c17aa8ea379fd",
+    "semantic_hash": ""
+  },
+  "cookies.txt": {
+    "mtime": 1789697904.919224,
+    "seen": 1789702158.4268048,
+    "ast_hash": "fc31b34eb1f36e5ff23be7f4621aa04e",
+    "semantic_hash": ""
+  },
+  "index.html": {
+    "mtime": 1789568041.6577723,
+    "seen": 1789702158.4268055,
+    "ast_hash": "ad13d7125796c48722a74f6f942b1595",
+    "semantic_hash": ""
+  },
+  "public/404.html": {
+    "mtime": 1789662904.4364805,
+    "seen": 1789702158.426806,
+    "ast_hash": "c62bedacb7397819a686a9c79f692936",
+    "semantic_hash": ""
+  }
+}
