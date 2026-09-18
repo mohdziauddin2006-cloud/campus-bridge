@@ -39,7 +39,7 @@ export default function Dashboard() {
   );
 
   return (
-    <main className="bg-slate-50 min-h-screen pb-20">
+    <main className="bg-slate-50 min-h-screen pb-20 flex flex-col gap-6">
       {/* Hero header */}
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-slate-950 text-white px-8 lg:px-14 pt-14 pb-10">
         <div className="max-w-6xl mx-auto">

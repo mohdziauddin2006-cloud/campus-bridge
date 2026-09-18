@@ -23,6 +23,8 @@ export default function Navbar() {
         <Link to="/scanner" className="hover:text-blue-600 transition whitespace-nowrap">ATS Scanner</Link>
         <Link to="/academy" className="hover:text-blue-600 transition whitespace-nowrap">Video Academy</Link>
         <Link to="/readiness" className="hover:text-blue-600 transition whitespace-nowrap">Industry Readiness</Link>
+        <Link to="/jobs" className="hover:text-blue-600 transition whitespace-nowrap">Jobs</Link>
+        <Link to="/internships" className="hover:text-blue-600 transition whitespace-nowrap">Internships</Link>
         <Link to="/tpo-dashboard" className="hover:text-blue-600 transition whitespace-nowrap">TPO Portal</Link>
       </div>
 
@@ -34,6 +36,10 @@ export default function Navbar() {
           <Link to="/scanner" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">ATS Scanner</Link>
           <Link to="/academy" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Video Academy</Link>
           <Link to="/readiness" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Industry Readiness</Link>
+          <Link to="/jobs" className="hover:text-blue-600 transition whitespace-nowrap">Jobs</Link>
+        <Link to="/internships" className="hover:text-blue-600 transition whitespace-nowrap">Internships</Link>
+        <Link to="/jobs" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Jobs</Link>
+          <Link to="/internships" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Internships</Link>
           <Link to="/tpo-dashboard" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">TPO Portal</Link>
         </div>
       )}

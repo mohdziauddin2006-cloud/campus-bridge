@@ -17,11 +17,11 @@ export default function Readiness() {
 
   // Questions dynamic by degree (default engineering-heavy + soft skills)
   const questions = [
-    { id: 'q1', label: 'How confident are you in system-level debugging (memory, concurrency, logs)?', opts: ['Not confident', 'Somewhat', 'Confident', 'Very confident'], weights: [10, 25, 60, 85] },
-    { id: 'q2', label: 'Rate your comfort with data-structure & algorithm complexity analysis.', opts: ['Beginner', 'Intermediate', 'Advanced', 'Expert'], weights: [10, 30, 65, 90] },
-    { id: 'q3', label: 'Soft skill self-check: structured communication in cross-functional teams.', opts: ['Needs practice', 'Average', 'Strong', 'Excellent'], weights: [15, 35, 70, 95] },
-    { id: 'q4', label: 'Aptitude: interpreting ambiguous requirements and deriving specs.', opts: ['Struggle', 'Manageable', 'Good', 'Natural'], weights: [10, 30, 65, 90] },
-    { id: 'q5', label: 'Technical depth: can you design and defend a small architecture?', opts: ['No', 'Some ideas', 'Yes, with docs', 'Yes, with trade-off analysis'], weights: [15, 40, 75, 95] },
+    { id: 'q1', label: 'Which register in the 8086 microprocessor holds the base address of the extra segment?', opts: ['AX', 'BX', 'CX', 'ES (Extra Segment)'], weights: [5, 15, 50, 90] },
+    { id: 'q2', label: 'In SystemVerilog, which construct is used for blocking assignments?', opts: ['<= (non-blocking)', '= (blocking)', '==', '||'], weights: [5, 15, 50, 90] },
+    { id: 'q3', label: 'What does the 8051 use to store the return address during an interrupt?', opts: ['The Program Counter (PC)', 'The Stack (SP register)', 'Register R0', 'The Accumulator'], weights: [5, 15, 50, 90] },
+    { id: 'q4', label: 'Which Python library is standard for scientific computing and array operations?', opts: ['requests', 'NumPy', 'pandas', 'flask'], weights: [5, 15, 50, 90] },
+    { id: 'q5', label: 'In digital logic, what does a full adder compute?', opts: ['Two-bit XOR', 'Sum of two bits plus carry-in', 'Only carry-out', 'Only sum bit'], weights: [5, 15, 50, 90] },
   ];
 
   useEffect(() => {
@@ -113,13 +113,13 @@ export default function Readiness() {
         <p className="text-slate-300 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
         <div className="grid md:grid-cols-2 gap-4">
           <Link to="/academy" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 shadow-sm p-5 transition backdrop-blur-sm">
-            <h4 className="font-extrabold mb-1 text-white">Programming Strengthening</h4>
-            <p className="text-sm text-slate-300 mb-2">Systems programming, performance optimization</p>
+            <h4 className="font-extrabold mb-1 text-slate-900">Programming Strengthening</h4>
+            <p className="text-sm text-slate-600 mb-2">Systems programming, performance optimization</p>
             <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-blue-200">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
           </Link>
           <Link to="/academy" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 shadow-sm p-5 transition backdrop-blur-sm">
-            <h4 className="font-extrabold mb-1 text-white">VLSI &amp; Embedded Systems</h4>
-            <p className="text-sm text-slate-300 mb-2">Verilog, FPGA design, microcontroller architecture</p>
+            <h4 className="font-extrabold mb-1 text-slate-900">VLSI &amp; Embedded Systems</h4>
+            <p className="text-sm text-slate-600 mb-2">Verilog, FPGA design, microcontroller architecture</p>
             <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-blue-200">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
           </Link>
         </div>

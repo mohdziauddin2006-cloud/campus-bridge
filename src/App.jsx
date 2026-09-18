@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import Jobs from './pages/Jobs';
+import Internships from './pages/Internships';
 import OpportunitiesPage from './pages/Opportunities';
 import Auth from './pages/Auth';
 import Dashboard from './pages/Dashboard';
@@ -22,6 +24,8 @@ export default function App() {
         <Route path="/scanner" element={<Scanner />} />
         <Route path="/academy" element={<Academy />} />
         <Route path="/tpo-login" element={<TpoLogin />} />
+        <Route path="/jobs" element={<Jobs />} />
+        <Route path="/internships" element={<Internships />} />
         <Route path="/opportunities" element={<OpportunitiesPage />} />
         <Route path="/tpo-dashboard" element={<ProtectedRoute><TpoDashboard /></ProtectedRoute>} />
         <Route path="/applications" element={<Applications />} />

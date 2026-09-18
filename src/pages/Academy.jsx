@@ -22,7 +22,7 @@ export default function Academy() {
       } catch (e) { console.error('supabase fetch', e); }
       // Expanded seed overlay (new categories + working public IDs)
       const expanded = [
-        { youtube_id: 'hZnNUW1I9pA', title: 'Financial Statement Analysis', description: 'Balance sheet, cash flow, ratios', category: 'Finance & Accounting' },
+        { youtube_id: 'jBzwzrDvZ18', title: 'Financial Statement Analysis', description: 'Balance sheet, cash flow, ratios', category: 'Finance & Accounting' },
         { youtube_id: 'JwHK0TShM3w', title: 'Accounting Principles for Startups', description: 'GAAP / IFRS basics for founders', category: 'Finance & Accounting' },
         { youtube_id: 'D2hTXYs2yZs', title: 'SEO Strategy 2026', description: 'Keyword mapping, backlinks, technical SEO', category: 'Marketing & SEO' },
         { youtube_id: 'OkyNq9XHLMU', title: 'Content Marketing & Funnel Design', description: 'Conversion-focused content systems', category: 'Marketing & SEO' },
@@ -44,7 +44,27 @@ export default function Academy() {
   if (loading) return (
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <div className="flex items-center justify-center h-96"><div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" /></div>
-    </main>
+    
+      {/* Govt & Open Resources */}
+      <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 text-white shadow-2xl mb-10">
+        <h2 className="text-xl font-extrabold mb-2">Govt &amp; Open Resources</h2>
+        <p className="text-slate-300 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
+        <div className="grid sm:grid-cols-3 gap-4">
+          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+            <h4 className="font-extrabold mb-1">NPTEL: VLSI Design</h4>
+            <p className="text-xs text-slate-300">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
+          </a>
+          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+            <h4 className="font-extrabold mb-1">SWAYAM: Embedded C</h4>
+            <p className="text-xs text-slate-300">Government-certified embedded systems & microcontroller course.</p>
+          </a>
+          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+            <h4 className="font-extrabold mb-1">AICTE Technical Books</h4>
+            <p className="text-xs text-slate-300">Recommended open-source PDF downloads for engineering core.</p>
+          </a>
+        </div>
+      </div>
+</main>
   );
 
   const filtered = filterCat === 'All' ? videos : videos.filter(v => v.category === filterCat);
@@ -89,6 +109,26 @@ export default function Academy() {
           </div>
         </div>
       </div>
-    </main>
+    
+      {/* Govt & Open Resources */}
+      <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 text-white shadow-2xl mb-10">
+        <h2 className="text-xl font-extrabold mb-2">Govt &amp; Open Resources</h2>
+        <p className="text-slate-300 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
+        <div className="grid sm:grid-cols-3 gap-4">
+          <a href="https://nptel.ac.in/content/html" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+            <h4 className="font-extrabold mb-1">NPTEL: VLSI Design</h4>
+            <p className="text-xs text-slate-300">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
+          </a>
+          <a href="https://swayam.gov.in/" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+            <h4 className="font-extrabold mb-1">SWAYAM: Embedded C</h4>
+            <p className="text-xs text-slate-300">Government-certified embedded systems & microcontroller course.</p>
+          </a>
+          <a href="https://nptel.ac.in/content/pdf" target="_blank" rel="noopener noreferrer" className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm">
+            <h4 className="font-extrabold mb-1">AICTE Technical Books</h4>
+            <p className="text-xs text-slate-300">Recommended open-source PDF downloads for engineering core.</p>
+          </a>
+        </div>
+      </div>
+</main>
   );
 }
