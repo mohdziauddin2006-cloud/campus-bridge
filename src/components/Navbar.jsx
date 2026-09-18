@@ -30,13 +30,13 @@ export default function Navbar() {
 
       {/* Mobile drawer */}
       {open && (
-        <div className="md:hidden fixed top-16 left-0 right-0 bottom-0 bg-white/98 backdrop-blur border-b border-slate-200 shadow-xl px-6 py-4 flex flex-col gap-3 z-50 overflow-y-auto">
-          <Link to="/" onClick={() => setOpen(false)} className="text-sm font-semibold text-slate-700 hover:text-blue-600 py-2">Student Hub</Link>
-          <Link to="/scanner" onClick={() => setOpen(false)} className="text-sm font-semibold text-slate-700 hover:text-blue-600 py-2">ATS Scanner</Link>
-          <Link to="/academy" onClick={() => setOpen(false)} className="text-sm font-semibold text-slate-700 hover:text-blue-600 py-2">Video Academy</Link>
-          <Link to="/readiness" onClick={() => setOpen(false)} className="text-sm font-semibold text-slate-700 hover:text-blue-600 py-2">Industry Readiness</Link>
-          <Link to="/tpo-dashboard" onClick={() => setOpen(false)} className="text-sm font-semibold text-slate-700 hover:text-blue-600 py-2">TPO Portal</Link>
-          <Link to="/tpo-login" onClick={() => setOpen(false)} className="text-sm font-bold text-white bg-blue-600 px-5 py-2.5 rounded-full text-center mt-2">TPO Officer Sign In</Link>
+        <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b border-slate-200 shadow-xl z-50 flex flex-col p-4 space-y-4">
+          <Link to="/" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Student Hub</Link>
+          <Link to="/scanner" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">ATS Scanner</Link>
+          <Link to="/academy" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Video Academy</Link>
+          <Link to="/readiness" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Industry Readiness</Link>
+          <Link to="/tpo-dashboard" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">TPO Portal</Link>
+          <Link to="/tpo-login" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium bg-blue-600 text-white font-bold px-5 py-2.5 rounded-full text-center mt-2">TPO Officer Sign In</Link>
         </div>
       )}
     </nav>

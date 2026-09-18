@@ -9,6 +9,7 @@ export default function TpoDashboard() {
   const [announcementText, setAnnouncementText] = useState('');
 
   useEffect(() => {
+  const auth = localStorage.getItem("tpo_auth");
     loadPending();
     fetchAnnouncements();
   }, []);
@@ -71,41 +72,41 @@ export default function TpoDashboard() {
       </div>
 
       {/* Pending Applications Queue */}
-      <div className="bg-gradient-to-r from-blue-950 to-indigo-900 rounded-3xl p-8 text-white shadow-2xl mb-10">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-slate-900 shadow-sm mb-10">
         <div className="flex items-center gap-3 mb-6">
-          <ShieldCheck size={28} className="text-amber-300" />
+          <ShieldCheck size={28} className="text-amber-600" />
           <h3 className="text-xl font-extrabold">Pending Applications Queue</h3>
         </div>
         {pendingApps.length === 0 ? (
-          <div className="text-blue-200 text-sm">No pending applications.</div>
+          <div className="text-slate-600 text-sm">No pending applications.</div>
         ) : (
         <div className="overflow-x-auto w-full">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-blue-800">
-                <th className="text-left px-3 py-3 font-medium text-blue-200">Student</th>
-                <th className="text-left px-3 py-3 font-medium text-blue-200">College / Branch / CGPA</th>
-                <th className="text-left px-3 py-3 font-medium text-blue-200">Target Company / Role</th>
-                <th className="text-left px-3 py-3 font-medium text-blue-200">Status</th>
-                <th className="text-left px-3 py-3 font-medium text-blue-200">Actions</th>
+              <tr className="border-b border-slate-300">
+                <th className="text-left px-3 py-3 font-medium text-slate-600">Student</th>
+                <th className="text-left px-3 py-3 font-medium text-slate-600">College / Branch / CGPA</th>
+                <th className="text-left px-3 py-3 font-medium text-slate-600">Target Company / Role</th>
+                <th className="text-left px-3 py-3 font-medium text-slate-600">Status</th>
+                <th className="text-left px-3 py-3 font-medium text-slate-600">Actions</th>
               </tr>
             </thead>
             <tbody>
               {pendingApps.map((app, idx) => (
-                <tr key={idx} className="border-b border-blue-800 hover:bg-white/5">
+                <tr key={idx} className="border-b border-slate-300 hover:bg-white/5">
                   <td className="px-3 py-3 font-bold">{app.fullName || 'Unknown'}</td>
-                  <td className="px-3 py-3 text-blue-200">
+                  <td className="px-3 py-3 text-slate-600">
                     {app.university || '—'} · {app.branch || '—'} · CGPA {app.cgpa || '—'}
                   </td>
                   <td className="px-3 py-3">{app.company || '—'} / {app.role || '—'}</td>
                   <td className="px-3 py-3">
-                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${app.status === 'Dispatched to Recruiter' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>
+                    <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${app.status === 'Dispatched to Recruiter' ? 'bg-emerald-50 text-emerald-600' : 'bg-amber-500/20 text-amber-600'}`}>
                       {app.status || 'Submitted'}
                     </span>
                   </td>
                   <td className="px-3 py-3 flex gap-2">
-                    <button onClick={() => handleReject(idx)} className="px-2 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold border border-rose-500/30 hover:bg-rose-500/30 flex items-center gap-1"><XCircle size={10}/> Reject</button>
-                    <button onClick={() => handleVerifyAndDispatch(idx)} className="px-2 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold border border-emerald-500/30 hover:bg-emerald-500/30 flex items-center gap-1"><Send size={10}/> Verify &amp; Send</button>
+                    <button onClick={() => handleReject(idx)} className="px-2 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-bold border border-rose-500/30 hover:bg-rose-500/30 flex items-center gap-1"><XCircle size={10}/> Reject</button>
+                    <button onClick={() => handleVerifyAndDispatch(idx)} className="px-2 py-1 rounded-full bg-emerald-50 text-emerald-600 text-xs font-bold border border-emerald-500/30 hover:bg-emerald-500/30 flex items-center gap-1"><Send size={10}/> Verify &amp; Send</button>
                   </td>
                 </tr>
               ))}

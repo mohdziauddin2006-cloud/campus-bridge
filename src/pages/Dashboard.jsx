@@ -33,7 +33,7 @@ export default function Dashboard() {
       <section className="bg-gradient-to-br from-blue-950 via-blue-900 to-slate-950 text-white px-8 lg:px-14 pt-14 pb-10">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight mb-3">Academia-Industry Collaboration</h1>
-          <p className="text-blue-200 text-lg md:text-xl font-medium">CampusBridge Placement Intelligence · Skill Readiness &amp; Institutional Gap Analytics · National Gateway</p>
+          <p className="text-slate-600 text-lg md:text-xl font-medium">CampusBridge Placement Intelligence · Skill Readiness &amp; Institutional Gap Analytics · National Gateway</p>
         </div>
       </section>
 
@@ -75,10 +75,10 @@ export default function Dashboard() {
         </div>
 
         {/* Learning paths */}
-        <div className="bg-gradient-to-br from-blue-950 to-slate-900 rounded-3xl p-8 md:p-10 text-white shadow-2xl shadow-blue-950/20 mb-16">
-          <div className="flex items-end justify-between mb-6"><div><h2 className="text-2xl font-extrabold mb-1">Matched Learning Paths</h2><p className="text-blue-100 text-sm">Curated academy modules linked to your skill gap profile</p></div><Link to="/academy" className="inline-flex items-center gap-1 text-sm font-extrabold bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-full transition">Browse Academy <ArrowRight size={16}/></Link></div>
+        <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 md:p-10 mb-16">
+          <div className="flex items-end justify-between mb-6"><div><h2 className="text-2xl font-extrabold mb-1">Matched Learning Paths</h2><p className="text-slate-600 text-sm">Curated academy modules linked to your skill gap profile</p></div><Link to="/academy" className="inline-flex items-center gap-1 text-sm font-extrabold bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-full transition">Browse Academy <ArrowRight size={16}/></Link></div>
           <div className="grid md:grid-cols-4 gap-4">
-            {[{t:'System Design',d:'Advanced architecture &amp; scaling patterns',id:'m8Icp_Cid5o'},{t:'React &amp; TS',d:'Modern component patterns',id:'bMknfKXIFA8'},{t:'Cloud / AWS',d:'Docker, Kubernetes, infra',id:'k1RI5locZE4'},{t:'Core DSA',d:'Algorithmic engineering',id:'8hly31xKli0'}].map(p => <Link key={p.t} to="/academy" className="bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-5 transition backdrop-blur"><h3 className="font-extrabold mb-1 text-slate-100">{p.t}</h3><p className="text-sm text-slate-300">{p.d}</p><span className="inline-block mt-3 text-xs font-bold bg-blue-500/20 px-2 py-0.5 rounded-full text-slate-200">Embedded</span></Link>)}
+            {[{t:'System Design',d:'Advanced architecture &amp; scaling patterns',id:'m8Icp_Cid5o'},{t:'React &amp; TS',d:'Modern component patterns',id:'bMknfKXIFA8'},{t:'Cloud / AWS',d:'Docker, Kubernetes, infra',id:'k1RI5locZE4'},{t:'Core DSA',d:'Algorithmic engineering',id:'8hly31xKli0'}].map(p => <Link key={p.t} to="/academy" className="bg-white border border-slate-200 rounded-2xl p-5 transition shadow-sm"><h3 className="font-extrabold mb-1 text-slate-900 font-bold">{p.t}</h3><p className="text-sm text-slate-600">{p.d}</p><span className="inline-block mt-3 text-xs font-bold bg-blue-50 px-2 py-0.5 rounded-full text-blue-700">Embedded</span></Link>)}
           </div>
         </div>
       </div>
