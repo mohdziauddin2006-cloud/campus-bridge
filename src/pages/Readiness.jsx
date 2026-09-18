@@ -54,19 +54,19 @@ export default function Readiness() {
         ))}
       </div>
 
-      <div className="bg-gradient-to-br from-blue-950 to-slate-900 rounded-3xl p-8 text-white shadow-2xl mb-10">
-        <h2 className="text-xl font-extrabold mb-4">Targeted Bridge Curriculum</h2>
-        <p className="text-blue-100 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
+      <div className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-3xl p-8 text-slate-900 shadow-2xl mb-10">
+        <h2 className="text-xl font-extrabold mb-4 text-slate-900">Targeted Bridge Curriculum</h2>
+        <p className="text-slate-600 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
         <div className="grid md:grid-cols-2 gap-4">
-          <Link to="/academy" className="block bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-5 transition backdrop-blur">
-            <h4 className="font-extrabold mb-1 text-slate-100">Programming Strengthening</h4>
-            <p className="text-sm text-blue-100 mb-2">Systems programming, performance optimization</p>
-            <span className="inline-flex items-center text-xs font-bold bg-blue-500/20 px-2 py-0.5 rounded-full text-blue-100">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
+          <Link to="/academy" className="block bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:shadow-md transition">
+            <h4 className="font-extrabold mb-1 text-slate-900">Programming Strengthening</h4>
+            <p className="text-sm text-slate-600 mb-2">Systems programming, performance optimization</p>
+            <span className="inline-flex items-center text-xs font-bold bg-blue-50 px-2 py-0.5 rounded-full text-blue-700">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
           </Link>
-          <Link to="/academy" className="block bg-white/10 hover:bg-white/15 border border-white/10 rounded-2xl p-5 transition backdrop-blur">
-            <h4 className="font-extrabold mb-1 text-slate-100">VLSI &amp; Embedded Systems</h4>
-            <p className="text-sm text-blue-100 mb-2">Verilog, FPGA design, microcontroller architecture</p>
-            <span className="inline-flex items-center text-xs font-bold bg-blue-500/20 px-2 py-0.5 rounded-full text-blue-100">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
+          <Link to="/academy" className="block bg-white rounded-2xl border border-slate-200 shadow-sm p-5 hover:shadow-md transition">
+            <h4 className="font-extrabold mb-1 text-slate-900">VLSI &amp; Embedded Systems</h4>
+            <p className="text-sm text-slate-600 mb-2">Verilog, FPGA design, microcontroller architecture</p>
+            <span className="inline-flex items-center text-xs font-bold bg-blue-50 px-2 py-0.5 rounded-full text-blue-700">Link to Academy <ArrowRight size={12} className="ml-1"/></span>
           </Link>
         </div>
       </div>
