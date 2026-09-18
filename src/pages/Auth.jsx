@@ -40,6 +40,16 @@ export default function Auth({ onAuth }) {
       const passwordLogin = isStudent ? pass : pass;
       if (!emailLogin || !passwordLogin) { setError('Fill both fields'); setLoading(false); return; }
 
+      if (!isStudent) {
+        // Mock TPO authentication
+        if (id.trim() === 'tpo@aits.ac.in' && pass === 'tpo123') {
+          await onAuth?.({ mode, email: 'tpo@aits.ac.in' });
+          setLoading(false); return;
+        } else {
+          setError('Incorrect TPO credentials'); setLoading(false); return;
+        }
+      }
+
       // Check approved students in localStorage for sign-in
       const approved = JSON.parse(localStorage.getItem('approvedStudents') || '[]');
       const match = approved.find(s => s.email === emailLogin || s.hallTicket === id.trim());
@@ -72,7 +82,7 @@ export default function Auth({ onAuth }) {
         {/* Sign In / Sign Up tabs */}
         <div className="flex gap-1 mb-6 bg-slate-100 rounded-xl p-1">
           <button onClick={() => setTab('signin')} className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${tab==='signin'?'bg-white text-blue-600 shadow-sm border border-slate-200':'text-slate-500 hover:text-slate-700'}`}>Sign In</button>
-          <button onClick={() => setTab('signup')} className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${tab==='signup'?'bg-white text-blue-600 shadow-sm border border-slate-200':'text-slate-500 hover:text-slate-700'}`}>Sign Up</button>
+          {isStudent && <button onClick={() => setTab('signup')} className={`flex-1 py-2 rounded-lg text-sm font-bold transition ${tab==='signup'?'bg-white text-blue-600 shadow-sm border border-slate-200':'text-slate-500 hover:text-slate-700'}`}>Sign Up</button>}
         </div>
 
         {tab === 'signup' ? (
