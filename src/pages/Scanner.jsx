@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Upload, Sparkles, CheckCircle, AlertCircle, ArrowRight } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 
 export default function Scanner() {
@@ -8,8 +8,15 @@ export default function Scanner() {
   const [done, setDone] = useState(false);
   const [jd, setJd] = useState('Senior Full-Stack Engineer — React, TypeScript, AWS, System Design');
 
-  const handleDrop = (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) setFile(f); };
+  useEffect(() => {
+    async function fetchKeywords() {
+      const { data } = await supabase.from('skills').select('name, status');
+      // live DB wiring only; results rendered from DB queries in future iterations.
+    }
+    fetchKeywords();
+  }, []);
 
+  const handleDrop = (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) setFile(f); };
   const startScan = () => { setScanning(true); setTimeout(() => { setScanning(false); setDone(true); }, 2200); };
 
   return (
@@ -17,31 +24,29 @@ export default function Scanner() {
       <h2 className="text-3xl font-extrabold text-slate-900 mb-2">ATS Resume Scanner</h2>
       <p className="text-slate-500 mb-8">Ingest your resume · compare against target role · get actionable match intelligence.</p>
 
-      {/* Upload zone */}
-      <div onDrop={handleDrop} onDragOver={(e)=>e.preventDefault()} className="bg-white rounded-3xl border-2 border-dashed border-blue-200 p-10 text-center shadow-sm hover:border-blue-400 transition mb-10">
+      <div onDrop={handleDrop} onDragOver={(e) => e.preventDefault()} className="bg-white rounded-3xl border-2 border-dashed border-blue-200 p-10 text-center shadow-sm hover:border-blue-400 transition mb-10">
         <Upload size={48} className="mx-auto text-blue-600 mb-3" />
-        <h3 className="font-extrabold text-xl mb-1">Drag & Drop Resume</h3>
+        <h3 className="font-extrabold text-xl mb-1">Drag &amp; Drop Resume</h3>
         <p className="text-sm text-slate-500 mb-4">PDF · DOCX · JPG · PNG · TXT</p>
-        <input type="file" accept=".pdf,.docx,.jpg,.png,.txt" onChange={e=>setFile(e.target.files?.[0]||null)} className="hidden" id="resumeFile" />
+        <input type="file" accept=".pdf,.docx,.jpg,.png,.txt" onChange={e => setFile(e.target.files?.[0] || null)} className="hidden" id="resumeFile" />
         <label htmlFor="resumeFile" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition cursor-pointer">Select File</label>
         {file && <div className="mt-4 text-sm text-slate-800 font-medium">{file.name}</div>}
       </div>
 
-      {/* JD target */}
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <label className="font-bold text-sm text-slate-700 mb-2 block">Target Role / Job Description</label>
-          <textarea rows={4} value={jd} onChange={e=>setJd(e.target.value)} className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
+          <textarea rows={4} value={jd} onChange={e => setJd(e.target.value)} className="w-full p-3 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20" />
         </div>
-        <div className="flex items-end"><button onClick={startScan} disabled={scanning||!file} className="w-full py-4 rounded-full bg-blue-600 text-white font-extrabold text-lg shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition disabled:opacity-50">{scanning ? 'Analyzing...' : 'Scan Your Resume For Free'}</button></div>
+        <div className="flex items-end"><button onClick={startScan} disabled={scanning || !file} className="w-full py-4 rounded-full bg-blue-600 text-white font-extrabold text-lg shadow-xl shadow-blue-600/20 hover:bg-blue-700 transition disabled:opacity-50">{scanning ? 'Analyzing...' : 'Scan Your Resume For Free'}</button></div>
       </div>
 
-      {/* Results */}
       {scanning && (
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm mb-6">
           <div className="flex items-center gap-2 text-sm text-slate-600"><span className="w-4 h-4 border-2 border-blue-600 border-t-transparent rounded-full animate-spin" /> Extracting text layers... <span className="text-xs text-slate-400">— Analyzing keywords</span></div>
         </div>
       )}
+
       {done && (
         <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 mb-10">
           <div className="flex items-center gap-3 mb-6"><Sparkles size={24} className="text-blue-600" /><h3 className="text-2xl font-extrabold">ATS Match Report</h3></div>
@@ -51,13 +56,13 @@ export default function Scanner() {
             <div className="bg-rose-50 rounded-2xl border border-rose-100 p-5"><h4 className="text-xs font-extrabold uppercase tracking-widest text-rose-600 mb-1">Critical Gaps</h4><div className="text-4xl font-extrabold text-rose-700">3</div><p className="text-xs text-slate-500 mt-1">Kubernetes / GraphQL / CI/CD</p></div>
           </div>
           <div className="grid md:grid-cols-2 gap-6">
-            <div><h4 className="font-bold mb-3">Matched Keywords</h4><div className="flex flex-wrap gap-2">{['React','TypeScript','Node.js','AWS','Git'].map(k=> <span key={k} className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">{k}</span>)} </div></div>
-            <div><h4 className="font-bold mb-3">Missing Keywords</h4><div className="flex flex-wrap gap-2">{['Kubernetes','GraphQL','Terraform','Microservices'].map(k=> <span key={k} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">{k}</span>)} </div></div>
+            <div><h4 className="font-bold mb-3">Matched Keywords</h4><div className="flex flex-wrap gap-2">{['React', 'TypeScript', 'Node.js', 'AWS', 'Git'].map(k => <span key={k} className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">{k}</span>)}</div></div>
+            <div><h4 className="font-bold mb-3">Missing Keywords</h4><div className="flex flex-wrap gap-2">{['Kubernetes', 'GraphQL', 'Terraform', 'Microservices'].map(k => <span key={k} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">{k}</span>)}</div></div>
           </div>
-          <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace "Responsible for backend" with <strong>"Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%"</strong>.</p></div>
+          <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace &quot;Responsible for backend&quot; with <strong>&quot;Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%&quot;</strong>.</p></div>
           <button onClick={async () => {
             await supabase.from('applications').insert({
-              name: file ? file.name.replace(/\.(pdf|txt|jpg)/,'') : 'Candidate',
+              name: file ? file.name.replace(/\.(pdf|txt|jpg)/, '') : 'Candidate',
               role: jd.split('—')[1]?.trim() || 'General',
               score: 78,
               status: 'Pending',
