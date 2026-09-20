@@ -151,6 +151,7 @@ export default function Readiness() {
   const [showBreakdown, setShowBreakdown] = useState(false);
   const [breakdown, setBreakdown] = useState({ bullets: [], roadmap: '' });
   const [aiQuestions, setAiQuestions] = useState([]);
+  const [isLoadingQuestions, setIsLoadingQuestions] = useState(false);
 
   const handleAnswer = (qid, idx) => {
     setQuizAnswers(a => ({ ...a, [qid]: idx }));
@@ -203,12 +204,17 @@ export default function Readiness() {
 
   // Adaptive selection: prioritize skill-tagged questions, fill from qualification
   const adaptiveSelect = async () => {
-    const d = DOMAIN_QUESTIONS[domainTrack];
-    if (d && d.length >= 5) return d.slice(0, 5);
+    setIsLoadingQuestions(true);
     try {
-      const q = await generateAssessmentQuestions(coreSkills || domainTrack || 'Engineering', domainTrack || 'VLSI', experience || 'Fresher');
-      if (q && q.length >= 5) { setAiQuestions(q); return q; }
-    } catch (e) {}
+      const d = DOMAIN_QUESTIONS[domainTrack];
+      if (d && d.length >= 5) { setIsLoadingQuestions(false); return d.slice(0, 5); }
+      const raw = await generateAssessmentQuestions(coreSkills || domainTrack || 'Engineering', domainTrack || 'VLSI', experience || 'Fresher');
+      const validList = Array.isArray(raw) ? raw : (raw?.questions || raw?.quiz || []);
+      const final = validList.length > 0 ? validList : (DOMAIN_QUESTIONS[domainTrack] || QUESTION_BANK[branchCategory] || QUESTION_BANK['Engineering'] || []);
+      setAiQuestions(Array.isArray(final) ? final.slice(0,5) : []);
+      setIsLoadingQuestions(false);
+      return Array.isArray(final) ? final.slice(0,5) : [];
+    } catch (e) { setIsLoadingQuestions(false); }
     const skills = (coreSkills || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
     const selectedPool = [];
     skills.forEach(skill => {
@@ -242,9 +248,21 @@ export default function Readiness() {
     return await adaptiveSelect();
   };
 
-  const dynamicQuestions = aiQuestions.length ? aiQuestions : generateQuestions();
+  const fallbackQuestions = {
+    Engineering: questionsEngineering, default: questionsEngineering,
+  };
 
-  const activeQuestions = profileStep ? [] : (aiQuestions.length ? aiQuestions : (dynamicQuestions || QUESTION_BANK[branchCategory] || QUESTION_BANK['Engineering'] || []));
+  const [loadedDynamic, setLoadedDynamic] = useState([]);
+
+  useEffect(() => {
+    if (!profileStep && !isLoadingQuestions) {
+      generateQuestions().then(q => setLoadedDynamic(Array.isArray(q) ? q : [])).catch(() => setLoadedDynamic([]));
+    }
+  }, [profileStep, isLoadingQuestions, domainTrack, coreSkills, experience, qualification, branchCategory]);
+
+  const dynamicQuestions = aiQuestions.length ? aiQuestions : loadedDynamic;
+
+  const activeQuestions = (profileStep || isLoadingQuestions) ? [] : (Array.isArray(aiQuestions) && aiQuestions.length ? aiQuestions : (Array.isArray(dynamicQuestions) ? dynamicQuestions : (QUESTION_BANK[branchCategory] || QUESTION_BANK['Engineering'] || [])));
 
   const submitQuiz = async () => {
     if (Object.keys(quizAnswers).length < activeQuestions.length) return;
@@ -471,6 +489,13 @@ export default function Readiness() {
                     <p className="text-sm text-violet-950 font-medium">{breakdown.roadmap || '3-week plan: fundamentals → applied → edge-case practice'}</p>
                   </div>
                 )}
+              </div>
+            ) : isLoadingQuestions ? (
+              <div className="text-center py-16">
+                <div className="inline-flex items-center gap-3 text-violet-700 font-extrabold text-base animate-pulse">
+                  <span className="w-8 h-8 rounded-full bg-violet-600 text-white flex items-center justify-center text-lg shadow-lg">✦</span>
+                  Generating tailored questions with Gemini...
+                </div>
               </div>
             ) : (
               <form

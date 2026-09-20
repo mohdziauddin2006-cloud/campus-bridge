@@ -22,7 +22,17 @@ export default function Scanner() {
       if (f.type === 'text/plain') {
         f.text().then(t => setFileContent(t)).catch(() => setFileContent(''));
       } else if (f.type === 'application/pdf' || f.name.endsWith('.pdf')) {
-        setFileContent('PDF file selected — using file name and size as fallback payload.');
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const arr = new Uint8Array(e.target.result);
+          let textChunk = '';
+          for (let i = 0; i < arr.length; i++) {
+            const b = arr[i];
+            if (b >= 32 && b < 127) textChunk += String.fromCharCode(b);
+          }
+          setFileContent(textChunk.slice(0, 800) || ('PDF file selected — using file name and metadata for AI structural audit.'));
+        };
+        reader.readAsArrayBuffer(f);
       } else {
         setFileContent('Binary/file upload — using file metadata for AI analysis.');
       }
@@ -46,7 +56,7 @@ export default function Scanner() {
         text = pastedText.trim();
       }
       if (!text || text.length < 2) { setScanning(false); return; }
-      const result = await deepScanResume(text, jd || 'General Software Engineer');
+      const result = await deepScanResume(text, jd.trim() ? jd.trim() : 'General Engineering / Graduate Trainee');
       setScanResult(result);
     } catch (e) {}
     setScanning(false);
@@ -56,7 +66,7 @@ export default function Scanner() {
   const fileInfo = file ? { name: file.name, size: (file.size / 1024).toFixed(1) + ' KB' } : null;
 
   return (
-    <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
+    <main className="bg-[#1b1e23] min-h-screen pb-28 w-full flex flex-col items-center pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <h2 className="text-3xl font-extrabold text-slate-900 mb-2">ATS Resume Scanner</h2>
       <p className="text-slate-500 mb-8">Ingest your resume · compare against target role · get actionable match intelligence.</p>
 
@@ -118,8 +128,8 @@ export default function Scanner() {
       <div className="flex justify-center mb-8">
         <button
           onClick={startScan}
-          disabled={scanning || (!file && !pastedText.trim()) || !jd.trim()}
-          className="w-full md:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-blue-600 to-violet-600 text-white font-extrabold text-lg shadow-xl shadow-blue-600/20 hover:shadow-blue-700/30 transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+          disabled={scanning || (!file && !pastedText.trim())}
+          className="w-full md:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-extrabold text-lg shadow-xl shadow-emerald-500/30 hover:shadow-blue-600/30 transition flex items-center justify-center gap-2"
         >
           {scanning ? (
             <>
