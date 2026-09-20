@@ -70,20 +70,12 @@ function getBranchCategory(branch) {
 export default function Readiness() {
   const [pillars, setPillars] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [branchCategory, setBranchCategory] = useState('engineering');
-  const [selectedBranch, setSelectedBranch] = useState('');
+  const [qualification, setQualification] = useState('Engineering / B.Tech');
+  const [coreSkills, setCoreSkills] = useState('');
+  const [experience, setExperience] = useState('Fresher / Student');
+  const [profileStep, setProfileStep] = useState(false);
 
-  const activeQuestions = (() => {
-    switch (branchCategory) {
-      case 'ssc': return questionsSSC;
-      case 'diploma': return questionsDiploma;
-      case 'arts': return questionsArts;
-      case 'commerce': return questionsCommerce;
-      case 'science': return questionsScience;
-      case 'phd': return questionsPhD;
-      default: return questionsEngineering;
-    }
-  })();
+  const activeQuestions = profileStep ? [] : dynamicQuestions;
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
@@ -109,15 +101,70 @@ export default function Readiness() {
 
   const openQuiz = () => {
     setShowQuiz(true);
+    setProfileStep(true);
     setQuizAnswers({});
     setQuizSubmitted(false);
     setScore(0);
+    setQualification('Engineering / B.Tech');
+    setCoreSkills('');
+    setExperience('Fresher / Student');
   };
 
   const closeQuiz = () => {
     if (submitting) return;
     setShowQuiz(false);
   };
+
+  const startAdaptiveAssessment = () => {
+    setProfileStep(false);
+    setQuizAnswers({});
+    setQuizSubmitted(false);
+    setScore(0);
+  };
+
+  function generateQuestions() {
+    const q = qualification.toLowerCase();
+    const skills = (coreSkills || '').toLowerCase();
+    const hasPython = skills.includes('python');
+    const hasVerilog = skills.includes('verilog') || skills.includes('systemverilog');
+    const hasReact = skills.includes('react');
+    const hasAccounting = skills.includes('tally') || skills.includes('accounting');
+    const out = [];
+    if (q.includes('ba') || q.includes('arts') || q.includes('humanities')) {
+      out.push({ id: 'a1', label: 'Critical Thinking: which biases affect judgment?', opts: ['Confirmation bias', 'Halo effect', 'Both', 'None'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'a2', label: 'Public Policy: which stage solves problems?', opts: ['Agenda-setting', 'Implementation', 'Evaluation', 'All'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'a3', label: 'Research Methodology: primary data is?', opts: ['Collected directly', 'From books', 'From web', 'None'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'a4', label: 'Communication: which improves clarity?', opts: ['Active listening', 'Jargon', 'Monologue', 'Silence'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'a5', label: 'History analysis: cause-and-effect is?', opts: ['Multifactorial', 'Single cause', 'Random', 'Unknowable'], weights: [5, 15, 50, 90] });
+    } else if (q.includes('b.com') || q.includes('commerce') || q.includes('mba') || q.includes('finance')) {
+      out.push({ id: 'c1', label: 'Financial Accounting: which is an asset?', opts: ['Cash', 'Expense', 'Revenue', 'Loss'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'c2', label: 'Corporate Taxation: which rate applies to income?', opts: ['30%', '10%', '50%', '0%'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'c3', label: 'Microeconomics: demand curve slopes?', opts: ['Downward', 'Upward', 'Flat', 'Vertical'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'c4', label: 'Marketing Strategy: 4P stands for?', opts: ['Product, Price, Place, Promotion', 'Plan, Policy, Price, Profit', 'People, Process, Product, Price', 'Promotion, Place, Policy, Profit'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'c5', label: 'Market Analysis: SWOT is?', opts: ['Strength, Weakness, Opportunity, Threat', 'Sales, Wage, Outlook, Trend', 'Strategy, Work, Operation, Tactic', 'Share, Wealth, Ownership, Trade'], weights: [5, 15, 50, 90] });
+    } else if (q.includes('ssc') || q.includes('10th') || q.includes('iti') || q.includes('diploma')) {
+      out.push({ id: 'd1', label: 'Workshop Safety: which is mandatory?', opts: ['Safety goggles', 'Loose gloves', 'Sunglasses', 'None'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'd2', label: 'Basic Arithmetic: 7 × 8 = ?', opts: ['56', '48', '64', '54'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'd3', label: 'Technical Drawing: scale is?', opts: ['Ratio', 'Size', 'Color', 'Weight'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'd4', label: 'Applied Mechanics: lever principle is?', opts: ['Force × distance', 'Mass / volume', 'Pressure / area', 'Velocity / time'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'd5', label: 'Tools: which measures 0.01 mm?', opts: ['Micrometer', 'Ruler', 'Tape', 'Scale'], weights: [5, 15, 50, 90] });
+    } else {
+      out.push({ id: 'e1', label: 'Data Structures: BST average search?', opts: ['O(log n)', 'O(n)', 'O(1)', 'O(n²)'], weights: [5, 15, 50, 90] });
+      out.push({ id: 'e2', label: 'Python: list comprehension returns?', opts: ['List', 'Tuple', 'Dict', 'Set'], weights: [5, 15, 50, 90] });
+      if (hasVerilog) out.push({ id: 'e3', label: 'SystemVerilog: blocking assignment is?', opts: ['=', '<=', '==', '==='], weights: [5, 15, 50, 90] });
+      else out.push({ id: 'e3', label: 'SystemVerilog: blocking assignment uses?', opts: ['=', '<=', '==', '==='], weights: [5, 15, 50, 90] });
+      out.push({ id: 'e4', label: 'Engineering: thermodynamics 1st law?', opts: ['Energy conserved', 'Entropy increases', 'Heat = work', 'None'], weights: [5, 15, 50, 90] });
+      if (hasPython) out.push({ id: 'e5', label: 'Python Skill Check: print(2+3) outputs?', opts: ['5', '23', '2', 'Error'], weights: [5, 15, 50, 90] });
+      else out.push({ id: 'e5', label: 'Structural: beam load distributes?', opts: ['Uniformly', 'Point', 'Curved', 'Zero'], weights: [5, 15, 50, 90] });
+      if (skills.includes('react')) out.push({ id: 'e6', label: 'React: useState returns?', opts: ['[state, setter]', 'Only state', 'Only setter', 'None'], weights: [5, 15, 50, 90] });
+    }
+    if (skills.includes('accounting') || skills.includes('tally')) {
+      out.push({ id: 's1', label: 'Accounting: balance sheet has?', opts: ['Assets = Liabilities + Equity', 'Only Assets', 'Only Liabilities', 'Only Equity'], weights: [5, 15, 50, 90] });
+    }
+    return out.slice(0, 5);
+  }
+
+  const dynamicQuestions = generateQuestions();
 
   const handleAnswer = (qid, idx) => {
     setQuizAnswers(a => ({ ...a, [qid]: idx }));
@@ -272,19 +319,73 @@ export default function Readiness() {
             </div>
             <p className="text-sm text-slate-700 mb-6">Answer 5 questions. Your score updates the Overall Readiness Gauge.</p>
 
-            {!quizSubmitted ? (
+            {profileStep ? (
+              <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
+                <h3 className="text-xl font-extrabold text-slate-900 mb-4">Candidate Profile & Skill Diagnostic</h3>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-1">Highest Qualification / Degree</label>
+                    <select
+                      value={qualification}
+                      onChange={e => setQualification(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    >
+                      <option>SSC / 10th / ITI</option>
+                      <option>Diploma / Polytechnic</option>
+                      <option>BA / Humanities / Arts</option>
+                      <option>B.Com / MBA / Finance</option>
+                      <option>B.Sc / Science</option>
+                      <option>Engineering / B.Tech</option>
+                      <option>Postgraduate / PhD</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-1">Core Skills (comma-separated)</label>
+                    <input
+                      type="text"
+                      value={coreSkills}
+                      onChange={e => setCoreSkills(e.target.value)}
+                      placeholder="Python, Verilog, Accounting, Public Speaking..."
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-bold text-slate-700 mb-1">Experience Level</label>
+                    <select
+                      value={experience}
+                      onChange={e => setExperience(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                    >
+                      <option>Fresher / Student</option>
+                      <option>1-3 Years</option>
+                      <option>3+ Years</option>
+                    </select>
+                  </div>
+                </div>
+                <button
+                  onClick={startAdaptiveAssessment}
+                  className="w-full mt-6 py-3.5 rounded-full bg-blue-600 text-white font-extrabold shadow-lg hover:bg-blue-700 transition"
+                >
+                  Start Adaptive Assessment
+                </button>
+              </div>
+            ) : quizSubmitted ? (
+              <div className="text-center py-6">
+                <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center shadow-xl mb-4">
+                  <span className="text-4xl font-black text-white">{score}%</span>
+                </div>
+                <h3 className="text-xl font-extrabold text-slate-900 mb-1">Your Readiness Score</h3>
+                <p className="text-sm text-slate-700 mb-4">Saved to your student profile. The gauge now reflects your result.</p>
+                <button onClick={() => setShowQuiz(false)} className="px-6 py-2.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition">Close</button>
+              </div>
+            ) : (
               <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  submitQuiz();
-                }}
+                onSubmit={e => { e.preventDefault(); submitQuiz(); }}
                 className="space-y-6"
               >
                 {activeQuestions.map(q => (
                   <div key={q.id}>
-                    <h4 className="font-bold text-slate-800 mb-3">
-                      {q.id}. {q.label}
-                    </h4>
+                    <h4 className="font-bold text-slate-800 mb-3">{q.id}. {q.label}</h4>
                     <div className="flex flex-wrap gap-2">
                       {q.opts.map((opt, i) => (
                         <button
@@ -292,9 +393,7 @@ export default function Readiness() {
                           type="button"
                           onClick={() => handleAnswer(q.id, i)}
                           className={`px-3 py-2 rounded-xl text-sm font-bold border transition ${
-                            quizAnswers[q.id] === i
-                              ? 'bg-blue-600 text-white border-blue-600 shadow-md'
-                              : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'
+                            quizAnswers[q.id] === i ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'
                           }`}
                         >
                           {opt}
@@ -308,32 +407,9 @@ export default function Readiness() {
                   disabled={Object.keys(quizAnswers).length < activeQuestions.length || submitting}
                   className="w-full py-3.5 rounded-full bg-blue-600 text-white font-extrabold shadow-lg hover:bg-blue-700 transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
-                  {submitting ? (
-                    <>
-                      <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      Saving...
-                    </>
-                  ) : (
-                    'Calculate My Score'
-                  )}
+                  {submitting ? (<>Saving...</>) : 'Calculate My Score'}
                 </button>
               </form>
-            ) : (
-              <div className="text-center py-6">
-                <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center shadow-xl mb-4">
-                  <span className="text-4xl font-black text-white">{score}%</span>
-                </div>
-                <h3 className="text-xl font-extrabold text-slate-900 mb-1">Your Readiness Score</h3>
-                <p className="text-sm text-slate-700 mb-4">
-                  Saved to your student profile. The gauge now reflects your result.
-                </p>
-                <button
-                  onClick={() => setShowQuiz(false)}
-                  className="px-6 py-2.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition"
-                >
-                  Close
-                </button>
-              </div>
             )}
           </div>
         </div>
