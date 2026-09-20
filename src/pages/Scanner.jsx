@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Upload, Sparkles, CheckCircle, ArrowRight, AlertCircle, Zap, TrendingUp, BadgeCheck, X, Check } from 'lucide-react';
-import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 import MatchPredictor from '../components/MatchPredictor';
 import AIRecommendationPanel from '../components/AIRecommendationPanel';
 import { db } from '../lib/firebase';
@@ -121,19 +120,37 @@ export default function Scanner() {
           </div>
           <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-xl"><h4 className="font-extrabold text-blue-700 mb-1">AI Bullet Rewrite Suggestion</h4><p className="text-sm text-slate-700">Replace &quot;Responsible for backend&quot; with <strong>&quot;Architected scalable REST APIs handling 10k+ concurrent users, reducing latency by 40%&quot;</strong>.</p></div>
           {/* Radar / Bar chart of matched vs missing keywords */}
-          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6 print:hidden">
-            <h4 className="font-extrabold text-slate-900 mb-4">Matched vs Missing Keywords (Radar)</h4>
-            <div className="h-64">
-              <ResponsiveContainer width="100%" height="100%">
-                <RadarChart cx="50%" cy="50%" outerRadius="80%" data={[{ subject: 'Matched', A: 78, fullMark: 100 }, { subject: 'Missing', A: 34, fullMark: 100 }]}>
-                  <PolarGrid />
-                  <PolarAngleAxis dataKey="subject" />
-                  <PolarRadiusAxis angle={30} domain={[0, 100]} />
-                  <Radar name="Score" dataKey="A" stroke="#10b981" fill="#10b981" fillOpacity={0.35} />
-                  <Tooltip />
-                </RadarChart>
-              </ResponsiveContainer>
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 mb-6 print:hidden flex items-center gap-6">
+            <div className="relative w-32 h-32 shrink-0">
+              <svg className="w-full h-full -rotate-90" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#e2e8f0" strokeWidth="8" />
+                <circle cx="50" cy="50" r="42" fill="none" stroke="#2563eb" strokeWidth="8" strokeLinecap="round" strokeDasharray="264" strokeDashoffset={264 - (264 * 82) / 100} className="transition-[stroke-dashoffset] duration-1000 ease-out" />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-2xl font-extrabold text-slate-900">82%</span>
+              </div>
             </div>
+            <div>
+              <h4 className="font-extrabold text-slate-900 mb-1">Match Rate</h4>
+              <p className="text-sm text-slate-500">Dynamic radial gauge — sweeps from 0% to target on mount.</p>
+            </div>
+          </div>
+          {/* Pure SVG radial progress ring — animates 0→82% on mount */}
+          <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-8 mb-6 print:hidden flex flex-col items-center justify-center">
+            <div className="relative w-48 h-48">
+              <svg viewBox="0 0 120 120" className="w-full h-full"
+                aria-label="Match rate radial progress 82 percent">
+                <circle cx="60" cy="60" r="52" fill="none" stroke="#f1f5f9" strokeWidth="10" />
+                <circle ref={el => { if (el && !el.dataset.animated) { el.dataset.animated = '1'; el.style.strokeDasharray = '326.73'; el.style.strokeDashoffset = '326.73'; requestAnimationFrame(() => { el.style.transition = 'stroke-dashoffset 1.2s ease-out'; el.style.strokeDashoffset = '58.81'; }); } }}
+                  cx="60" cy="60" r="52" fill="none" stroke="#2563eb" strokeWidth="10" strokeLinecap="round"
+                  strokeDasharray="326.73" strokeDashoffset="326.73" />
+              </svg>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <span className="text-5xl font-black text-slate-900 tracking-tighter">82%</span>
+              </div>
+            </div>
+            <h4 className="font-extrabold text-slate-900 mt-4 mb-1">Match Rate</h4>
+            <p className="text-sm text-slate-500">Dynamic radial gauge — sweeps from 0% to target on mount.</p>
           </div>
 
           <AIRecommendationPanel studentSkills={["React","TypeScript","Node","AWS"]} studentBranch="B.Tech ECE" studentDegree="B.Tech" />

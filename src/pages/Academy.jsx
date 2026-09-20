@@ -21,6 +21,7 @@ export default function Academy() {
   const [completed, setCompleted] = useState(new Set());
 
   useEffect(() => {
+    // Filter category change: select first video in category
     if (filterCat !== 'All') {
       const firstInCat = videos.find(v => v.category === filterCat);
       if (firstInCat && firstInCat.videoId !== selectedId) {
@@ -28,6 +29,16 @@ export default function Academy() {
       }
     }
   }, [filterCat]);
+
+  useEffect(() => {
+    // 1:1 video synchronization: activeVideo always matches selectedId
+    if (selectedId) {
+      const matched = videos.find(v => v.videoId === selectedId);
+      if (matched && matched.videoId !== activeVideo?.videoId) {
+        setActiveVideo(matched);
+      }
+    }
+  }, [selectedId]);
 
   const filtered = filterCat === 'All' ? videos : videos.filter(v => v.category === filterCat);
   const toggleComplete = () => {
