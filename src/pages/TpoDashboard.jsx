@@ -83,25 +83,19 @@ export default function TpoDashboard() {
     }, 300);
   };
 
-  const handleVerifyAndDispatch = async id => {
-    const app = pendingApps.find(a => a.id === id);
-    if (!app) return;
+  const handleVerify = async id => {
     try {
       await updateDoc(doc(db, 'applications', id), { status: 'Verified' });
-      alert(`Verified: ${app.fullName || 'Candidate'}`);
-      loadQueue();
-    } catch (e) {
-      console.error('Update error:', e);
-    }
+      setPendingApps(prev => prev.map(a => (a.id === id ? { ...a, status: 'Verified' } : a)));
+      alert('Verified');
+    } catch (e) { console.error('Verify error:', e); }
   };
 
   const handleReject = async id => {
     try {
       await updateDoc(doc(db, 'applications', id), { status: 'Rejected' });
-      loadQueue();
-    } catch (e) {
-      console.error('Update error:', e);
-    }
+      setPendingApps(prev => prev.map(a => (a.id === id ? { ...a, status: 'Rejected' } : a)));
+    } catch (e) { console.error('Reject error:', e); }
   };
 
   const broadcast = async () => {
@@ -236,7 +230,7 @@ export default function TpoDashboard() {
                         <XCircle size={12} /> Reject
                       </button>
                       <button
-                        onClick={() => handleVerifyAndDispatch(app.id)}
+                        onClick={() => handleVerify(app.id)}
                         className="cursor-pointer relative z-20 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1 pointer-events-auto"
                       >
                         <Send size={12} /> Verify

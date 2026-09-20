@@ -4,12 +4,40 @@ import { Link } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 
+const questionsScience = [
+  { id: 'sci1', label: 'Organic Chemistry: benzene is?', opts: ['Aromatic', 'Aliphatic', 'Alkane', 'Alkyne'], weights: [5, 15, 50, 90] },
+  { id: 'sci2', label: 'Quantum Physics: Planck constant relates?', opts: ['Energy and frequency', 'Force and mass', 'Velocity and time', 'Pressure and volume'], weights: [5, 15, 50, 90] },
+  { id: 'sci3', label: 'Linear Algebra: determinant of identity is?', opts: ['1', '0', 'n', 'n!'], weights: [5, 15, 50, 90] },
+  { id: 'sci4', label: 'Statistics: mean of 2,4,6 is?', opts: ['4', '6', '2', '12'], weights: [5, 15, 50, 90] },
+];
+
+const questionsPhD = [
+  { id: 'phd1', label: 'Advanced Research Design: null hypothesis states?', opts: ['No effect', 'Strong effect', 'Always true', 'Always false'], weights: [5, 15, 50, 90] },
+  { id: 'phd2', label: 'Patent Law: patent protects?', opts: ['Invention', 'Brand', 'Expression', 'Trade secret'], weights: [5, 15, 50, 90] },
+  { id: 'phd3', label: 'Machine Learning Architectures: CNNs are best for?', opts: ['Images', 'Text', 'Audio', 'Tabular'], weights: [5, 15, 50, 90] },
+  { id: 'phd4', label: 'Advanced VLSI: FinFET improves?', opts: ['Short-channel control', 'Speed only', 'Power only', 'Cost only'], weights: [5, 15, 50, 90] },
+];
+
 const questionsEngineering = [
   { id: 'q1', label: 'In SystemVerilog, which construct is used for blocking assignments?', opts: ['<= (non-blocking)', '= (blocking)', '==', '||'], weights: [5, 15, 50, 90] },
   { id: 'q2', label: 'Which Python library is standard for scientific computing?', opts: ['requests', 'NumPy', 'pandas', 'flask'], weights: [5, 15, 50, 90] },
   { id: 'q3', label: 'What data structure offers O(1) average lookup?', opts: ['Linked List', 'Hash Table', 'Array', 'Tree'], weights: [5, 15, 50, 90] },
   { id: 'q4', label: 'A full adder computes?', opts: ['Two-bit XOR', 'Sum + carry-in', 'Only carry-out', 'Only sum bit'], weights: [5, 15, 50, 90] },
   { id: 'q5', label: 'Which register holds 8086 extra-segment base?', opts: ['AX', 'BX', 'CX', 'ES'], weights: [5, 15, 50, 90] },
+];
+
+const questionsSSC = [
+  { id: 'ssc1', label: 'Basic Mathematics: solve 3 + 5 × 2?', opts: ['8', '13', '16', '10'], weights: [5, 15, 50, 90] },
+  { id: 'ssc2', label: 'Workshop Safety: which PPE is mandatory?', opts: ['Goggles', 'Ear plugs', 'Both', 'None'], weights: [5, 15, 50, 90] },
+  { id: 'ssc3', label: 'Tools & Measurement: a vernier caliper measures?', opts: ['Length', 'Weight', 'Temperature', 'Pressure'], weights: [5, 15, 50, 90] },
+  { id: 'ssc4', label: 'Basic Computers: which is not an OS?', opts: ['Windows', 'Linux', 'MS Word', 'MacOS'], weights: [5, 15, 50, 90] },
+];
+
+const questionsDiploma = [
+  { id: 'dip1', label: 'Applied Mechanics: work = force × ?', opts: ['Distance', 'Time', 'Mass', 'Velocity'], weights: [5, 15, 50, 90] },
+  { id: 'dip2', label: 'Circuit Theory: Ohm\'s law is V = ?', opts: ['IR', 'I/R', 'R/I', 'V/I'], weights: [5, 15, 50, 90] },
+  { id: 'dip3', label: 'Technical Drawing: orthographic projection shows?', opts: ['Front/top/side', 'Only front', 'Only top', 'Perspective'], weights: [5, 15, 50, 90] },
+  { id: 'dip4', label: 'Basic Electronics: diode allows current in?', opts: ['One direction', 'Both', 'None', 'Alternating'], weights: [5, 15, 50, 90] },
 ];
 
 const questionsArts = [
@@ -30,8 +58,12 @@ const questionsCommerce = [
 
 function getBranchCategory(branch) {
   const b = (branch || '').toString().toLowerCase();
+  if (b.includes('ssc') || b.includes('10th') || b.includes('iti')) return 'ssc';
+  if (b.includes('diploma') || b.includes('polytechnic')) return 'diploma';
   if (b.includes('arts') || b.includes('humanities') || b.includes('ba') || b.includes('b.a')) return 'arts';
-  if (b.includes('commerce') || b.includes('mba') || b.includes('business')) return 'commerce';
+  if (b.includes('commerce') || b.includes('mba') || b.includes('business') || b.includes('b.com')) return 'commerce';
+  if (b.includes('science') || b.includes('b.sc') || b.includes('m.sc')) return 'science';
+  if (b.includes('phd') || b.includes('postgrad') || b.includes('m.tech')) return 'phd';
   return 'engineering';
 }
 
@@ -41,7 +73,17 @@ export default function Readiness() {
   const [branchCategory, setBranchCategory] = useState('engineering');
   const [selectedBranch, setSelectedBranch] = useState('');
 
-  const activeQuestions = branchCategory === 'arts' ? questionsArts : branchCategory === 'commerce' ? questionsCommerce : questionsEngineering;
+  const activeQuestions = (() => {
+    switch (branchCategory) {
+      case 'ssc': return questionsSSC;
+      case 'diploma': return questionsDiploma;
+      case 'arts': return questionsArts;
+      case 'commerce': return questionsCommerce;
+      case 'science': return questionsScience;
+      case 'phd': return questionsPhD;
+      default: return questionsEngineering;
+    }
+  })();
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
@@ -119,7 +161,7 @@ export default function Readiness() {
       <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-5 mb-8 flex flex-col sm:flex-row sm:items-center gap-3">
         <span className="text-slate-700 font-medium text-sm">Branch / Background:</span>
         <div className="flex gap-2">
-          {['Engineering / ECE / CSE', 'Arts / Humanities / BA', 'Commerce / MBA'].map(opt => (
+          {['SSC / 10th / ITI', 'Diploma / Polytechnic', 'Arts / BA / Humanities', 'Commerce / MBA / B.Com', 'Science / B.Sc', 'Engineering / ECE / CSE', 'Postgrad / PhD'].map(opt => (
             <button
               key={opt}
               onClick={() => { setSelectedBranch(opt); setBranchCategory(getBranchCategory(opt)); }}

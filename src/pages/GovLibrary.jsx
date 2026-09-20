@@ -34,7 +34,7 @@ export default function GovLibrary() {
         ))}
       </div>
 
-      <h2 className="text-xl font-extrabold text-white mb-4 mt-12">Open Source PDF Library</h2>
+      <h2 className="text-xl font-extrabold text-slate-900 mb-4 mt-12">Open Source PDF Library</h2>
       <div className="grid md:grid-cols-2 gap-4 mb-10">
         {[
           { title: 'VLSI Design & SystemVerilog Architecture.pdf', desc: 'Advanced digital design, SystemVerilog, and physical design fundamentals.' },
@@ -43,7 +43,7 @@ export default function GovLibrary() {
           { title: 'AICTE Model Engineering Curriculum.pdf', desc: 'National engineering core curriculum and accreditation framework.' },
         ].map(p => (
           <div key={p.title} className="bg-white rounded-2xl border border-slate-200 p-5 hover:shadow-sm transition">
-            <h4 className="font-extrabold text-white mb-2">{p.title}</h4>
+            <h4 className="font-extrabold text-slate-900 mb-2">{p.title}</h4>
             <p className="text-xs text-slate-700 font-medium mb-3">{p.desc}</p>
             <a
               href="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
