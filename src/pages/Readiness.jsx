@@ -66,6 +66,32 @@ const QUESTION_BANK = {
   PhD: questionsPhD,
 };
 
+const SKILL_POOL = {
+  python: [
+    { id: 'py1', label: 'In Python, what is the time complexity of looking up a key in a dictionary on average?', opts: ['O(1)', 'O(n)', 'O(log n)', 'O(n^2)'], correct: 0 },
+    { id: 'py2', label: 'Which keyword in Python is used to create a generator function?', opts: ['yield', 'return', 'generate', 'async'], correct: 0 },
+  ],
+  verilog: [
+    { id: 'v1', label: 'In SystemVerilog, which operator represents non-blocking assignment?', opts: ['<=', '=', '==', ':='], correct: 0 },
+    { id: 'v2', label: 'What condition occurs when data changes within the setup time before the clock edge?', opts: ['Setup Violation / Metastability', 'Hold Violation', 'Race Condition', 'Clock Skew'], correct: 0 },
+  ],
+  dsa: [
+    { id: 'd1', label: 'Which data structure is optimal for implementing LRU Cache?', opts: ['Hash Map + Doubly Linked List', 'Binary Search Tree', 'Array', 'Stack'], correct: 0 },
+  ],
+  react: [
+    { id: 'r1', label: 'In React, what hook is used to handle side-effects and lifecycle cleanup?', opts: ['useEffect', 'useState', 'useMemo', 'useCallback'], correct: 0 },
+  ],
+  finance: [
+    { id: 'f1', label: 'Which financial statement reports a company\'s financial position at a specific point in time?', opts: ['Balance Sheet', 'Cash Flow Statement', 'Income Statement', 'P&L'], correct: 0 },
+  ],
+  mechanical: [
+    { id: 'm1', label: 'What does the area under a Stress-Strain curve represent?', opts: ['Toughness', 'Yield Strength', 'Elasticity', 'Ductility'], correct: 0 },
+  ],
+  default_engineering: [
+    { id: 'de1', label: 'Which layer of the OSI model does IP routing operate on?', opts: ['Network (Layer 3)', 'Transport (Layer 4)', 'Data Link (Layer 2)', 'Application (Layer 7)'], correct: 0 },
+  ],
+};
+
 function getBranchCategory(branch) {
   const b = (branch || '').toString().toLowerCase();
   if (b.includes('ssc') || b.includes('10th') || b.includes('iti')) return 'ssc';
@@ -140,46 +166,39 @@ export default function Readiness() {
     setScore(0);
   };
 
-  const generateQuestions = () => {
-    const q = (qualification || '').toLowerCase();
-    const skills = (coreSkills || '').toLowerCase();
-    const hasPython = skills.includes('python');
-    const hasVerilog = skills.includes('verilog') || skills.includes('systemverilog');
-    const hasReact = skills.includes('react');
-    const hasAccounting = skills.includes('tally') || skills.includes('accounting');
-    const out = [];
-    if (q.includes('ba') || q.includes('arts') || q.includes('humanities')) {
-      out.push({ id: 'a1', label: 'Critical Thinking: which biases affect judgment?', opts: ['Confirmation bias', 'Halo effect', 'Both', 'None'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'a2', label: 'Public Policy: which stage solves problems?', opts: ['Agenda-setting', 'Implementation', 'Evaluation', 'All'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'a3', label: 'Research Methodology: primary data is?', opts: ['Collected directly', 'From books', 'From web', 'None'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'a4', label: 'Communication: which improves clarity?', opts: ['Active listening', 'Jargon', 'Monologue', 'Silence'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'a5', label: 'History analysis: cause-and-effect is?', opts: ['Multifactorial', 'Single cause', 'Random', 'Unknowable'], weights: [5, 15, 50, 90] });
-    } else if (q.includes('b.com') || q.includes('commerce') || q.includes('mba') || q.includes('finance')) {
-      out.push({ id: 'c1', label: 'Financial Accounting: which is an asset?', opts: ['Cash', 'Expense', 'Revenue', 'Loss'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'c2', label: 'Corporate Taxation: which rate applies to income?', opts: ['30%', '10%', '50%', '0%'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'c3', label: 'Microeconomics: demand curve slopes?', opts: ['Downward', 'Upward', 'Flat', 'Vertical'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'c4', label: 'Marketing Strategy: 4P stands for?', opts: ['Product, Price, Place, Promotion', 'Plan, Policy, Price, Profit', 'People, Process, Product, Price', 'Promotion, Place, Policy, Profit'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'c5', label: 'Market Analysis: SWOT is?', opts: ['Strength, Weakness, Opportunity, Threat', 'Sales, Wage, Outlook, Trend', 'Strategy, Work, Operation, Tactic', 'Share, Wealth, Ownership, Trade'], weights: [5, 15, 50, 90] });
-    } else if (q.includes('ssc') || q.includes('10th') || q.includes('iti') || q.includes('diploma')) {
-      out.push({ id: 'd1', label: 'Workshop Safety: which is mandatory?', opts: ['Safety goggles', 'Loose gloves', 'Sunglasses', 'None'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'd2', label: 'Basic Arithmetic: 7 × 8 = ?', opts: ['56', '48', '64', '54'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'd3', label: 'Technical Drawing: scale is?', opts: ['Ratio', 'Size', 'Color', 'Weight'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'd4', label: 'Applied Mechanics: lever principle is?', opts: ['Force × distance', 'Mass / volume', 'Pressure / area', 'Velocity / time'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'd5', label: 'Tools: which measures 0.01 mm?', opts: ['Micrometer', 'Ruler', 'Tape', 'Scale'], weights: [5, 15, 50, 90] });
-    } else {
-      out.push({ id: 'e1', label: 'Data Structures: BST average search?', opts: ['O(log n)', 'O(n)', 'O(1)', 'O(n²)'], weights: [5, 15, 50, 90] });
-      out.push({ id: 'e2', label: 'Python: list comprehension returns?', opts: ['List', 'Tuple', 'Dict', 'Set'], weights: [5, 15, 50, 90] });
-      if (hasVerilog) out.push({ id: 'e3', label: 'SystemVerilog: blocking assignment is?', opts: ['=', '<=', '==', '==='], weights: [5, 15, 50, 90] });
-      else out.push({ id: 'e3', label: 'SystemVerilog: blocking assignment uses?', opts: ['=', '<=', '==', '==='], weights: [5, 15, 50, 90] });
-      out.push({ id: 'e4', label: 'Engineering: thermodynamics 1st law?', opts: ['Energy conserved', 'Entropy increases', 'Heat = work', 'None'], weights: [5, 15, 50, 90] });
-      if (hasPython) out.push({ id: 'e5', label: 'Python Skill Check: print(2+3) outputs?', opts: ['5', '23', '2', 'Error'], weights: [5, 15, 50, 90] });
-      else out.push({ id: 'e5', label: 'Structural: beam load distributes?', opts: ['Uniformly', 'Point', 'Curved', 'Zero'], weights: [5, 15, 50, 90] });
-      if (skills.includes('react')) out.push({ id: 'e6', label: 'React: useState returns?', opts: ['[state, setter]', 'Only state', 'Only setter', 'None'], weights: [5, 15, 50, 90] });
+  // Adaptive selection: prioritize skill-tagged questions, fill from qualification
+  const adaptiveSelect = () => {
+    const skills = (coreSkills || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
+    const selectedPool = [];
+    skills.forEach(skill => {
+      const key = Object.keys(SKILL_POOL).find(k => skill.includes(k) || k.includes(skill));
+      if (key && SKILL_POOL[key]) {
+        SKILL_POOL[key].forEach(q => selectedPool.push(q));
+      }
+    });
+    // Deduplicate by id
+    const uniquePool = selectedPool.filter((q, i, arr) => arr.findIndex(x => x.id === q.id) === i);
+    let out = uniquePool.slice();
+    // If fewer than 5, fill from qualification-based bank
+    if (out.length < 5) {
+      const cat = getBranchCategory(qualification);
+      const bank = QUESTION_BANK[cat] || QUESTION_BANK['Engineering'] || questionsEngineering;
+      bank.forEach(q => {
+        if (out.find(x => x.id === q.id) === undefined) out.push(q);
+      });
     }
-    if (skills.includes('accounting') || skills.includes('tally')) {
-      out.push({ id: 's1', label: 'Accounting: balance sheet has?', opts: ['Assets = Liabilities + Equity', 'Only Assets', 'Only Liabilities', 'Only Equity'], weights: [5, 15, 50, 90] });
+    // If still fewer, add default engineering
+    if (out.length < 5) {
+      SKILL_POOL.default_engineering.forEach(q => {
+        if (out.find(x => x.id === q.id) === undefined) out.push(q);
+      });
     }
+    // Slice to exactly 5 (shuffle optional, but we'll take first 5 for determinism)
     return out.slice(0, 5);
+  };
+
+  const generateQuestions = () => {
+    return adaptiveSelect();
   };
 
   const dynamicQuestions = generateQuestions();
