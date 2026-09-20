@@ -13,43 +13,19 @@
       "file_type": "code",
       "norm_label": "navbar()",
       "source_file": "src/components/Navbar.jsx",
-      "source_location": "L3"
-    },
-    {
-      "id": "src_pages_academy_academy",
-      "label": "Academy()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "academy()",
-      "source_file": "src/pages/Academy.jsx",
       "source_location": "L5"
     },
     {
-      "id": "src_pages_academy_academy_fetchdata",
-      "label": "fetchData()",
+      "id": "src_components_protectedroute_protectedroute",
+      "label": "ProtectedRoute()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "fetchdata()",
-      "source_file": "src/pages/Academy.jsx",
-      "source_location": "L14"
-    },
-    {
-      "id": "src_pages_applications_applications",
-      "label": "Applications()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "applications()",
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L12"
+      "norm_label": "protectedroute()",
+      "source_file": "src/components/ProtectedRoute.jsx",
+      "source_location": "L3"
     },
     {
       "id": "src_pages_auth_auth",
@@ -64,76 +40,64 @@
       "source_location": "L5"
     },
     {
-      "id": "src_pages_dashboard_dashboard",
-      "label": "Dashboard()",
+      "id": "src_pages_govlibrary_govlibrary",
+      "label": "GovLibrary()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "dashboard()",
-      "source_file": "src/pages/Dashboard.jsx",
-      "source_location": "L7"
+      "norm_label": "govlibrary()",
+      "source_file": "src/pages/GovLibrary.jsx",
+      "source_location": "L12"
     },
     {
-      "id": "src_pages_dashboard_dashboard_fetchdata",
-      "label": "fetchData()",
+      "id": "src_pages_internships_applymodal",
+      "label": "ApplyModal()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "fetchdata()",
-      "source_file": "src/pages/Dashboard.jsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_pages_readiness_readiness",
-      "label": "Readiness()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "readiness()",
-      "source_file": "src/pages/Readiness.jsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_pages_readiness_readiness_fetchdata",
-      "label": "fetchData()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "fetchdata()",
-      "source_file": "src/pages/Readiness.jsx",
-      "source_location": "L11"
-    },
-    {
-      "id": "src_pages_tpodashboard_tpodashboard",
-      "label": "TpoDashboard()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "tpodashboard()",
-      "source_file": "src/pages/TpoDashboard.jsx",
+      "norm_label": "applymodal()",
+      "source_file": "src/pages/Internships.jsx",
       "source_location": "L5"
     },
     {
-      "id": "src_pages_tpodashboard_tpodashboard_fetchannouncements",
-      "label": "fetchAnnouncements()",
+      "id": "src_pages_internships_internships",
+      "label": "Internships()",
       "_callable": true,
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "fetchannouncements()",
-      "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L41"
+      "norm_label": "internships()",
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L45"
+    },
+    {
+      "id": "src_pages_scanner_scanner",
+      "label": "Scanner()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "scanner()",
+      "source_file": "src/pages/Scanner.jsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_pages_scanner_scanner_fetchkeywords",
+      "label": "fetchKeywords()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "fetchkeywords()",
+      "source_file": "src/pages/Scanner.jsx",
+      "source_location": "L27"
     },
     {
       "id": "src_pages_tpologin_tpologin",
@@ -145,31 +109,7 @@
       "file_type": "code",
       "norm_label": "tpologin()",
       "source_file": "src/pages/TpoLogin.jsx",
-      "source_location": "L4"
-    },
-    {
-      "id": "src_pages_scanner_scanner",
-      "label": "Scanner()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "Scanner",
-      "file_type": "code",
-      "norm_label": "scanner()",
-      "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L6"
-    },
-    {
-      "id": "src_pages_scanner_scanner_fetchkeywords",
-      "label": "fetchKeywords()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 10,
-      "community_name": "Scanner",
-      "file_type": "code",
-      "norm_label": "fetchkeywords()",
-      "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L14"
+      "source_location": "L5"
     },
     {
       "id": "src_components_matchpredictor_matchpredictor",
@@ -184,6 +124,54 @@
       "source_location": "L4"
     },
     {
+      "id": "src_pages_academy_academy",
+      "label": "Academy()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "academy()",
+      "source_file": "src/pages/Academy.jsx",
+      "source_location": "L17"
+    },
+    {
+      "id": "src_pages_applications_applications",
+      "label": "Applications()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "applications()",
+      "source_file": "src/pages/Applications.jsx",
+      "source_location": "L12"
+    },
+    {
+      "id": "src_pages_jobs_applymodal",
+      "label": "ApplyModal()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "applymodal()",
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_pages_jobs_jobs",
+      "label": "Jobs()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "jobs()",
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L61"
+    },
+    {
       "id": "src_pages_matchpredictor_matchpredictor",
       "label": "MatchPredictor()",
       "_callable": true,
@@ -196,28 +184,52 @@
       "source_location": "L4"
     },
     {
+      "id": "src_pages_readiness_getbranchcategory",
+      "label": "getBranchCategory()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "getbranchcategory()",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L95"
+    },
+    {
+      "id": "src_pages_readiness_readiness",
+      "label": "Readiness()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "readiness()",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L106"
+    },
+    {
+      "id": "src_pages_readiness_readiness_fetchdata",
+      "label": "fetchData()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "fetchdata()",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L130"
+    },
+    {
       "id": "src_app_app",
       "label": "App()",
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "app()",
       "source_file": "src/App.jsx",
-      "source_location": "L13"
-    },
-    {
-      "id": "src_components_protectedroute_protectedroute",
-      "label": "ProtectedRoute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "protectedroute()",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L4"
+      "source_location": "L17"
     },
     {
       "id": "src_context_authcontext_authprovider",
@@ -225,7 +237,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "authprovider()",
       "source_file": "src/context/AuthContext.jsx",
@@ -237,7 +249,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "refreshprofile()",
       "source_file": "src/context/AuthContext.jsx",
@@ -249,7 +261,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "signout()",
       "source_file": "src/context/AuthContext.jsx",
@@ -261,11 +273,71 @@
       "_callable": true,
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "useauth()",
       "source_file": "src/context/AuthContext.jsx",
       "source_location": "L37"
+    },
+    {
+      "id": "src_pages_dashboard_dashboard",
+      "label": "Dashboard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Dashboard.jsx",
+      "file_type": "code",
+      "norm_label": "dashboard()",
+      "source_file": "src/pages/Dashboard.jsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "src_pages_dashboard_dashboard_fetchdata",
+      "label": "fetchData()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Dashboard.jsx",
+      "file_type": "code",
+      "norm_label": "fetchdata()",
+      "source_file": "src/pages/Dashboard.jsx",
+      "source_location": "L16"
+    },
+    {
+      "id": "src_components_airecommendationpanel_airecommendationpanel",
+      "label": "AIRecommendationPanel()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "airecommendationpanel()",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "src_lib_suggestionengine_computematch",
+      "label": "computeMatch()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "computematch()",
+      "source_file": "src/lib/suggestionEngine.js",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_lib_suggestionengine_gettoprecommendations",
+      "label": "getTopRecommendations()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "gettoprecommendations()",
+      "source_file": "src/lib/suggestionEngine.js",
+      "source_location": "L49"
     },
     {
       "id": "src_pages_opportunities_opportunitiespage",
@@ -273,11 +345,35 @@
       "_callable": true,
       "_origin": "ast",
       "community": 8,
-      "community_name": "Opportunities.jsx",
+      "community_name": "firebase.js",
       "file_type": "code",
       "norm_label": "opportunitiespage()",
       "source_file": "src/pages/Opportunities.jsx",
-      "source_location": "L5"
+      "source_location": "L6"
+    },
+    {
+      "id": "src_pages_opportunities_opportunitiespage_load",
+      "label": "load()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "firebase.js",
+      "file_type": "code",
+      "norm_label": "load()",
+      "source_file": "src/pages/Opportunities.jsx",
+      "source_location": "L18"
+    },
+    {
+      "id": "src_pages_tpodashboard_tpodashboard",
+      "label": "TpoDashboard()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "firebase.js",
+      "file_type": "code",
+      "norm_label": "tpodashboard()",
+      "source_file": "src/pages/TpoDashboard.jsx",
+      "source_location": "L6"
     },
     {
       "id": "package",
@@ -302,6 +398,39 @@
       "source_location": "L4"
     },
     {
+      "id": "package_devdependencies",
+      "label": "devDependencies",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "devdependencies",
+      "source_file": "package.json",
+      "source_location": "L23"
+    },
+    {
+      "id": "package_devdependencies_vite",
+      "label": "vite",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "vite",
+      "source_file": "package.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "package_devdependencies_vitejs_plugin_react",
+      "label": "@vitejs/plugin-react",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "@vitejs/plugin-react",
+      "source_file": "package.json",
+      "source_location": "L24"
+    },
+    {
       "id": "package_main",
       "label": "main",
       "_origin": "ast",
@@ -322,6 +451,50 @@
       "norm_label": "name",
       "source_file": "package.json",
       "source_location": "L2"
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "scripts",
+      "source_file": "package.json",
+      "source_location": "L7"
+    },
+    {
+      "id": "package_scripts_build",
+      "label": "build",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "build",
+      "source_file": "package.json",
+      "source_location": "L9"
+    },
+    {
+      "id": "package_scripts_dev",
+      "label": "dev",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "dev",
+      "source_file": "package.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "package_scripts_preview",
+      "label": "preview",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "preview",
+      "source_file": "package.json",
+      "source_location": "L10"
     },
     {
       "id": "package_type",
@@ -346,6 +519,28 @@
       "source_location": "L3"
     },
     {
+      "id": "vite_config",
+      "label": "vite.config.js",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "code",
+      "norm_label": "vite.config.js",
+      "source_file": "vite.config.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "ref_firebase",
+      "label": "firebase",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "concept",
+      "norm_label": "firebase",
+      "source_file": "package.json",
+      "source_location": "L16"
+    },
+    {
       "id": "ref_google_genai",
       "label": "@google/genai",
       "_origin": "ast",
@@ -365,18 +560,7 @@
       "file_type": "concept",
       "norm_label": "react-dom",
       "source_file": "package.json",
-      "source_location": "L18"
-    },
-    {
-      "id": "ref_recharts",
-      "label": "recharts",
-      "_origin": "ast",
-      "community": 0,
-      "community_name": "package.json",
-      "file_type": "concept",
-      "norm_label": "recharts",
-      "source_file": "package.json",
-      "source_location": "L20"
+      "source_location": "L19"
     },
     {
       "id": "ref_supabase_supabase_js",
@@ -388,6 +572,39 @@
       "norm_label": "@supabase/supabase-js",
       "source_file": "package.json",
       "source_location": "L14"
+    },
+    {
+      "id": "ref_tailwindcss_vite",
+      "label": "@tailwindcss/vite",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "concept",
+      "norm_label": "@tailwindcss/vite",
+      "source_file": "package.json",
+      "source_location": "L15"
+    },
+    {
+      "id": "ref_vite",
+      "label": "vite",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "concept",
+      "norm_label": "vite",
+      "source_file": "package.json",
+      "source_location": "L25"
+    },
+    {
+      "id": "ref_vitejs_plugin_react",
+      "label": "@vitejs/plugin-react",
+      "_origin": "ast",
+      "community": 0,
+      "community_name": "package.json",
+      "file_type": "concept",
+      "norm_label": "@vitejs/plugin-react",
+      "source_file": "package.json",
+      "source_location": "L24"
     },
     {
       "id": "src_app",
@@ -412,26 +629,15 @@
       "source_location": "L1"
     },
     {
-      "id": "src_pages_applications",
-      "label": "Applications.jsx",
+      "id": "src_components_protectedroute",
+      "label": "ProtectedRoute.jsx",
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "applications.jsx",
-      "source_file": "src/pages/Applications.jsx",
+      "norm_label": "protectedroute.jsx",
+      "source_file": "src/components/ProtectedRoute.jsx",
       "source_location": "L1"
-    },
-    {
-      "id": "src_pages_applications_stages",
-      "label": "STAGES",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "App.jsx",
-      "file_type": "code",
-      "norm_label": "stages",
-      "source_file": "src/pages/Applications.jsx",
-      "source_location": "L4"
     },
     {
       "id": "src_pages_auth",
@@ -445,15 +651,48 @@
       "source_location": "L1"
     },
     {
-      "id": "src_pages_readiness",
-      "label": "Readiness.jsx",
+      "id": "src_pages_govlibrary",
+      "label": "GovLibrary.jsx",
       "_origin": "ast",
       "community": 1,
       "community_name": "App.jsx",
       "file_type": "code",
-      "norm_label": "readiness.jsx",
-      "source_file": "src/pages/Readiness.jsx",
+      "norm_label": "govlibrary.jsx",
+      "source_file": "src/pages/GovLibrary.jsx",
       "source_location": "L1"
+    },
+    {
+      "id": "src_pages_govlibrary_resources",
+      "label": "resources",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "resources",
+      "source_file": "src/pages/GovLibrary.jsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "src_pages_internships",
+      "label": "Internships.jsx",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "internships.jsx",
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_internships_interndata",
+      "label": "internData",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "App.jsx",
+      "file_type": "code",
+      "norm_label": "interndata",
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L33"
     },
     {
       "id": "src_pages_tpologin",
@@ -475,7 +714,7 @@
       "file_type": "concept",
       "norm_label": "react-router-dom",
       "source_file": "package.json",
-      "source_location": "L19"
+      "source_location": "L20"
     },
     {
       "id": "src_components_matchpredictor",
@@ -489,28 +728,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_lib_supabase",
-      "label": "supabase.js",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "supabase.js",
-      "source_file": "src/lib/supabase.js",
-      "source_location": "L1"
-    },
-    {
-      "id": "src_lib_supabase_supabase",
-      "label": "supabase",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "supabase",
-      "source_file": "src/lib/supabase.js",
-      "source_location": "L2"
-    },
-    {
       "id": "src_pages_academy",
       "label": "Academy.jsx",
       "_origin": "ast",
@@ -522,15 +739,70 @@
       "source_location": "L1"
     },
     {
-      "id": "src_pages_dashboard",
-      "label": "Dashboard.jsx",
+      "id": "src_pages_academy_categories",
+      "label": "categories",
       "_origin": "ast",
       "community": 2,
       "community_name": "react",
       "file_type": "code",
-      "norm_label": "dashboard.jsx",
-      "source_file": "src/pages/Dashboard.jsx",
+      "norm_label": "categories",
+      "source_file": "src/pages/Academy.jsx",
+      "source_location": "L15"
+    },
+    {
+      "id": "src_pages_academy_videos",
+      "label": "videos",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "videos",
+      "source_file": "src/pages/Academy.jsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_pages_applications",
+      "label": "Applications.jsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "applications.jsx",
+      "source_file": "src/pages/Applications.jsx",
       "source_location": "L1"
+    },
+    {
+      "id": "src_pages_applications_stages",
+      "label": "STAGES",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "stages",
+      "source_file": "src/pages/Applications.jsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "src_pages_jobs",
+      "label": "Jobs.jsx",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "jobs.jsx",
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_jobs_jobsdata",
+      "label": "jobsData",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "react",
+      "file_type": "code",
+      "norm_label": "jobsdata",
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L38"
     },
     {
       "id": "src_pages_matchpredictor",
@@ -555,17 +827,6 @@
       "source_location": "L1"
     },
     {
-      "id": "src_pages_tpodashboard",
-      "label": "TpoDashboard.jsx",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "react",
-      "file_type": "code",
-      "norm_label": "tpodashboard.jsx",
-      "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L1"
-    },
-    {
       "id": "ref_lucide_react",
       "label": "lucide-react",
       "_origin": "ast",
@@ -574,7 +835,7 @@
       "file_type": "concept",
       "norm_label": "lucide-react",
       "source_file": "package.json",
-      "source_location": "L16"
+      "source_location": "L17"
     },
     {
       "id": "ref_react",
@@ -585,7 +846,7 @@
       "file_type": "concept",
       "norm_label": "react",
       "source_file": "package.json",
-      "source_location": "L17"
+      "source_location": "L18"
     },
     {
       "id": "package_dependencies",
@@ -597,6 +858,17 @@
       "norm_label": "dependencies",
       "source_file": "package.json",
       "source_location": "L12"
+    },
+    {
+      "id": "package_dependencies_firebase",
+      "label": "firebase",
+      "_origin": "ast",
+      "community": 3,
+      "community_name": "dependencies",
+      "file_type": "code",
+      "norm_label": "firebase",
+      "source_file": "package.json",
+      "source_location": "L16"
     },
     {
       "id": "package_dependencies_google_genai",
@@ -618,7 +890,7 @@
       "file_type": "code",
       "norm_label": "lucide-react",
       "source_file": "package.json",
-      "source_location": "L16"
+      "source_location": "L17"
     },
     {
       "id": "package_dependencies_react",
@@ -629,7 +901,7 @@
       "file_type": "code",
       "norm_label": "react",
       "source_file": "package.json",
-      "source_location": "L17"
+      "source_location": "L18"
     },
     {
       "id": "package_dependencies_react_dom",
@@ -640,7 +912,7 @@
       "file_type": "code",
       "norm_label": "react-dom",
       "source_file": "package.json",
-      "source_location": "L18"
+      "source_location": "L19"
     },
     {
       "id": "package_dependencies_react_router_dom",
@@ -651,7 +923,7 @@
       "file_type": "code",
       "norm_label": "react-router-dom",
       "source_file": "package.json",
-      "source_location": "L19"
+      "source_location": "L20"
     },
     {
       "id": "package_dependencies_recharts",
@@ -662,7 +934,7 @@
       "file_type": "code",
       "norm_label": "recharts",
       "source_file": "package.json",
-      "source_location": "L20"
+      "source_location": "L21"
     },
     {
       "id": "package_dependencies_supabase_supabase_js",
@@ -747,66 +1019,121 @@
       "source_location": "L5"
     },
     {
-      "id": "package_scripts",
-      "label": "scripts",
+      "id": "src_pages_readiness",
+      "label": "Readiness.jsx",
       "_origin": "ast",
       "community": 5,
-      "community_name": "scripts",
+      "community_name": "Readiness.jsx",
       "file_type": "code",
-      "norm_label": "scripts",
-      "source_file": "package.json",
+      "norm_label": "readiness.jsx",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_pages_readiness_question_bank",
+      "label": "QUESTION_BANK",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "question_bank",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L59"
+    },
+    {
+      "id": "src_pages_readiness_questionsarts",
+      "label": "questionsArts",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "questionsarts",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L43"
+    },
+    {
+      "id": "src_pages_readiness_questionscommerce",
+      "label": "questionsCommerce",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "questionscommerce",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L51"
+    },
+    {
+      "id": "src_pages_readiness_questionsdiploma",
+      "label": "questionsDiploma",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "questionsdiploma",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L36"
+    },
+    {
+      "id": "src_pages_readiness_questionsengineering",
+      "label": "questionsEngineering",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "questionsengineering",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L21"
+    },
+    {
+      "id": "src_pages_readiness_questionsphd",
+      "label": "questionsPhD",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "questionsphd",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_pages_readiness_questionsscience",
+      "label": "questionsScience",
+      "_origin": "ast",
+      "community": 5,
+      "community_name": "Readiness.jsx",
+      "file_type": "code",
+      "norm_label": "questionsscience",
+      "source_file": "src/pages/Readiness.jsx",
       "source_location": "L7"
     },
     {
-      "id": "package_scripts_build",
-      "label": "build",
+      "id": "src_pages_readiness_questionsssc",
+      "label": "questionsSSC",
       "_origin": "ast",
       "community": 5,
-      "community_name": "scripts",
+      "community_name": "Readiness.jsx",
       "file_type": "code",
-      "norm_label": "build",
-      "source_file": "package.json",
-      "source_location": "L9"
+      "norm_label": "questionsssc",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L29"
     },
     {
-      "id": "package_scripts_dev",
-      "label": "dev",
+      "id": "src_pages_readiness_skill_pool",
+      "label": "SKILL_POOL",
       "_origin": "ast",
       "community": 5,
-      "community_name": "scripts",
+      "community_name": "Readiness.jsx",
       "file_type": "code",
-      "norm_label": "dev",
-      "source_file": "package.json",
-      "source_location": "L8"
-    },
-    {
-      "id": "package_scripts_preview",
-      "label": "preview",
-      "_origin": "ast",
-      "community": 5,
-      "community_name": "scripts",
-      "file_type": "code",
-      "norm_label": "preview",
-      "source_file": "package.json",
-      "source_location": "L10"
-    },
-    {
-      "id": "src_components_protectedroute",
-      "label": "ProtectedRoute.jsx",
-      "_origin": "ast",
-      "community": 6,
-      "community_name": "AuthContext.jsx",
-      "file_type": "code",
-      "norm_label": "protectedroute.jsx",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L1"
+      "norm_label": "skill_pool",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L69"
     },
     {
       "id": "src_context_authcontext",
       "label": "AuthContext.jsx",
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "authcontext.jsx",
       "source_file": "src/context/AuthContext.jsx",
@@ -817,145 +1144,222 @@
       "label": "AuthContext",
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "authcontext",
       "source_file": "src/context/AuthContext.jsx",
       "source_location": "L4"
     },
     {
+      "id": "src_lib_supabase",
+      "label": "supabase.js",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Dashboard.jsx",
+      "file_type": "code",
+      "norm_label": "supabase.js",
+      "source_file": "src/lib/supabase.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_supabase_supabase",
+      "label": "supabase",
+      "_origin": "ast",
+      "community": 6,
+      "community_name": "Dashboard.jsx",
+      "file_type": "code",
+      "norm_label": "supabase",
+      "source_file": "src/lib/supabase.js",
+      "source_location": "L2"
+    },
+    {
       "id": "src_main",
       "label": "main.jsx",
       "_origin": "ast",
       "community": 6,
-      "community_name": "AuthContext.jsx",
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
       "norm_label": "main.jsx",
       "source_file": "src/main.jsx",
       "source_location": "L1"
     },
     {
-      "id": "vite_config",
-      "label": "vite.config.js",
+      "id": "src_pages_dashboard",
+      "label": "Dashboard.jsx",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "vite.config.js",
+      "community": 6,
+      "community_name": "Dashboard.jsx",
       "file_type": "code",
-      "norm_label": "vite.config.js",
-      "source_file": "vite.config.js",
+      "norm_label": "dashboard.jsx",
+      "source_file": "src/pages/Dashboard.jsx",
       "source_location": "L1"
     },
     {
-      "id": "ref_tailwindcss_vite",
-      "label": "@tailwindcss/vite",
+      "id": "ref_recharts",
+      "label": "recharts",
       "_origin": "ast",
-      "community": 7,
-      "community_name": "vite.config.js",
+      "community": 6,
+      "community_name": "Dashboard.jsx",
       "file_type": "concept",
-      "norm_label": "@tailwindcss/vite",
+      "norm_label": "recharts",
       "source_file": "package.json",
-      "source_location": "L15"
+      "source_location": "L21"
     },
     {
-      "id": "ref_vite",
-      "label": "vite",
+      "id": "src_components_airecommendationpanel",
+      "label": "AIRecommendationPanel.jsx",
       "_origin": "ast",
       "community": 7,
-      "community_name": "vite.config.js",
-      "file_type": "concept",
-      "norm_label": "vite",
-      "source_file": "package.json",
-      "source_location": "L24"
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "airecommendationpanel.jsx",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L1"
     },
     {
-      "id": "ref_vitejs_plugin_react",
-      "label": "@vitejs/plugin-react",
+      "id": "src_data_jobs",
+      "label": "jobs.js",
       "_origin": "ast",
       "community": 7,
-      "community_name": "vite.config.js",
-      "file_type": "concept",
-      "norm_label": "@vitejs/plugin-react",
-      "source_file": "package.json",
-      "source_location": "L23"
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "jobs.js",
+      "source_file": "src/data/jobs.js",
+      "source_location": "L1"
     },
     {
-      "id": "src_data_mockopportunities",
-      "label": "mockOpportunities.js",
+      "id": "src_data_jobs_jobs",
+      "label": "jobs",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "jobs",
+      "source_file": "src/data/jobs.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_data_taxonomy",
+      "label": "taxonomy.js",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "taxonomy.js",
+      "source_file": "src/data/taxonomy.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_data_taxonomy_degrees",
+      "label": "degrees",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "degrees",
+      "source_file": "src/data/taxonomy.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_data_taxonomy_skills",
+      "label": "skills",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "skills",
+      "source_file": "src/data/taxonomy.js",
+      "source_location": "L11"
+    },
+    {
+      "id": "src_lib_suggestionengine",
+      "label": "suggestionEngine.js",
+      "_origin": "ast",
+      "community": 7,
+      "community_name": "AIRecommendationPanel.jsx",
+      "file_type": "code",
+      "norm_label": "suggestionengine.js",
+      "source_file": "src/lib/suggestionEngine.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "src_lib_firebase",
+      "label": "firebase.js",
       "_origin": "ast",
       "community": 8,
-      "community_name": "Opportunities.jsx",
+      "community_name": "firebase.js",
       "file_type": "code",
-      "norm_label": "mockopportunities.js",
-      "source_file": "src/data/mockOpportunities.js",
+      "norm_label": "firebase.js",
+      "source_file": "src/lib/firebase.js",
       "source_location": "L1"
     },
     {
-      "id": "src_data_mockopportunities_mockopportunities",
-      "label": "mockOpportunities",
+      "id": "src_lib_firebase_app",
+      "label": "app",
       "_origin": "ast",
       "community": 8,
-      "community_name": "Opportunities.jsx",
+      "community_name": "firebase.js",
       "file_type": "code",
-      "norm_label": "mockopportunities",
-      "source_file": "src/data/mockOpportunities.js",
-      "source_location": "L1"
+      "norm_label": "app",
+      "source_file": "src/lib/firebase.js",
+      "source_location": "L13"
+    },
+    {
+      "id": "src_lib_firebase_db",
+      "label": "db",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "firebase.js",
+      "file_type": "code",
+      "norm_label": "db",
+      "source_file": "src/lib/firebase.js",
+      "source_location": "L14"
+    },
+    {
+      "id": "src_lib_firebase_firebaseconfig",
+      "label": "firebaseConfig",
+      "_origin": "ast",
+      "community": 8,
+      "community_name": "firebase.js",
+      "file_type": "code",
+      "norm_label": "firebaseconfig",
+      "source_file": "src/lib/firebase.js",
+      "source_location": "L4"
     },
     {
       "id": "src_pages_opportunities",
       "label": "Opportunities.jsx",
       "_origin": "ast",
       "community": 8,
-      "community_name": "Opportunities.jsx",
+      "community_name": "firebase.js",
       "file_type": "code",
       "norm_label": "opportunities.jsx",
       "source_file": "src/pages/Opportunities.jsx",
       "source_location": "L1"
     },
     {
-      "id": "package_devdependencies",
-      "label": "devDependencies",
+      "id": "src_pages_tpodashboard",
+      "label": "TpoDashboard.jsx",
       "_origin": "ast",
-      "community": 9,
-      "community_name": "devDependencies",
+      "community": 8,
+      "community_name": "firebase.js",
       "file_type": "code",
-      "norm_label": "devdependencies",
-      "source_file": "package.json",
-      "source_location": "L22"
-    },
-    {
-      "id": "package_devdependencies_vite",
-      "label": "vite",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "vite",
-      "source_file": "package.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "package_devdependencies_vitejs_plugin_react",
-      "label": "@vitejs/plugin-react",
-      "_origin": "ast",
-      "community": 9,
-      "community_name": "devDependencies",
-      "file_type": "code",
-      "norm_label": "@vitejs/plugin-react",
-      "source_file": "package.json",
-      "source_location": "L23"
+      "norm_label": "tpodashboard.jsx",
+      "source_file": "src/pages/TpoDashboard.jsx",
+      "source_location": "L1"
     }
   ],
   "links": [
     {
-      "source": "src_components_protectedroute_protectedroute",
-      "target": "src_context_authcontext_useauth",
+      "source": "src_components_airecommendationpanel_airecommendationpanel",
+      "target": "src_lib_suggestionengine_gettoprecommendations",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L5",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -971,6 +1375,30 @@
       "weight": 1.0
     },
     {
+      "source": "src_lib_suggestionengine_gettoprecommendations",
+      "target": "src_lib_suggestionengine_computematch",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/lib/suggestionEngine.js",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness_readiness",
+      "target": "src_pages_readiness_getbranchcategory",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L184",
+      "weight": 1.0
+    },
+    {
       "source": "src_context_authcontext_authprovider",
       "target": "src_context_authcontext_authprovider_refreshprofile",
       "relation": "contains",
@@ -983,18 +1411,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_pages_academy_academy",
-      "target": "src_pages_academy_academy_fetchdata",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/pages/Academy.jsx",
-      "source_location": "L14",
-      "weight": 1.0
-    },
-    {
       "source": "src_pages_dashboard_dashboard",
       "target": "src_pages_dashboard_dashboard_fetchdata",
       "relation": "contains",
@@ -1003,7 +1419,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/Dashboard.jsx",
-      "source_location": "L13",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_opportunities_opportunitiespage",
+      "target": "src_pages_opportunities_opportunitiespage_load",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "src/pages/Opportunities.jsx",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -1015,7 +1443,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/Readiness.jsx",
-      "source_location": "L11",
+      "source_location": "L130",
       "weight": 1.0
     },
     {
@@ -1027,19 +1455,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L14",
-      "weight": 1.0
-    },
-    {
-      "source": "src_pages_tpodashboard_tpodashboard",
-      "target": "src_pages_tpodashboard_tpodashboard_fetchannouncements",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L41",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -1080,7 +1496,7 @@
     },
     {
       "source": "package",
-      "target": "ref_lucide_react",
+      "target": "ref_firebase",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1092,7 +1508,7 @@
     },
     {
       "source": "package",
-      "target": "ref_react",
+      "target": "ref_lucide_react",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1104,7 +1520,7 @@
     },
     {
       "source": "package",
-      "target": "ref_react_dom",
+      "target": "ref_react",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1116,7 +1532,7 @@
     },
     {
       "source": "package",
-      "target": "ref_react_router_dom",
+      "target": "ref_react_dom",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1128,7 +1544,7 @@
     },
     {
       "source": "package",
-      "target": "ref_recharts",
+      "target": "ref_react_router_dom",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1140,6 +1556,18 @@
     },
     {
       "source": "package",
+      "target": "ref_recharts",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "package.json",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "package",
       "target": "ref_vitejs_plugin_react",
       "relation": "imports",
       "_origin": "ast",
@@ -1147,7 +1575,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -1159,12 +1587,12 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
       "source": "src_app",
-      "target": "src_pages_readiness_readiness",
+      "target": "src_pages_tpologin_tpologin",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1176,7 +1604,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_applications_applications",
+      "target": "src_pages_tpodashboard_tpodashboard",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1184,6 +1612,54 @@
       "context": "import",
       "source_file": "src/App.jsx",
       "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_pages_readiness_readiness",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_pages_govlibrary_govlibrary",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_pages_applications_applications",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_components_protectedroute_protectedroute",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -1200,7 +1676,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_opportunities_opportunitiespage",
+      "target": "src_pages_jobs_jobs",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1212,7 +1688,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_auth_auth",
+      "target": "src_pages_internships_internships",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1224,7 +1700,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_dashboard_dashboard",
+      "target": "src_pages_opportunities_opportunitiespage",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1236,7 +1712,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_scanner_scanner",
+      "target": "src_pages_auth_auth",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1248,7 +1724,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_academy_academy",
+      "target": "src_pages_dashboard_dashboard",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1260,7 +1736,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_tpologin_tpologin",
+      "target": "src_pages_scanner_scanner",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1272,7 +1748,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_tpodashboard_tpodashboard",
+      "target": "src_pages_academy_academy",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1283,15 +1759,39 @@
       "weight": 1.0
     },
     {
-      "source": "src_components_protectedroute",
-      "target": "src_context_authcontext_useauth",
+      "source": "src_components_airecommendationpanel",
+      "target": "src_data_taxonomy_degrees",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "import",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L1",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_airecommendationpanel",
+      "target": "src_data_taxonomy_skills",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_airecommendationpanel",
+      "target": "src_lib_suggestionengine_gettoprecommendations",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -1303,6 +1803,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/context/AuthContext.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_suggestionengine",
+      "target": "src_data_jobs_jobs",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/suggestionEngine.js",
       "source_location": "L2",
       "weight": 1.0
     },
@@ -1331,15 +1843,15 @@
       "weight": 1.0
     },
     {
-      "source": "src_pages_academy",
-      "target": "src_lib_supabase_supabase",
+      "source": "src_pages_dashboard",
+      "target": "src_lib_firebase_db",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "import",
-      "source_file": "src/pages/Academy.jsx",
-      "source_location": "L3",
+      "source_file": "src/pages/Dashboard.jsx",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -1351,12 +1863,12 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/pages/Dashboard.jsx",
-      "source_location": "L5",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
       "source": "src_pages_opportunities",
-      "target": "src_data_mockopportunities_mockopportunities",
+      "target": "src_lib_firebase_db",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1368,7 +1880,7 @@
     },
     {
       "source": "src_pages_readiness",
-      "target": "src_lib_supabase_supabase",
+      "target": "src_lib_firebase_db",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1392,7 +1904,7 @@
     },
     {
       "source": "src_pages_scanner",
-      "target": "src_lib_supabase_supabase",
+      "target": "src_components_airecommendationpanel_airecommendationpanel",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1403,8 +1915,32 @@
       "weight": 1.0
     },
     {
-      "source": "src_pages_tpodashboard",
+      "source": "src_pages_scanner",
+      "target": "src_lib_firebase_db",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Scanner.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_scanner",
       "target": "src_lib_supabase_supabase",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Scanner.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_tpodashboard",
+      "target": "src_lib_firebase_db",
       "relation": "imports",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1428,7 +1964,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_readiness",
+      "target": "src_pages_tpologin",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1440,7 +1976,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_applications",
+      "target": "src_pages_tpodashboard",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1448,6 +1984,54 @@
       "context": "import",
       "source_file": "src/App.jsx",
       "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_pages_readiness",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_pages_govlibrary",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_pages_applications",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_app",
+      "target": "src_components_protectedroute",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/App.jsx",
+      "source_location": "L15",
       "weight": 1.0
     },
     {
@@ -1464,7 +2048,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_opportunities",
+      "target": "src_pages_jobs",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1476,7 +2060,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_auth",
+      "target": "src_pages_internships",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1488,7 +2072,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_dashboard",
+      "target": "src_pages_opportunities",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1500,7 +2084,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_scanner",
+      "target": "src_pages_auth",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1512,7 +2096,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_academy",
+      "target": "src_pages_dashboard",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1524,7 +2108,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_tpologin",
+      "target": "src_pages_scanner",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1536,7 +2120,7 @@
     },
     {
       "source": "src_app",
-      "target": "src_pages_tpodashboard",
+      "target": "src_pages_academy",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1544,6 +2128,54 @@
       "context": "import",
       "source_file": "src/App.jsx",
       "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_airecommendationpanel",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_airecommendationpanel",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_airecommendationpanel",
+      "target": "src_data_taxonomy",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_airecommendationpanel",
+      "target": "src_lib_suggestionengine",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -1572,7 +2204,7 @@
     },
     {
       "source": "src_components_navbar",
-      "target": "ref_react_router_dom",
+      "target": "ref_react",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1583,15 +2215,27 @@
       "weight": 1.0
     },
     {
-      "source": "src_components_protectedroute",
-      "target": "src_context_authcontext",
+      "source": "src_components_navbar",
+      "target": "ref_react_router_dom",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "import",
-      "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L1",
+      "source_file": "src/components/Navbar.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_navbar",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/components/Navbar.jsx",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -1603,7 +2247,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L2",
+      "source_location": "L1",
       "weight": 1.0
     },
     {
@@ -1627,6 +2271,18 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "src/context/AuthContext.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_suggestionengine",
+      "target": "src_data_jobs",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/lib/suggestionEngine.js",
       "source_location": "L2",
       "weight": 1.0
     },
@@ -1703,18 +2359,6 @@
       "weight": 1.0
     },
     {
-      "source": "src_pages_academy",
-      "target": "src_lib_supabase",
-      "relation": "imports_from",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "src/pages/Academy.jsx",
-      "source_location": "L3",
-      "weight": 1.0
-    },
-    {
       "source": "src_pages_applications",
       "target": "ref_react",
       "relation": "imports_from",
@@ -1824,7 +2468,7 @@
     },
     {
       "source": "src_pages_dashboard",
-      "target": "src_lib_supabase",
+      "target": "src_lib_firebase",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1835,6 +2479,78 @@
       "weight": 1.0
     },
     {
+      "source": "src_pages_dashboard",
+      "target": "src_lib_supabase",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Dashboard.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_govlibrary",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/GovLibrary.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_internships",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_internships",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_jobs",
+      "target": "ref_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_jobs",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
       "source": "src_pages_matchpredictor",
       "target": "ref_react",
       "relation": "imports_from",
@@ -1884,7 +2600,7 @@
     },
     {
       "source": "src_pages_opportunities",
-      "target": "src_data_mockopportunities",
+      "target": "src_lib_firebase",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1932,7 +2648,7 @@
     },
     {
       "source": "src_pages_readiness",
-      "target": "src_lib_supabase",
+      "target": "src_lib_firebase",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1980,7 +2696,7 @@
     },
     {
       "source": "src_pages_scanner",
-      "target": "src_lib_supabase",
+      "target": "src_components_airecommendationpanel",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1988,6 +2704,30 @@
       "context": "import",
       "source_file": "src/pages/Scanner.jsx",
       "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_scanner",
+      "target": "src_lib_firebase",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Scanner.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_scanner",
+      "target": "src_lib_supabase",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/Scanner.jsx",
+      "source_location": "L7",
       "weight": 1.0
     },
     {
@@ -2016,7 +2756,7 @@
     },
     {
       "source": "src_pages_tpodashboard",
-      "target": "src_lib_supabase",
+      "target": "src_lib_firebase",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2040,7 +2780,7 @@
     },
     {
       "source": "src_pages_tpologin",
-      "target": "ref_lucide_react",
+      "target": "ref_react_router_dom",
       "relation": "imports_from",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2048,6 +2788,18 @@
       "context": "import",
       "source_file": "src/pages/TpoLogin.jsx",
       "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_tpologin",
+      "target": "ref_lucide_react",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "src/pages/TpoLogin.jsx",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -2160,7 +2912,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L22",
+      "source_location": "L23",
       "weight": 1.0
     },
     {
@@ -2253,7 +3005,7 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_lucide_react",
+      "target": "package_dependencies_firebase",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2264,7 +3016,7 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_react",
+      "target": "package_dependencies_lucide_react",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2275,7 +3027,7 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_react_dom",
+      "target": "package_dependencies_react",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2286,7 +3038,7 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_react_router_dom",
+      "target": "package_dependencies_react_dom",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2297,13 +3049,24 @@
     },
     {
       "source": "package_dependencies",
-      "target": "package_dependencies_recharts",
+      "target": "package_dependencies_react_router_dom",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
       "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "package_dependencies",
+      "target": "package_dependencies_recharts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "package.json",
+      "source_location": "L21",
       "weight": 1.0
     },
     {
@@ -2314,7 +3077,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L23",
+      "source_location": "L24",
       "weight": 1.0
     },
     {
@@ -2325,7 +3088,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "package.json",
-      "source_location": "L24",
+      "source_location": "L25",
       "weight": 1.0
     },
     {
@@ -2369,7 +3132,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/App.jsx",
-      "source_location": "L13",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_components_airecommendationpanel",
+      "target": "src_components_airecommendationpanel_airecommendationpanel",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/components/AIRecommendationPanel.jsx",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -2391,7 +3165,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/Navbar.jsx",
-      "source_location": "L3",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -2402,7 +3176,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/components/ProtectedRoute.jsx",
-      "source_location": "L4",
+      "source_location": "L3",
       "weight": 1.0
     },
     {
@@ -2439,14 +3213,91 @@
       "weight": 1.0
     },
     {
-      "source": "src_data_mockopportunities",
-      "target": "src_data_mockopportunities_mockopportunities",
+      "source": "src_data_jobs",
+      "target": "src_data_jobs_jobs",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/data/mockOpportunities.js",
+      "source_file": "src/data/jobs.js",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_data_taxonomy",
+      "target": "src_data_taxonomy_degrees",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/data/taxonomy.js",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "src_data_taxonomy",
+      "target": "src_data_taxonomy_skills",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/data/taxonomy.js",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_firebase",
+      "target": "src_lib_firebase_app",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/firebase.js",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_firebase",
+      "target": "src_lib_firebase_db",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/firebase.js",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_firebase",
+      "target": "src_lib_firebase_firebaseconfig",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/firebase.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_suggestionengine",
+      "target": "src_lib_suggestionengine_computematch",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/suggestionEngine.js",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_lib_suggestionengine",
+      "target": "src_lib_suggestionengine_gettoprecommendations",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/lib/suggestionEngine.js",
+      "source_location": "L49",
       "weight": 1.0
     },
     {
@@ -2462,13 +3313,35 @@
     },
     {
       "source": "src_pages_academy",
+      "target": "src_pages_academy_categories",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Academy.jsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_academy",
       "target": "src_pages_academy_academy",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/Academy.jsx",
-      "source_location": "L5",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_academy",
+      "target": "src_pages_academy_videos",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Academy.jsx",
+      "source_location": "L4",
       "weight": 1.0
     },
     {
@@ -2512,7 +3385,95 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/Dashboard.jsx",
-      "source_location": "L7",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_govlibrary",
+      "target": "src_pages_govlibrary_govlibrary",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/GovLibrary.jsx",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_govlibrary",
+      "target": "src_pages_govlibrary_resources",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/GovLibrary.jsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_internships",
+      "target": "src_pages_internships_interndata",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_internships",
+      "target": "src_pages_internships_internships",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_internships",
+      "target": "src_pages_internships_applymodal",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Internships.jsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_jobs",
+      "target": "src_pages_jobs_jobsdata",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_jobs",
+      "target": "src_pages_jobs_applymodal",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_jobs",
+      "target": "src_pages_jobs_jobs",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Jobs.jsx",
+      "source_location": "L61",
       "weight": 1.0
     },
     {
@@ -2534,7 +3495,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/Opportunities.jsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -2545,7 +3506,117 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/Readiness.jsx",
-      "source_location": "L6",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_questionsphd",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_questionsengineering",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_questionsssc",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_questionsdiploma",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_questionsarts",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_questionscommerce",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_question_bank",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L59",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_skill_pool",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_questionsscience",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "src_pages_readiness",
+      "target": "src_pages_readiness_getbranchcategory",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/pages/Readiness.jsx",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -2556,7 +3627,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/Scanner.jsx",
-      "source_location": "L6",
+      "source_location": "L9",
       "weight": 1.0
     },
     {
@@ -2567,7 +3638,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/TpoDashboard.jsx",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 1.0
     },
     {
@@ -2578,7 +3649,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/pages/TpoLogin.jsx",
-      "source_location": "L4",
+      "source_location": "L5",
       "weight": 1.0
     },
     {
@@ -2595,5 +3666,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "7b690fcc10b91756d02f970945013fd2ae627b1e"
+  "built_at_commit": "8b2e8fc69576cdf8692287c9cec8dfcd42cf7f5c"
 }

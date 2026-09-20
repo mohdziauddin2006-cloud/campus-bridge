@@ -4,10 +4,8 @@
   "2": "react",
   "3": "dependencies",
   "4": "CLAUDE.md",
-  "5": "scripts",
-  "6": "AuthContext.jsx",
-  "7": "vite.config.js",
-  "8": "Opportunities.jsx",
-  "9": "devDependencies",
-  "10": "Scanner"
+  "5": "Readiness.jsx",
+  "6": "Dashboard.jsx",
+  "7": "AIRecommendationPanel.jsx",
+  "8": "firebase.js"
 }

@@ -83,25 +83,26 @@ export default function TpoDashboard() {
     }, 300);
   };
 
-  const handleVerify = async id => {
-    try {
-      await updateDoc(doc(db, 'applications', id), { status: 'Verified' });
-      setPendingApps(prev => prev.map(a => (a.id === id ? { ...a, status: 'Verified' } : a)));
-      const rawApps = JSON.parse(localStorage.getItem('campus_bridge_applications') || '[]');
-      const updated = rawApps.map(a => (a.id === id ? { ...a, status: 'Verified' } : a));
-      localStorage.setItem('campus_bridge_applications', JSON.stringify(updated));
-      alert('Verified');
-    } catch (e) { console.error('Verify error:', e); }
+  const handleVerify = (targetId) => {
+    console.log('Verifying ID:', targetId);
+    setPendingApps((prev) => {
+      const updated = prev.map((app) =>
+        (app.id === targetId || app._id === targetId) ? { ...app, status: 'Verified' } : app
+      );
+      try { localStorage.setItem('campus_bridge_applications', JSON.stringify(updated)); } catch (e) {}
+      return updated;
+    });
   };
 
-  const handleReject = async id => {
-    try {
-      await updateDoc(doc(db, 'applications', id), { status: 'Rejected' });
-      setPendingApps(prev => prev.map(a => (a.id === id ? { ...a, status: 'Rejected' } : a)));
-      const rawApps = JSON.parse(localStorage.getItem('campus_bridge_applications') || '[]');
-      const updated = rawApps.map(a => (a.id === id ? { ...a, status: 'Rejected' } : a));
-      localStorage.setItem('campus_bridge_applications', JSON.stringify(updated));
-    } catch (e) { console.error('Reject error:', e); }
+  const handleReject = (targetId) => {
+    console.log('Rejecting ID:', targetId);
+    setPendingApps((prev) => {
+      const updated = prev.map((app) =>
+        (app.id === targetId || app._id === targetId) ? { ...app, status: 'Rejected' } : app
+      );
+      try { localStorage.setItem('campus_bridge_applications', JSON.stringify(updated)); } catch (e) {}
+      return updated;
+    });
   };
 
   const broadcast = async () => {
@@ -126,14 +127,14 @@ export default function TpoDashboard() {
       <p className="text-slate-500 mb-6">Institutional Skill Gap Heatmap · Batch 2026 · CampusBridge National Gateway</p>
 
       {liveAnnouncement && (
-        <div className="mb-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl px-6 py-4 shadow-xl flex items-center gap-3 font-bold text-sm md:text-base">
-          <Megaphone size={20} className="shrink-0" />
+        <div className="mb-6 bg-gradient-to-r from-amber-500 to-orange-500 text-white rounded-2xl px-6 py-4 shadow-xl flex items-center gap-3 font-bold text-sm md:text-base pointer-events-none">
+          <Megaphone size={20} className="shrink-0 pointer-events-none" />
           <span>Institutional Broadcast: {liveAnnouncement}</span>
         </div>
       )}
 
       {/* Pending Applications Queue */}
-      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-slate-900 mb-10">
+      <div className="relative z-20 bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-slate-900 mb-10">
         <div className="flex flex-wrap gap-2 mb-6">
           {[
             { key: 'pending', label: 'Pending Queue' },
@@ -141,9 +142,10 @@ export default function TpoDashboard() {
             { key: 'rejected', label: 'Rejected Applications' },
           ].map(t => (
             <button
+              type="button"
               key={t.key}
               onClick={() => setTab(t.key)}
-              className={`px-4 py-2 rounded-full text-xs font-extrabold border transition ${tab === t.key ? 'bg-blue-600 text-white border-blue-600 shadow' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'}`}
+              className={`relative z-30 cursor-pointer pointer-events-auto select-none px-4 py-2 rounded-full text-xs font-extrabold border transition ${tab === t.key ? 'bg-blue-600 text-white border-blue-600 shadow' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'}`}
             >
               {t.label}
             </button>
@@ -157,9 +159,10 @@ export default function TpoDashboard() {
             <h3 className="text-xl font-extrabold">Pending Applications Queue</h3>
           </div>
           <button
+            type="button"
             onClick={refreshQueue}
             disabled={refreshing}
-            className="px-4 py-2 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-2 disabled:opacity-50"
+            className="relative z-30 cursor-pointer pointer-events-auto select-none px-4 py-2 rounded-full bg-blue-50 text-blue-700 font-bold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-2 disabled:opacity-50"
           >
             {refreshing ? 'Refreshing...' : 'Refresh Queue'}
           </button>
@@ -224,20 +227,23 @@ export default function TpoDashboard() {
                     </td>
                     <td className="px-3 py-3 flex gap-2">
                       <button
+                        type="button"
                         onClick={() => setInspectorApp(app)}
-                        className="cursor-pointer relative z-30 px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1 pointer-events-auto"
+                        className="relative z-30 cursor-pointer pointer-events-auto select-none px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1"
                       >
                         <Sparkles size={12} /> View Details
                       </button>
                       <button
+                        type="button"
                         onClick={() => handleReject(app.id)}
-                        className="cursor-pointer relative z-30 px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1 pointer-events-auto"
+                        className="relative z-30 cursor-pointer pointer-events-auto select-none px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1"
                       >
                         <XCircle size={12} /> Reject
                       </button>
                       <button
+                        type="button"
                         onClick={() => handleVerify(app.id)}
-                        className="cursor-pointer relative z-30 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1 pointer-events-auto"
+                        className="relative z-30 cursor-pointer pointer-events-auto select-none px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1"
                       >
                         <Send size={12} /> Verify
                       </button>
@@ -336,7 +342,7 @@ export default function TpoDashboard() {
               </button>
               <button
                 onClick={() => {
-                  handleVerifyAndDispatch(inspectorApp.id);
+                  handleVerify(inspectorApp.id);
                   setInspectorApp(null);
                 }}
                 className="flex-1 py-2.5 rounded-full bg-emerald-50 text-emerald-700 font-extrabold border border-emerald-200 hover:bg-emerald-100 transition"

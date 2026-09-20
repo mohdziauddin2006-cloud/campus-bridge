@@ -419,9 +419,9 @@ export default function Readiness() {
                 onSubmit={e => { e.preventDefault(); submitQuiz(); }}
                 className="space-y-6"
               >
-                {activeQuestions.map(q => (
+                {activeQuestions.map((q, idx) => (
                   <div key={q.id}>
-                    <h4 className="font-bold text-slate-800 mb-3">{q.id}. {q.label}</h4>
+                    <h3 className="font-bold text-slate-900 text-base mb-2.5">{idx + 1}. {q.label}</h3>
                     <div className="flex flex-wrap gap-2">
                       {q.opts.map((opt, i) => (
                         <button
@@ -429,7 +429,7 @@ export default function Readiness() {
                           type="button"
                           onClick={() => handleAnswer(q.id, i)}
                           className={`px-3 py-2 rounded-xl text-sm font-bold border transition ${
-                            quizAnswers[q.id] === i ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'
+                            quizAnswers[q.id] === i ? 'bg-blue-600 text-white border-blue-600 shadow-md' : 'bg-slate-50 text-slate-800 hover:bg-blue-50 border-slate-200 hover:border-blue-300'
                           }`}
                         >
                           {opt}
