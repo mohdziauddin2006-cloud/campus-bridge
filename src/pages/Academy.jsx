@@ -40,7 +40,7 @@ export default function Academy() {
     }
   }, [selectedId]);
 
-  const filtered = filterCat === 'All' ? videos : videos.filter(v => v.category === filterCat);
+  const filtered = (videos || []).filter ? (filterCat === 'All' ? videos : videos.filter(v => v.category === filterCat)) : [];
   const toggleComplete = () => {
     const next = new Set(completed);
     if (next.has(activeVideo.videoId)) {

@@ -138,6 +138,7 @@ export default function Readiness() {
   };
 
   const generateQuestions = () => {
+    const q = (qualification || '').toLowerCase();
     const skills = (coreSkills || '').toLowerCase();
     const hasPython = skills.includes('python');
     const hasVerilog = skills.includes('verilog') || skills.includes('systemverilog');
@@ -201,7 +202,7 @@ export default function Readiness() {
     setSubmitting(false);
   };
 
-  if (loading) {
+  if (!pillars || loading) {
     return (
       <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
         <div className="flex items-center justify-center h-96">
