@@ -56,6 +56,16 @@ const questionsCommerce = [
   { id: 'q5', label: 'A business plan should include?', opts: ['Financial projections', 'Only code', 'Only hardware', 'Only policy'], weights: [5, 15, 50, 90] },
 ];
 
+const QUESTION_BANK = {
+  Engineering: questionsEngineering,
+  SSC: questionsSSC,
+  Diploma: questionsDiploma,
+  Arts: questionsArts,
+  Commerce: questionsCommerce,
+  Science: questionsScience,
+  PhD: questionsPhD,
+};
+
 function getBranchCategory(branch) {
   const b = (branch || '').toString().toLowerCase();
   if (b.includes('ssc') || b.includes('10th') || b.includes('iti')) return 'ssc';
@@ -74,13 +84,18 @@ export default function Readiness() {
   const [coreSkills, setCoreSkills] = useState('');
   const [experience, setExperience] = useState('Fresher / Student');
   const [profileStep, setProfileStep] = useState(false);
+  const [selectedBranch, setSelectedBranch] = useState('Engineering / B.Tech');
+  const [branchCategory, setBranchCategory] = useState('engineering');
 
-  const activeQuestions = profileStep ? [] : dynamicQuestions;
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [submitting, setSubmitting] = useState(false);
+
+  const handleAnswer = (qid, idx) => {
+    setQuizAnswers(a => ({ ...a, [qid]: idx }));
+  };
 
   useEffect(() => {
     async function fetchData() {
@@ -122,8 +137,7 @@ export default function Readiness() {
     setScore(0);
   };
 
-  function generateQuestions() {
-    const q = qualification.toLowerCase();
+  const generateQuestions = () => {
     const skills = (coreSkills || '').toLowerCase();
     const hasPython = skills.includes('python');
     const hasVerilog = skills.includes('verilog') || skills.includes('systemverilog');
@@ -162,13 +176,11 @@ export default function Readiness() {
       out.push({ id: 's1', label: 'Accounting: balance sheet has?', opts: ['Assets = Liabilities + Equity', 'Only Assets', 'Only Liabilities', 'Only Equity'], weights: [5, 15, 50, 90] });
     }
     return out.slice(0, 5);
-  }
+  };
 
   const dynamicQuestions = generateQuestions();
 
-  const handleAnswer = (qid, idx) => {
-    setQuizAnswers(a => ({ ...a, [qid]: idx }));
-  };
+  const activeQuestions = profileStep ? [] : (dynamicQuestions || QUESTION_BANK[branchCategory] || QUESTION_BANK['Engineering'] || []);
 
   const submitQuiz = async () => {
     if (Object.keys(quizAnswers).length < activeQuestions.length) return;
