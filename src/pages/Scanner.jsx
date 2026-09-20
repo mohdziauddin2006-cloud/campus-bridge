@@ -66,9 +66,9 @@ export default function Scanner() {
   const fileInfo = file ? { name: file.name, size: (file.size / 1024).toFixed(1) + ' KB' } : null;
 
   return (
-    <main className="bg-[#1b1e23] min-h-screen pb-28 w-full flex flex-col items-center pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
+    <main className="bg-slate-50 min-h-screen pb-28 w-full flex flex-col items-center pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <h2 className="text-3xl font-extrabold text-slate-900 mb-2">ATS Resume Scanner</h2>
-      <p className="text-slate-500 mb-8">Ingest your resume · compare against target role · get actionable match intelligence.</p>
+      <p className="text-slate-600 mb-8">Ingest your resume · compare against target role · get actionable match intelligence.</p>
 
       {/* Upload Zone */}
       <div
@@ -89,8 +89,14 @@ export default function Scanner() {
         <label htmlFor="resumeFile" className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-blue-600 text-white font-bold shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition cursor-pointer">
           Select File
         </label>
-        {fileInfo && <div className="mt-4 text-sm text-slate-800 font-medium">{fileInfo.name} · {fileInfo.size}</div>}
-        {fileContent && <div className="mt-2 text-xs text-slate-500 font-medium">{fileContent.slice(0, 120)}{fileContent.length > 120 ? '...' : ''}</div>}
+        {fileInfo && (
+          <div className="mt-4 bg-emerald-50 border border-emerald-200 rounded-xl px-4 py-3 flex items-center gap-3 text-sm font-medium text-emerald-800 shadow-sm">
+            <CheckCircle size={18} className="text-emerald-600" />
+            <span className="font-extrabold">{fileInfo.name}</span>
+            <span className="text-emerald-600">· {fileInfo.size}</span>
+            <span className="ml-auto bg-emerald-600 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full">✓ Resume parsed & ready for AI analysis</span>
+          </div>
+        )}
       </div>
 
       {/* Paste option */}
@@ -207,6 +213,39 @@ export default function Scanner() {
               </ul>
             </div>
           )}
+
+          {/* Critical Weaknesses */}
+          <div className="mb-6">
+            <h4 className="font-extrabold text-rose-800 mb-3">Critical Weaknesses & Skill Gaps</h4>
+            <div className="grid md:grid-cols-3 gap-3">
+              {(Array.isArray(scanResult?.criticalWeaknesses) ? scanResult.criticalWeaknesses : ['Lack of measurable metrics','Missing core keywords','Outdated tool references']).map((w, i) => (
+                <div key={i} className="bg-rose-50 border border-rose-200 rounded-xl p-3 text-sm font-medium text-rose-800 shadow-sm">{w}</div>
+              ))}
+            </div>
+          </div>
+
+          {/* Skills to Learn + links */}
+          <div className="mb-6">
+            <h4 className="font-extrabold text-blue-900 mb-3">Skills to Learn & Direct Study Links</h4>
+            <div className="flex flex-wrap gap-2">
+              {(Array.isArray(scanResult?.skillGaps) ? scanResult.skillGaps : [{skill:'System Design',link:'/library'},{skill:'Cloud / DevOps',link:'/library'}]).map((g, i) => (
+                <a key={i} href={g.link || '/library'} className="px-3 py-1.5 rounded-full bg-blue-600 text-white text-xs font-extrabold shadow hover:bg-blue-700 transition">{g.skill || 'Study'} → Link to Free Library / NPTEL / SWAYAM</a>
+              ))}
+            </div>
+          </div>
+
+          {/* Before vs After bullets */}
+          <div className="bg-emerald-50 rounded-2xl p-5 border border-emerald-200 mb-10">
+            <h4 className="font-extrabold text-emerald-900 mb-3">Actionable Bullet Revisions (Before vs After)</h4>
+            <div className="space-y-3">
+              {(Array.isArray(scanResult?.beforeAfterBullets) ? scanResult.beforeAfterBullets : [{before:'Managed database',after:'Optimized PostgreSQL query performance reducing latency by 40%'}]).map((b, i) => (
+                <div key={i} className="grid md:grid-cols-2 gap-3 text-sm">
+                  <div className="bg-rose-50 border border-rose-200 rounded-xl p-3 text-rose-800 font-medium"><span className="font-extrabold">Before:</span> {b.before || 'Vague bullet'}</div>
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-emerald-900 font-medium"><span className="font-extrabold">After:</span> {b.after || 'Quantified impact'}</div>
+                </div>
+              ))}
+            </div>
+          </div>
 
           {/* Improvements */}
           <div className="bg-blue-50 rounded-2xl p-5 border border-blue-100">

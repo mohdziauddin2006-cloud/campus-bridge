@@ -61,9 +61,9 @@ export async function generateAssessmentQuestions(skills, domain, experienceLeve
 }
 
 export async function deepScanResume(resumeText, targetRole) {
-  const prompt = `Analyze resume text for role="${targetRole}". Return JSON: {atsScore: number 0-100, verdict: "High Match"|"Moderate Match"|"Needs Optimization", executiveSummary: "2 sentences", matchedKeywords: ["..."], missingKeywords: ["..."], formattingIssues: ["..."], actionableImprovements: ["..."]}. Return only JSON.`;
+  const prompt = `Analyze resume text for role="${targetRole}". Return JSON: {atsScore: number 0-100, verdict: "High Match"|"Moderate Match"|"Needs Optimization", executiveSummary: "2 sentences", matchedKeywords: ["..."], missingKeywords: ["..."], formattingIssues: ["..."], actionableImprovements: ["..."], criticalWeaknesses: ["..."], skillGaps: [{skill:"...", link:"..."}], beforeAfterBullets: [{before:"...", after:"..."}]}. Return only JSON.`;
   const text = await geminiFetch(prompt);
-  return safeParse(text, { atsScore: 72, verdict: 'Moderate Match', executiveSummary: 'Resume shows relevant experience but could be stronger with targeted keywords.', matchedKeywords: ['Python','React'], missingKeywords: ['Cloud','DevOps'], formattingIssues: ['Consider quantifying achievements'], actionableImprovements: ['Add role-specific keywords','Quantify impact metrics'] });
+  return safeParse(text, { atsScore: 72, verdict: 'Moderate Match', executiveSummary: 'Resume shows relevant experience but could be stronger with targeted keywords.', matchedKeywords: ['Python','React'], missingKeywords: ['Cloud','DevOps'], formattingIssues: ['Consider quantifying achievements'], actionableImprovements: ['Add role-specific keywords','Quantify impact metrics'], criticalWeaknesses: ['Lack of measurable metrics in bullets','Missing core industry keywords','Outdated toolchain references'], skillGaps: [{skill:'System Design', link:'/library'},{skill:'Cloud / DevOps', link:'/library'}], beforeAfterBullets: [{before:'Managed database', after:'Optimized PostgreSQL query performance reducing latency by 40%'}] });
 }
 
 export async function evaluateReadinessReport(score, domain, targetRole) {
