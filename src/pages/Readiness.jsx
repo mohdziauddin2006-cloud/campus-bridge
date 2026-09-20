@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Brain, Sparkles, Zap } from 'lucide-react';
-import { evaluateReadinessReport } from '../services/aiService';
+import { evaluateReadinessReport, generateAssessmentQuestions } from '../services/aiService';
 import { Link } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -150,6 +150,7 @@ export default function Readiness() {
   const [submitting, setSubmitting] = useState(false);
   const [showBreakdown, setShowBreakdown] = useState(false);
   const [breakdown, setBreakdown] = useState({ bullets: [], roadmap: '' });
+  const [aiQuestions, setAiQuestions] = useState([]);
 
   const handleAnswer = (qid, idx) => {
     setQuizAnswers(a => ({ ...a, [qid]: idx }));
@@ -201,9 +202,13 @@ export default function Readiness() {
   };
 
   // Adaptive selection: prioritize skill-tagged questions, fill from qualification
-  const adaptiveSelect = () => {
+  const adaptiveSelect = async () => {
     const d = DOMAIN_QUESTIONS[domainTrack];
     if (d && d.length >= 5) return d.slice(0, 5);
+    try {
+      const q = await generateAssessmentQuestions(coreSkills || domainTrack || 'Engineering', domainTrack || 'VLSI', experience || 'Fresher');
+      if (q && q.length >= 5) { setAiQuestions(q); return q; }
+    } catch (e) {}
     const skills = (coreSkills || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
     const selectedPool = [];
     skills.forEach(skill => {
@@ -230,17 +235,16 @@ export default function Readiness() {
       });
     }
     // Slice to exactly 5 (shuffle optional, but we'll take first 5 for determinism)
-    try { const url = 'https://omni-route.example.com/generate?domain=' + encodeURIComponent(domainTrack || 'engineering') + '&skills=' + encodeURIComponent(skillsText || ''); /* lazy fetch attempt; falls back silently */ } catch(e){}
     return out.slice(0, 5);
   };
 
-  const generateQuestions = () => {
-    return adaptiveSelect();
+  const generateQuestions = async () => {
+    return await adaptiveSelect();
   };
 
-  const dynamicQuestions = generateQuestions();
+  const dynamicQuestions = aiQuestions.length ? aiQuestions : generateQuestions();
 
-  const activeQuestions = profileStep ? [] : (dynamicQuestions || QUESTION_BANK[branchCategory] || QUESTION_BANK['Engineering'] || []);
+  const activeQuestions = profileStep ? [] : (aiQuestions.length ? aiQuestions : (dynamicQuestions || QUESTION_BANK[branchCategory] || QUESTION_BANK['Engineering'] || []));
 
   const submitQuiz = async () => {
     if (Object.keys(quizAnswers).length < activeQuestions.length) return;

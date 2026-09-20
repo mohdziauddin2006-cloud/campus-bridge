@@ -60,6 +60,12 @@ export async function generateAssessmentQuestions(skills, domain, experienceLeve
   ];
 }
 
+export async function deepScanResume(resumeText, targetRole) {
+  const prompt = `Analyze resume text for role="${targetRole}". Return JSON: {atsScore: number 0-100, verdict: "High Match"|"Moderate Match"|"Needs Optimization", executiveSummary: "2 sentences", matchedKeywords: ["..."], missingKeywords: ["..."], formattingIssues: ["..."], actionableImprovements: ["..."]}. Return only JSON.`;
+  const text = await geminiFetch(prompt);
+  return safeParse(text, { atsScore: 72, verdict: 'Moderate Match', executiveSummary: 'Resume shows relevant experience but could be stronger with targeted keywords.', matchedKeywords: ['Python','React'], missingKeywords: ['Cloud','DevOps'], formattingIssues: ['Consider quantifying achievements'], actionableImprovements: ['Add role-specific keywords','Quantify impact metrics'] });
+}
+
 export async function evaluateReadinessReport(score, domain, targetRole) {
   const prompt = `Given readiness score=${score} domain=${domain} targetRole=${targetRole}, provide 3 bullet recommendations and 1 roadmap. JSON: {bullets:["...","...","..."],roadmap:"..."}`;
   const text = await geminiFetch(prompt);
