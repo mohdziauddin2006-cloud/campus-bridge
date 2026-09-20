@@ -53,8 +53,8 @@ export default function Academy() {
 
   return (
     <main className="bg-slate-50 min-h-screen pb-24 pt-10 px-6 lg:px-16 max-w-7xl mx-auto">
-      <h1 className="text-4xl font-black tracking-tight text-white mb-3">Video Academy</h1>
-      <p className="text-slate-400 text-base mb-8 font-light">Verified, embeddable public courses — no restricted IDs.</p>
+      <h1 className="text-4xl font-extrabold tracking-tight text-slate-900 mb-3">Video Academy</h1>
+      <p className="text-slate-700 text-base mb-8 font-light">Verified, embeddable public courses — no restricted IDs.</p>
 
       <div className="flex flex-wrap gap-2 mb-8">
         {categories.map(c => (
@@ -81,7 +81,7 @@ export default function Academy() {
       <div className="grid lg:grid-cols-3 gap-8">
         {/* Video List */}
         <div className="space-y-3">
-          <h3 className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-500 mb-4">Curated Learning Paths</h3>
+          <h3 className="text-[11px] font-bold uppercase tracking-[0.15em] text-slate-700 mb-4">Curated Learning Paths</h3>
           {filtered.map(v => (
             <button
               key={v.videoId}
@@ -91,13 +91,13 @@ export default function Academy() {
               }}
               className={`w-full text-left rounded-2xl border p-4 transition shadow-sm ${
                 selectedId === v.videoId
-                  ? 'bg-blue-50/40 border-blue-400/40 shadow-[0_8px_30px_rgba(59,130,246,0.12)]'
-                  : 'bg-white border-white/10 hover:border-white/20 hover:shadow-xl hover:shadow-black/20 transition-all duration-300'
+                  ? 'bg-blue-50 border-blue-400 shadow-md'
+                  : 'bg-white border-slate-200 hover:border-blue-300 hover:shadow-md'
               }`}
             >
-              <h4 className="font-extrabold text-slate-100">{v.title}</h4>
-              <p className="text-xs text-slate-500">{v.description}</p>
-              <span className="text-[10px] font-bold text-slate-400 uppercase">{v.category}</span>
+              <h4 className="font-extrabold text-slate-900">{v.title}</h4>
+              <p className="text-xs text-slate-700">{v.description}</p>
+              <span className="text-[10px] font-bold text-slate-700 uppercase">{v.category}</span>
             </button>
           ))}
         </div>
@@ -108,15 +108,15 @@ export default function Academy() {
             <iframe
               key={activeVideo.videoId}
               src={`https://www.youtube.com/embed/${activeVideo.videoId}`}
-              title={activeVideo.title}
-              className="w-full h-full"
+              title="YouTube video player"
+              className="w-full h-full rounded-2xl"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             />
           </div>
           <div className="p-8">
-            <h3 className="text-2xl font-extrabold text-slate-100 mb-2">{activeVideo.title}</h3>
-            <div className="flex items-center gap-4 text-sm text-slate-400 text-base mb-8 font-light">
+            <h3 className="text-2xl font-extrabold text-slate-900 mb-2">{activeVideo.title}</h3>
+            <div className="flex items-center gap-4 text-sm text-slate-700 text-base mb-8 font-medium">
               <span className="inline-flex items-center gap-1">
                 <Clock size={14} /> ~25 min
               </span>
@@ -124,8 +124,8 @@ export default function Academy() {
                 <CheckCircle size={14} /> Verifiable public source
               </span>
             </div>
-            <h4 className="font-bold text-slate-100 mb-2">Key Takeaways</h4>
-            <ul className="space-y-2 text-sm text-slate-600 mb-6">
+            <h4 className="font-bold text-slate-900 mb-2">Key Takeaways</h4>
+            <ul className="space-y-2 text-sm text-slate-800 mb-6">
               {[
                 'Understand core concepts through guided instruction.',
                 'Apply patterns in real-world engineering problems.',

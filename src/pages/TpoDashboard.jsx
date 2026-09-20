@@ -204,19 +204,19 @@ export default function TpoDashboard() {
                     <td className="px-3 py-3 flex gap-2">
                       <button
                         onClick={() => setInspectorApp(app)}
-                        className="cursor-pointer px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1"
+                        className="cursor-pointer relative z-20 px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1 pointer-events-auto"
                       >
                         <Sparkles size={12} /> View Details
                       </button>
                       <button
                         onClick={() => handleReject(app.id)}
-                        className="cursor-pointer px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1"
+                        className="cursor-pointer relative z-20 px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1 pointer-events-auto"
                       >
                         <XCircle size={12} /> Reject
                       </button>
                       <button
                         onClick={() => handleVerifyAndDispatch(app.id)}
-                        className="cursor-pointer px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1"
+                        className="cursor-pointer relative z-20 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1 pointer-events-auto"
                       >
                         <Send size={12} /> Verify
                       </button>

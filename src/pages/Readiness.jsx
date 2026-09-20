@@ -114,7 +114,7 @@ export default function Readiness() {
                 style={{ width: `${overall}%` }}
               />
             </div>
-            <div className="flex justify-between text-[10px] font-bold text-slate-400 mt-2 uppercase tracking-widest">
+            <div className="flex justify-between text-[10px] font-bold text-slate-700 mt-2 uppercase tracking-widest">
               <span>Low</span>
               <span>Medium</span>
               <span>High</span>
@@ -177,7 +177,7 @@ export default function Readiness() {
             <button
               onClick={closeQuiz}
               disabled={submitting}
-              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition disabled:opacity-30"
+              className="absolute top-4 right-4 text-slate-700 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition disabled:opacity-30"
             >
               <span className="text-xl">&times;</span>
             </button>
@@ -185,7 +185,7 @@ export default function Readiness() {
               <Zap className="text-amber-500" size={22} />
               <h2 className="text-2xl font-extrabold text-white">Readiness Assessment</h2>
             </div>
-            <p className="text-sm text-slate-500 mb-6">Answer 5 questions. Your score updates the Overall Readiness Gauge.</p>
+            <p className="text-sm text-slate-700 mb-6">Answer 5 questions. Your score updates the Overall Readiness Gauge.</p>
 
             {!quizSubmitted ? (
               <form
@@ -239,7 +239,7 @@ export default function Readiness() {
                   <span className="text-4xl font-black text-white">{score}%</span>
                 </div>
                 <h3 className="text-xl font-extrabold text-white mb-1">Your Readiness Score</h3>
-                <p className="text-sm text-slate-500 mb-4">
+                <p className="text-sm text-slate-700 mb-4">
                   Saved to your student profile. The gauge now reflects your result.
                 </p>
                 <button
