@@ -139,12 +139,12 @@ export default function Scanner() {
         >
           {scanning ? (
             <>
-              <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-              Analyzing keywords, relevance, and formatting...
+              <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin shrink-0" />
+              <span className="text-white font-extrabold">Analyzing keywords, relevance, and formatting...</span>
             </>
           ) : (
             <>
-              <Sparkles size={20} /> ✦ Scan with Gemini AI Intelligence
+              <Sparkles size={20} className="text-white" /> <span className="text-white font-extrabold">✦ Scan with Gemini AI Intelligence</span>
             </>
           )}
         </button>
