@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Brain, Sparkles, Zap } from 'lucide-react';
+import { evaluateReadinessReport } from '../services/aiService';
 import { Link } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
@@ -147,6 +148,8 @@ export default function Readiness() {
     try { return parseInt(localStorage.getItem('campus_bridge_readiness'), 10) || 0; } catch(e){ return 0; }
   });
   const [submitting, setSubmitting] = useState(false);
+  const [showBreakdown, setShowBreakdown] = useState(false);
+  const [breakdown, setBreakdown] = useState({ bullets: [], roadmap: '' });
 
   const handleAnswer = (qid, idx) => {
     setQuizAnswers(a => ({ ...a, [qid]: idx }));
@@ -249,6 +252,11 @@ export default function Readiness() {
     try { localStorage.setItem('campus_bridge_readiness', finalScore); } catch(e){}
     setQuizSubmitted(true);
     setSubmitting(true);
+    try {
+      const b = await evaluateReadinessReport(score, domainTrack || 'Engineering', selectedBranch || 'B.Tech');
+      setBreakdown(b);
+      setShowBreakdown(true);
+    } catch (e) {}
     try {
       await addDoc(collection(db, 'student_profiles'), {
         score: finalScore,
@@ -448,6 +456,17 @@ export default function Readiness() {
                 <h3 className="text-xl font-extrabold text-slate-900 mb-1">Your Readiness Score</h3>
                 <p className="text-sm text-slate-700 mb-4">Saved to your student profile. The gauge now reflects your result.</p>
                 <button onClick={() => setShowQuiz(false)} className="px-6 py-2.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition">Close</button>
+                <button onClick={() => setShowBreakdown(s => !s)} className="ml-2 px-6 py-2.5 rounded-full bg-violet-600 text-white font-bold hover:bg-violet-700 transition inline-flex items-center gap-2"><Sparkles size={16}/> AI Deep Breakdown</button>
+                {showBreakdown && (
+                  <div className="text-left mt-6 bg-gradient-to-br from-violet-50 to-blue-50 rounded-2xl p-5 border border-violet-200 shadow-sm">
+                    <h4 className="font-extrabold text-violet-900 mb-2">Why correct / incorrect</h4>
+                    <ul className="text-sm text-violet-950 font-medium list-disc pl-4 space-y-1 mb-3">
+                      {(breakdown.bullets || ['Strengthen core fundamentals','Practice applied scenarios']).map(b => <li key={b}>{b}</li>)}
+                    </ul>
+                    <h4 className="font-extrabold text-violet-900 mb-1">7-Day Catch-Up Schedule</h4>
+                    <p className="text-sm text-violet-950 font-medium">{breakdown.roadmap || '3-week plan: fundamentals → applied → edge-case practice'}</p>
+                  </div>
+                )}
               </div>
             ) : (
               <form

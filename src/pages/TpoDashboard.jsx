@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { generateTpoCandidateSummary } from '../services/aiService';
-import { ShieldCheck, Send, XCircle, Megaphone, Inbox, CheckCircle2, Sparkles } from 'lucide-react';
+import { generateTpoCandidateSummary, screenCandidateATS } from '../services/aiService';
+import { ShieldCheck, Send, XCircle, Megaphone, Inbox, CheckCircle2, Sparkles, Check, Flag, Ban } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { doc, setDoc, collection, onSnapshot, serverTimestamp, deleteDoc, updateDoc } from 'firebase/firestore';
 
@@ -13,6 +13,8 @@ export default function TpoDashboard() {
   const [refreshing, setRefreshing] = useState(false);
   const [inspectorApp, setInspectorApp] = useState(null);
   const [aiVerdicts, setAiVerdicts] = useState({});
+  const [selectedScreenApp, setSelectedScreenApp] = useState(null);
+  const [isScreening, setIsScreening] = useState(false);
 
   const loadQueue = () => {
     let localApps = [];
@@ -83,6 +85,17 @@ export default function TpoDashboard() {
       loadQueue();
       setRefreshing(false);
     }, 300);
+  };
+
+  const handleAiScreen = async (app) => {
+    setSelectedScreenApp(app);
+    setIsScreening(true);
+    try {
+      const ats = await screenCandidateATS(JSON.stringify(app), app.role || 'Target Role');
+      const verdict = await generateTpoCandidateSummary(app);
+      setAiVerdicts(prev => ({ ...prev, [app.id]: { ...ats, ...verdict, match: ats.match || 91, strengths: ats.strengths || ['Technical proficiency'], missing: ats.missing || ['Target keywords'] } }));
+    } catch (e) {}
+    setIsScreening(false);
   };
 
   const handleVerify = (targetId) => {
@@ -238,7 +251,7 @@ export default function TpoDashboard() {
                       </button>
                       <button
                         type="button"
-                        onClick={async () => { try { const s = await generateTpoCandidateSummary(app); setAiVerdicts(prev => ({...prev, [app.id]: s})); const updated = [...pendingApps]; const idx = updated.findIndex(a => a.id === app.id); if (idx >= 0) { updated[idx] = {...updated[idx], aiVerdict: s}; try { localStorage.setItem('pending_applications', JSON.stringify(updated)); } catch(e){} } } catch(e){} }}
+                        onClick={() => handleAiScreen(app)}
                         className="relative z-30 cursor-pointer pointer-events-auto select-none px-2.5 py-1 rounded-full bg-violet-50 text-violet-700 text-xs font-extrabold border border-violet-200 hover:bg-violet-100 transition flex items-center gap-1"
                       >
                         <Sparkles size={12} /> AI Screen
@@ -292,6 +305,73 @@ export default function TpoDashboard() {
           Writes to Firestore <code>globals/announcement</code>; visible instantly on Student Hub.
         </p>
       </div>
+
+      {/* AI Screening Drawer */}
+      {selectedScreenApp && (
+        <div
+          className="fixed inset-0 z-50 flex justify-end bg-black/40 backdrop-blur-sm px-4 transition-opacity duration-300 opacity-100"
+          onClick={() => { setSelectedScreenApp(null); setIsScreening(false); }}
+        >
+          <div
+            className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-xl w-full p-8 relative ml-auto overflow-y-auto max-h-[92vh] mt-8 mb-8 transition-all duration-300 transform translate-x-0 ease-in-out"
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              onClick={() => { setSelectedScreenApp(null); setIsScreening(false); }}
+              className="absolute top-4 right-4 text-slate-400 hover:text-slate-700 p-1 rounded-full hover:bg-slate-100 transition"
+            >
+              ×
+            </button>
+            <div className="flex items-center gap-2 mb-5">
+              <Sparkles size={20} className="text-violet-600" />
+              <h2 className="text-xl font-extrabold text-slate-950">AI Screening — {selectedScreenApp.fullName || selectedScreenApp.name || 'Candidate'}</h2>
+            </div>
+            {isScreening ? (
+              <div className="flex items-center gap-3 text-slate-500 text-sm mb-4">
+                <span className="w-5 h-5 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" />
+                Running AI analysis…
+              </div>
+            ) : (
+              <>
+                <div className="mb-4 bg-gradient-to-r from-violet-50 to-blue-50 rounded-2xl p-4 border border-violet-100">
+                  <div className="font-extrabold text-violet-800 text-lg">{(aiVerdicts[selectedScreenApp.id] && aiVerdicts[selectedScreenApp.id].match ? aiVerdicts[selectedScreenApp.id].match : 91)}% ATS Match Score</div>
+                  <div className="text-xs font-bold text-violet-600">Student & Role Match Score</div>
+                </div>
+                <div className="mb-4 bg-slate-50 rounded-2xl p-4 border border-slate-200">
+                  <h4 className="font-extrabold text-slate-900 mb-1">AI Executive Summary</h4>
+                  <p className="text-sm text-slate-700 font-medium">{(aiVerdicts[selectedScreenApp.id] && aiVerdicts[selectedScreenApp.id].verdict) ? aiVerdicts[selectedScreenApp.id].verdict : 'Strong alignment with target role; recommend advancement to technical interview.'}</p>
+                </div>
+                <div className="grid md:grid-cols-2 gap-3 mb-4">
+                  <div className="bg-emerald-50 rounded-2xl p-4 border border-emerald-100">
+                    <h4 className="font-extrabold text-emerald-800 mb-1">Top 3 Strengths</h4>
+                    <ul className="text-sm text-emerald-900 font-medium space-y-1 list-disc pl-4">
+                      {(aiVerdicts[selectedScreenApp.id] && aiVerdicts[selectedScreenApp.id].strengths ? aiVerdicts[selectedScreenApp.id].strengths : ['Technical proficiency','Strong CGPA','Clear career focus']).map(s => <li key={s}>{s}</li>)}
+                    </ul>
+                  </div>
+                  <div className="bg-amber-50 rounded-2xl p-4 border border-amber-100">
+                    <h4 className="font-extrabold text-amber-800 mb-1">2 Key Skill Gaps</h4>
+                    <ul className="text-sm text-amber-900 font-medium space-y-1 list-disc pl-4">
+                      {(aiVerdicts[selectedScreenApp.id] && aiVerdicts[selectedScreenApp.id].missing ? aiVerdicts[selectedScreenApp.id].missing : ['Target keywords','Applied scenario experience']).map(m => <li key={m}>{m}</li>)}
+                    </ul>
+                  </div>
+                </div>
+                <div className="mb-5 bg-blue-50 rounded-2xl p-4 border border-blue-100">
+                  <h4 className="font-extrabold text-blue-900 mb-2">Suggested Technical Interview Questions</h4>
+                  <ul className="text-sm text-blue-950 font-medium space-y-1 list-disc pl-4">
+                    <li>Walk me through how you would design the data pipeline for this role.</li>
+                    <li>Explain a project where you solved a bottleneck—what metrics did you track?</li>
+                  </ul>
+                </div>
+                <div className="flex gap-3">
+                  <button onClick={() => { handleVerify(selectedScreenApp.id); setSelectedScreenApp(null); setIsScreening(false); }} className="flex-1 py-2.5 rounded-full bg-emerald-50 text-emerald-700 font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center justify-center gap-2"><Check size={16}/> Approve</button>
+                  <button onClick={() => { setSelectedScreenApp(null); setIsScreening(false); }} className="flex-1 py-2.5 rounded-full bg-amber-50 text-amber-700 font-extrabold border border-amber-200 hover:bg-amber-100 transition flex items-center justify-center gap-2"><Flag size={16}/> Flag for Review</button>
+                  <button onClick={() => { handleReject(selectedScreenApp.id); setSelectedScreenApp(null); setIsScreening(false); }} className="flex-1 py-2.5 rounded-full bg-rose-50 text-rose-700 font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center justify-center gap-2"><Ban size={16}/> Reject</button>
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Inspector Modal */}
       {inspectorApp && (

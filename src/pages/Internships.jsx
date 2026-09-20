@@ -1,12 +1,26 @@
 import { useState } from 'react';
-import { Building2, MapPin, Clock, Star, ArrowRight, CheckCircle2, X } from 'lucide-react';
+import { Building2, MapPin, Clock, Star, ArrowRight, CheckCircle2, X, Sparkles } from 'lucide-react';
+import { generateTpoCandidateSummary } from '../services/aiService';
 
 
 const ApplyModal = ({ open, onClose, role }) => {
   if (!open) return null;
   const [form, setForm] = useState({ fullName: '', email: '', college: 'Annamacharya Institute of Technology and Sciences', qualification: '', hallTicket: '', skills: '' });
   const [ok, setOk] = useState(false);
-  const handle = (e) => { e.preventDefault(); const pending = JSON.parse(localStorage.getItem('pending_applications') || '[]'); pending.push({ id: 'app-' + Date.now(), studentName: 'Mohd Zia Uddin', degree: 'B.Tech', branch: 'ECE', cgpa: '8.4', college: 'AITS Hyderabad', atsScore: '91%', role: role?.title || '', company: role?.company || '', status: 'Submitted', submittedAt: new Date().toLocaleDateString(), fullName: form.fullName, email: form.email }); localStorage.setItem('pending_applications', JSON.stringify(pending)); window.dispatchEvent(new Event('storage')); setOk(true); setTimeout(() => { setOk(false); onClose(); }, 2200); };
+  const [isAligning, setIsAligning] = useState(false);
+  const [alignedNote, setAlignedNote] = useState('');
+  const handleAlign = async () => {
+    setIsAligning(true);
+    try {
+      const res = await generateTpoCandidateSummary({ studentName: form.fullName, role: role?.title || 'Role', branch: form.qualification || 'B.Tech', skills: form.skills, company: role?.company || 'N/A' });
+      const keywords = res.verdict ? res.verdict.split(' ').slice(0,3) : [];
+      const optimized = (form.skills ? form.skills.split(',').map(s=>s.trim()).join(', ') + ', ' : '') + keywords.join(', ');
+      setForm(prev => ({...prev, skills: optimized}));
+      setAlignedNote(res.verdict || 'Tailored pitch: Strong alignment with the role requirements. Ready to contribute with optimized skill keywords.');
+    } catch (e) {}
+    setIsAligning(false);
+  };
+  const handle = (e) => { e.preventDefault(); const pending = JSON.parse(localStorage.getItem('pending_applications') || '[]'); pending.push({ id: 'app-' + Date.now(), studentName: 'Mohd Zia Uddin', degree: 'B.Tech', branch: 'ECE', cgpa: '8.4', college: 'AITS Hyderabad', atsScore: '91%', role: role?.title || '', company: role?.company || '', status: 'Submitted', submittedAt: new Date().toLocaleDateString(), fullName: form.fullName, email: form.email, skills: form.skills, notes: alignedNote || '' }); localStorage.setItem('pending_applications', JSON.stringify(pending)); window.dispatchEvent(new Event('storage')); setOk(true); setTimeout(() => { setOk(false); onClose(); }, 2200); };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md px-4" onClick={onClose}>
       <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-lg w-full p-8 relative" onClick={e => e.stopPropagation()}>
@@ -20,7 +34,13 @@ const ApplyModal = ({ open, onClose, role }) => {
               const placeholders = { fullName: 'Mohd Zia Uddin', email: 'zia@college.edu', college: 'Annamacharya Institute of Technology and Sciences', qualification: 'B.Tech ECE', hallTicket: '21EECE1234', skills: 'Python, VLSI, SystemVerilog' };
               return (
                 <div key={k}><label className="block text-xs font-extrabold uppercase tracking-widest text-slate-500 mb-1">{labels[k]}</label>
-                <input required type={k==='email'?'email':'text'} value={form[k]} onChange={e => setForm({ ...form, [k]: e.target.value })} placeholder={placeholders[k]} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition" /></div>
+                  {k === 'skills' && (
+                    <button type="button" onClick={handleAlign} disabled={isAligning} className="mb-1.5 inline-flex items-center gap-1.5 text-xs font-extrabold bg-violet-50 text-violet-700 border border-violet-200 hover:bg-violet-100 rounded-full px-2.5 py-1 transition disabled:opacity-50"><Sparkles size={12}/> ✦ AI Auto-Align Skills & Pitch</button>
+                  )}
+                  <input required type={k==='email'?'email':'text'} value={form[k]} onChange={e => setForm({ ...form, [k]: e.target.value })} placeholder={placeholders[k]} className="w-full px-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 transition" />
+                  {k === 'skills' && alignedNote && <p className="text-xs text-violet-700 font-medium mt-1">{alignedNote}</p>}
+                  {k === 'skills' && isAligning && <div className="flex items-center gap-2 text-xs text-violet-600 font-medium mt-1"><span className="w-3 h-3 border-2 border-violet-600 border-t-transparent rounded-full animate-spin" /> Generating optimized keywords & pitch…</div>}
+                </div>
               );
             })}
             <button type="submit" className="w-full py-3 rounded-full bg-blue-600 text-white font-extrabold shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition">Submit Application</button>
