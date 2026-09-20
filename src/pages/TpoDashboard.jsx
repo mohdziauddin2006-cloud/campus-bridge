@@ -117,7 +117,7 @@ export default function TpoDashboard() {
   };
 
   return (
-    <main className="bg-[#0b0d12] min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
+    <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <a href="/" className="text-sm font-bold text-blue-600 hover:text-blue-700 transition mb-4 inline-block">
         ← Back to Portal
       </a>
@@ -132,7 +132,7 @@ export default function TpoDashboard() {
       )}
 
       {/* Pending Applications Queue */}
-      <div className="bg-[#131820] rounded-3xl border border-slate-200 shadow-sm p-8 text-slate-900 mb-10">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-slate-900 mb-10">
         <div className="flex items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
@@ -204,19 +204,19 @@ export default function TpoDashboard() {
                     <td className="px-3 py-3 flex gap-2">
                       <button
                         onClick={() => setInspectorApp(app)}
-                        className="px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1"
+                        className="cursor-pointer px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1"
                       >
                         <Sparkles size={12} /> View Details
                       </button>
                       <button
                         onClick={() => handleReject(app.id)}
-                        className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1"
+                        className="cursor-pointer px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1"
                       >
                         <XCircle size={12} /> Reject
                       </button>
                       <button
                         onClick={() => handleVerifyAndDispatch(app.id)}
-                        className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1"
+                        className="cursor-pointer px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1"
                       >
                         <Send size={12} /> Verify
                       </button>
@@ -230,7 +230,7 @@ export default function TpoDashboard() {
       </div>
 
       {/* Announcement Broadcast */}
-      <div className="bg-[#131820] rounded-3xl border border-slate-200 shadow-sm p-8 mb-10">
+      <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 mb-10">
         <div className="flex items-center gap-3 mb-5">
           <div className="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center">
             <Megaphone size={20} className="text-blue-600" />
@@ -242,7 +242,7 @@ export default function TpoDashboard() {
             value={announcementText}
             onChange={e => setAnnouncementText(e.target.value)}
             placeholder="Broadcast message to all students..."
-            className="flex-1 px-4 py-3 rounded-xl border border-slate-200 bg-[#0b0d12] text-sm font-medium text-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+            className="flex-1 px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-950 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
           />
           <button
             onClick={broadcast}
@@ -263,7 +263,7 @@ export default function TpoDashboard() {
           onClick={() => setInspectorApp(null)}
         >
           <div
-            className="bg-[#131820] rounded-3xl shadow-2xl border border-slate-200 max-w-md w-full p-8 relative"
+            className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-md w-full p-8 relative"
             onClick={e => e.stopPropagation()}
           >
             <button

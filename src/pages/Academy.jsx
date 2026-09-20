@@ -52,7 +52,7 @@ export default function Academy() {
   };
 
   return (
-    <main className="bg-[#0f1115] min-h-screen pb-24 pt-10 px-6 lg:px-16 max-w-7xl mx-auto">
+    <main className="bg-slate-50 min-h-screen pb-24 pt-10 px-6 lg:px-16 max-w-7xl mx-auto">
       <h1 className="text-4xl font-black tracking-tight text-white mb-3">Video Academy</h1>
       <p className="text-slate-400 text-base mb-8 font-light">Verified, embeddable public courses — no restricted IDs.</p>
 
@@ -91,8 +91,8 @@ export default function Academy() {
               }}
               className={`w-full text-left rounded-2xl border p-4 transition shadow-sm ${
                 selectedId === v.videoId
-                  ? 'bg-[#1a2332] border-blue-400/40 shadow-[0_8px_30px_rgba(59,130,246,0.12)]'
-                  : 'bg-[#161b22] border-white/10 hover:border-white/20 hover:shadow-xl hover:shadow-black/20 transition-all duration-300'
+                  ? 'bg-blue-50/40 border-blue-400/40 shadow-[0_8px_30px_rgba(59,130,246,0.12)]'
+                  : 'bg-white border-white/10 hover:border-white/20 hover:shadow-xl hover:shadow-black/20 transition-all duration-300'
               }`}
             >
               <h4 className="font-extrabold text-slate-100">{v.title}</h4>
