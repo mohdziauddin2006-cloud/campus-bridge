@@ -19,6 +19,8 @@ export default function Academy() {
   const [selectedId, setSelectedId] = useState(videos[0].videoId);
   const [activeVideo, setActiveVideo] = useState(videos[0]);
   const [completed, setCompleted] = useState(new Set());
+  const [tab, setActiveTab] = useState('concept');
+  const [showAnswer, setShowAnswer] = useState(false);
 
   useEffect(() => {
     // Filter category change: select first video in category
@@ -155,8 +157,23 @@ export default function Academy() {
         </div>
       </div>
 
-    </main>
+    
+      {/* AI Concept Explainer */}
+      <div className="bg-white border border-slate-200 shadow-sm rounded-3xl p-8 mb-10">
+        <h3 className="text-xl font-extrabold text-slate-900 mb-4">✦ Gemini AI Academy Copilot</h3>
+        <div className="flex gap-2 mb-4">
+          <button onClick={() => setActiveTab('concept')} className={`px-3 py-1.5 rounded-full text-xs font-bold border ${tab==='concept'?'bg-blue-600 text-white border-blue-600':'bg-slate-50 text-slate-700 border-slate-200'}`}>Concept Breakdown</button>
+          <button onClick={() => setActiveTab('interview')} className={`px-3 py-1.5 rounded-full text-xs font-bold border ${tab==='interview'?'bg-blue-600 text-white border-blue-600':'bg-slate-50 text-slate-700 border-slate-200'}`}>Interview Prep</button>
+          <button onClick={() => setActiveTab('ask')} className={`px-3 py-1.5 rounded-full text-xs font-bold border ${tab==='ask'?'bg-blue-600 text-white border-blue-600':'bg-slate-50 text-slate-700 border-slate-200'}`}>Ask AI Tutor</button>
+        </div>
+        <div className="text-sm text-slate-700 font-medium">
+          {tab==='concept' && <div><p className="mb-2">Key Takeaways for <b>{(activeVideo||{title:'Lesson'}).title||'Lesson'}</b>:</p><ul className="list-disc pl-5 space-y-1"><li>Core architecture and design pattern</li><li>Syntax and implementation details</li><li>Real-world industrial relevance</li></ul></div>}
+          {tab==='interview' && <div><p className="mb-1 font-bold">Interview Question:</p><p>How would you explain {(activeVideo||{title:'this concept'}).title||'this concept'} in a production system?</p><button className="mt-2 px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold" onClick={() => setShowAnswer(!showAnswer)}>Reveal Model Answer</button>{showAnswer && <p className="mt-2 text-xs text-slate-500">Answer: It provides structured, scalable behavior with clear separation of concerns.</p>}</div>}
+          {tab==='ask' && <div><p>Ask anything about the current lecture.</p></div>}
+        </div>
+      </div>
+</main>
 
   );
 }
-<div className="p-4 bg-violet-50 border border-violet-200 rounded-xl mb-4"><h3>✦ AI Concept Explainer</h3><p>Takeaways and interview prep for '"${activeVideo.title}"'</p></div>
+
