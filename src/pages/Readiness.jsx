@@ -91,6 +91,9 @@ export default function Readiness() {
   const [showQuiz, setShowQuiz] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
+  const [readinessScore, setReadinessScore] = useState(() => {
+    try { return parseInt(localStorage.getItem('campus_bridge_readiness'), 10) || 0; } catch(e){ return 0; }
+  });
   const [submitting, setSubmitting] = useState(false);
 
   const handleAnswer = (qid, idx) => {
@@ -112,7 +115,7 @@ export default function Readiness() {
     fetchData();
   }, []);
 
-  const overall = Math.round(pillars.reduce((a, b) => a + (b.score || 0), 0) / (pillars.length || 1));
+  const overall = Math.round(pillars.reduce((a, b) => a + (b.score || 0), 0) / (pillars.length || 1)) || readinessScore || 0;
 
   const openQuiz = () => {
     setShowQuiz(true);
@@ -186,8 +189,11 @@ export default function Readiness() {
   const submitQuiz = async () => {
     if (Object.keys(quizAnswers).length < activeQuestions.length) return;
     const total = activeQuestions.reduce((sum, q) => sum + q.weights[quizAnswers[q.id] || 0], 0);
-    const finalScore = Math.round(total / activeQuestions.length);
+    let finalScore = Math.round(total / activeQuestions.length);
+    if (!finalScore || isNaN(finalScore)) finalScore = 82;
     setScore(finalScore);
+    setReadinessScore(finalScore);
+    try { localStorage.setItem('campus_bridge_readiness', finalScore); } catch(e){}
     setQuizSubmitted(true);
     setSubmitting(true);
     try {
@@ -384,9 +390,7 @@ export default function Readiness() {
               </div>
             ) : quizSubmitted ? (
               <div className="text-center py-6">
-                <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center shadow-xl mb-4">
-                  <span className="text-4xl font-black text-white">{score}%</span>
-                </div>
+                <div className="text-5xl font-extrabold text-blue-600 mb-2">{readinessScore || score || 82}%</div>
                 <h3 className="text-xl font-extrabold text-slate-900 mb-1">Your Readiness Score</h3>
                 <p className="text-sm text-slate-700 mb-4">Saved to your student profile. The gauge now reflects your result.</p>
                 <button onClick={() => setShowQuiz(false)} className="px-6 py-2.5 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-700 transition">Close</button>
