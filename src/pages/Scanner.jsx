@@ -135,7 +135,7 @@ export default function Scanner() {
         <button
           onClick={startScan}
           disabled={scanning || (!file && !pastedText.trim())}
-          className="w-full md:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-emerald-500 to-blue-500 text-white font-extrabold text-lg shadow-xl shadow-emerald-500/30 hover:shadow-blue-600/30 transition flex items-center justify-center gap-2"
+          className="w-full md:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold shadow-lg shadow-indigo-500/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:bg-indigo-400 disabled:text-white disabled:cursor-not-allowed"
         >
           {scanning ? (
             <>
@@ -144,7 +144,8 @@ export default function Scanner() {
             </>
           ) : (
             <>
-              <Sparkles size={20} className="text-white" /> <span className="text-white font-extrabold">✦ Scan with Gemini AI Intelligence</span>
+              <Sparkles size={20} className="text-white shrink-0" />
+              <span className="text-white font-bold">Scan with Gemini AI Intelligence</span>
             </>
           )}
         </button>
