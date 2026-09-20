@@ -465,7 +465,7 @@ export default function Readiness() {
                   <div className="text-left mt-6 bg-gradient-to-br from-violet-50 to-blue-50 rounded-2xl p-5 border border-violet-200 shadow-sm">
                     <h4 className="font-extrabold text-violet-900 mb-2">Why correct / incorrect</h4>
                     <ul className="text-sm text-violet-950 font-medium list-disc pl-4 space-y-1 mb-3">
-                      {(breakdown.bullets || ['Strengthen core fundamentals','Practice applied scenarios']).map(b => <li key={b}>{b}</li>)}
+                      {(Array.isArray(breakdown?.bullets) ? breakdown.bullets : (breakdown?.bullets || ['Strengthen core fundamentals','Practice applied scenarios'])).map(b => <li key={b}>{b}</li>)}
                     </ul>
                     <h4 className="font-extrabold text-violet-900 mb-1">7-Day Catch-Up Schedule</h4>
                     <p className="text-sm text-violet-950 font-medium">{breakdown.roadmap || '3-week plan: fundamentals → applied → edge-case practice'}</p>
@@ -481,7 +481,7 @@ export default function Readiness() {
                   <div key={q.id}>
                     <h3 className="font-bold text-slate-900 text-base mb-2.5">{idx + 1}. {q.label}</h3>
                     <div className="flex flex-wrap gap-2">
-                      {q.opts.map((opt, i) => (
+                      {(Array.isArray(q?.opts) ? q.opts : []).map((opt, i) => (
                         <button
                           key={i}
                           type="button"

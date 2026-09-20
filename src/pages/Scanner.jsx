@@ -173,7 +173,7 @@ export default function Scanner() {
             <div>
               <h4 className="font-extrabold text-emerald-800 mb-2">Matched Keywords</h4>
               <div className="flex flex-wrap gap-2">
-                {(scanResult.matchedKeywords || ['Python','React']).map(k => (
+                {(Array.isArray(scanResult?.matchedKeywords) ? scanResult.matchedKeywords : ['Python','React']).map(k => (
                   <span key={k} className="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">{k}</span>
                 ))}
               </div>
@@ -181,7 +181,7 @@ export default function Scanner() {
             <div>
               <h4 className="font-extrabold text-rose-800 mb-2">Missing Keywords</h4>
               <div className="flex flex-wrap gap-2">
-                {(scanResult.missingKeywords || ['Cloud','DevOps']).map(k => (
+                {(Array.isArray(scanResult?.missingKeywords) ? scanResult.missingKeywords : ['Cloud','DevOps']).map(k => (
                   <span key={k} className="px-2.5 py-1 rounded-full bg-rose-50 text-rose-700 text-xs font-bold border border-rose-200">{k}</span>
                 ))}
               </div>
@@ -189,11 +189,11 @@ export default function Scanner() {
           </div>
 
           {/* Formatting issues */}
-          {scanResult.formattingIssues && scanResult.formattingIssues.length > 0 && (
+          {scanResult.formattingIssues && Array.isArray(scanResult.formattingIssues) && scanResult.formattingIssues.length > 0 && (
             <div className="mb-6 bg-amber-50 rounded-2xl p-4 border border-amber-200">
               <h4 className="font-extrabold text-amber-800 mb-2">Formatting Issues</h4>
               <ul className="list-disc pl-5 text-sm text-amber-900 font-medium space-y-1">
-                {scanResult.formattingIssues.map(i => <li key={i}>{i}</li>)}
+                {(Array.isArray(scanResult.formattingIssues) ? scanResult.formattingIssues : []).map(i => <li key={i}>{i}</li>)}
               </ul>
             </div>
           )}
@@ -202,7 +202,7 @@ export default function Scanner() {
           <div className="bg-blue-50 rounded-2xl p-5 border border-blue-100">
             <h4 className="font-extrabold text-blue-900 mb-3">Actionable Improvements</h4>
             <ul className="list-disc pl-5 text-sm text-blue-950 font-medium space-y-1">
-              {(scanResult.actionableImprovements || ['Add role-specific keywords','Quantify impact metrics']).map(a => <li key={a}>{a}</li>)}
+              {(Array.isArray(scanResult?.actionableImprovements) ? scanResult.actionableImprovements : ['Add role-specific keywords','Quantify impact metrics']).map(a => <li key={a}>{a}</li>)}
             </ul>
           </div>
         </div>
