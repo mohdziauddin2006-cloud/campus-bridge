@@ -137,9 +137,9 @@ export default function Readiness() {
       </div>
 
       {/* Curriculum */}
-      <div className="bg-gradient-to-br from-slate-900 to-blue-950 rounded-3xl p-8 text-white shadow-2xl mb-10">
-        <h2 className="text-xl font-extrabold mb-4">Targeted Bridge Curriculum</h2>
-        <p className="text-slate-300 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
+      <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 text-white shadow-2xl mb-10">
+        <h2 className="text-xl font-extrabold text-white mb-4">Targeted Bridge Curriculum</h2>
+        <p className="text-blue-50 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
         <div className="grid md:grid-cols-2 gap-4">
           <Link
             to="/academy"
