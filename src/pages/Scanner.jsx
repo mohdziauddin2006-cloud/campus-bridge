@@ -135,7 +135,7 @@ export default function Scanner() {
         <button
           onClick={startScan}
           disabled={scanning || (!file && !pastedText.trim())}
-          className="w-full md:w-auto px-10 py-4 rounded-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold shadow-lg shadow-indigo-500/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 disabled:bg-indigo-400 disabled:text-white disabled:cursor-not-allowed"
+          className="w-full py-4 px-6 rounded-2xl font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 shadow-xl shadow-indigo-500/25 transition-all duration-200 flex items-center justify-center gap-3 disabled:opacity-60 disabled:cursor-not-allowed cursor-pointer text-lg"
         >
           {scanning ? (
             <>
