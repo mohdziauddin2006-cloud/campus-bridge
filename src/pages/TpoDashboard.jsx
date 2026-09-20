@@ -87,6 +87,9 @@ export default function TpoDashboard() {
     try {
       await updateDoc(doc(db, 'applications', id), { status: 'Verified' });
       setPendingApps(prev => prev.map(a => (a.id === id ? { ...a, status: 'Verified' } : a)));
+      const rawApps = JSON.parse(localStorage.getItem('campus_bridge_applications') || '[]');
+      const updated = rawApps.map(a => (a.id === id ? { ...a, status: 'Verified' } : a));
+      localStorage.setItem('campus_bridge_applications', JSON.stringify(updated));
       alert('Verified');
     } catch (e) { console.error('Verify error:', e); }
   };
@@ -95,6 +98,9 @@ export default function TpoDashboard() {
     try {
       await updateDoc(doc(db, 'applications', id), { status: 'Rejected' });
       setPendingApps(prev => prev.map(a => (a.id === id ? { ...a, status: 'Rejected' } : a)));
+      const rawApps = JSON.parse(localStorage.getItem('campus_bridge_applications') || '[]');
+      const updated = rawApps.map(a => (a.id === id ? { ...a, status: 'Rejected' } : a));
+      localStorage.setItem('campus_bridge_applications', JSON.stringify(updated));
     } catch (e) { console.error('Reject error:', e); }
   };
 
@@ -219,19 +225,19 @@ export default function TpoDashboard() {
                     <td className="px-3 py-3 flex gap-2">
                       <button
                         onClick={() => setInspectorApp(app)}
-                        className="cursor-pointer relative z-20 px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1 pointer-events-auto"
+                        className="cursor-pointer relative z-30 px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1 pointer-events-auto"
                       >
                         <Sparkles size={12} /> View Details
                       </button>
                       <button
                         onClick={() => handleReject(app.id)}
-                        className="cursor-pointer relative z-20 px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1 pointer-events-auto"
+                        className="cursor-pointer relative z-30 px-2.5 py-1 rounded-full bg-rose-50 text-rose-600 text-xs font-extrabold border border-rose-200 hover:bg-rose-100 transition flex items-center gap-1 pointer-events-auto"
                       >
                         <XCircle size={12} /> Reject
                       </button>
                       <button
                         onClick={() => handleVerify(app.id)}
-                        className="cursor-pointer relative z-20 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1 pointer-events-auto"
+                        className="cursor-pointer relative z-30 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-extrabold border border-emerald-200 hover:bg-emerald-100 transition flex items-center gap-1 pointer-events-auto"
                       >
                         <Send size={12} /> Verify
                       </button>
