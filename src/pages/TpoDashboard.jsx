@@ -4,7 +4,7 @@ import { db } from '../lib/firebase';
 import { doc, setDoc, collection, onSnapshot, serverTimestamp, deleteDoc, updateDoc } from 'firebase/firestore';
 
 export default function TpoDashboard() {
-  const [tab, setTab] = useState('pending');
+  const [tab, setTab] = useState(() => { try { return localStorage.getItem('tpo_active_tab') || 'pending'; } catch(e){ return 'pending'; } });
   const [pendingApps, setPendingApps] = useState([]);
   const [announcementText, setAnnouncementText] = useState('');
   const [liveAnnouncement, setLiveAnnouncement] = useState('');
@@ -89,7 +89,7 @@ export default function TpoDashboard() {
       const updated = prev.map((app) =>
         (app.id === targetId || app._id === targetId) ? { ...app, status: 'Verified' } : app
       );
-      try { localStorage.setItem('campus_bridge_applications', JSON.stringify(updated)); } catch (e) {}
+      try { localStorage.setItem('pending_applications', JSON.stringify(updated)); } catch (e) {}
       return updated;
     });
   };
@@ -100,7 +100,8 @@ export default function TpoDashboard() {
       const updated = prev.map((app) =>
         (app.id === targetId || app._id === targetId) ? { ...app, status: 'Rejected' } : app
       );
-      try { localStorage.setItem('campus_bridge_applications', JSON.stringify(updated)); } catch (e) {}
+      try { localStorage.setItem('pending_applications', JSON.stringify(updated)); } catch (e) {}
+      try { fetch('/api/applications/' + targetId, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'Rejected' }) }).catch(()=>{}); } catch(e){}
       return updated;
     });
   };
@@ -144,7 +145,7 @@ export default function TpoDashboard() {
             <button
               type="button"
               key={t.key}
-              onClick={() => setTab(t.key)}
+              onClick={() => { setTab(t.key); try { localStorage.setItem('tpo_active_tab', t.key); } catch(e){} }}
               className={`relative z-30 cursor-pointer pointer-events-auto select-none px-4 py-2 rounded-full text-xs font-extrabold border transition ${tab === t.key ? 'bg-blue-600 text-white border-blue-600 shadow' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'}`}
             >
               {t.label}
@@ -196,8 +197,8 @@ export default function TpoDashboard() {
               </thead>
               <tbody>
                 {pendingApps.filter(app => {
-                  if (tab === 'pending') return !app.status || app.status === 'Submitted' || app.status === 'Pending';
-                  if (tab === 'verified') return app.status === 'Verified';
+                  if (tab === 'pending') return app.status === 'Submitted' || app.status === 'Pending';
+                  if (tab === 'verified') return app.status === 'Verified' || app.status === 'Approved';
                   if (tab === 'rejected') return app.status === 'Rejected';
                   return false;
                 }).map(app => (

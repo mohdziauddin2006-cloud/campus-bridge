@@ -92,6 +92,31 @@ const SKILL_POOL = {
   ],
 };
 
+
+const DOMAIN_QUESTIONS = {
+  'VLSI & Digital Design': [
+    { id: 'vlsi1', label: 'Core Fundamentals: In CMOS logic, what determines propagation delay?', opts: ['Capacitance and drive current','Only supply voltage','Only transistor count','Only clock frequency'], weights: [5,15,50,90] },
+    { id: 'vlsi2', label: 'Applied Principles: Setup time violation is caused when?', opts: ['Data changes too close to clock edge','Clock is too slow','Hold time exceeds delay','No signal'], weights: [5,15,50,90] },
+    { id: 'vlsi3', label: 'Applied Principles: Which technique reduces dynamic power?', opts: ['Clock gating','Increasing VDD','Removing buffers','Adding flip-flops'], weights: [5,15,50,90] },
+    { id: 'vlsi4', label: 'Advanced Timing: Metastability in a flip-flop is best described as?', opts: ['Unpredictable output for bounded time','Permanent high output','Always resolved to 0','Always resolved to 1'], weights: [5,15,50,90] },
+    { id: 'vlsi5', label: 'Advanced Edge-Case: FSM with no reset can suffer?', opts: ['Unknown initial state','Faster transitions','Lower area','Better timing'], weights: [5,15,50,90] },
+  ],
+  'Embedded & Firmware': [
+    { id: 'emb1', label: 'Core Fundamentals: Interrupt vector table role?', opts: ['Map sources to handlers','Store code','Buffer data','Generate clocks'], weights: [5,15,50,90] },
+    { id: 'emb2', label: 'Applied Principles: In embedded C, volatile indicates?', opts: ['Non-volatile storage','Constant value','Fast access','Shared memory'], weights: [5,15,50,90] },
+    { id: 'emb3', label: 'Applied Principles: DMA improves by?', opts: ['Offloading CPU from transfer','Increasing clock','Reducing memory','Removing interrupts'], weights: [5,15,50,90] },
+    { id: 'emb4', label: 'Advanced Timing: Watchdog resets when?', opts: ['Loop fails to refresh','Clock too fast','Interrupt low','Memory overflows'], weights: [5,15,50,90] },
+    { id: 'emb5', label: 'Advanced Edge-Case: RTOS race conditions prevented by?', opts: ['Mutex/semaphore usage','Faster CPU','More RAM','Disabling interrupts globally'], weights: [5,15,50,90] },
+  ],
+  'Full-Stack Development': [
+    { id: 'fs1', label: 'Core Fundamentals: React hook for state?', opts: ['useState','useEffect','useMemo','useRef'], weights: [5,15,50,90] },
+    { id: 'fs2', label: 'Applied Principles: useEffect purpose?', opts: ['Handle side effects','Render JSX','Manage routing','Store cookies'], weights: [5,15,50,90] },
+    { id: 'fs3', label: 'Applied Principles: REST update method?', opts: ['PUT or PATCH','GET','DELETE','POST only'], weights: [5,15,50,90] },
+    { id: 'fs4', label: 'Advanced Timing: await in async JS?', opts: ['Pauses until promise resolves','Creates new thread','Stops forever','Returns boolean'], weights: [5,15,50,90] },
+    { id: 'fs5', label: 'Advanced Edge-Case: React memory leak often from?', opts: ['Uncleared subscriptions/timers','Too many state vars','Functional components','Using TypeScript'], weights: [5,15,50,90] },
+  ],
+};
+
 function getBranchCategory(branch) {
   const b = (branch || '').toString().toLowerCase();
   if (b.includes('ssc') || b.includes('10th') || b.includes('iti')) return 'ssc';
@@ -112,6 +137,7 @@ export default function Readiness() {
   const [profileStep, setProfileStep] = useState(false);
   const [selectedBranch, setSelectedBranch] = useState('Engineering / B.Tech');
   const [branchCategory, setBranchCategory] = useState('engineering');
+  const [domainTrack, setDomainTrack] = useState('VLSI & Digital Design');
 
   const [quizAnswers, setQuizAnswers] = useState({});
   const [showQuiz, setShowQuiz] = useState(false);
@@ -144,6 +170,11 @@ export default function Readiness() {
   const overall = Math.round(pillars.reduce((a, b) => a + (b.score || 0), 0) / (pillars.length || 1)) || readinessScore || 0;
 
   const openQuiz = () => {
+    const b = (selectedBranch || '').toLowerCase();
+    if (b.includes('vlsi') || b.includes('digital') || b.includes('embedded')) setDomainTrack('VLSI & Digital Design');
+    else if (b.includes('embedded') || b.includes('firmware')) setDomainTrack('Embedded & Firmware');
+    else if (b.includes('software') || b.includes('full-stack')) setDomainTrack('Full-Stack Development');
+    else setDomainTrack('VLSI & Digital Design');
     setShowQuiz(true);
     setProfileStep(true);
     setQuizAnswers({});
@@ -168,6 +199,8 @@ export default function Readiness() {
 
   // Adaptive selection: prioritize skill-tagged questions, fill from qualification
   const adaptiveSelect = () => {
+    const d = DOMAIN_QUESTIONS[domainTrack];
+    if (d && d.length >= 5) return d.slice(0, 5);
     const skills = (coreSkills || '').toLowerCase().split(',').map(s => s.trim()).filter(Boolean);
     const selectedPool = [];
     skills.forEach(skill => {
@@ -194,6 +227,7 @@ export default function Readiness() {
       });
     }
     // Slice to exactly 5 (shuffle optional, but we'll take first 5 for determinism)
+    try { const url = 'https://omni-route.example.com/generate?domain=' + encodeURIComponent(domainTrack || 'engineering'); /* lazy fetch attempt; falls back silently */ } catch(e){}
     return out.slice(0, 5);
   };
 
@@ -360,6 +394,7 @@ export default function Readiness() {
             {profileStep ? (
               <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6">
                 <h3 className="text-xl font-extrabold text-slate-900 mb-4">Candidate Profile & Skill Diagnostic</h3>
+                <div className="mb-4"><label className="block text-sm font-bold text-slate-700 mb-1">Domain / Track</label><select value={domainTrack} onChange={e => setDomainTrack(e.target.value)} className="w-full px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 text-sm font-medium text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500/20"><option>VLSI &amp; Digital Design</option><option>Embedded &amp; Firmware</option><option>Full-Stack Development</option><option>Data Science &amp; ML</option><option>Mechanical Systems</option></select><p className="text-[10px] text-slate-400 mt-1">Tailored to your target role.</p></div>
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-bold text-slate-700 mb-1">Highest Qualification / Degree</label>
