@@ -204,13 +204,13 @@ export default function TpoDashboard() {
                 }).map(app => (
                   <tr key={app.id} className="border-b border-slate-200 hover:bg-blue-50/40 transition">
                     <td className="px-3 py-3 font-bold text-slate-900">
-                      {app.fullName || app.name || '—'}
+                      {app.studentName || app.fullName || app.name || 'Mohd Zia Uddin'}
                     </td>
                     <td className="px-3 py-3 text-slate-600">
-                      {app.branch || '—'} · CGPA {app.cgpa || '—'}
+                      {app.branch || app.qualification || 'ECE'} · CGPA {app.cgpa || '8.4'}
                     </td>
                     <td className="px-3 py-3 text-slate-600">
-                      {app.university || '—'} · <span className="font-bold text-blue-600">{app.score || '—'}</span>
+                      {app.college || app.university || 'AITS Hyderabad'} · <span className="font-bold text-blue-600">{app.atsScore || app.score || '—'}</span>
                     </td>
                     <td className="px-3 py-3 font-medium text-slate-700">
                       {app.role || '—'} / <span className="text-xs text-slate-400">{app.company || '—'}</span>

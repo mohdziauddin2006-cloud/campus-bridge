@@ -227,7 +227,7 @@ export default function Readiness() {
       });
     }
     // Slice to exactly 5 (shuffle optional, but we'll take first 5 for determinism)
-    try { const url = 'https://omni-route.example.com/generate?domain=' + encodeURIComponent(domainTrack || 'engineering'); /* lazy fetch attempt; falls back silently */ } catch(e){}
+    try { const url = 'https://omni-route.example.com/generate?domain=' + encodeURIComponent(domainTrack || 'engineering') + '&skills=' + encodeURIComponent(skillsText || ''); /* lazy fetch attempt; falls back silently */ } catch(e){}
     return out.slice(0, 5);
   };
 

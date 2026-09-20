@@ -31,7 +31,7 @@ export default function App() {
         <Route path="/tpo-dashboard" element={<ProtectedRoute><TpoDashboard /></ProtectedRoute>} />
         <Route path="/applications" element={<Applications />} />
         <Route path="/readiness" element={<Readiness />} />
-        <Route path="/gov-library" element={<GovLibrary />} />
+        <Route path="/library" element={<GovLibrary />} />
       </Routes>
       </div>
     </BrowserRouter>

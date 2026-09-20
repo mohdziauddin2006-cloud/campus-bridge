@@ -25,6 +25,7 @@ export default function Navbar() {
         <Link to="/readiness" className="hover:text-blue-600 transition whitespace-nowrap">Industry Readiness</Link>
         <Link to="/jobs" className="hover:text-blue-600 transition whitespace-nowrap">Jobs</Link>
         <Link to="/internships" className="hover:text-blue-600 transition whitespace-nowrap">Internships</Link>
+        <Link to="/library" className="hover:text-blue-600 transition whitespace-nowrap">Free Library</Link>
         <Link to="/tpo-dashboard" className="hover:text-blue-600 transition whitespace-nowrap">TPO Portal</Link>
       </div>
 
@@ -40,7 +41,7 @@ export default function Navbar() {
         <Link to="/internships" className="hover:text-blue-600 transition whitespace-nowrap">Internships</Link>
         <Link to="/jobs" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Jobs</Link>
           <Link to="/internships" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Internships</Link>
-          <Link to="/gov-library" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Gov Library</Link>
+          <Link to="/library" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">Free Library</Link>
         <Link to="/tpo-dashboard" onClick={() => setOpen(false)} className="text-slate-800 text-lg font-medium py-1 hover:text-blue-600 transition">TPO Portal</Link>
         </div>
       )}

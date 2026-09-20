@@ -6,7 +6,7 @@ const ApplyModal = ({ open, onClose, role }) => {
   if (!open) return null;
   const [form, setForm] = useState({ fullName: '', email: '', college: 'Annamacharya Institute of Technology and Sciences', qualification: '', hallTicket: '', skills: '' });
   const [ok, setOk] = useState(false);
-  const handle = (e) => { e.preventDefault(); const pending = JSON.parse(localStorage.getItem('pending_applications') || '[]'); pending.push({ job: role?.title || '', company: role?.company || '', fullName: form.fullName, email: form.email, college: form.college, qualification: form.qualification, hallTicket: form.hallTicket, skills: form.skills, timestamp: new Date().toISOString() }); localStorage.setItem('pending_applications', JSON.stringify(pending)); setOk(true); setTimeout(() => { setOk(false); onClose(); }, 2200); };
+  const handle = (e) => { e.preventDefault(); const pending = JSON.parse(localStorage.getItem('pending_applications') || '[]'); pending.push({ id: 'app-' + Date.now(), studentName: 'Mohd Zia Uddin', degree: 'B.Tech', branch: 'ECE', cgpa: '8.4', college: 'AITS Hyderabad', atsScore: '91%', role: role?.title || '', company: role?.company || '', status: 'Submitted', submittedAt: new Date().toLocaleDateString(), fullName: form.fullName, email: form.email }); localStorage.setItem('pending_applications', JSON.stringify(pending)); window.dispatchEvent(new Event('storage')); setOk(true); setTimeout(() => { setOk(false); onClose(); }, 2200); };
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-md px-4" onClick={onClose}>
       <div className="bg-white rounded-3xl shadow-2xl border border-slate-200 max-w-lg w-full p-8 relative" onClick={e => e.stopPropagation()}>

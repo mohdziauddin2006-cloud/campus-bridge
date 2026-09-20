@@ -155,40 +155,7 @@ export default function Academy() {
         </div>
       </div>
 
-      {/* Govt & Open Resources */}
-      <div className="bg-gradient-to-br from-blue-950 to-indigo-950 rounded-3xl p-8 text-white shadow-2xl mb-10 mt-10">
-        <h2 className="text-xl font-extrabold mb-2">Govt & Open Resources</h2>
-        <p className="text-slate-200 text-sm mb-6">Free, verified academic resources for Indian engineering students.</p>
-        <div className="grid sm:grid-cols-3 gap-4">
-          <a
-            href="https://nptel.ac.in/content/html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block bg-slate-800 hover:bg-slate-900 rounded-2xl border border-slate-700 p-5 transition shadow-lg"
-          >
-            <h4 className="font-extrabold mb-1">NPTEL: VLSI Design</h4>
-            <p className="text-xs text-slate-200">Free course on microelectronics design (IIT Bombay / NPTEL).</p>
-          </a>
-          <a
-            href="https://swayam.gov.in/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block bg-slate-800 hover:bg-slate-900 rounded-2xl border border-slate-700 p-5 transition shadow-lg"
-          >
-            <h4 className="font-extrabold mb-1">SWAYAM: Embedded C</h4>
-            <p className="text-xs text-slate-200">Government-certified embedded systems & microcontroller course.</p>
-          </a>
-          <a
-            href="https://nptel.ac.in/content/pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block bg-slate-800 hover:bg-slate-900 rounded-2xl border border-slate-700 p-5 transition shadow-lg"
-          >
-            <h4 className="font-extrabold mb-1">AICTE Technical Books</h4>
-            <p className="text-xs text-slate-200">Recommended open-source PDF downloads for engineering core.</p>
-          </a>
-        </div>
-      </div>
     </main>
+
   );
 }
