@@ -4,19 +4,46 @@ import { Link } from 'react-router-dom';
 import { db } from '../lib/firebase';
 import { collection, getDocs, addDoc, serverTimestamp } from 'firebase/firestore';
 
-const questions = [
-  { id: 'q1', label: 'Which register in the 8086 microprocessor holds the base address of the extra segment?', opts: ['AX', 'BX', 'CX', 'ES'], weights: [5, 15, 50, 90] },
-  { id: 'q2', label: 'In SystemVerilog, which construct is used for blocking assignments?', opts: ['<= (non-blocking)', '= (blocking)', '==', '||'], weights: [5, 15, 50, 90] },
-  { id: 'q3', label: 'What does the 8051 use to store the return address during an interrupt?', opts: ['PC', 'Stack (SP)', 'Register R0', 'Accumulator'], weights: [5, 15, 50, 90] },
-  { id: 'q4', label: 'Which Python library is standard for scientific computing and array operations?', opts: ['requests', 'NumPy', 'pandas', 'flask'], weights: [5, 15, 50, 90] },
-  { id: 'q5', label: 'In digital logic, what does a full adder compute?', opts: ['Two-bit XOR', 'Sum + carry-in', 'Only carry-out', 'Only sum bit'], weights: [5, 15, 50, 90] },
+const questionsEngineering = [
+  { id: 'q1', label: 'In SystemVerilog, which construct is used for blocking assignments?', opts: ['<= (non-blocking)', '= (blocking)', '==', '||'], weights: [5, 15, 50, 90] },
+  { id: 'q2', label: 'Which Python library is standard for scientific computing?', opts: ['requests', 'NumPy', 'pandas', 'flask'], weights: [5, 15, 50, 90] },
+  { id: 'q3', label: 'What data structure offers O(1) average lookup?', opts: ['Linked List', 'Hash Table', 'Array', 'Tree'], weights: [5, 15, 50, 90] },
+  { id: 'q4', label: 'A full adder computes?', opts: ['Two-bit XOR', 'Sum + carry-in', 'Only carry-out', 'Only sum bit'], weights: [5, 15, 50, 90] },
+  { id: 'q5', label: 'Which register holds 8086 extra-segment base?', opts: ['AX', 'BX', 'CX', 'ES'], weights: [5, 15, 50, 90] },
 ];
+
+const questionsArts = [
+  { id: 'q1', label: 'Which concept deals with persuasive public messaging?', opts: ['Critical Thinking', 'Public Policy', 'Communication', 'Research'], weights: [5, 15, 50, 90] },
+  { id: 'q2', label: 'Public policy analysis relies most on?', opts: ['Data Structures', 'Critical Thinking', 'SystemVerilog', 'Microprocessors'], weights: [5, 15, 50, 90] },
+  { id: 'q3', label: 'Effective research begins with?', opts: ['Hypothesis formation', 'Coding', 'FPGA design', 'VLSI layout'], weights: [5, 15, 50, 90] },
+  { id: 'q4', label: 'Critical thinking emphasizes?', opts: ['Evaluating evidence', 'Writing code', 'Soldering', 'Routing'], weights: [5, 15, 50, 90] },
+  { id: 'q5', label: 'Communication skills are vital for?', opts: ['Team collaboration', 'Only coding', 'Only hardware', 'Only finance'], weights: [5, 15, 50, 90] },
+];
+
+const questionsCommerce = [
+  { id: 'q1', label: 'Business analytics uses which for insight?', opts: ['Data visualization', 'SystemVerilog', 'VLSI', 'Embedded C'], weights: [5, 15, 50, 90] },
+  { id: 'q2', label: 'Finance strategy emphasizes?', opts: ['Risk management', 'Microprocessors', 'FPGA', 'Communication'], weights: [5, 15, 50, 90] },
+  { id: 'q3', label: 'Which metric tracks profitability?', opts: ['ROI', 'Code coverage', 'Clock speed', 'Latency'], weights: [5, 15, 50, 90] },
+  { id: 'q4', label: 'Market analysis relies on?', opts: ['Data interpretation', 'SystemVerilog', 'Embedded C', 'FPGA'], weights: [5, 15, 50, 90] },
+  { id: 'q5', label: 'A business plan should include?', opts: ['Financial projections', 'Only code', 'Only hardware', 'Only policy'], weights: [5, 15, 50, 90] },
+];
+
+function getBranchCategory(branch) {
+  const b = (branch || '').toString().toLowerCase();
+  if (b.includes('arts') || b.includes('humanities') || b.includes('ba') || b.includes('b.a')) return 'arts';
+  if (b.includes('commerce') || b.includes('mba') || b.includes('business')) return 'commerce';
+  return 'engineering';
+}
 
 export default function Readiness() {
   const [pillars, setPillars] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showQuiz, setShowQuiz] = useState(false);
+  const [branchCategory, setBranchCategory] = useState('engineering');
+  const [selectedBranch, setSelectedBranch] = useState('');
+
+  const activeQuestions = branchCategory === 'arts' ? questionsArts : branchCategory === 'commerce' ? questionsCommerce : questionsEngineering;
   const [quizAnswers, setQuizAnswers] = useState({});
+  const [showQuiz, setShowQuiz] = useState(false);
   const [quizSubmitted, setQuizSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [submitting, setSubmitting] = useState(false);
@@ -55,9 +82,9 @@ export default function Readiness() {
   };
 
   const submitQuiz = async () => {
-    if (Object.keys(quizAnswers).length < questions.length) return;
-    const total = questions.reduce((sum, q) => sum + q.weights[quizAnswers[q.id] || 0], 0);
-    const finalScore = Math.round(total / questions.length);
+    if (Object.keys(quizAnswers).length < activeQuestions.length) return;
+    const total = activeQuestions.reduce((sum, q) => sum + q.weights[quizAnswers[q.id] || 0], 0);
+    const finalScore = Math.round(total / activeQuestions.length);
     setScore(finalScore);
     setQuizSubmitted(true);
     setSubmitting(true);
@@ -87,6 +114,22 @@ export default function Readiness() {
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
       <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Industry Readiness Portal</h1>
       <p className="text-slate-700 text-sm font-medium mb-8">Live diagnostic of student skill readiness vs industry benchmarks.</p>
+
+      {/* Branch Selector */}
+      <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-5 mb-8 flex flex-col sm:flex-row sm:items-center gap-3">
+        <span className="text-slate-700 font-medium text-sm">Branch / Background:</span>
+        <div className="flex gap-2">
+          {['Engineering / ECE / CSE', 'Arts / Humanities / BA', 'Commerce / MBA'].map(opt => (
+            <button
+              key={opt}
+              onClick={() => { setSelectedBranch(opt); setBranchCategory(getBranchCategory(opt)); }}
+              className={`px-3 py-1.5 rounded-full text-xs font-bold border transition ${selectedBranch === opt ? 'bg-blue-600 text-white border-blue-600' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'}`}
+            >
+              {opt}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {/* Gauge + Quiz Button */}
       <div className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950 rounded-3xl p-8 md:p-10 text-white shadow-2xl mb-10 relative overflow-hidden">
@@ -137,26 +180,26 @@ export default function Readiness() {
       </div>
 
       {/* Curriculum */}
-      <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 text-white shadow-2xl mb-10">
-        <h2 className="text-xl font-extrabold text-white mb-4">Targeted Bridge Curriculum</h2>
-        <p className="text-blue-50 mb-6 text-sm">Recommended modules based on weakest pillar scores.</p>
+      <div className="bg-white border border-slate-200 shadow-sm rounded-2xl p-8 text-slate-900 mb-10">
+        <h2 className="text-xl font-extrabold text-slate-900 mb-4">Targeted Bridge Curriculum</h2>
+        <p className="text-slate-700 font-medium text-sm mb-6">Recommended modules based on weakest pillar scores.</p>
         <div className="grid md:grid-cols-2 gap-4">
           <Link
             to="/academy"
-            className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm"
+            className="block bg-white border border-slate-200 shadow-sm rounded-2xl hover:shadow-md p-5 transition"
           >
             <h4 className="font-extrabold text-slate-900 mb-1">Programming Strengthening</h4>
-            <p className="text-sm text-slate-600 mb-2">Systems programming, performance optimization</p>
+            <p className="text-sm text-slate-700 font-medium mb-2">Systems programming, performance optimization</p>
             <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-slate-600">
               Link to Academy
             </span>
           </Link>
           <Link
             to="/academy"
-            className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm"
+            className="block bg-white border border-slate-200 shadow-sm rounded-2xl hover:shadow-md p-5 transition"
           >
             <h4 className="font-extrabold text-slate-900 mb-1">VLSI & Embedded Systems</h4>
-            <p className="text-sm text-slate-600 mb-2">Verilog, FPGA design, microcontroller architecture</p>
+            <p className="text-sm text-slate-700 font-medium mb-2">Verilog, FPGA design, microcontroller architecture</p>
             <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-slate-600">
               Link to Academy
             </span>
@@ -183,7 +226,7 @@ export default function Readiness() {
             </button>
             <div className="flex items-center gap-2 mb-2">
               <Zap className="text-amber-500" size={22} />
-              <h2 className="text-2xl font-extrabold text-white">Readiness Assessment</h2>
+              <h2 className="text-2xl font-extrabold text-slate-900 mb-2">Readiness Assessment</h2>
             </div>
             <p className="text-sm text-slate-700 mb-6">Answer 5 questions. Your score updates the Overall Readiness Gauge.</p>
 
@@ -195,7 +238,7 @@ export default function Readiness() {
                 }}
                 className="space-y-6"
               >
-                {questions.map(q => (
+                {activeQuestions.map(q => (
                   <div key={q.id}>
                     <h4 className="font-bold text-slate-800 mb-3">
                       {q.id}. {q.label}
@@ -220,7 +263,7 @@ export default function Readiness() {
                 ))}
                 <button
                   type="submit"
-                  disabled={Object.keys(quizAnswers).length < questions.length || submitting}
+                  disabled={Object.keys(quizAnswers).length < activeQuestions.length || submitting}
                   className="w-full py-3.5 rounded-full bg-blue-600 text-white font-extrabold shadow-lg hover:bg-blue-700 transition disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {submitting ? (
@@ -238,7 +281,7 @@ export default function Readiness() {
                 <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center shadow-xl mb-4">
                   <span className="text-4xl font-black text-white">{score}%</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-white mb-1">Your Readiness Score</h3>
+                <h3 className="text-xl font-extrabold text-slate-900 mb-1">Your Readiness Score</h3>
                 <p className="text-sm text-slate-700 mb-4">
                   Saved to your student profile. The gauge now reflects your result.
                 </p>

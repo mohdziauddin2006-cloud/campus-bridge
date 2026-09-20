@@ -4,6 +4,7 @@ import { db } from '../lib/firebase';
 import { doc, setDoc, collection, onSnapshot, serverTimestamp, deleteDoc, updateDoc } from 'firebase/firestore';
 
 export default function TpoDashboard() {
+  const [tab, setTab] = useState('pending');
   const [pendingApps, setPendingApps] = useState([]);
   const [announcementText, setAnnouncementText] = useState('');
   const [liveAnnouncement, setLiveAnnouncement] = useState('');
@@ -133,6 +134,21 @@ export default function TpoDashboard() {
 
       {/* Pending Applications Queue */}
       <div className="bg-white rounded-3xl border border-slate-200 shadow-sm p-8 text-slate-900 mb-10">
+        <div className="flex flex-wrap gap-2 mb-6">
+          {[
+            { key: 'pending', label: 'Pending Queue' },
+            { key: 'verified', label: 'Verified Applications' },
+            { key: 'rejected', label: 'Rejected Applications' },
+          ].map(t => (
+            <button
+              key={t.key}
+              onClick={() => setTab(t.key)}
+              className={`px-4 py-2 rounded-full text-xs font-extrabold border transition ${tab === t.key ? 'bg-blue-600 text-white border-blue-600 shadow' : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'}`}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
         <div className="flex items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center">
@@ -176,7 +192,12 @@ export default function TpoDashboard() {
                 </tr>
               </thead>
               <tbody>
-                {pendingApps.map(app => (
+                {pendingApps.filter(app => {
+                  if (tab === 'pending') return !app.status || app.status === 'Submitted' || app.status === 'Pending';
+                  if (tab === 'verified') return app.status === 'Verified';
+                  if (tab === 'rejected') return app.status === 'Rejected';
+                  return false;
+                }).map(app => (
                   <tr key={app.id} className="border-b border-slate-200 hover:bg-blue-50/40 transition">
                     <td className="px-3 py-3 font-bold text-slate-900">
                       {app.fullName || app.name || '—'}
