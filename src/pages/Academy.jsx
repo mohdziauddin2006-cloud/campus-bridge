@@ -159,3 +159,4 @@ export default function Academy() {
 
   );
 }
+<div className="p-4 bg-violet-50 border border-violet-200 rounded-xl mb-4"><h3>✦ AI Concept Explainer</h3><p>Takeaways and interview prep for '"${activeVideo.title}"'</p></div>

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { generateTpoCandidateSummary } from '../services/aiService';
 import { ShieldCheck, Send, XCircle, Megaphone, Inbox, CheckCircle2, Sparkles } from 'lucide-react';
 import { db } from '../lib/firebase';
 import { doc, setDoc, collection, onSnapshot, serverTimestamp, deleteDoc, updateDoc } from 'firebase/firestore';
@@ -11,6 +12,7 @@ export default function TpoDashboard() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [inspectorApp, setInspectorApp] = useState(null);
+  const [aiVerdicts, setAiVerdicts] = useState({});
 
   const loadQueue = () => {
     let localApps = [];
@@ -233,6 +235,13 @@ export default function TpoDashboard() {
                         className="relative z-30 cursor-pointer pointer-events-auto select-none px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 text-xs font-extrabold border border-blue-200 hover:bg-blue-100 transition flex items-center gap-1"
                       >
                         <Sparkles size={12} /> View Details
+                      </button>
+                      <button
+                        type="button"
+                        onClick={async () => { try { const s = await generateTpoCandidateSummary(app); setAiVerdicts(prev => ({...prev, [app.id]: s})); const updated = [...pendingApps]; const idx = updated.findIndex(a => a.id === app.id); if (idx >= 0) { updated[idx] = {...updated[idx], aiVerdict: s}; try { localStorage.setItem('pending_applications', JSON.stringify(updated)); } catch(e){} } } catch(e){} }}
+                        className="relative z-30 cursor-pointer pointer-events-auto select-none px-2.5 py-1 rounded-full bg-violet-50 text-violet-700 text-xs font-extrabold border border-violet-200 hover:bg-violet-100 transition flex items-center gap-1"
+                      >
+                        <Sparkles size={12} /> AI Screen
                       </button>
                       <button
                         type="button"
