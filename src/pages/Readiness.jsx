@@ -341,7 +341,7 @@ export default function Readiness() {
 
       {/* Pillar Cards */}
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-        {pillars.map(p => (
+        {(Array.isArray(pillars) ? pillars : []).map(p => (
           <div key={p.label} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
             <h3 className="font-extrabold text-slate-900 mb-3">{p.label}</h3>
             <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-2">

@@ -4,6 +4,8 @@ import { deepScanResume } from '../services/aiService';
 
 export default function Scanner() {
   const [file, setFile] = useState(null);
+  const [fileName, setFileName] = useState('');
+  const [fileContent, setFileContent] = useState('');
   const [scanning, setScanning] = useState(false);
   const [done, setDone] = useState(false);
   const [jd, setJd] = useState('');
@@ -11,7 +13,24 @@ export default function Scanner() {
   const [showPaste, setShowPaste] = useState(false);
   const [scanResult, setScanResult] = useState(null);
 
-  const handleDrop = (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) setFile(f); };
+  const handleDrop = (e) => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) { setFile(f); setFileName(f.name); } };
+  const handleFileChange = (e) => {
+    const f = e.target.files?.[0] || null;
+    setFile(f);
+    if (f) {
+      setFileName(f.name);
+      if (f.type === 'text/plain') {
+        f.text().then(t => setFileContent(t)).catch(() => setFileContent(''));
+      } else if (f.type === 'application/pdf' || f.name.endsWith('.pdf')) {
+        setFileContent('PDF file selected — using file name and size as fallback payload.');
+      } else {
+        setFileContent('Binary/file upload — using file metadata for AI analysis.');
+      }
+    } else {
+      setFileName('');
+      setFileContent('');
+    }
+  };
 
   const startScan = async () => {
     setScanning(true);
@@ -20,14 +39,13 @@ export default function Scanner() {
     try {
       let text = '';
       if (file) {
-        text = file.name; // basic fallback; real parsing would use PDF parser
-        if (file.type === 'text/plain') {
-          text = await file.text();
-        }
+        if (fileContent && fileContent.trim()) text = fileContent;
+        else if (file.type === 'text/plain') text = await file.text().catch(() => '');
+        else text = `${fileName || 'Resume'} — ${file.size ? (file.size/1024).toFixed(1)+' KB' : 'file'} — target role: ${jd || 'General'}`;
       } else if (pastedText.trim()) {
         text = pastedText.trim();
       }
-      if (!text) { setScanning(false); return; }
+      if (!text || text.length < 2) { setScanning(false); return; }
       const result = await deepScanResume(text, jd || 'General Software Engineer');
       setScanResult(result);
     } catch (e) {}
@@ -54,7 +72,7 @@ export default function Scanner() {
         <input
           type="file"
           accept=".pdf,.docx,.jpg,.png,.txt"
-          onChange={e => setFile(e.target.files?.[0] || null)}
+          onChange={handleFileChange}
           className="hidden"
           id="resumeFile"
         />
@@ -62,6 +80,7 @@ export default function Scanner() {
           Select File
         </label>
         {fileInfo && <div className="mt-4 text-sm text-slate-800 font-medium">{fileInfo.name} · {fileInfo.size}</div>}
+        {fileContent && <div className="mt-2 text-xs text-slate-500 font-medium">{fileContent.slice(0, 120)}{fileContent.length > 120 ? '...' : ''}</div>}
       </div>
 
       {/* Paste option */}
