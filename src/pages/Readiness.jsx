@@ -145,9 +145,9 @@ export default function Readiness() {
             to="/academy"
             className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm"
           >
-            <h4 className="font-extrabold mb-1">Programming Strengthening</h4>
-            <p className="text-sm text-slate-300 mb-2">Systems programming, performance optimization</p>
-            <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-blue-200">
+            <h4 className="font-extrabold text-slate-900 mb-1">Programming Strengthening</h4>
+            <p className="text-sm text-slate-600 mb-2">Systems programming, performance optimization</p>
+            <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-slate-600">
               Link to Academy
             </span>
           </Link>
@@ -155,9 +155,9 @@ export default function Readiness() {
             to="/academy"
             className="block bg-white/10 hover:bg-white/15 rounded-2xl border border-white/10 p-5 transition backdrop-blur-sm"
           >
-            <h4 className="font-extrabold mb-1">VLSI & Embedded Systems</h4>
-            <p className="text-sm text-slate-300 mb-2">Verilog, FPGA design, microcontroller architecture</p>
-            <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-blue-200">
+            <h4 className="font-extrabold text-slate-900 mb-1">VLSI & Embedded Systems</h4>
+            <p className="text-sm text-slate-600 mb-2">Verilog, FPGA design, microcontroller architecture</p>
+            <span className="inline-flex items-center text-xs font-bold bg-blue-600/30 px-2 py-0.5 rounded-full text-slate-600">
               Link to Academy
             </span>
           </Link>

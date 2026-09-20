@@ -17,6 +17,7 @@ const categories = ['All', 'Programming', 'Cloud / DevOps', 'Web Dev', 'VLSI / H
 export default function Academy() {
   const [filterCat, setFilterCat] = useState('All');
   const [selectedId, setSelectedId] = useState(videos[0].videoId);
+  const [activeVideo, setActiveVideo] = useState(videos[0]);
   const [completed, setCompleted] = useState(new Set());
 
   useEffect(() => {
@@ -29,8 +30,6 @@ export default function Academy() {
   }, [filterCat]);
 
   const filtered = filterCat === 'All' ? videos : videos.filter(v => v.category === filterCat);
-  const activeVideo = useMemo(() => videos.find(v => v.videoId === selectedId) || videos[0], [selectedId]);
-
   const toggleComplete = () => {
     const next = new Set(completed);
     if (next.has(activeVideo.videoId)) {
@@ -75,7 +74,10 @@ export default function Academy() {
           {filtered.map(v => (
             <button
               key={v.videoId}
-              onClick={() => setSelectedId(v.videoId)}
+              onClick={() => {
+                setSelectedId(v.videoId);
+                setActiveVideo(v);
+              }}
               className={`w-full text-left rounded-2xl border p-4 transition shadow-sm ${
                 selectedId === v.videoId
                   ? 'bg-blue-50 border-blue-200 shadow-md'

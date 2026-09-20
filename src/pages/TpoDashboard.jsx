@@ -82,23 +82,22 @@ export default function TpoDashboard() {
     }, 300);
   };
 
-  const handleReject = async id => {
-    try {
-      await deleteDoc(doc(db, 'applications', id));
-    } catch (e) {
-      console.error('Delete error:', e);
-    }
-  };
-
   const handleVerifyAndDispatch = async id => {
     const app = pendingApps.find(a => a.id === id);
     if (!app) return;
     try {
-      await updateDoc(doc(db, 'applications', id), { status: 'Dispatched to Recruiter' });
-      const companyUrl = app.company
-        ? `https://careers.${app.company.toLowerCase().replace(/\s+/g, '').replace(/[^a-z0-9]/g, '')}.com/`
-        : '#';
-      alert(`Dispatched: ${app.fullName || 'Candidate'} to ${app.company || 'Recruiter'}. Career URL: ${companyUrl}`);
+      await updateDoc(doc(db, 'applications', id), { status: 'Verified' });
+      alert(`Verified: ${app.fullName || 'Candidate'}`);
+      loadQueue();
+    } catch (e) {
+      console.error('Update error:', e);
+    }
+  };
+
+  const handleReject = async id => {
+    try {
+      await updateDoc(doc(db, 'applications', id), { status: 'Rejected' });
+      loadQueue();
     } catch (e) {
       console.error('Update error:', e);
     }

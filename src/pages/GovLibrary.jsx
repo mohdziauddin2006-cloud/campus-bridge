@@ -12,7 +12,7 @@ const resources = [
 export default function GovLibrary() {
   return (
     <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10">
-      <h1 className="text-4xl font-extrabold text-slate-950 mb-2">Government Resource Library</h1>
+      <h1 className="text-4xl font-extrabold text-slate-900 mb-2">Government Resource Library</h1>
       <p className="text-slate-700 text-sm font-medium mb-10">Open, free, and authoritative Indian education portals.</p>
 
       <div className="grid md:grid-cols-3 gap-6">
@@ -26,7 +26,7 @@ export default function GovLibrary() {
           >
             <div className="flex items-center gap-3 mb-3">
               <r.icon className="text-emerald-600" size={28} />
-              <h2 className="text-xl font-extrabold text-slate-950">{r.title}</h2>
+              <h2 className="text-xl font-extrabold text-slate-900">{r.title}</h2>
             </div>
             <p className="text-slate-700 text-sm font-medium mb-3">{r.desc}</p>
             <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600">Visit <ExternalLink size={12} /></span>
