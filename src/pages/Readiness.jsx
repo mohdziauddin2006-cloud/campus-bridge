@@ -75,7 +75,7 @@ export default function Readiness() {
 
   if (loading) {
     return (
-      <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
+      <main className="bg-[#0b0d12] min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
         <div className="flex items-center justify-center h-96">
           <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
         </div>
@@ -84,8 +84,8 @@ export default function Readiness() {
   }
 
   return (
-    <main className="bg-slate-50 min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
-      <h1 className="text-3xl font-extrabold text-slate-950 mb-2">Industry Readiness Portal</h1>
+    <main className="bg-[#0b0d12] min-h-screen pb-20 pt-6 px-6 lg:px-10 max-w-6xl mx-auto">
+      <h1 className="text-3xl font-extrabold text-white mb-2">Industry Readiness Portal</h1>
       <p className="text-slate-700 text-sm font-medium mb-8">Live diagnostic of student skill readiness vs industry benchmarks.</p>
 
       {/* Gauge + Quiz Button */}
@@ -127,7 +127,7 @@ export default function Readiness() {
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
         {pillars.map(p => (
           <div key={p.label} className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 hover:shadow-md transition">
-            <h3 className="font-extrabold text-slate-950 mb-3">{p.label}</h3>
+            <h3 className="font-extrabold text-white mb-3">{p.label}</h3>
             <div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden mb-2">
               <div className="h-full rounded-full bg-blue-600" style={{ width: `${p.score}%` }} />
             </div>
@@ -183,7 +183,7 @@ export default function Readiness() {
             </button>
             <div className="flex items-center gap-2 mb-2">
               <Zap className="text-amber-500" size={22} />
-              <h2 className="text-2xl font-extrabold text-slate-950">Readiness Assessment</h2>
+              <h2 className="text-2xl font-extrabold text-white">Readiness Assessment</h2>
             </div>
             <p className="text-sm text-slate-500 mb-6">Answer 5 questions. Your score updates the Overall Readiness Gauge.</p>
 
@@ -209,7 +209,7 @@ export default function Readiness() {
                           className={`px-3 py-2 rounded-xl text-sm font-bold border transition ${
                             quizAnswers[q.id] === i
                               ? 'bg-blue-600 text-white border-blue-600 shadow-md'
-                              : 'bg-slate-50 text-slate-700 border-slate-200 hover:border-blue-300'
+                              : 'bg-[#0b0d12] text-slate-700 border-slate-200 hover:border-blue-300'
                           }`}
                         >
                           {opt}
@@ -238,7 +238,7 @@ export default function Readiness() {
                 <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-emerald-400 to-blue-500 flex items-center justify-center shadow-xl mb-4">
                   <span className="text-4xl font-black text-white">{score}%</span>
                 </div>
-                <h3 className="text-xl font-extrabold text-slate-950 mb-1">Your Readiness Score</h3>
+                <h3 className="text-xl font-extrabold text-white mb-1">Your Readiness Score</h3>
                 <p className="text-sm text-slate-500 mb-4">
                   Saved to your student profile. The gauge now reflects your result.
                 </p>
