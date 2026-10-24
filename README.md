@@ -27,6 +27,10 @@ npm run build    # artifact check — zero ReferenceErrors, zero missing imports
 npm run preview  # inspect what the build just produced
 ```
 
+```diff
+- BUILD. VERIFY. THEN SPEAK. THE ORDER IS NOT NEGOTIABLE.
+```
+
 <span style="color: #FF0000;"><b>The build is the acceptance test.</b></span> Run it before you claim any change works; the core does not take your word for it.
 
 ## 03 // STRUCTURE

@@ -1,7 +1,7 @@
 {
   "name": "campus-bridge",
   "version": "1.0.0",
-  "description": "SIH26044 Academia-Industry Collaboration Platform",
+  "description": "SIH26044 // CAMPUS-BRIDGE - academia-industry collaboration portal linking college placement cells with industry demand. React 18 + Vite + Tailwind, Supabase, Firebase, Google GenAI.",
   "main": "index.html",
   "type": "module",
   "scripts": {
